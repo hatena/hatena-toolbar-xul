@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+    <rdf:Description rdf:about="urn:mozilla:install-manifest">
+        <em:id>{03be6b1a-4501-4b15-b4eb-a0c623136b4a}</em:id>
+        <em:version>0.7.0a1</em:version>
+        <em:type>2</em:type>
+        <!--<em:optionsURL>chrome://hatenabar/content/hatenaPreference.xul</em:optionsURL>-->
+        <!--<em:iconURL>chrome://hatenabar/content/skin/HatenaLogo32.png</em:iconURL>-->
+
+        <em:localized>
+          <rdf:Description>
+            <em:locale>en-US</em:locale>
+            <em:name>Hatena Toolbar</em:name>
+            <em:description>{{The Hatenabar for Firefox}}</em:description>
+            <em:creator>Hatena</em:creator>
+            <em:contributor>Shinji Tanaka</em:contributor>
+            <em:homepageURL>http://www.hatena.ne.jp/tool/firefox</em:homepageURL>
+          </rdf:Description>
+        </em:localized>
+        <em:localized>
+          <rdf:Description>
+            <em:locale>ja</em:locale>
+            <em:name>はてなツールバー</em:name>
+            <em:description>{{The Hatenabar for Firefox}}</em:description>
+            <em:creator>株式会社はてな</em:creator>
+            <em:contributor>Shinji Tanaka</em:contributor>
+            <em:homepageURL>http://www.hatena.ne.jp/tool/firefox</em:homepageURL>
+          </rdf:Description>
+        </em:localized>
+
+        <em:targetApplication>
+            <rdf:Description>
+                <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+                <em:minVersion>3.0</em:minVersion>
+                <em:maxVersion>3.7a4</em:maxVersion>
+            </rdf:Description>
+        </em:targetApplication>
+    </rdf:Description>
+</rdf:RDF>
