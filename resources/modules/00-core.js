@@ -136,7 +136,7 @@ var log = {
     },
 };
 
-PrefService.addObserver('', {
+PrefService.addObserver(PREF_PREFIX, {
     // XXX We should use EXTENSION_ID.
     DEBUG_PREF: PREF_PREFIX + 'debug.log',
 
@@ -147,6 +147,38 @@ PrefService.addObserver('', {
         }
     },
 }, false);
+
+/**
+ * URI文字列から対応するnsIRUIオブジェクトを作成する。
+ * let uriObject = newURI(absURI);
+ * let uriObject = newURI(relURI, baseURI);
+ * let uriObject = newURI(absURI, encoding);
+ * let uriObject = newURI(relURI, encoding, baseURI);
+ * 
+ * @param {string} uriSpec URI文字列。相対URIのときはbaseURIの指定が必要。
+ * @param {string} originCharset URIの文字符号化方式またはnull。
+ * @param {string || nsIURI} baseURI 基底URIまたはnull。
+ * @return {nsIURI} uriSpecに対応するnsIURIオブジェクト。
+ */
+function newURI(uriSpec, originCharset, baseURI) {
+    switch (arguments.length) {
+    case 1:
+        originCharset = baseURI = null;
+        break;
+    case 2:
+        if (typeof originCharset === 'string' &&
+            originCharset.indexOf(':') === -1) {
+            baseURI = null;
+        } else {
+            baseURI = originCharset;
+            originCharset = null;
+        }
+        break;
+    }
+    if (baseURI && !(baseURI instanceof Ci.nsIURI))
+        baseURI = IOService.newURI(baseURI, null, null);
+    return IOService.newURI(uriSpec, originCharset, baseURI);
+}
 
 var createElementBindDocument = function(doc, ns) {
     return function(name, attr) {
@@ -433,7 +465,7 @@ let _loaderHelper = {
             if (env.EXPORT)
                 env.EXPORT.forEach(function (name) target[name] = env[name]);
         });
-    },
+p    },
 
     unique: function lh_unique(array) {
         let m = {};

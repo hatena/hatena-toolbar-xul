@@ -1,0 +1,81 @@
+<?xml version="1.0" ?>
+<!--
+<?xml-stylesheet type="text/css" href="chrome://hatenabookmark/content/toolbar.css"?>
+<?xml-stylesheet type="text/css" href="chrome://hatenabookmark/skin/toolbar.css"?>
+<?xml-stylesheet type="text/css" href="chrome://hatenabookmark/skin/commentViewer.css"?>
+<?xml-stylesheet type="text/css" href="chrome://hatenabookmark/skin/star.css"?>
+<?xml-stylesheet type="text/css" href="chrome://hatenabookmark/content/widgets.css"?>
+<?xml-stylesheet type="text/css" href="chrome://hatenabookmark/skin/browser.css"?>
+<?xul-overlay href="chrome://hatenabookmark/content/popupsOverlay.xul"?>
+<!DOCTYPE overlay SYSTEM "chrome://hatenabookmark/locale/browser.dtd" [
+    <!ENTITY % toolbar SYSTEM "chrome://hatenabookmark/locale/toolbar.dtd">
+    %toolbar;
+    <!ENTITY % star SYSTEM "chrome://hatenabookmark/locale/star.dtd">
+    %star;
+]>
+-->
+<overlay id="hatenabar-overlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+    <script type="application/javascript" src="autoloader.js"></script>
+
+    <toolbarpalette id="BrowserToolbarPalette">
+    </toolbarpalette>
+
+    <toolbox id="navigator-toolbox">
+        <toolbar id="hatenabar-toolbar"
+                 class="chromeclass-toolbar-additional"
+                 mode="icons"
+                 defaultmode="icons"
+                 iconsize="small"
+                 defaulticonsize="small"
+                 toolbarname="{{Hatena Toolbar}}">
+          <!--
+                 customizable="true"
+                 defaultset="hBookmark-toolbar-sidebar-button,hBookmark-toolbar-add-button,hBookmark-toolbar-home-button,separator,hBookmark-toolbar-recent-line"
+                 context="toolbar-context-menu"
+                 accesskey="&hBookmark.toolbar.titleKey;"
+            -->
+        </toolbar>
+    </toolbox>
+
+    <statusbar id="status-bar">
+    </statusbar>
+
+    <popupset id="mainPopupSet">
+    </popupset>
+
+    <!--
+    <script type="text/javascript; version=1.8" charset="utf-8">
+    // <![CDATA[
+    (function() {
+        with(hBookmark) {
+            if (hBookmark.nowDebug) {
+                Application.console.open();
+            }
+
+            EventService.dispatch('preload', window);
+
+            window.addEventListener('load', function(e) {
+                EventService.dispatch('Migration', window); // タイミングはここで
+
+                EventService.dispatch('load', window);
+
+                if (!shared.get('firstPreload')) {
+
+                    EventService.dispatch('firstPreload', window);
+                    shared.set('firstPreload', true);
+                }
+            }, false);
+
+            window.addEventListener('unload', function(e) {
+                EventService.dispatch('unload', window);
+            }, false);
+
+        }
+    })();
+    // ]]>
+    </script>
+    -->
+
+</overlay>

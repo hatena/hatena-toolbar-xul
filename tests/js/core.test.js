@@ -59,6 +59,24 @@ function testLoadModules() {
     assert.equals(root.Foo.baz, 42);
 }
 
+function testNewURI() {
+    let uri = newURI('http://example.org/');
+    assert.isTrue(uri instanceof Components.interfaces.nsIURI);
+    assert.equals('http://example.org/', uri.spec);
+
+    assert.equals('http://example.org/foo',
+                  newURI('foo', 'http://example.org/').spec);
+    assert.equals('http://example.org/foo',
+                  newURI('foo', newURI('http://example.org/')).spec);
+    assert.equals('http://example.org/foo',
+                  newURI('foo', null, 'http://example.org/').spec);
+    assert.equals('http://example.org/foo',
+                  newURI('foo', null, newURI('http://example.org/')).spec);
+
+    assert.equals('shift_jis',
+                  newURI('http://example.org/', 'shift_jis').originCharset);
+}
+
 function testBindMethod() {
     let f = function(arg) {
         return this.foo + arg;
