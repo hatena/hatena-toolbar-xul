@@ -51,7 +51,8 @@ const BookmarksService =
 const FaviconService = 
     getService("@mozilla.org/browser/favicon-service;1", Ci.nsIFaviconService);
 const PrefService = 
-    getService("@mozilla.org/preferences-service;1", [Ci.nsIPrefService, Ci.nsIPrefBranch, Ci.nsIPrefBranch2]);
+    getService("@mozilla.org/preferences-service;1",
+               [Ci.nsIPrefService, Ci.nsIPrefBranch, Ci.nsIPrefBranch2]);
 const CookieManager =
      getService("@mozilla.org/cookiemanager;1", Ci.nsICookieManager);
 const CookieService=
@@ -60,12 +61,18 @@ const PromptService =
     getService("@mozilla.org/embedcomp/prompt-service;1", Ci.nsIPromptService);
 const AtomService =
     getService("@mozilla.org/atom-service;1", Ci.nsIAtomService);
+const ChromeRegistry =
+    getService("@mozilla.org/chrome/chrome-registry;1",
+               [Ci.nsIChromeRegistry, Ci.nsIXULOverlayProvider]);
 
 //const CryptoHash = 
 //    createInstance("@mozilla.org/security/hash;1", Ci.nsICryptoHash);
 
 //const StorageStatementWrapper =
 //    Components.Constructor('@mozilla.org/storage/statement-wrapper;1', 'mozIStorageStatementWrapper', 'initialize');
+
+const loadSubScript =
+    getService('@mozilla.org/moz/jssubscript-loader;1', Ci.mozIJSSubScriptLoader).loadSubScript;
 
 const XUL_NS = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul";
 const XBL_NS = "http://www.mozilla.org/xbl";
@@ -213,6 +220,13 @@ function method(self, methodName) {
     return function () self[methodName].apply(self, args.concat(Array.slice(arguments)));
 }
 
+function getGlobalObject(obj) {
+    obj = obj || this;
+    while (obj.__parent__)
+        obj = obj.__parent__;
+    return obj;
+}
+
 // 特定のウィンドウに属さない辞書用オブジェクトの作成
 function DictionaryObject() ({ __proto__: null });
 
@@ -329,7 +343,103 @@ function _getSiblingFileURIs(file) {
     }
     return files.map(function (f) IOService.newFileURI(f).spec).sort();
 }
-let _siblingFileURIs = {};
+
+let _loaderHelper = {
+    getChildFileNames: function lh_getChildFileNames(dir) {
+        let names = [];
+        let children = dir.directoryEntries;
+        while (children.hasMoreElements()) {
+            let child = children.getNext().QueryInterface(Ci.nsIFile);
+            if (child.isFile() || child.isSymlink())
+                names.push(child.leafName);
+        }
+        return names.sort();
+    },
+
+    getScriptsForURI: function lh_getScriptsForURI(uri) {
+        // cache here
+
+        if (!(uri instanceof Ci.nsIURI))
+            uri = IOService.newURI(uri, null, null);
+        let scripts = [];
+
+        let overlayScriptsSet =
+            this.getOverlays(uri).map(this.getScriptsForURI, this);
+        scripts = scripts.concat.apply(scripts, overlayScriptsSet);
+
+        if (uri.host === EXTENSION_HOST) {
+            let baseURI = uri.clone().QueryInterface(Ci.nsIURL);
+            if (baseURI.fileName)
+                baseURI.path = baseURI.directory + baseURI.fileBaseName + '/';
+            let childNames = null;
+            let localURI = ChromeRegistry.convertChromeURL(baseURI);
+            if (localURI instanceof Ci.nsIFileURL) {
+                let dir = localURI.file;
+                if (dir.exists() && dir.isDirectory())
+                    childNames = this.getChildFileNames(dir);
+            } else {
+                // XXX nsIJARURL
+            }
+            if (childNames) {
+                let baseURISpec = baseURI.spec;
+                let childScripts =
+                    childNames.filter(function (name) /\.js$/.test(name))
+                              .map(function (name) baseURISpec + name);
+                scripts = scripts.concat(childScripts);
+            }
+        }
+        return this.unique(scripts);
+    },
+
+    getOverlays: function lh_getOverlays(uri) {
+        let overlays = [];
+        let enumerator = ChromeRegistry.getXULOverlays(uri);
+        while (enumerator.hasMoreElements()) {
+            let uri = enumerator.getNext().QueryInterface(Ci.nsIURI);
+            if (uri.host === EXTENSION_HOST)
+                overlays.push(uri);
+        }
+        return overlays;
+    },
+
+    getScriptsForWindow: function lh_getScriptsForWindow(win) {
+        // cache here
+
+        let scripts = [];
+
+        let node = win.document.firstChild;
+        let root = win.document.documentElement;
+        let ourURIPattern =
+            new RegExp('\\bchrome://' + EXTENSION_HOST + '/content/[\\w./-]');
+        for (; node !== root; node = node.nextSibling) {
+            let match;
+            if (node.nodeType === node.PROCESSING_INSTRUCTION_NODE &&
+                node.target === 'xul-overlay' &&
+                (match = node.data.match(ourURIPattern))) {
+                scripts = scripts.concat(this.getScriptsForURI(match[0]));
+            }
+        }
+
+        scripts = scripts.concat(this.getScriptsForURI(win.location.href));
+        return this.unique(scripts);
+    },
+
+    loadScripts: function lh_loadScripts(scripts, target) {
+        let global = getGlobalObject(target);
+        scripts.forEach(function (script) {
+            let env = new global.Object();
+            env.__proto__ = target;
+            loadSubScript(script, env);
+            if (env.EXPORT)
+                env.EXPORT.forEach(function (name) target[name] = env[name]);
+        });
+    },
+
+    unique: function lh_unique(array) {
+        let m = {};
+        return array.filter(function (e) (e in m) ? false : (m[e] = true));
+    },
+};
 
 /* This should be called from chrome pages. */
 function loadModules() {
@@ -344,6 +454,18 @@ function loadPrecedingModules() {
     let i = uris.indexOf(self);
     if (i === -1) return;
     uris.slice(0, i).forEach(function (uri) Cu.import(uri, this), this);
+}
+
+/* This should be called from chrome pages. */
+function loadForURI(uri) {
+    let scripts = _loaderHelper.getScriptsForURI(uri);
+    _loaderHelper.loadScripts(scripts, this);
+}
+
+/* This should be called from chrome pages. */
+function loadForWindow(win) {
+    let scripts = _loaderHelper.getScriptsForWindow(win);
+    _loaderHelper.loadScripts(scripts, this);
 }
 
 /*
