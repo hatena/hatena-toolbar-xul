@@ -86,7 +86,7 @@ Prefs.prototype = {
     },
 
     has: function Prefs_has(name) {
-        return this.prefs.getPrefType() !== PrefService.PREF_INVALID;
+        return this.prefs.getPrefType(name) !== PrefService.PREF_INVALID;
     },
 
     hasSet: function Prefs_hasSet(name) {

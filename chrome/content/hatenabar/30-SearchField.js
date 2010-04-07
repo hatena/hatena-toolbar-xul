@@ -1,11 +1,20 @@
 const EXPORT = ['SearchField'];
 
 var SearchField = {
+    get inputHistory SF_get_inputHistory() InputHistory.searchbar,
     get textbox SF_get_textbox() document.getElementById('hatenabar-search-field'),
+
+    // XXX Must be called on load and ToolboxCustomizeDone
+    bindInputHistory: function SF_bindInputHistory() {
+        let textbox = this.textbox;
+        if (!textbox) return;
+        textbox.searchParam = this.inputHistory.key;
+    },
 
     goSearch: function SF_goSearch(event) {
         let query = this.textbox.value;
-        InputHistory.searchbar.add(query);
+        if (query)
+            this.inputHistory.add(query);
         Command.goSearch(query, event);
     },
 
@@ -19,3 +28,5 @@ var SearchField = {
         this.goSearch(event);
     },
 };
+
+window.addEventListener('load', function () SearchField.bindInputHistory(), false);

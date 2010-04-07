@@ -34,9 +34,13 @@ extend(InputHistory.prototype, {
         FormHistory.removeEntry(this.key, value);
     },
 
+    has: function SH_has(value) {
+        return FormHistory.entryExists(this.key, value);
+    },
+
     clear: function SH_clear() {
         FormHistory.removeEntriesForName(this.key);
     },
 });
 
-InputHistory.searchbar = new InputHistory(searchbar);
+InputHistory.searchbar = new InputHistory('searchbar');
