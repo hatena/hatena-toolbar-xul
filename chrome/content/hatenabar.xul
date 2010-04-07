@@ -41,7 +41,7 @@
                  defaultset=""
                  accesskey="&hBookmark.toolbar.titleKey;"
             -->
-            <toolbarbutton id="hatenabar-menu-button"
+            <toolbarbutton id="hatenabar-main-button"
                            class="toolbarbutton-1 chromeclass-toolbar-additional"
                            type="menu-button"
                            image="http://www.hatena.ne.jp/favicon.ico"
@@ -50,7 +50,8 @@
                            oncommand="hatenabar.Control.openLink(this, event);"
                            onclick="checkForMiddleClick(this, event);"
                            hatena:link="www:">
-                <menupopup onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
+                <menupopup tooltiptext=""
+                           onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
                            oncommand="event.stopPropagation();"
                            onclick="event.stopPropagation();">
                     <menuitem label="{{Clear History}}"
@@ -63,6 +64,31 @@
                               hatena:link="www:tool:firefox"/>
                 </menupopup>
             </toolbarbutton>
+
+            <toolbaritem id="hatenabar-search-item">
+                <textbox id="hatenabar-search-field"
+                         type="autocomplete"
+                         flex="1">
+                    <hbox>
+                        <image src="http://www.hatena.ne.jp/favicon.ico"/>
+                    </hbox>
+                </textbox>
+            </toolbaritem>
+
+            <splitter id="hatenabar-search-splitter"
+                      resizebefore="closest"
+                      resizeafter="flex"
+                      tooltiptext="{{Resize Search Field}}">
+                <toolbarseparator/>
+            </splitter>
+
+            <toolbarseparator/>
+
+            <toolbarbutton class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           label="{{Hello}}"
+                           image="http://www.hatena.ne.jp/favicon.ico"/>
+
+            <toolbarspring flex="1"/>
         </toolbar>
     </toolbox>
 
