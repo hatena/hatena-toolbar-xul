@@ -65,12 +65,16 @@
                 </menupopup>
             </toolbarbutton>
 
-            <toolbaritem id="hatenabar-search-item">
+            <toolbaritem id="hatenabar-search-item" align="center">
                 <textbox id="hatenabar-search-field"
                          type="autocomplete"
-                         flex="1">
+                         enablehistory="true"
+                         flex="1"
+                         onkeypress="hatenabar.SearchField.onKeyPress(event);">
                     <hbox>
-                        <image src="http://www.hatena.ne.jp/favicon.ico"/>
+                        <image src="http://www.hatena.ne.jp/favicon.ico"
+                               tooltiptext="{{Search}}"
+                               onclick="hatenabar.SearchField.onButtonClick(event);"/>
                     </hbox>
                 </textbox>
             </toolbaritem>
