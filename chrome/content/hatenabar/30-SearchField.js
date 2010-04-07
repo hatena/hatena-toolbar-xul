@@ -4,7 +4,9 @@ var SearchField = {
     get textbox SF_get_textbox() document.getElementById('hatenabar-search-field'),
 
     goSearch: function SF_goSearch(event) {
-        Command.goSearch(this.textbox.value, event);
+        let query = this.textbox.value;
+        InputHistory.searchbar.add(query);
+        Command.goSearch(query, event);
     },
 
     onKeyPress: function SF_onKeyPress(event) {
