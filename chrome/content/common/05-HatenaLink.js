@@ -13,7 +13,7 @@ var HatenaLink = {
         if (User.user)
             link = link.replace(/\$/g, User.user.name);
         // XXX 一時しのぎ。
-        if (/^b:search:/) {
+        if (/^b:search:/.test(link)) {
             // XXX リリース時は via=hatenabar1 とかに変更する?
             return 'http://b.hatena.ne.jp/search?via=hatenabar&q=' +
                    encodeURIComponent(context.query);
