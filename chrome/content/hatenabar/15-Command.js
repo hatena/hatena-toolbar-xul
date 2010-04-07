@@ -28,7 +28,7 @@ var Command = {
         openUILink(link, event);
     },
 
-    clearHistory: function Cmd_clearHistory() {
-        p(arguments.callee.name + ': not yet implemented...');
+    clearSearchHistory: function Cmd_clearSearchHistory() {
+        InputHistory.searchbar.clear();
     },
 };

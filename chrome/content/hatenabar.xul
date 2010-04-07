@@ -54,8 +54,8 @@
                            onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
                            oncommand="event.stopPropagation();"
                            onclick="event.stopPropagation();">
-                    <menuitem label="{{Clear History}}"
-                              oncommand="hatenabar.Command.clearHistory();"/>
+                    <menuitem label="{{Clear Search History}}"
+                              oncommand="hatenabar.Command.clearSearchHistory();"/>
                     <menuitem label="{{Options...}}"
                               oncommand="hatenabar.Command.openPreferences();"/>
                     <menuitem label="{{My Hatena}}"
