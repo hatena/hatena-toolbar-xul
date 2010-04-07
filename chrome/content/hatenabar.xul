@@ -58,12 +58,8 @@
                     <menuitem label="{{Options...}}"
                               oncommand="hatenabar.Command.openPreferences();"/>
                     <menuitem label="{{My Hatena}}"
-                              oncommand="hatenabar.Control.openLink(this, event);"
-                              onclick="checkForMiddleClick(this, event);"
                               hatena:link="www:my"/>
                     <menuitem label="{{Help}}"
-                              oncommand="hatenabar.Control.openLink(this, event);"
-                              onclick="checkForMiddleClick(this, event);"
                               hatena:link="www:tool:firefox"/>
                 </menupopup>
             </toolbarbutton>

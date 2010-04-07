@@ -33,11 +33,16 @@ var Control = {
         let isLoggedIn = !!User.user;
         for (let menu = popup.firstChild; menu; menu = menu.nextSibling) {
             let link;
-            if (menu.localName !== 'menuitem' || !(link = this.getLink(menu)))
+            if (menu.localName !== 'menuitem' ||
+                !(link = menu.getAttributeNS(HATENA_NS, 'link')))
                 continue;
             if (isLoggedIn || !HatenaLink.isUserRequired(link)) {
                 menu.disabled = false;
                 menu.statusText = HatenaLink.expand(link);
+                if (!menu.hasAttribute('oncommand'))
+                    menu.setAttribute('oncommand', "hatenabar.Control.openLink(this, event);");
+                if (!menu.hasAttribute('onclick'))
+                    menu.setAttribute('onclick', "checkForMiddleClick(this, event)");
             } else {
                 menu.disabled = true;
             }
