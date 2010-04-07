@@ -15,9 +15,14 @@
 ]>
 -->
 <overlay id="hatenabar-overlay"
-         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+         xmlns:hatena="http://www.hatena.ne.jp/">
 
     <script type="application/javascript" src="autoloader.js"></script>
+
+    <commandset id="mainCommandSet">
+        <command id="hatenabar-cmd-go" oncommand="hatenabar.p(event.sourceEvent.target.nodeName);"/>
+    </commandset>
 
     <toolbarpalette id="BrowserToolbarPalette">
     </toolbarpalette>
@@ -29,13 +34,39 @@
                  defaultmode="icons"
                  iconsize="small"
                  defaulticonsize="small"
-                 toolbarname="{{Hatena Toolbar}}">
-          <!--
+                 toolbarname="{{Hatena Toolbar}}"
+                 context="toolbar-context-menu">
+            <!--
                  customizable="true"
-                 defaultset="hBookmark-toolbar-sidebar-button,hBookmark-toolbar-add-button,hBookmark-toolbar-home-button,separator,hBookmark-toolbar-recent-line"
-                 context="toolbar-context-menu"
+                 defaultset=""
                  accesskey="&hBookmark.toolbar.titleKey;"
             -->
+            <toolbarbutton id="hatenabar-menu-button"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           type="menu-button"
+                           image="http://www.hatena.ne.jp/favicon.ico"
+                           label="{{Hatena}}"
+                           tooltiptext="{{Hatena}}"
+                           oncommand="hatenabar.Control.openLink(this, event);"
+                           onclick="checkForMiddleClick(this, event);"
+                           hatena:link="www:">
+                <menupopup onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
+                           oncommand="event.stopPropagation();"
+                           onclick="event.stopPropagation();">
+                    <menuitem label="{{Clear History}}"
+                              oncommand="hatenabar.Command.clearHistory();"/>
+                    <menuitem label="{{Options...}}"
+                              oncommand="hatenabar.Command.openPreferences();"/>
+                    <menuitem label="{{My Hatena}}"
+                              oncommand="hatenabar.Control.openLink(this, event);"
+                              onclick="checkForMiddleClick(this, event);"
+                              hatena:link="www:my"/>
+                    <menuitem label="{{Help}}"
+                              oncommand="hatenabar.Control.openLink(this, event);"
+                              onclick="checkForMiddleClick(this, event);"
+                              hatena:link="www:tool:firefox"/>
+                </menupopup>
+            </toolbarbutton>
         </toolbar>
     </toolbox>
 

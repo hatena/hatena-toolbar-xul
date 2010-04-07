@@ -20,9 +20,7 @@ var net = {
         //xhr.onerror = onerror;
         xhr.onerror = bind(p, null, 'onerror...');
         xhr.send('');
-        p('sent request');
         function onLoad() {
-            p('do onload, ' + xhr.responseText);
             onload({ value: JSON.parse(xhr.responseText) });
         }
     },
@@ -35,13 +33,11 @@ function User(name, options) {
 
 extend(User, {
     login: function User_loginCheck () {
-            p('begin login...');
         //HTTP.post(MY_NAME_URL, null, User._login, User.loginErrorHandler);
         net.post(MY_NAME_URL, User._login, User.loginErrorHandler,
                  true, null, { Cookie: 'rk=' + User.rk });
     },
     _login: function User__login(res) {
-            p(uneval(res));
         res = res.value;
         if (res.login) {
             User.setUser(res);
