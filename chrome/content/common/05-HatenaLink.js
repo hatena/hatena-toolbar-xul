@@ -12,4 +12,9 @@ var HatenaLink = {
             link = link.replace(/\$/g, User.user.name);
         return link.replace(/:/g, '/').replace(/^\w+/, 'http://$&.hatena.ne.jp');
     },
+
+    isUserRequired: function HL_isUserRequired(link) {
+        if (link === 'www:my') return true;
+        return link.indexOf('$') !== -1;
+    },
 };
