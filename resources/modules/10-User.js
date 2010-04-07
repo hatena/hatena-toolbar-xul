@@ -1,10 +1,32 @@
 // To be moved to modules.
 
+Components.utils.import('resource://hatenabar/modules/00-core.js');
+loadPrecedingModules();
+
 const EXPORTED_SYMBOLS = ["User"];
 
 const MY_NAME_URL = 'http://b.hatena.ne.jp/my.name';
 
 // ログインユーザだけでなく、お気に入りユーザなどユーザ一般を表す。
+
+// XXX 一時的に……
+var net = {
+    post: function (url, onload, onerror, _1, _2, headers) {
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', url);
+        for (let [name, value] in new Iterator(headers))
+            xhr.setRequestHeader(name, value);
+        xhr.onload = onLoad;
+        //xhr.onerror = onerror;
+        xhr.onerror = bind(p, null, 'onerror...');
+        xhr.send('');
+        p('sent request');
+        function onLoad() {
+            p('do onload, ' + xhr.responseText);
+            onload({ value: JSON.parse(xhr.responseText) });
+        }
+    },
+};
 
 function User(name, options) {
     this._name = name;
@@ -13,11 +35,13 @@ function User(name, options) {
 
 extend(User, {
     login: function User_loginCheck () {
-        HTTP.post(MY_NAME_URL, null, User._login, User.loginErrorHandler);
-        //net.post(MY_NAME_URL, User._login, User.loginErrorHandler,
-        //         true, null, { Cookie: 'rk=' + User.rk });
+            p('begin login...');
+        //HTTP.post(MY_NAME_URL, null, User._login, User.loginErrorHandler);
+        net.post(MY_NAME_URL, User._login, User.loginErrorHandler,
+                 true, null, { Cookie: 'rk=' + User.rk });
     },
     _login: function User__login(res) {
+            p(uneval(res));
         res = res.value;
         if (res.login) {
             User.setUser(res);
@@ -53,7 +77,7 @@ extend(User, {
             this.clearUser(true);
         }
         let user = new User(res.name, res);
-        this.user = user;
+        this.user = this.current = user;
         this.user.options.rk = this.rk; // XXX この位置で設定していいのか?
         this.user.onLogIn();
         //EventService.dispatch('UserChange', this);
@@ -62,10 +86,8 @@ extend(User, {
         let cookies = CookieManager.enumerator;
         while (cookies.hasMoreElements()) {
             let cookie = cookies.getNext().QueryInterface(Ci.nsICookie);
-            if (cookie.host === ".hatena.ne.jp" && cookie.name === "rk") {
-                Prefs.bookmark.set('everLoggedIn', true);
+            if (cookie.host === ".hatena.ne.jp" && cookie.name === "rk")
                 return cookie.value;
-            }
         }
         return "";
     })()
@@ -172,3 +194,4 @@ User.addObservers();
 //    preloadTimer.stop();
 //}, null, 10);
 
+User.login();
