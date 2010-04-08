@@ -9,36 +9,34 @@ function InputHistory(name) {
 }
 
 extend(InputHistory.prototype, {
-    get key SH_get_key() {
+    get key IH_get_key() {
         if (!this._key) {
-            let prefix = 'hatenabar-' + this.name + '-';
-            let prefKey = 'inputHistory.key.' + this.name;
-            let uuid = Prefs.hatenabar.has(prefKey)
-                       ? Prefs.hatenabar.get(prefKey) : ''
+            let prefKey = 'inputHistory.keys.' + this.name;
+            let uuid = Prefs.hatenabar.get(prefKey, '');
             if (!uuid) {
                 uuid = getService('@mozilla.org/uuid-generator;1',
                                   Ci.nsIUUIDGenerator)
-                           .generateUUID().toString().replace(/\W/g, '');
+                           .generateUUID().toString().replace(/\W+/g, '');
                 Prefs.hatenabar.set(prefKey, uuid);
             }
-            this._key = prefix + uuid;
+            this._key = 'hatenabar-' + this.name + '-' + uuid;
         }
         return this._key;
     },
 
-    add: function SH_add(value) {
+    add: function IH_add(value) {
         FormHistory.addEntry(this.key, value);
     },
 
-    remove: function SH_remove(value) {
+    remove: function IH_remove(value) {
         FormHistory.removeEntry(this.key, value);
     },
 
-    has: function SH_has(value) {
+    has: function IH_has(value) {
         return FormHistory.entryExists(this.key, value);
     },
 
-    clear: function SH_clear() {
+    clear: function IH_clear() {
         FormHistory.removeEntriesForName(this.key);
     },
 });

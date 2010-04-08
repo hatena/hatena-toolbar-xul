@@ -8,7 +8,7 @@ function warmUp() {
 }
 
 function coolDown() {
-    let branch = PrefService.getBranch('extensions.hatenabar.inputHistory.key.');
+    let branch = PrefService.getBranch('extensions.hatenabar.inputHistory.keys.');
     try { branch.clearUserPref('test'); } catch (ex) {}
     try { branch.clearUserPref('test2'); } catch (ex) {}
 }
