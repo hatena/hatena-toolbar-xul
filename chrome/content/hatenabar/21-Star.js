@@ -8,6 +8,7 @@ var Star = {
 
     init: function S_init() {
         gBrowser.addEventListener('DOMContentLoaded', this, false);
+        gBrowser.addEventListener('hatenabar-stars-loaded', this, false, true);
 
         if (!this.SiteConfig) {
             // XXX Use net.http or something else.
@@ -24,12 +25,12 @@ var Star = {
         }
     },
 
-    load: function S_load(win) {
+    load: function S_load(doc) {
+        let win = doc.defaultView;
         // XXX return if star is disabled.
-        if (!this.SiteConfig || !/^https?:/.test(win.location.protocol))
-            return;
-        if (win.top != win ||
-            !(win.document instanceof Ci.nsIDOMHTMLDocument))
+        if (!this.SiteConfig || win.top != win ||
+            !/^https?:/.test(win.location.protocol) ||
+            !(doc instanceof Ci.nsIDOMHTMLDocument))
             return;
         let host = win.location.hostname;
         let config = this.SiteConfig[host] ||
@@ -80,9 +81,20 @@ var Star = {
         }
     },
 
+    onStarsLoaded: function S_onStarsLoaded(doc) {
+        doc.hatenabar_hasStars = true;
+        //this.dispatch('StarsLoaded', doc);
+    },
+
     handleEvent: function S_handleEvent(event) {
-        if (event.type === 'DOMContentLoaded')
-            this.load(event.target.defaultView);
+        switch (event.type) {
+        case 'DOMContentLoaded':
+            this.load(event.target);
+            break;
+        case 'hatenabar-stars-loaded':
+            this.onStarsLoaded(event.target);
+            break;
+        }
     },
 };
 
