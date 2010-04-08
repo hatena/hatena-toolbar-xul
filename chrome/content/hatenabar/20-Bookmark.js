@@ -21,16 +21,13 @@ var Bookmark = {
     },
 
     addSearchButton: function B_addSearchButton(win) {
-        if (!win || !win.location || win.location.protocol !== 'http:')
-            return;
+        if (win.top !== win || win.location.protocol !== 'http:') return;
         let config = this.SiteConfig[win.location.host];
         if (!config ||
             (config.path && !win.location.pathname.match(config.path)))
             return;
         let doc = win.document;
-        if (!(doc instanceof Ci.nsIDOMHTMLDocument) ||
-            !gBrowser.getBrowserForDocument(win.document))
-            return;
+        if (!(doc instanceof Ci.nsIDOMHTMLDocument)) return;
         let form = doc.forms.namedItem(config.form);
         if (!form) return;
         let input = form.elements.namedItem(config.input);
@@ -39,43 +36,44 @@ var Bookmark = {
         let href = HatenaLink.parseToURL('b:search', { query: query });
         let text = '{{Search "' + query + '" by Hatena Search}}';
         let src = HatenaLink.parseToURL('b:images:search-mini.png');
-        let code = 'javascript:(' + addHatenaSearchButton.toSource() + ')(' +
+        let code = 'javascript:(' + this._addSearchButton.toSource() + ')(' +
             [config, href, text, src].map(uneval).join(',') + ')';
         win.location.href = encodeURI(code);
 
-        // This function is executed in the context of the web page.
-        // The original file for this function is:
-        // http://www.hatena.ne.jp/js/hatenabar_bookmarksearch.js
-        function addHatenaSearchButton(config, href, text, src) {
-            function ensure(object, prop, value) {
-                if (typeof object[prop] === 'undefined')
-                    object[prop] = value || {};
-            }
-            ensure(window, 'Hatena');
-            ensure(Hatena, 'Bookmark');
-            if (Hatena.Bookmark.loaded) return;
-            ensure(Hatena.Bookmark, 'onLoadFunctions', []);
-            ensure(Hatena.Bookmark, 'log', function () {});
-            Hatena.Bookmark.SiteConfig = config;
-            var container = document.evaluate(
-                config.xpath, document, null,
-                XPathResult.FIRST_ORDERED_NODE_TYPE, null
-            ).singleNodeValue;
-            if (!container) return;
-            if (config.parent)
-                container = container.parentNode;
-            if (container instanceof HTMLTableRowElement)
-                container = container.appendChild(document.createElement('td'));
-            var a = document.createElement('a');
-            a.href = href;
-            a.title = text;
-            var img = document.createElement('img');
-            img.src = src;
-            img.alt = text;
-            img.style.border = 'none';
-            a.appendChild(img);
-            container.appendChild(a);
+    },
+
+    // This function is executed in the context of the web page.
+    // The original file for this function is:
+    // http://www.hatena.ne.jp/js/hatenabar_bookmarksearch.js
+    _addSearchButton: function B__addSearchButton(config, href, text, src) {
+        function ensure(object, prop, value) {
+            if (typeof object[prop] === 'undefined')
+                object[prop] = value || {};
         }
+        ensure(window, 'Hatena');
+        ensure(Hatena, 'Bookmark');
+        if (Hatena.Bookmark.loaded) return;
+        ensure(Hatena.Bookmark, 'onLoadFunctions', []);
+        ensure(Hatena.Bookmark, 'log', function () {});
+        Hatena.Bookmark.SiteConfig = config;
+        var container = document.evaluate(
+            config.xpath, document, null,
+            XPathResult.FIRST_ORDERED_NODE_TYPE, null
+        ).singleNodeValue;
+        if (!container) return;
+        if (config.parent)
+            container = container.parentNode;
+        if (container instanceof HTMLTableRowElement)
+            container = container.appendChild(document.createElement('td'));
+        var a = document.createElement('a');
+        a.href = href;
+        a.title = text;
+        var img = document.createElement('img');
+        img.src = src;
+        img.alt = text;
+        img.style.border = 'none';
+        a.appendChild(img);
+        container.appendChild(a);
     },
 
     handleEvent: function B_handleEvent(event) {
