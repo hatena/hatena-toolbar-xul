@@ -1,9 +1,10 @@
-Components.utils.import('resource://hatenabar/modules/01-Prefs.js');
+Components.utils.import('resource://hatenabar/modules/03-Prefs.js');
 
 function setUp() {
     utils.setPref('extensions.hatenabar.strfoo', 'foo');
     utils.setPref('extensions.hatenabar.strbar', 'bar');
     utils.setPref('extensions.hatenabar.intbar', 3);
+    utils.setPref('extensions.hatenabar.strja', '日本語');
     utils.setPref('extensions.hatenabar.bar', 'bar');
     utils.setPref('extensions.hatenabar.hogehoge.hugahuga', 100);
     utils.setPref('toplevel.bar', 'foo');
@@ -12,23 +13,18 @@ function setUp() {
 }
 
 function tearDown() {
-    utils.clearPref('extensions.hatenabar.strfoo');
-    utils.clearPref('extensions.hatenabar.strbar');
-    utils.clearPref('extensions.hatenabar.intbar');
-    utils.clearPref('extensions.hatenabar.bar');
-    utils.clearPref('extensions.hatenabar.hogehoge.hugahuga');
-    utils.clearPref('extensions.hatenabar.setstrbar');
-    utils.clearPref('extensions.hatenabar.setbarint');
-    //Prefs.global.unregister();
-    //Prefs.hatenabar.unregister();
+    Prefs.hatenabar.clear('setstrbar');
+    Prefs.hatenabar.clear('setbarint');
+    Prefs.hatenabar.clear('strfoo');
 }
 
 
-function testPref()
-{
+function testPref() {
     assert.equals('foo', Prefs.hatenabar.get('strfoo'));
     assert.equals(3, Prefs.hatenabar.get('intbar'));
     assert.equals('bar', Prefs.hatenabar.get('bar'));
+    assert.equals('日本語', Prefs.hatenabar.get('strja'));
+    assert.equals('日本語', Prefs.hatenabar.get('strja', '', Ci.nsIPrefLocalizedString));
 
     Prefs.hatenabar.set('setstrbar', 'string');
     assert.equals(utils.getPref('extensions.hatenabar.setstrbar'), 'string');
@@ -43,18 +39,25 @@ function testPref()
     try { Prefs.global.get('toplevel.bar'); }
     catch (ex) { status = 'THROWN'; }
     assert.equals('THROWN', status, 'Throw for not existing prefs.');
+
+    assert.equals(42, Prefs.global.get('toplevel.bar', 42));
 }
 
-//function testObserve() {
-//    var loaded = { value: false };
-//    var loaded2 = { value: false };
-//    Prefs.hatenabar.createListener('strfoo', function(e) {
-//        loaded.value = true;
-//    });
-//    Prefs.global.createListener('extensions.hatenabar.strfoo', function(e) {
-//        loaded2.value = true;
-//    });
-//    utils.setPref('extensions.hatenabar.strfoo', 'change');
-//    yield loaded;
-//    yield loaded2;
-//}
+function testObserve() {
+    let loaded = { value: false };
+    let loaded2 = { value: false };
+    let b1, b2;
+    Prefs.hatenabar.createListener('strfoo', function () {
+        b1 = this.target.branch;
+        loaded.value = true;
+    });
+    Prefs.global.createListener('extensions.hatenabar.strfoo', function () {
+        b2 = this.target.branch;
+        loaded2.value = true;
+    });
+    utils.setPref('extensions.hatenabar.strfoo', 'change');
+    yield loaded;
+    yield loaded2;
+    assert.equals('extensions.hatenabar.', b1);
+    assert.equals('', b2);
+}
