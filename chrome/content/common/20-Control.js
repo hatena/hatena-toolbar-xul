@@ -38,7 +38,7 @@ var Control = {
                 continue;
             if (isLoggedIn || !HatenaLink.isUserRequired(link)) {
                 menu.disabled = false;
-                menu.statusText = HatenaLink.expand(link);
+                menu.statusText = HatenaLink.parseToURL(link);
                 if (!menu.hasAttribute('oncommand'))
                     menu.setAttribute('oncommand', "hatenabar.Control.openLink(this, event);");
                 if (!menu.hasAttribute('onclick'))
