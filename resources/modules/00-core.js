@@ -376,6 +376,8 @@ let _loaderHelper = {
         return names.sort();
     },
 
+    isModulesLoaded: false,
+
     getScriptsForURI: function lh_getScriptsForURI(uri) {
         // cache here
 
@@ -453,7 +455,7 @@ let _loaderHelper = {
             if (env.EXPORT)
                 env.EXPORT.forEach(function (name) target[name] = env[name]);
         });
-p    },
+    },
 
     unique: function lh_unique(array) {
         let m = {};
@@ -465,6 +467,11 @@ p    },
 function loadModules() {
     let uris = _getSiblingFileURIs(__LOCATION__);
     uris.forEach(function (uri) Cu.import(uri, this), this);
+    if (!_loaderHelper.isModulesLoaded) {
+        _loaderHelper.isModulesLoaded = true;
+        Cu.import('resource://' + EXTENSION_HOST + '/modules/02-EventService.js');
+        EventService.dispatch('AllModulesLoaded');
+    }
 }
 
 /* This should be called from JS modules. */
