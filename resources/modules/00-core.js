@@ -223,19 +223,6 @@ var escapeIRI = function(iri) {
     return encodeURIComponent(iri2uri(iri));
 };
 
-var entryURL = function(url) {
-    let suffix = iri2uri(url).replace(/#/g, '%23');
-    if (suffix.indexOf("http://") === 0)
-        suffix = suffix.substring(7);
-    else if (suffix.indexOf("https://") === 0)
-        suffix = "s/" + suffix.substring(8);
-    return B_HTTP + 'entry/' + suffix;
-};
-
-var addPageURL = function(url) {
-    return B_HTTP + 'my/add.confirm?url=' + escapeIRI(url);
-};
-
 var isInclude = function(val, ary) {
     for (var i = 0;  i < ary.length; i++) {
         if (ary[i] == val) return true;

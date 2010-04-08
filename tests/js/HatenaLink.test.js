@@ -43,6 +43,12 @@ function testBookmarkLink() {
                   u('b:t:hatena'));
     //assert.equals('http://b.hatena.ne.jp/keyword/%E3%81%AF%E3%81%A6%E3%81%AA',
     //              u('b:keyword:はてな'));
+    assert.equals('http://b.hatena.ne.jp/entry/example.org/',
+                  u('b:entry', { url: 'http://example.org/' }));
+    assert.equals('http://b.hatena.ne.jp/entry/example.org/%23fragment',
+                  u('b:entry', { url: 'http://example.org/#fragment' }));
+    assert.equals('http://b.hatena.ne.jp/entry/s/example.org/',
+                  u('b:entry', { url: 'https://example.org/' }));
 }
 
 function testDiaryLink() {

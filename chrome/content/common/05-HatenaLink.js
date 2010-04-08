@@ -57,8 +57,17 @@ HatenaLink.schemes = {
         link = link.replace(/\b(id:[^:]+:)t:(.+)/, '$1$2:');
         let url = hatenaURL(link, context);
         let type = link.substring(2);
-        if (type === 'search')
+        switch (type) {
+        case 'search':
             url += '?via=hatenabar&q=' + encodeURIComponent(context.query);
+            break;
+        case 'entry':
+            let suffix = iri2uri(context.url).replace(/#/g, '%23');
+            url += suffix.replace(/^http(s)?:\/\//, function (match, ssl) {
+                return ssl ? '/s/' : '/';
+            });
+            break;
+        }
         return { url: url };
     },
 
