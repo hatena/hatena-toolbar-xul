@@ -112,6 +112,12 @@ extend(Prefs.prototype, {
         } catch(e) {}
     },
 
+    getChildPrefs: function Prefs_getChildPrefs(name) {
+        if (name.charAt(name.length - 1) !== '.')
+            name += '.';
+        return new Prefs(this.branch + name);
+    },
+
     clearAll: function Prefs_clearAll() {
         this.prefBranch.deleteBranch('');
     },

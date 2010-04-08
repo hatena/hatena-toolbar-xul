@@ -43,6 +43,15 @@ function testPref() {
     assert.equals(42, Prefs.global.get('toplevel.bar', 42));
 }
 
+function testGetChildPrefs() {
+    let prefs = Prefs.hatenabar.getChildPrefs('testChild.');
+    assert.isTrue(prefs instanceof Prefs);
+    assert.equals('extensions.hatenabar.testChild.', prefs.branch);
+    assert.equals(42, prefs.get('testName', 42));
+    let prefs2 = Prefs.hatenabar.getChildPrefs('testChild');
+    assert.equals('extensions.hatenabar.testChild.', prefs2.branch);
+}
+
 function testObserve() {
     let loaded = { value: false };
     let loaded2 = { value: false };

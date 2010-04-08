@@ -32,6 +32,7 @@ function User(name, options) {
 };
 
 extend(User, {
+    user: null,
     login: function User_loginCheck () {
         //HTTP.post(MY_NAME_URL, null, User._login, User.loginErrorHandler);
         net.post(MY_NAME_URL, User._login, User.loginErrorHandler,
@@ -55,11 +56,12 @@ extend(User, {
     },
     clearUser: function(forUserChange) {
         if (this.user) {
+            let current = this.user;
             //this.user.clear();
-            this.user.onLogOut();
-            this.user = this.current = null;
+            this.user.onLogout();
+            this.user = null;
             if (!forUserChange)
-                ;//EventService.dispatch('UserChange', this);
+                EventService.dispatch('UserChanged', current);
         }
     },
     setUser: function User_setCurrentUser (res) {
@@ -73,10 +75,10 @@ extend(User, {
             this.clearUser(true);
         }
         let user = new User(res.name, res);
-        this.user = this.current = user;
+        this.user = user;
         this.user.options.rk = this.rk; // XXX この位置で設定していいのか?
-        this.user.onLogIn();
-        //EventService.dispatch('UserChange', this);
+        this.user.onLogin();
+        EventService.dispatch('UserChanged', current);
     },
     rk: (function User_getRk() {
         let cookies = CookieManager.enumerator;
@@ -104,8 +106,14 @@ User.prototype = {
     //    }
     //},
 
-    onLogIn: function User_onLogIn() {},
-    onLogOut: function User_onLogOut() {},
+    get prefs User_get_prefs() {
+        if (!this._prefs)
+            this._prefs = Prefs.hatenabar.getChildPrefs('users.' + this.name);
+        return this._prefs;
+    },
+
+    onLogin: function User_onLogin() {},
+    onLogout: function User_onLogout() {},
 };
 
 /*
@@ -190,4 +198,4 @@ User.addObservers();
 //    preloadTimer.stop();
 //}, null, 10);
 
-User.login();
+EventService.createListener('AllModulesLoaded', function () User.login());
