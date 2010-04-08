@@ -93,6 +93,59 @@
                            label="{{Hello}}"
                            image="http://www.hatena.ne.jp/favicon.ico"/>
 
+            <toolbarseparator/>
+
+            <toolbarbutton id="hatenabar-including-antenna-button"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           image="http://www.hatena.ne.jp/favicon.ico"
+                           label="{{Including Antennas}}"
+                           tooltiptext="{{Including Antennas}}"
+                           oncommand="hatenabar.Toolbar.openRelatedLink('a:include', event);"
+                           onclick="checkForMiddleClick(this, event);"/>
+            <toolbarbutton id="hatenabar-add-antenna-button"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-user-required"
+                           image="http://www.hatena.ne.jp/favicon.ico"
+                           label="{{Add to Antenna}}"
+                           tooltiptext="{{Add to Antenna}}"
+                           oncommand="hatenabar.Toolbar.openRelatedLink('a:append', event);"
+                           onclick="checkForMiddleClick(this, event);"/>
+            <toolbarbutton id="hatenabar-show-bookmark-button"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           image="http://www.hatena.ne.jp/favicon.ico"
+                           label="{{Show Bookmark Entry}}"
+                           tooltiptext="{{Show Bookmark Entry}}"
+                           oncommand="hatenabar.Toolbar.openRelatedLink('b:entry', event);"
+                           onclick="checkForMiddleClick(this, event);"/>
+            <toolbarbutton id="hatenabar-add-bookmark-button"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-user-required"
+                           image="http://www.hatena.ne.jp/favicon.ico"
+                           label="{{Add to Bookmark}}"
+                           tooltiptext="{{Add to Bookmark}}"
+                           oncommand="hatenabar.Bookmark.add(content);"
+                           onclick="checkForMiddleClick(this, event);"/>
+            <!-- The command of this button is same as show-bookmark-button. -->
+            <toolbarbutton id="hatenabar-referring-diary-button"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           image="http://www.hatena.ne.jp/favicon.ico"
+                           label="{{Referring Diaries}}"
+                           tooltiptext="{{Referring Diaries}}"
+                           oncommand="hatenabar.Toolbar.openRelatedLink('b:entry', event);"
+                           onclick="checkForMiddleClick(this, event);"/>
+            <toolbarbutton id="hatenabar-diary-refer-button"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-user-required"
+                           image="http://www.hatena.ne.jp/favicon.ico"
+                           label="{{Refer in Diary}}"
+                           tooltiptext="{{Refer in Diary}}"
+                           oncommand="hatenabar.Toolbar.goReferInDiary(event);"
+                           onclick="checkForMiddleClick(this, event);"/>
+            <toolbarbutton id="hatenabar-group-refer-button"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-user-required"
+                           image="http://www.hatena.ne.jp/favicon.ico"
+                           label="{{Refer in Group}}"
+                           tooltiptext="{{Refer in Group}}"
+                           oncommand="hatenabar.Command.goReferInGropu(event);"
+                           onclick="checkForMiddleClick(this, event);"/>
+
             <toolbarspring flex="1"/>
         </toolbar>
     </toolbox>
