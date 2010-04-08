@@ -10,6 +10,9 @@ function favicon(uri) {
     return FaviconService.getFaviconImageForPage(uri).spec;
 }
 
+function doOnLoad(f) window.addEventListener('load', f, false);
+function doOnUnload(f) window.addEventListener('unload', f, false);
+
 /*
  * あとで jsm に移植？
  */
