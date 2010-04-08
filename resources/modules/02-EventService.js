@@ -38,7 +38,7 @@ var EventServicePrototype = {
             try {
                 listener.handler.apply(listener, args);
             } catch (ex) {
-                Cu.reportError(ex);
+                reportError(ex);
             }
         });
     },
@@ -67,7 +67,7 @@ function Listener(target, event, handler) {
         try {
             this.target.onListenerAdded(this);
         } catch (ex) {
-            Cu.reportError(ex);
+            reportError(ex);
         }
     }
 }
@@ -81,7 +81,7 @@ extend(Listener.prototype, {
             try {
                 this.target.onListenerRemoved(this);
             } catch (ex) {
-                Cu.reportError(ex);
+                reportError(ex);
             }
         }
         if (this.canceler)

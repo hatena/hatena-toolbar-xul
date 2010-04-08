@@ -137,6 +137,13 @@ var log = {
     },
 };
 
+// Cu.reportError() だとエラーコンソールにログが
+// 表示されないことがあるので、念のため p() も使う。
+function reportError(error) {
+    p(error + (error.stack ? '\n' + error.stack : ''));
+    Cu.reportError(error);
+}
+
 PrefService.addObserver(PREF_PREFIX, {
     // XXX We should use EXTENSION_ID.
     DEBUG_PREF: PREF_PREFIX + 'debug.log',
