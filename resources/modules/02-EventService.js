@@ -4,12 +4,13 @@ const EXPORTED_SYMBOLS = ["EventService"];
 
 /* var l = EventService.createListener("DataUpdated", function () { ... });
  *
- * var eventListener = {
- *     handleEvent: function (event) {
- *         alert(event.data);
+ * var eventHandler = {
+ *     handleEvent: function (data) {
+ *         alert(data);
  *     }
  * };
- * var l = EventService.createListener("DataUpdated", eventListener);
+ * var l = EventService.createListener("DataUpdated", eventHandler);
+ * EventService.dispatch("DataUpdated", theData);
  *
  * l.unlisten();
  */
@@ -89,6 +90,7 @@ extend(Listener.prototype, {
     },
 
     until: function Listener_until(target, event) {
+        if (!this.target) return;
         let canceler = null;
         let unlisten = method(this, 'unlisten');
         if (target.addEventListener ||
@@ -113,11 +115,20 @@ extend(Listener.prototype, {
 });
 
 
+const QUIT_APPLICATION = 'quit-application';
+
 var EventService = {
     __proto__: EventServicePrototype,
 
     bless: function EvtSvc_s_bless(object) {
         return extend(object, EventServicePrototype);
+    },
+
+    observe: function EvtSvc_s_observe(subject, topic, data) {
+        if (topic === QUIT_APPLICATION) {
+            this.dispatch('unload');
+            ObserverService.removeObserver(this, topic);
+        }
     },
 
     implement: function EvtSvc_s_implement(target) {
@@ -126,3 +137,5 @@ var EventService = {
         return this.bless(target);
     },
 };
+
+ObserverService.addObserver(EventService, QUIT_APPLICATION, false);
