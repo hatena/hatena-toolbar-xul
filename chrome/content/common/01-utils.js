@@ -4,6 +4,17 @@
  * 頭に _ のついてないローカル変数はすべて EXPORT の対象となる
  */
 
+// EventService.createListener() が束縛された関数に対しても期待通り動くよう、
+// ここ (特定のウィンドウのコンテキスト) で bind と method を再定義する。
+function bind(func, self) {
+    let args = Array.slice(arguments, 2);
+    return function () func.apply(self, args.concat(Array.slice(arguments)));
+}
+function method(self, methodName) {
+    let args = Array.slice(arguments, 2);
+    return function () self[methodName].apply(self, args.concat(Array.slice(arguments)));
+}
+
 function favicon(uri) {
     if (typeof uri === "string")
         uri = IOService.newURI(uri, null, null);
