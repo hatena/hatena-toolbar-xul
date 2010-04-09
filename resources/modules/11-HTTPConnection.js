@@ -169,6 +169,7 @@ function Response(connection) {
     this.request = connection.request;
     this._status = -1;
     this._value = undefined;
+    this._xml = undefined;
 }
 
 extend(Response.prototype, {
@@ -195,6 +196,21 @@ extend(Response.prototype, {
         }
         return this._value;
     },
+    get xml Res_get_xml() {
+        if (this._xml === undefined) {
+            let doc = this.doc;
+            // 非 XML な MIME 型を持つ文書でも一応 XML として解析してみる。
+            let source = doc
+                ? new XMLSerializer().serializeToString(doc.documentElement)
+                : this.text.replace(/^(?:<\?[\s\S]*?\?>\s*)*/, '');
+            try {
+                this._xml = new XML(source);
+            } catch (ex) {
+                this._xml = null;
+            }
+        }
+        return this._xml;
+    }
     // XXX Needs methods or properties to access response headers.
 });
 

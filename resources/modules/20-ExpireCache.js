@@ -154,12 +154,7 @@ HTTPCache.prototype = {
                 }
             }
         } else if (this.options.xml) {
-            val = val.replace(/(?:<\?.*?\?>\s*)*/, '');
-            try {
-                val = new XML(val);
-            } catch (ex) {
-                val = null;
-            }
+            val = res.xml;
         }
         cache.set(url, val);
         p('http not using cache: ' + url);
