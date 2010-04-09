@@ -78,13 +78,12 @@ extend(HTTPConnection.prototype, {
     },
 
     useRkCookie: function HTTP_useRkCookie() {
-        if (!User.user ||
-            !HTTPConnection.useRkURLPattern.test(this.url) ||
+        let rk = User.user ? User.user.rk : User.rk
+        if (!rk || !HTTPConnection.useRkURLPattern.test(this.url) ||
             ('useRkCookie' in this.options && !this.options.useRkCookie))
             return;
         let cookie = this.headers['Cookie'] || '';
-        this.headers['Cookie'] =
-            (cookie && cookie + '; ') + 'rk=' + User.user.rk;
+        this.headers['Cookie'] = (cookie && cookie + '; ') + 'rk=' + rk;
     },
 
     retry: function HTTP_retry() {

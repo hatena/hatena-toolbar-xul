@@ -9,23 +9,6 @@ const MY_NAME_URL = 'http://b.hatena.ne.jp/my.name';
 
 // ログインユーザだけでなく、お気に入りユーザなどユーザ一般を表す。
 
-// XXX 一時的に……
-var net = {
-    post: function (url, onload, onerror, _1, _2, headers) {
-        let xhr = new XMLHttpRequest();
-        xhr.open('POST', url);
-        for (let [name, value] in new Iterator(headers))
-            xhr.setRequestHeader(name, value);
-        xhr.onload = onLoad;
-        //xhr.onerror = onerror;
-        xhr.onerror = bind(p, null, 'onerror...');
-        xhr.send('');
-        function onLoad() {
-            onload({ value: JSON.parse(xhr.responseText) });
-        }
-    },
-};
-
 function User(name, options) {
     this._name = name;
     this.options = options || {};
@@ -34,12 +17,11 @@ function User(name, options) {
 extend(User, {
     user: null,
     login: function User_loginCheck () {
-        //HTTP.post(MY_NAME_URL, null, User._login, User.loginErrorHandler);
-        net.post(MY_NAME_URL, User._login, User.loginErrorHandler,
-                 true, null, { Cookie: 'rk=' + User.rk });
+        http.postWithRetry(MY_NAME_URL, null,
+                           User._login, User.loginErrorHandler);
     },
     _login: function User__login(res) {
-        res = res.value;
+        res = res.value || {};
         if (res.login) {
             User.setUser(res);
             return User.user;
@@ -176,26 +158,15 @@ User.removeObservers = function User_s_removeObservers() {
 };
 User.addObservers();
 
-//User.LoginChecker = new Timer(1000 * 60 * 15); // 15 分
-//User.LoginChecker.createListener('timer', function() {
-//    if (!User.user) {
-//        User.login();
-//    }
-//});
-//User.LoginChecker.start();
-//
-//EventService.createListener('firstPreload', function() {
-//    // 初回時はログインチェックする
-//    User.login();
-//    let preloadTimer = new Timer(5000, 5);
-//    preloadTimer.createListener('timer', function() {
-//        if (User.user) {
-//            preloadTimer.stop();
-//        } else {
-//            User.login();
-//        }
-//    });
-//    preloadTimer.stop();
-//}, null, 10);
+User.LoginChecker = new Timer(1000 * 60 * 15); // 15 分
+User.LoginChecker.createListener('timer', function() {
+    if (!User.user) {
+        User.login();
+    }
+});
+User.LoginChecker.start();
 
-EventService.createListener('AllModulesLoaded', function () User.login());
+EventService.createListener('AllModulesLoaded', bind(function () {
+    Cu.import('resource://' + EXTENSION_HOST + '/modules/11-HTTPConnection.js', this);
+    User.login()
+}, this));
