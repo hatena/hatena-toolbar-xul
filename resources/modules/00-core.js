@@ -188,6 +188,25 @@ function newURI(uriSpec, originCharset, baseURI) {
     return IOService.newURI(uriSpec, originCharset, baseURI);
 }
 
+function makeURIQuery(data) {
+    let type = typeof data;
+    if (type === 'string' || type === 'number' || type === 'boolean')
+        return String(data).replace(/[#\u0080-\uffff]+/g, encodeURIComponent);
+    let pairs = [];
+    let toString = Object.prototype.toString;
+    for (let [key, value] in new Iterator(data || {})) {
+        let prefix = encodeURIComponent(key) + '=';
+        if (toString.call(value) === '[object Array]') {
+            value.forEach(function (v) {
+                pairs.push(prefix + encodeURIComponent(v));
+            });
+        } else {
+            pairs.push(prefix + encodeURIComponent(value));
+        }
+    }
+    return pairs.join('&').replace(/%20/g, '+');
+}
+
 var createElementBindDocument = function(doc, ns) {
     return function(name, attr) {
         var children = Array.slice(arguments, 2);

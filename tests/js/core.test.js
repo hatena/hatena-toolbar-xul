@@ -77,6 +77,18 @@ function testNewURI() {
                   newURI('http://example.org/', 'shift_jis').originCharset);
 }
 
+function testMakeURIQuery() {
+    assert.equals('foo=42&bar=baz',
+                  makeURIQuery({ foo: 42, bar: 'baz' }));
+    assert.equals('%%%%E6%97%A5%E6%9C%AC%E8%AA%9E=%E7%A9%BA+%E7%99%BD',
+                  makeURIQuery({ '日本語': '空 白' }));
+    assert.equals('foo=bar&foo=baz',
+                  mekeQuery({ foo: ['bar', 'baz'] }));
+    assert.equals('http://example.org/%25fragment',
+                  mekeQuery('http://example.org/#fragment'));
+    assert.equals('', mekeQuery(null));
+}
+
 function testBindMethod() {
     let f = function(arg) {
         return this.foo + arg;
