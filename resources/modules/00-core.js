@@ -328,7 +328,11 @@ let _referenceMap = {
 if (typeof JSON === 'undefined') {
     let domJSON = createInstance('@mozilla.org/dom/json;1', Ci.nsIJSON);
     this.JSON = {
-        parse: function JSON_parse(json) domJSON.decode(json),
+        // JSON.parse can parse not only objects and array
+        // but also primitive values.
+        parse: function JSON_parse(json) {
+            return domJSON.decode('{ "value": ' + json + ' }').value;
+        },
         stringify: function JSON_stringify(obj) domJSON.encode(obj),
     };
 }

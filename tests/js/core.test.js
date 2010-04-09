@@ -115,6 +115,8 @@ function testJSON() {
     }
     assert.equals(status, 'THROWN', 'JSON.parse should throw for invalid input.');
 
+    assert.equals(42, JSON.parse('42'));
+
     assert.equals('[23,42]', JSON.stringify([23, 42]));
 }
 
