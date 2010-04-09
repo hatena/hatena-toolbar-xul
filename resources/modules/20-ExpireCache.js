@@ -21,14 +21,19 @@ var ExpireCache = function(key, defaultExpire, serializer, sweeperDelay) {
     this.sweeper = new Timer(1000 * sweeperDelay);
     this.sweeper.createListener('timer', method(this, 'sweepHandler'));
     this.sweeper.start();
-}
+};
 
 ExpireCache.Serializer = {};
 
 ExpireCache.Serializer.uneval = {
     serialize: function(value) uneval(value),
     deserialize: function(value) eval(value),
-}
+};
+
+ExpireCache.Serializer.xml = {
+    serialize: function (value) value ? value.toXMLString() : '',
+    deserialize: function (value) value ? new XML(value) : null,
+};
 
 ExpireCache.prototype = {
     sweepHandler: function() {
@@ -83,7 +88,7 @@ ExpireCache.prototype = {
         let e = Date.now() + (expire * 1000);
         this.cache[key] = [this.serialize(value), e];
     },
-}
+};
 
 /*
  * HTTP 上のデータを抽象化
@@ -92,7 +97,7 @@ var HTTPCache = function(key, options) {
     if (!options) options = {};
     this.options = options;
     this.cache = new ExpireCache(key, options.expire, options.serializer);
-}
+};
 
 HTTPCache.prototype = {
     createURL: function HTTPCache_createURL (url) {
@@ -108,7 +113,8 @@ HTTPCache.prototype = {
         return this.get(url, callback);
     },
     get: function HTTPCache_get(url, callback) {
-        if (!this.isValid(url)) return callback(null);
+        if (!/^https?:/.test(url) || !this.isValid(url))
+            return callback(null);
         let cache = this.cache;
         if (cache.has(url)) {
             let val = cache.get(url);
@@ -147,6 +153,13 @@ HTTPCache.prototype = {
                     val = null;
                 }
             }
+        } else if (this.options.xml) {
+            val = val.replace(/(?:<\?.*?\?>\s*)*/, '');
+            try {
+                val = new XML(val);
+            } catch (ex) {
+                val = null;
+            }
         }
         cache.set(url, val);
         p('http not using cache: ' + url);
@@ -161,38 +174,50 @@ HTTPCache.prototype = {
         let cache = this.cache;
         return cache.has(url);
     },
-}
+};
 
-HTTPCache.counter = new HTTPCache('counterCache', {
-    expire: 60 * 15,
+HTTPCache.bookmarked = new HTTPCache('BookmarkedCountCache', {
+    expire: 60 * 11,
     baseURL: B_API_STATIC_HTTP + 'entry.count?url=',
     encoder: escapeIRI,
 });
 
-HTTPCache.counter.filters = [];
+HTTPCache.bookmarked.filters = [];
 
-HTTPCache.counter.__defineGetter__('prefs', function() {
+HTTPCache.bookmarked.__defineGetter__('prefs', function() {
     delete this.prefs;
     return this.prefs = Prefs.hatenabar.getChildPrefs('');
 });
 
-HTTPCache.counter.isValid = function(url) {
-    return HTTPCache.counter.filters.every(function(re) !re.test(url));
+HTTPCache.bookmarked.isValid = function(url) {
+    return HTTPCache.bookmarked.filters.every(function(re) !re.test(url));
 };
 
-HTTPCache.counter.createFilter = function(ev) {
-    //let filters = eval( '(' + HTTPCache.counter.prefs.get('counterIgnoreList') + ')');
+HTTPCache.bookmarked.createFilter = function(ev) {
+    //let filters = eval( '(' + HTTPCache.bookmarked.prefs.get('counterIgnoreList') + ')');
     let filters = ['\^https:\/\/.*\$', '\^https?:\/\/192\\.168\\.\\d+\\.\\d+.*\$', '\^https?:\/\/172\\.((1[6-9])|(2[0-9])|(3[0-1]))\\.\\d+\\.\\d+.*\$', '\^https?:\/\/10\\.\\d+\\.\\d+\\.\\d+.*\$'];
-    HTTPCache.counter.setFilter(filters);
+    HTTPCache.bookmarked.setFilter(filters);
 };
 
-HTTPCache.counter.setFilter = function(filters) {
-    HTTPCache.counter.filters = filters.map(function(v) new RegExp(v));
-}
-
-HTTPCache.counter.loadHandler = function(ev) {
-    HTTPCache.counter.createFilter();
-    //HTTPCache.counter.prefs.createListener('counterIgnoreList', HTTPCache.counter.createFilter);
+HTTPCache.bookmarked.setFilter = function(filters) {
+    HTTPCache.bookmarked.filters = filters.map(function(v) new RegExp(v));
 };
 
-EventService.createListener('AllModulesLoaded', HTTPCache.counter.loadHandler);
+HTTPCache.bookmarked.loadHandler = function(ev) {
+    HTTPCache.bookmarked.createFilter();
+    //HTTPCache.bookmarked.prefs.createListener('counterIgnoreList', HTTPCache.bookmarked.createFilter);
+};
+
+HTTPCache.referred = new HTTPCache('ReferredCountCache', {
+    expire: 60 * 13,
+    // XXX 直書きをやめる。
+    baseURL: 'http://d.hatena.ne.jp/exist?mode=xml&url=',
+    serializer: 'xml',
+    xml: true,
+    encoder: escapeIRI,
+});
+
+HTTPCache.referred.isValid = HTTPCache.bookmarked.isValid;
+
+EventService.createListener('AllModulesLoaded',
+                            HTTPCache.bookmarked.loadHandler);

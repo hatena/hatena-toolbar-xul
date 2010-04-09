@@ -1,5 +1,9 @@
 Components.utils.import('resource://hatenabar/modules/20-ExpireCache.js');
 
+function warmUp() {
+    HTTPCache.counter = HTTPCache.bookmarked;
+}
+
 function setUp() {
     let filter = "['\\^https:\\/\\/.*\\$', '\\^https?:\\/\\/192\\\\.168\\\\.\\\\d+\\\\.\\\\d+.*\\$', '\\^https?:\\/\\/172\\\\.((1[6-9])|(2[0-9])|(3[0-1]))\\\\.\\\\d+\\\\.\\\\d+.*\\$', '\\^https?:\\/\\/10\\\\.\\\\d+\\\\.\\\\d+\\\\.\\\\d+.*\\$']";
     HTTPCache.counter.setFilter(eval(filter));
@@ -10,6 +14,11 @@ function testSeriarizer() {
     cache.set('foo', {foo: 1, bar: 2});
     assert.equals(1, cache.get('foo').foo);
     assert.equals(2, cache.get('foo').bar);
+
+    cache = new ExpireCache('xmltest', null, 'xml');
+    cache.set('foo', <foo><bar>42</bar><baz>23</baz></foo>);
+    assert.equals('42', cache.get('foo').bar.toString());
+    assert.equals('23', cache.get('foo').baz.toString());
 }
 
 function testCache() {
@@ -36,7 +45,7 @@ function testHTTPCounter() {
     let result;
 
     got.value = false;
-    result = NaN
+    result = NaN;
     HTTPCache.counter.get('http://www.hatena.ne.jp/my', function (val) {
         result = val;
         got.value = true;
@@ -47,7 +56,7 @@ function testHTTPCounter() {
     assert.isTrue(HTTPCache.counter.has('http://www.hatena.ne.jp/my'));
     
     got.value = false;
-    result = NaN
+    result = NaN;
     HTTPCache.counter.get('http://www.hatena.ne.jp/my', function (val) {
         result = val;
         got.value = true;
@@ -78,4 +87,29 @@ function testLocalURLS() {
     assert.isFalse(c.isValid('http://172.31.3.22/'));
     assert.isFalse(c.isValid('https://172.31.3.22/'));
     assert.isTrue(c.isValid('http://172.32.3.22/'));
+}
+
+function testReferredCounter() {
+    let got = {};
+    let result;
+
+    got.value = false;
+    result = undefined;
+    HTTPCache.referred.get('http://www.hatena.ne.jp/', function (val) {
+        result = val;
+        got.value = true;
+    });
+    yield got;
+    assert.compare(1000, '<', +result.count.(@name == 'diary'));
+
+    assert.isTrue(HTTPCache.referred.has('http://www.hatena.ne.jp/'));
+    
+    got.value = false;
+    result = undefined;
+    HTTPCache.referred.get('http://www.hatena.ne.jp/', function (val) {
+        result = val;
+        got.value = true;
+    });
+    yield got;
+    assert.equals('1', result.count.(@name == 'antenna').toString());
 }
