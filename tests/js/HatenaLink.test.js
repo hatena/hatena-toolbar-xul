@@ -49,6 +49,8 @@ function testBookmarkLink() {
                   u('b:entry', { url: 'http://example.org/#fragment' }));
     assert.equals('http://b.hatena.ne.jp/entry/s/example.org/',
                   u('b:entry', { url: 'https://example.org/' }));
+    assert.equals('http://b.hatena.ne.jp/sample/?mode=detail',
+                  u('b:id:sample:detail'));
 }
 
 function testDiaryLink() {
@@ -78,6 +80,7 @@ function testFotolifeLink() {
 function testGroupLink() {
     let u = method(HatenaLink, 'parseToURL');
     assert.equals('http://g.hatena.ne.jp/', u('g:'));
+    assert.equals('http://g.hatena.ne.jp/sample/', u('g:id:sample'));
     assert.equals('http://hatena.g.hatena.ne.jp/', u('g:hatena'));
     assert.equals('http://hatena.g.hatena.ne.jp/sample/',
                   u('g:hatena:id:sample'));
@@ -137,6 +140,7 @@ function testStarLink() {
 function testUgomemoLink() {
     let u = method(HatenaLink, 'parseToURL');
     assert.equals('http://ugomemo.hatena.ne.jp/', u('ugomemo:'));
+    assert.equals('http://ugomemo.hatena.ne.jp/movies?sort=hot', u('ugomemo:hotmovies'));
 }
 
 function testWWWLink() {

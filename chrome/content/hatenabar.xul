@@ -33,6 +33,9 @@
         <command id="hatenabar-cmd-open-related-user-link"
                  oncommand="hatenabar.UICommand.openRelatedLink(event);"
                  onclick="checkForMiddleClick(this, event);"/>
+        <command id="hatenabar-cmd-open-top-or-user-link"
+                 oncommand="hatenabar.UICommand.openTopOrUserLink(event);"
+                 onclick="checkForMiddleClick(this, event);"/>
     </commandset>
 
     <toolbarpalette id="BrowserToolbarPalette">
@@ -104,9 +107,358 @@
 
             <toolbarseparator/>
 
-            <toolbarbutton class="toolbarbutton-1 chromeclass-toolbar-additional"
-                           label="{{Hello}}"
-                           image="http://www.hatena.ne.jp/favicon.ico"/>
+            <toolbarbutton id="hatenabar-antenna-button"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           type="menu-button"
+                           image="http://www.hatena.ne.jp/favicon.ico"
+                           label="{{Hatena Antenna}}"
+                           tooltiptext="{{Hatena Antenna}}"
+                           command="hatenabar-cmd-open-top-or-user-link"
+                           hatena:link="a:">
+                <menupopup tooltiptext=""
+                           onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
+                           oncommand="event.stopPropagation();"
+                           onclick="event.stopPropagation();">
+                    <menuitem label="{{Antenna}}"
+                              observes="hatenabar-cmd-open-user-link"
+                              hatena:link="a:id:$"/>
+                    <menuitem label="{{Simple}}"
+                              observes="hatenabar-cmd-open-user-link"
+                              hatena:link="a:id:$:simple"/>
+                    <menuitem label="{{Detail}}"
+                              observes="hatenabar-cmd-open-user-link"
+                              hatena:link="a:id:$:detail"/>
+                    <menuseparator/>
+                    <menuitem label="{{Check List}}"
+                              observes="hatenabar-cmd-open-user-link"
+                              hatena:link="a:id:$:checklist"/>
+                    <menuitem label="{{Config}}"
+                              observes="hatenabar-cmd-open-user-link"
+                              hatena:link="a:id:$:config"/>
+                    <menuseparator/>
+                    <menuitem label="{{Top}}"
+                              observes="hatenabar-cmd-open-link"
+                              hatena:link="a:"/>
+                </menupopup>
+            </toolbarbutton>
+            <toolbarbutton id="hatenabar-bookmark-button"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           type="menu-button"
+                           image="http://www.hatena.ne.jp/favicon.ico"
+                           label="{{Hatena Bookmark}}"
+                           tooltiptext="{{Hatena Bookmark}}"
+                           command="hatenabar-cmd-open-top-or-user-link"
+                           hatena:link="b:">
+                <menupopup tooltiptext=""
+                           onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
+                           oncommand="event.stopPropagation();"
+                           onclick="event.stopPropagation();">
+                    <menuitem label="{{Details}}"
+                              observes="hatenabar-cmd-open-user-link"
+                              hatena:link="b:id:$:detail"/>
+                    <menuitem label="{{Favorites}}"
+                              observes="hatenabar-cmd-open-user-link"
+                              hatena:link="b:id:$:favorite"/>
+                    <menuseparator/>
+                    <menuitem label="{{Config}}"
+                              observes="hatenabar-cmd-open-user-link"
+                              hatena:link="b:id:$:config"/>
+                    <menuseparator/>
+                    <menuitem label="{{Top}}"
+                              observes="hatenabar-cmd-open-link"
+                              hatena:link="b:"/>
+                </menupopup>
+            </toolbarbutton>
+            <toolbarbutton id="hatenabar-diary-button"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           type="menu-button"
+                           image="http://www.hatena.ne.jp/favicon.ico"
+                           label="{{Hatena Diary}}"
+                           tooltiptext="{{Hatena Diary}}"
+                           command="hatenabar-cmd-open-top-or-user-link"
+                           hatena:link="d:">
+                <menupopup tooltiptext=""
+                           onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
+                           oncommand="event.stopPropagation();"
+                           onclick="event.stopPropagation();">
+                    <menuitem label="{{Edit Diary}}"
+                              observes="hatenabar-cmd-open-user-link"
+                              hatena:link="d:id:$:edit"/>
+                    <menuitem label="{{Manage Diary}}"
+                              observes="hatenabar-cmd-open-user-link"
+                              hatena:link="d:id:$:admin"/>
+                    <menuseparator/>
+                    <menuitem label="{{Top}}"
+                              observes="hatenabar-cmd-open-link"
+                              hatena:link="d:"/>
+                </menupopup>
+            </toolbarbutton>
+            <toolbarbutton id="hatenabar-fotolife-button"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           type="menu-button"
+                           image="http://www.hatena.ne.jp/favicon.ico"
+                           label="{{Hatena Fotolife}}"
+                           tooltiptext="{{Hatena Fotolife}}"
+                           command="hatenabar-cmd-open-top-or-user-link"
+                           hatena:link="f:">
+                <menupopup tooltiptext=""
+                           onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
+                           oncommand="event.stopPropagation();"
+                           onclick="event.stopPropagation();">
+                    <menuitem label="{{Upload}}"
+                              observes="hatenabar-cmd-open-user-link"
+                              hatena:link="f:id:$:up"/>
+                    <menuitem label="{{Favorite}}"
+                              observes="hatenabar-cmd-open-user-link"
+                              hatena:link="f:id:$:favorite"/>
+                    <menuitem label="{{Edit}}"
+                              observes="hatenabar-cmd-open-user-link"
+                              hatena:link="f:id:$:edit"/>
+                    <menuitem label="{{Config}}"
+                              observes="hatenabar-cmd-open-user-link"
+                              hatena:link="f:id:$:config"/>
+                    <menuseparator/>
+                    <menuitem label="{{Top}}"
+                              observes="hatenabar-cmd-open-link"
+                              hatena:link="f:"/>
+                </menupopup>
+            </toolbarbutton>
+            <toolbarbutton id="hatenabar-group-button"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           type="menu-button"
+                           image="http://www.hatena.ne.jp/favicon.ico"
+                           label="{{Hatena Group}}"
+                           tooltiptext="{{Hatena Group}}"
+                           command="hatenabar-cmd-open-top-or-user-link"
+                           hatena:link="g:">
+                <menupopup tooltiptext=""
+                           onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
+                           oncommand="event.stopPropagation();"
+                           onclick="event.stopPropagation();">
+                    <menuitem label="{{List}}"
+                              observes="hatenabar-cmd-open-user-link"
+                              hatena:link="g:id:$:group"/>
+                    <menuseparator/>
+                    <menuitem label="{{Top}}"
+                              observes="hatenabar-cmd-open-link"
+                              hatena:link="g:"/>
+                </menupopup>
+            </toolbarbutton>
+            <toolbarbutton id="hatenabar-haiku-button"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           type="menu-button"
+                           image="http://www.hatena.ne.jp/favicon.ico"
+                           label="{{Hatena Haiku}}"
+                           tooltiptext="{{Hatena Haiku}}"
+                           command="hatenabar-cmd-open-top-or-user-link"
+                           hatena:link="h:id:$:following">
+                <menupopup tooltiptext=""
+                           onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
+                           oncommand="event.stopPropagation();"
+                           onclick="event.stopPropagation();">
+                    <menuitem label="{{Entries}}"
+                              observes="hatenabar-cmd-open-user-link"
+                              hatena:link="h:id:$"/>
+                    <menuseparator/>
+                    <menuitem label="{{Hot Keywords}}"
+                              observes="hatenabar-cmd-open-link"
+                              hatena:link="h:hotkeywords"/>
+                    <menuitem label="{{Album}}"
+                              observes="hatenabar-cmd-open-link"
+                              hatena:link="h:album"/>
+                    <menuseparator/>
+                    <menuitem label="{{Top}}"
+                              observes="hatenabar-cmd-open-link"
+                              hatena:link="h:"/>
+                </menupopup>
+            </toolbarbutton>
+            <toolbarbutton id="hatenabar-idea-button"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           type="menu-button"
+                           image="http://www.hatena.ne.jp/favicon.ico"
+                           label="{{Hatena Idea}}"
+                           tooltiptext="{{Hatena Idea}}"
+                           command="hatenabar-cmd-open-top-or-user-link"
+                           hatena:link="i:">
+                <menupopup tooltiptext=""
+                           onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
+                           oncommand="event.stopPropagation();"
+                           onclick="event.stopPropagation();">
+                    <menuitem label="{{Top}}"
+                              observes="hatenabar-cmd-open-link"
+                              hatena:link="h:"/>
+                </menupopup>
+            </toolbarbutton>
+            <toolbarbutton id="hatenabar-keyword-button"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           type="menu-button"
+                           image="http://www.hatena.ne.jp/favicon.ico"
+                           label="{{Hatena Keyword}}"
+                           tooltiptext="{{Hatena Keyword}}"
+                           command="hatenabar-cmd-open-top-or-user-link"
+                           hatena:link="k:">
+                <menupopup tooltiptext=""
+                           onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
+                           oncommand="event.stopPropagation();"
+                           onclick="event.stopPropagation();">
+                    <menuitem label="{{Favorites}}"
+                              observes="hatenabar-cmd-open-user-link"
+                              hatena:link="h:id:$:favorite"/>
+                    <menuitem label="{{Modifications}}"
+                              observes="hatenabar-cmd-open-user-link"
+                              hatena:link="h:id:$:modified"/>
+                    <menuitem label="{{History}}"
+                              observes="hatenabar-cmd-open-user-link"
+                              hatena:link="h:id:$:visited"/>
+                    <menuseparator/>
+                    <menuitem label="{{Top}}"
+                              observes="hatenabar-cmd-open-link"
+                              hatena:link="h:"/>
+                </menupopup>
+            </toolbarbutton>
+            <toolbarbutton id="hatenabar-message-button"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           type="menu-button"
+                           image="http://www.hatena.ne.jp/favicon.ico"
+                           label="{{Hatena Message}}"
+                           tooltiptext="{{Hatena Message}}"
+                           command="hatenabar-cmd-open-link"
+                           hatena:link="m:">
+                <menupopup tooltiptext=""
+                           onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
+                           oncommand="event.stopPropagation();"
+                           onclick="event.stopPropagation();">
+                    <menuitem label="{{Top}}"
+                              observes="hatenabar-cmd-open-link"
+                              hatena:link="m:"/>
+                </menupopup>
+            </toolbarbutton>
+            <toolbarbutton id="hatenabar-question-button"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           type="menu-button"
+                           image="http://www.hatena.ne.jp/favicon.ico"
+                           label="{{Question Hatena}}"
+                           tooltiptext="{{Question Hatena}}"
+                           command="hatenabar-cmd-open-top-or-user-link"
+                           hatena:link="q:">
+                <menupopup tooltiptext=""
+                           onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
+                           oncommand="event.stopPropagation();"
+                           onclick="event.stopPropagation();">
+                    <menuitem label="{{Top}}"
+                              observes="hatenabar-cmd-open-link"
+                              hatena:link="q:"/>
+                </menupopup>
+            </toolbarbutton>
+            <toolbarbutton id="hatenabar-star-button"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           type="menu-button"
+                           image="http://www.hatena.ne.jp/favicon.ico"
+                           label="{{Hatena Star}}"
+                           tooltiptext="{{Hatena Star}}"
+                           command="hatenabar-cmd-open-top-or-user-link"
+                           hatena:link="s:">
+                <menupopup tooltiptext=""
+                           onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
+                           oncommand="event.stopPropagation();"
+                           onclick="event.stopPropagation();">
+                    <menuitem label="{{Reports}}"
+                              observes="hatenabar-cmd-open-user-link"
+                              hatena:link="s:id:$:report"/>
+                    <menuitem label="{{Stars}}"
+                              observes="hatenabar-cmd-open-user-link"
+                              hatena:link="s:id:$:stars"/>
+                    <menuitem label="{{Blogs}}"
+                              observes="hatenabar-cmd-open-user-link"
+                              hatena:link="s:id:$:blogs"/>
+                    <menuseparator/>
+                    <menuitem label="{{Top}}"
+                              observes="hatenabar-cmd-open-link"
+                              hatena:link="s:"/>
+                </menupopup>
+            </toolbarbutton>
+            <toolbarbutton id="hatenabar-ugomemo-button"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           type="menu-button"
+                           image="http://www.hatena.ne.jp/favicon.ico"
+                           label="{{Ugomemo Hatena}}"
+                           tooltiptext="{{Ugomemo Hatena}}"
+                           command="hatenabar-cmd-open-top-or-user-link"
+                           hatena:link="ugomemo:id:$:following">
+                <menupopup tooltiptext=""
+                           onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
+                           oncommand="event.stopPropagation();"
+                           onclick="event.stopPropagation();">
+                    <!-- Favorites のリンク先が /favorites でなく、
+                         Stars のリンク先が /favorites なのは意図的
+                         (旧はてなツールバーがそうなっていた)。 -->
+                    <menuitem label="{{Favorites}}"
+                              observes="hatenabar-cmd-open-user-link"
+                              hatena:link="ugomemo:id:$:following"/>
+                    <menuitem label="{{Stars}}"
+                              observes="hatenabar-cmd-open-user-link"
+                              hatena:link="ugomemo:id:$:favorites"/>
+                    <menuseparator/>
+                    <menuitem label="{{Hot Movies}}"
+                              observes="hatenabar-cmd-open-link"
+                              hatena:link="ugomemo:hotmovies"/>
+                    <menuitem label="{{Movies}}"
+                              observes="hatenabar-cmd-open-link"
+                              hatena:link="ugomemo:movies"/>
+                    <menuitem label="{{Ranking}}"
+                              observes="hatenabar-cmd-open-link"
+                              hatena:link="ugomemo:ranking"/>
+                    <menuitem label="{{Channels}}"
+                              observes="hatenabar-cmd-open-link"
+                              hatena:link="ugomemo:channels.top"/>
+                    <menuseparator/>
+                    <menuitem label="{{Top}}"
+                              observes="hatenabar-cmd-open-link"
+                              hatena:link="ugomemo:"/>
+                </menupopup>
+            </toolbarbutton>
+            <toolbarbutton id="hatenabar-counter-button"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           type="menu-button"
+                           image="http://www.hatena.ne.jp/favicon.ico"
+                           label="{{Hatena Counter}}"
+                           tooltiptext="{{Hatena Counter}}"
+                           command="hatenabar-cmd-open-top-or-user-link"
+                           hatena:link="counter:">
+                <menupopup tooltiptext=""
+                           onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
+                           oncommand="event.stopPropagation();"
+                           onclick="event.stopPropagation();">
+                    <menuitem label="{{Config}}"
+                              observes="hatenabar-cmd-open-user-link"
+                              hatena:link="counter:id:$:edit"/>
+                    <menuseparator/>
+                    <menuitem label="{{Top}}"
+                              observes="hatenabar-cmd-open-link"
+                              hatena:link="counter:"/>
+                </menupopup>
+            </toolbarbutton>
+            <toolbarbutton id="hatenabar-graph-button"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           type="menu-button"
+                           image="http://www.hatena.ne.jp/favicon.ico"
+                           label="{{Hatena Graph}}"
+                           tooltiptext="{{Hatena Graph}}"
+                           command="hatenabar-cmd-open-top-or-user-link"
+                           hatena:link="graph:">
+                <menupopup tooltiptext=""
+                           onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
+                           oncommand="event.stopPropagation();"
+                           onclick="event.stopPropagation();">
+                    <menuitem label="{{Edit}}"
+                              observes="hatenabar-cmd-open-user-link"
+                              hatena:link="graph:id:$:edit"/>
+                    <menuseparator/>
+                    <menuitem label="{{Top}}"
+                              observes="hatenabar-cmd-open-link"
+                              hatena:link="graph:"/>
+                </menupopup>
+            </toolbarbutton>
 
             <toolbarseparator/>
 

@@ -27,6 +27,15 @@ var UICommand = {
         Command.openContentLinkWith(this.getLink(event), context, event);
     },
 
+    openTopOrUserLink: function UIC_openTopOrUserLink(event) {
+        let link = this.getLink(event);
+        if (!User.user)
+            link = link.replace(/:.*/, ':');
+        else if (link.indexOf(':id:') === -1)
+            link = link.replace(/:?$/, ':id:' + User.user.name);
+        Command.openUILink(link, event);
+    },
+
     getLink: function UIC_getLink(event) {
         for (let node = this.getTarget(event); node; node = node.parentNode) {
             let link = node.getAttributeNS(HATENA_NS, 'link');

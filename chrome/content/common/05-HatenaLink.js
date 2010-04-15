@@ -56,6 +56,8 @@ HatenaLink.schemes = {
         // -> http://b.hatena.ne.jp/sample/hatena/
         link = link.replace(/\b(id:[^:]+:)t:(.+)/, '$1$2:');
         let url = hatenaURL(link, context);
+        if (/:detail$/.test(link))
+            url = url.replace(/detail$/, '?mode=detail');
         let type = link.substring(2);
         switch (type) {
         case 'search':
@@ -82,7 +84,7 @@ HatenaLink.schemes = {
     },
 
     g: function HL_scheme_g(link, context) {
-        link = link.replace(/^g:([^:]+):?/, '$1.g:');
+        link = link.replace(/^g:(?!id:)([^:]+):?/, '$1.g:');
         return { url: hatenaURL(link, context) };
     },
 
@@ -129,7 +131,10 @@ HatenaLink.schemes = {
     },
 
     ugomemo: function HL_scheme_ugomemo(link, context) {
-        return { url: hatenaURL(link, context) };
+        let url = hatenaURL(link, context);
+        if (link.substring(8) === 'hotmovies')
+            url = url.replace(/hotmovies$/, 'movies?sort=hot');
+        return { url: url };
     },
 
     www: function HL_scheme_www(link, context) {
