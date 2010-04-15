@@ -2,6 +2,7 @@ const EXPORT = ['UICommand'];
 
 var UICommand = {
     userRequiredComands: [
+        'hatenabar-has-user',
         'hatenabar-cmd-open-user-link',
         'hatenabar-cmd-open-related-user-link',
     ],
