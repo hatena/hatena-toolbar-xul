@@ -1,26 +1,6 @@
 const EXPORT = ['UICommand'];
 
 var UICommand = {
-    userRequiredComands: [
-        'hatenabar-has-user',
-        'hatenabar-cmd-open-user-link',
-        'hatenabar-cmd-open-related-user-link',
-        'hatenabar-cmd-add-bookmark',
-        'hatenabar-cmd-refer-in-diary',
-        'hatenabar-cmd-refer-in-group',
-    ],
-
-    enableUserRequiredCommands: function UIC_enableUserRequiredCommands() {
-        let disabled = !User.user;
-        this.userRequiredComands.forEach(function (id) {
-            let command = document.getElementById(id);
-            if (disabled)
-                command.setAttribute('disabled', 'true');
-            else
-                command.removeAttribute('disabled');
-        });
-    },
-
     openLink: function UIC_openLink(event) {
         Command.openUILink(this.getLink(event), event);
     },
@@ -54,10 +34,49 @@ var UICommand = {
                 event.sourceEvent)
                ? event.sourceEvent.target : event.target;
     },
+
+    userRequiredComands: [
+        'hatenabar-has-user',
+        'hatenabar-cmd-open-user-link',
+        'hatenabar-cmd-open-related-user-link',
+        'hatenabar-cmd-add-bookmark',
+        'hatenabar-cmd-refer-in-diary',
+    ],
+    _prevUserListener: null,
+
+    onUserChanged: function UIC_onUserChanged() {
+        let isLogin = !!User.user;
+        this.userRequiredComands.forEach(function (id) {
+            let command = document.getElementById(id);
+            if (isLogin)
+                command.removeAttribute('disabled');
+            else
+                command.setAttribute('disabled', 'true');
+        });
+
+        if (this._prevUserListener) {
+            this._prevUserListener.unlisten();
+            this._prevUserListener = null;
+        }
+        let groupChanged = method(this, 'onSelectedGroupChanged');
+        if (isLogin) {
+            this._prevUserListener =
+                User.user.prefs.createListener('group.selected', groupChanged);
+        }
+        groupChanged();
+    },
+
+    onSelectedGroupChanged: function UIC_onSelectedGroupChanged() {
+        let command = document.getElementById('hatenabar-cmd-refer-in-group');
+        if (User.user && User.user.prefs.get('group.selected', ''))
+            command.removeAttribute('disabled');
+        else
+            command.setAttribute('disabled', 'true');
+    },
 };
 
 doOnLoad(function () {
-    let updateCommands = method(UICommand, 'enableUserRequiredCommands');
-    EventService.createListener('UserChanged', updateCommands);
-    updateCommands();
+    let userChanged = method(UICommand, 'onUserChanged');
+    EventService.createListener('UserChanged', userChanged);
+    userChanged();
 });

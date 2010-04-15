@@ -51,7 +51,7 @@ var Toolbar = {
         Array.slice(radios).forEach(function (menuitem) {
             menuitem.parentNode.removeChild(menuitem);
         });
-        if (User.user && User.user.groups) {
+        if (User.user && User.user.groups.length) {
             let separator = popup.firstChild;
             let selected = User.user.prefs.get('group.selected', '');
             User.user.groups.forEach(function (group) {
@@ -79,7 +79,7 @@ var Toolbar = {
     },
 
     referInGroup: function Tb_referInGroup(event) {
-        let group = User.user.get('group.selected');
+        let group = User.user.prefs.get('group.selected');
         Command.goRefer('g:' + group + ':refer', content.document, event);
     },
 };
