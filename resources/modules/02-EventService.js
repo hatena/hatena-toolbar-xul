@@ -33,8 +33,9 @@ var EventServicePrototype = {
     },
 
     dispatch: function EvtSvc_dispatch(event) {
-        let args = Array.slice(arguments, 1);
+        let commonArgs = Array.slice(arguments, 1);
         this.getListeners(event).forEach(function (listener) {
+            let args = [listener].concat(commonArgs);
             try {
                 listener.handler.apply(listener, args);
             } catch (ex) {
@@ -112,6 +113,10 @@ extend(Listener.prototype, {
             this.canceler();
         this.canceler = canceler;
     },
+
+    // Make Listener partially compatible with nsIDOMEvent.
+    get type Listener_get_type() this.event,
+    get currentTarget Listener_get_currentTarget() this.target,
 });
 
 

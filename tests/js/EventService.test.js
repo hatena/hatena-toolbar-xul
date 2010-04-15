@@ -24,10 +24,19 @@ function testDispatch() {
     EventService.dispatch('EventDispatched');
     assert.isTrue(result);
 
-    let arg1 = null, arg2 = null;
-    function g(a1, a2) { arg1 = a1; arg2 = a2; }
-    EventService.createListener('DispatchedWithArgs', g);
+    let l = null, typ = null, tgt = null, arg1 = null, arg2 = null;
+    function g(_1, _2, _3) {
+        l = _1;
+        typ = _1.type;
+        tgt = _1.target;
+        arg1 = _2;
+        arg2 = _3;
+    }
+    let lsnr = EventService.createListener('DispatchedWithArgs', g);
     EventService.dispatch('DispatchedWithArgs', 42, 23);
+    assert.strictlyEquals(lsnr, l);
+    assert.equals('DispatchedWithArgs', typ);
+    assert.strictlyEquals(EventService, tgt);
     assert.equals(42, arg1);
     assert.equals(23, arg2);
 }
