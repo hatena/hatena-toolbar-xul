@@ -1,5 +1,3 @@
-// To be moved to modules.
-
 Components.utils.import('resource://hatenabar/modules/00-core.js');
 loadPrecedingModules();
 
@@ -167,6 +165,6 @@ User.LoginChecker.createListener('timer', function() {
 User.LoginChecker.start();
 
 EventService.createListener('AllModulesLoaded', bind(function () {
-    Cu.import('resource://' + EXTENSION_HOST + '/modules/11-HTTPConnection.js', this);
+    Cu.import('resource://' + EXTENSION_HOST + '/modules/12-HTTPConnection.js', this);
     User.login()
 }, this));

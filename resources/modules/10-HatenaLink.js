@@ -1,9 +1,13 @@
-// XXX Should we move this to modules?
+Components.utils.import('resource://hatenabar/modules/00-core.js');
+loadPrecedingModules();
+EventService.createListener('AllModulesLoaded', bind(function () {
+    Cu.import('resource://' + EXTENSION_HOST + '/modules/11-User.js', this);
+}, this));
 
 // はてな記法のうち、はてな内自動リンク記法をURLへ展開する。
 // http://hatenadiary.g.hatena.ne.jp/keyword/%E3%81%AF%E3%81%A6%E3%81%AA%E8%A8%98%E6%B3%95%E4%B8%80%E8%A6%A7
 
-const EXPORT = ['HatenaLink'];
+const EXPORTED_SYMBOLS = ['HatenaLink'];
 
 // We may use 'hatena.com' for itenationalized services in future...
 const EFFECTIVE_DOMAIN = 'hatena.ne.jp';

@@ -1,11 +1,5 @@
-var global = this;
-var hatenabar;
-
-function warmUp() {
-    utils.include('helpers.js');
-    hatenabar = loadAutoloader().hatenabar;
-    hatenabar.extend(global, hatenabar);
-}
+Components.utils.import('resource://hatenabar/modules/00-core.js');
+Components.utils.import('resource://hatenabar/modules/10-HatenaLink.js');
 
 function testParse() {
     let o;
