@@ -410,7 +410,13 @@ function _getSiblingFileURIs(file) {
         if (sibling.isFile() || sibling.isSymlink())
             files.push(sibling);
     }
-    return files.map(function (f) IOService.newFileURI(f).spec).sort();
+    let uris = files.map(function (f) IOService.newFileURI(f).spec).sort();
+    // XXX 本来ここでやる処理ではない。
+    uris = uris.filter(function (uri) /\.jsm?$/.test(uri));
+    // XXX 間に合わせのキャッシュ。
+    // 後でちゃんと引数ごとにキャッシュするようにしたい。
+    _getSiblingFileURIs = function () uris;
+    return _getSiblingFileURIs();
 }
 
 let _loaderHelper = {
