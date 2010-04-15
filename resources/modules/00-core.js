@@ -593,6 +593,26 @@ function addBefore(target, name, before) {
 }
 
 /**
+ * メソッドが呼ばれた後に処理を追加する。
+ * より詳細なコントロールが必要な場合はaddAroundを使うこと。
+ * 
+ * @param {Object} target 対象オブジェクト。
+ * @param {String} name メソッド名。
+ * @param {Function} after 前処理。
+ *        対象オブジェクトをthisとして、オリジナルの引数が全て渡されて呼び出される。
+ */
+function addAfter(target, name, after) {
+    var original = target[name];
+    target[name] = function() {
+        try {
+            return original.apply(this, arguments);
+        } finally {
+            after.apply(this, arguments);
+        }
+    }
+}
+
+/**
  * メソッドへアラウンドアドバイスを追加する。
  * 処理を置きかえ、引数の変形や、返り値の加工をできるようにする。
  * 

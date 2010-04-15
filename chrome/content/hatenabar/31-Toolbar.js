@@ -15,3 +15,11 @@ var Toolbar = {
         Command.goRefer('g:' + group + ':refer', content.document, event);
     },
 };
+
+EventService.bless(Toolbar);
+
+doOnLoad(function () {
+    let dispatchCustomizeDone = method(Toolbar, 'dispatch', 'CustomizeDone');
+    addAfter(window, 'BrowserToolboxCustomizeDone', dispatchCustomizeDone);
+    setTimeout(dispatchCustomizeDone, 0);
+});
