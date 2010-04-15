@@ -36,6 +36,12 @@
         <command id="hatenabar-cmd-open-top-or-user-link"
                  oncommand="hatenabar.UICommand.openTopOrUserLink(event);"
                  onclick="checkForMiddleClick(this, event);"/>
+        <command id="hatenabar-cmd-open-antenna"
+                 oncommand="hatenabar.Toolbar.openAntenna(event);"
+                 onclick="checkForMiddleClick(this, event);"/>
+        <command id="hatenabar-cmd-open-group"
+                 oncommand="hatenabar.Toolbar.openGroup(event);"
+                 onclick="checkForMiddleClick(this, event);"/>
     </commandset>
 
     <broadcasterset id="mainBroadcasterSet">
@@ -122,15 +128,13 @@
                            image="http://www.hatena.ne.jp/favicon.ico"
                            label="{{Hatena Antenna}}"
                            tooltiptext="{{Hatena Antenna}}"
-                           oncommand="hatenabar.Toolbar.openAntenna(event);"
-                           onclick="checkForMiddleClick(this, event);">
+                           command="hatenabar-cmd-open-antenna">
                 <menupopup observes="hatenabar-popup-base"
                            onpopupshowing="hatenabar.Toolbar.updateAntennaPopup(event);">
                     <menuitem type="radio"
                               name="hatenabar-antenna-mode"
                               label="{{Antenna}}"
-                              oncommand="hatenabar.Toolbar.openAntenna(event);"
-                              onclick="checkForMiddleClick(this, event);"
+                              observes="hatenabar-cmd-open-antenna"
                               value="antenna"
                               hatena:link="a:id:$">
                         <observes element="hatenabar-has-user"
@@ -139,8 +143,7 @@
                     <menuitem type="radio"
                               name="hatenabar-antenna-mode"
                               label="{{Simple}}"
-                              oncommand="hatenabar.Toolbar.openAntenna(event);"
-                              onclick="checkForMiddleClick(this, event);"
+                              observes="hatenabar-cmd-open-antenna"
                               value="simple"
                               hatena:link="a:id:$:simple">
                         <observes element="hatenabar-has-user"
@@ -149,8 +152,7 @@
                     <menuitem type="radio"
                               name="hatenabar-antenna-mode"
                               label="{{Detail}}"
-                              oncommand="hatenabar.Toolbar.openAntenna(event);"
-                              onclick="checkForMiddleClick(this, event);"
+                              observes="hatenabar-cmd-open-antenna"
                               value="detail"
                               hatena:link="a:id:$:detail">
                         <observes element="hatenabar-has-user"
@@ -248,9 +250,10 @@
                            image="http://www.hatena.ne.jp/favicon.ico"
                            label="{{Hatena Group}}"
                            tooltiptext="{{Hatena Group}}"
-                           command="hatenabar-cmd-open-top-or-user-link"
-                           hatena:link="g:">
-                <menupopup observes="hatenabar-link-popup-base">
+                           command="hatenabar-cmd-open-group">
+                <menupopup observes="hatenabar-popup-base"
+                           onpopupshowing="hatenabar.Toolbar.updateGroupPopup(event);">
+                    <menuseparator/>
                     <menuitem label="{{List}}"
                               observes="hatenabar-cmd-open-user-link"
                               hatena:link="g:id:$:group"/>
