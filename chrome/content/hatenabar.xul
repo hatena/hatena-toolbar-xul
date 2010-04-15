@@ -21,7 +21,18 @@
     <script type="application/javascript" src="autoloader.js"></script>
 
     <commandset id="mainCommandSet">
-        <command id="hatenabar-cmd-go" oncommand="hatenabar.p(event.sourceEvent.target.nodeName);"/>
+        <command id="hatenabar-cmd-open-link"
+                 oncommand="hatenabar.UICommand.openLink(event);"
+                 onclick="checkForMiddleClick(this, event);"/>
+        <command id="hatenabar-cmd-open-user-link"
+                 oncommand="hatenabar.UICommand.openLink(event);"
+                 onclick="checkForMiddleClick(this, event);"/>
+        <command id="hatenabar-cmd-open-related-link"
+                 oncommand="hatenabar.UICommand.openRelatedLink(event);"
+                 onclick="checkForMiddleClick(this, event);"/>
+        <command id="hatenabar-cmd-open-related-user-link"
+                 oncommand="hatenabar.UICommand.openRelatedLink(event);"
+                 onclick="checkForMiddleClick(this, event);"/>
     </commandset>
 
     <toolbarpalette id="BrowserToolbarPalette">
@@ -47,8 +58,7 @@
                            image="http://www.hatena.ne.jp/favicon.ico"
                            label="{{Hatena}}"
                            tooltiptext="{{Hatena}}"
-                           oncommand="hatenabar.Control.openLink(this, event);"
-                           onclick="checkForMiddleClick(this, event);"
+                           command="hatenabar-cmd-open-link"
                            hatena:link="www:">
                 <menupopup tooltiptext=""
                            onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
@@ -58,9 +68,14 @@
                               oncommand="hatenabar.Command.clearSearchHistory();"/>
                     <menuitem label="{{Options...}}"
                               oncommand="hatenabar.Command.openPreferences();"/>
+                    <!-- menuitem 要素に command 属性でコマンドを指定した場合、
+                         なぜか onclick 属性が転送されないので、
+                         代わりにobserves 属性で属性を転送する。 -->
                     <menuitem label="{{My Hatena}}"
+                              observes="hatenabar-cmd-open-user-link"
                               hatena:link="www:my"/>
                     <menuitem label="{{Help}}"
+                              observes="hatenabar-cmd-open-link"
                               hatena:link="www:tool:firefox"/>
                 </menupopup>
             </toolbarbutton>

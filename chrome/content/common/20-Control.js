@@ -23,29 +23,18 @@ var Control = {
     updateLinkPopup: function Ctrl_updateLinkPopup(event) {
         let popup = event.target;
         if (popup === event.currentTarget &&
-            !popup.hatenabar_listeningActivity) {
+            !popup.hatenabar_isListeningActivity) {
             let listener = this.menuActivityListener;
             popup.addEventListener('DOMMenuItemActive', listener, false);
             popup.addEventListener('DOMMenuItemInactive', listener, false);
-            popup.hatenabar_listeningActivity = true;
+            popup.hatenabar_isListeningActivity = true;
         }
 
-        let isLoggedIn = !!User.user;
         for (let menu = popup.firstChild; menu; menu = menu.nextSibling) {
-            let link;
-            if (menu.localName !== 'menuitem' ||
-                !(link = menu.getAttributeNS(HATENA_NS, 'link')))
-                continue;
-            if (isLoggedIn || !HatenaLink.isUserRequired(link)) {
-                menu.disabled = false;
-                menu.statusText = HatenaLink.parseToURL(link);
-                if (!menu.hasAttribute('oncommand'))
-                    menu.setAttribute('oncommand', "hatenabar.Control.openLink(this, event);");
-                if (!menu.hasAttribute('onclick'))
-                    menu.setAttribute('onclick', "checkForMiddleClick(this, event)");
-            } else {
-                menu.disabled = true;
-            }
+            if (menu.disabled || menu.localName !== 'menuitem') continue;
+            let link = menu.getAttributeNS(HATENA_NS, 'link');
+            if (!link) continue;
+            menu.statusText = HatenaLink.parseToURL(link);
         }
     },
 
