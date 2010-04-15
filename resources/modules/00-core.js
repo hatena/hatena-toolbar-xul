@@ -166,7 +166,7 @@ PrefService.addObserver(PREF_PREFIX, {
  * @param {string} uriSpec URI文字列。相対URIのときはbaseURIの指定が必要。
  * @param {string} originCharset URIの文字符号化方式またはnull。
  * @param {string || nsIURI} baseURI 基底URIまたはnull。
- * @return {nsIURI} uriSpecに対応するnsIURIオブジェクト。
+ * @returns {nsIURI} uriSpecに対応するnsIURIオブジェクト。
  */
 function newURI(uriSpec, originCharset, baseURI) {
     switch (arguments.length) {
@@ -266,10 +266,29 @@ function method(self, methodName) {
     return function () self[methodName].apply(self, args.concat(Array.slice(arguments)));
 }
 
+/**
+ * 渡されたオブジェクトが生成されたコンテキストの
+ * グローバルオブジェクトを取得する。
+ * 
+ * @param {Object} obj 任意のオブジェクト。
+ * @returns {Object}
+ *     渡されたオブジェクトが属するコンテキストのグローバルオブジェクト。
+ */
 function getGlobalObject(obj) {
-    obj = obj || this;
-    while (obj.__parent__)
-        obj = obj.__parent__;
+    // スコープチェーンの最奥にあるのがグローバルオブジェクトであると
+    // 推測できる。ただし、関数に関してはスコープチェーンの
+    // 先頭オブジェクトがアクティベーションオブジェクトかもしれず、
+    // その場合 __parent__ の値が null となってスコープチェーンを
+    // たどれないので、代わりにプロトタイプチェーンの先頭にある
+    // オブジェクトを起点としてスコープチェーンをたどる。
+    while (true) {
+        if (obj.__parent__)
+            obj = obj.__parent__;
+        else if (typeof obj === 'function' && obj.__proto__)
+            obj = obj.__proto__;
+        else
+            break;
+    }
     return obj;
 }
 
@@ -537,7 +556,7 @@ function loadForWindow(win) {
  * 
  * @param {Object} target コピー先。
  * @param {Object} source コピー元。
- * @return {Object} コピー先。
+ * @returns {Object} コピー先。
  */
 var extend = function extend(target, source, overwrite){
     overwrite = overwrite == null ? true : overwrite;

@@ -105,6 +105,13 @@ function testBindMethod() {
     assert.equals(method(f1, 'callBar').apply({bar: 2}), 1);
 }
 
+function testGetGlobalObject() {
+    let global = (function () this)();
+    var r = (function (a) (function (b) [{ c: a + b }, function () a + b]))(1)(2);
+    assert.strictlyEquals(global, getGlobalObject(r[0]));
+    assert.strictlyEquals(global, getGlobalObject(r[1]));
+}
+
 function testJSON() {
     assert.equals({ foo: 42 }, JSON.parse('{ "foo": 42 }'));
     let status = 'PASS';
