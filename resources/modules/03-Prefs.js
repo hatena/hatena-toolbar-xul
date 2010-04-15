@@ -7,7 +7,7 @@ const nsIPrefBranch = Ci.nsIPrefBranch;
 
 function Prefs(branch) {
     if (branch && branch[branch.length - 1] !== '.')
-        throw new Error('branch should be "foo.branch." -> ' + branch);
+        branch += '.';
     this._branch = branch || '';
 }
 
@@ -113,8 +113,6 @@ extend(Prefs.prototype, {
     },
 
     getChildPrefs: function Prefs_getChildPrefs(name) {
-        if (name.charAt(name.length - 1) !== '.')
-            name += '.';
         return new Prefs(this.branch + name);
     },
 

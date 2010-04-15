@@ -96,7 +96,6 @@
                 <textbox id="hatenabar-search-field"
                          type="autocomplete"
                          autocompletesearch="form-history"
-                         enablehistory="true"
                          flex="1"
                          onkeypress="hatenabar.SearchField.onKeyPress(event);">
                     <hbox>

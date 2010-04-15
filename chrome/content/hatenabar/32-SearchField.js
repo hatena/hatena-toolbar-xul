@@ -4,6 +4,8 @@ var SearchField = {
     get inputHistory SF_get_inputHistory() InputHistory.searchbar,
     get textbox SF_get_textbox() document.getElementById('hatenabar-search-field'),
 
+    formFillPrefs: new Prefs('browser.formfill'),
+
     // XXX Must be called on load and ToolboxCustomizeDone
     init: function SF_init() {
         let textbox = this.textbox;
@@ -17,6 +19,19 @@ var SearchField = {
         //menu.setAttribute('accesskey', '');
         menu.setAttribute('oncommand', "hatenabar.Command.clearSearchHistory();");
         contextMenu.appendChild(menu);
+
+        this.enableHistory();
+    },
+
+    enableHistory: function SF_enableHistory(enable) {
+        let textbox = this.textbox;
+        if (!textbox) return;
+        if (enable === undefined)
+            enable = this.formFillPrefs.get('enable', true);
+        if (enable)
+            textbox.setAttribute('enablehistory', 'true');
+        else
+            textbox.removeAttribute('enablehistory');
     },
 
     goSearch: function SF_goSearch(event) {
@@ -37,4 +52,6 @@ var SearchField = {
     },
 };
 
-window.addEventListener('load', function () SearchField.init(), false);
+Toolbar.createListener('CustomizeDone', method(SearchField, 'init'));
+SearchField.formFillPrefs.createListener(
+    'enable', method(SearchField, 'enableHistory', undefined));
