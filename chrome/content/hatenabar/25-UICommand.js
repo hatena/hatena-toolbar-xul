@@ -56,6 +56,8 @@ var UICommand = {
     },
 };
 
-EventService.createListener('UserChanged',
-                            method(UICommand, 'enableUserRequiredCommands'));
-doOnLoad(method(UICommand, 'enableUserRequiredCommands'));
+doOnLoad(function () {
+    let updateCommands = method(UICommand, 'enableUserRequiredCommands');
+    EventService.createListener('UserChanged', updateCommands);
+    updateCommands();
+});
