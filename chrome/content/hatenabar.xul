@@ -38,6 +38,18 @@
                  onclick="checkForMiddleClick(this, event);"/>
     </commandset>
 
+    <broadcasterset id="mainBroadcasterSet">
+        <broadcaster id="hatenabar-popup-base"
+                     tooltiptext=""
+                     oncommand="event.stopPropagation();"
+                     onclick="event.stopPropagation();"/>
+        <broadcaster id="hatenabar-link-popup-base"
+                     tooltiptext=""
+                     onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
+                     oncommand="event.stopPropagation();"
+                     onclick="event.stopPropagation();"/>
+    </broadcasterset>
+
     <toolbarpalette id="BrowserToolbarPalette">
     </toolbarpalette>
 
@@ -63,10 +75,7 @@
                            tooltiptext="{{Hatena}}"
                            command="hatenabar-cmd-open-link"
                            hatena:link="www:">
-                <menupopup tooltiptext=""
-                           onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
-                           oncommand="event.stopPropagation();"
-                           onclick="event.stopPropagation();">
+                <menupopup observes="hatenabar-link-popup-base">
                     <menuitem label="{{Clear Search History}}"
                               oncommand="hatenabar.Command.clearSearchHistory();"/>
                     <menuitem label="{{Options...}}"
@@ -115,10 +124,7 @@
                            tooltiptext="{{Hatena Antenna}}"
                            command="hatenabar-cmd-open-top-or-user-link"
                            hatena:link="a:">
-                <menupopup tooltiptext=""
-                           onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
-                           oncommand="event.stopPropagation();"
-                           onclick="event.stopPropagation();">
+                <menupopup observes="hatenabar-link-popup-base">
                     <menuitem label="{{Antenna}}"
                               observes="hatenabar-cmd-open-user-link"
                               hatena:link="a:id:$"/>
@@ -149,10 +155,7 @@
                            tooltiptext="{{Hatena Bookmark}}"
                            command="hatenabar-cmd-open-top-or-user-link"
                            hatena:link="b:">
-                <menupopup tooltiptext=""
-                           onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
-                           oncommand="event.stopPropagation();"
-                           onclick="event.stopPropagation();">
+                <menupopup observes="hatenabar-link-popup-base">
                     <menuitem label="{{Details}}"
                               observes="hatenabar-cmd-open-user-link"
                               hatena:link="b:id:$:detail"/>
@@ -177,10 +180,7 @@
                            tooltiptext="{{Hatena Diary}}"
                            command="hatenabar-cmd-open-top-or-user-link"
                            hatena:link="d:">
-                <menupopup tooltiptext=""
-                           onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
-                           oncommand="event.stopPropagation();"
-                           onclick="event.stopPropagation();">
+                <menupopup observes="hatenabar-link-popup-base">
                     <menuitem label="{{Edit Diary}}"
                               observes="hatenabar-cmd-open-user-link"
                               hatena:link="d:id:$:edit"/>
@@ -201,10 +201,7 @@
                            tooltiptext="{{Hatena Fotolife}}"
                            command="hatenabar-cmd-open-top-or-user-link"
                            hatena:link="f:">
-                <menupopup tooltiptext=""
-                           onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
-                           oncommand="event.stopPropagation();"
-                           onclick="event.stopPropagation();">
+                <menupopup observes="hatenabar-link-popup-base">
                     <menuitem label="{{Upload}}"
                               observes="hatenabar-cmd-open-user-link"
                               hatena:link="f:id:$:up"/>
@@ -231,10 +228,7 @@
                            tooltiptext="{{Hatena Group}}"
                            command="hatenabar-cmd-open-top-or-user-link"
                            hatena:link="g:">
-                <menupopup tooltiptext=""
-                           onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
-                           oncommand="event.stopPropagation();"
-                           onclick="event.stopPropagation();">
+                <menupopup observes="hatenabar-link-popup-base">
                     <menuitem label="{{List}}"
                               observes="hatenabar-cmd-open-user-link"
                               hatena:link="g:id:$:group"/>
@@ -252,10 +246,7 @@
                            tooltiptext="{{Hatena Haiku}}"
                            command="hatenabar-cmd-open-top-or-user-link"
                            hatena:link="h:id:$:following">
-                <menupopup tooltiptext=""
-                           onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
-                           oncommand="event.stopPropagation();"
-                           onclick="event.stopPropagation();">
+                <menupopup observes="hatenabar-link-popup-base">
                     <menuitem label="{{Entries}}"
                               observes="hatenabar-cmd-open-user-link"
                               hatena:link="h:id:$"/>
@@ -280,10 +271,7 @@
                            tooltiptext="{{Hatena Idea}}"
                            command="hatenabar-cmd-open-top-or-user-link"
                            hatena:link="i:">
-                <menupopup tooltiptext=""
-                           onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
-                           oncommand="event.stopPropagation();"
-                           onclick="event.stopPropagation();">
+                <menupopup observes="hatenabar-link-popup-base">
                     <menuitem label="{{Top}}"
                               observes="hatenabar-cmd-open-link"
                               hatena:link="h:"/>
@@ -297,10 +285,7 @@
                            tooltiptext="{{Hatena Keyword}}"
                            command="hatenabar-cmd-open-top-or-user-link"
                            hatena:link="k:">
-                <menupopup tooltiptext=""
-                           onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
-                           oncommand="event.stopPropagation();"
-                           onclick="event.stopPropagation();">
+                <menupopup observes="hatenabar-link-popup-base">
                     <menuitem label="{{Favorites}}"
                               observes="hatenabar-cmd-open-user-link"
                               hatena:link="h:id:$:favorite"/>
@@ -324,10 +309,7 @@
                            tooltiptext="{{Hatena Message}}"
                            command="hatenabar-cmd-open-link"
                            hatena:link="m:">
-                <menupopup tooltiptext=""
-                           onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
-                           oncommand="event.stopPropagation();"
-                           onclick="event.stopPropagation();">
+                <menupopup observes="hatenabar-link-popup-base">
                     <menuitem label="{{Top}}"
                               observes="hatenabar-cmd-open-link"
                               hatena:link="m:"/>
@@ -341,10 +323,7 @@
                            tooltiptext="{{Question Hatena}}"
                            command="hatenabar-cmd-open-top-or-user-link"
                            hatena:link="q:">
-                <menupopup tooltiptext=""
-                           onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
-                           oncommand="event.stopPropagation();"
-                           onclick="event.stopPropagation();">
+                <menupopup observes="hatenabar-link-popup-base">
                     <menuitem label="{{Top}}"
                               observes="hatenabar-cmd-open-link"
                               hatena:link="q:"/>
@@ -358,10 +337,7 @@
                            tooltiptext="{{Hatena Star}}"
                            command="hatenabar-cmd-open-top-or-user-link"
                            hatena:link="s:">
-                <menupopup tooltiptext=""
-                           onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
-                           oncommand="event.stopPropagation();"
-                           onclick="event.stopPropagation();">
+                <menupopup observes="hatenabar-link-popup-base">
                     <menuitem label="{{Reports}}"
                               observes="hatenabar-cmd-open-user-link"
                               hatena:link="s:id:$:report"/>
@@ -385,10 +361,7 @@
                            tooltiptext="{{Ugomemo Hatena}}"
                            command="hatenabar-cmd-open-top-or-user-link"
                            hatena:link="ugomemo:id:$:following">
-                <menupopup tooltiptext=""
-                           onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
-                           oncommand="event.stopPropagation();"
-                           onclick="event.stopPropagation();">
+                <menupopup observes="hatenabar-link-popup-base">
                     <!-- Favorites のリンク先が /favorites でなく、
                          Stars のリンク先が /favorites なのは意図的
                          (旧はてなツールバーがそうなっていた)。 -->
@@ -425,10 +398,7 @@
                            tooltiptext="{{Hatena Counter}}"
                            command="hatenabar-cmd-open-top-or-user-link"
                            hatena:link="counter:">
-                <menupopup tooltiptext=""
-                           onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
-                           oncommand="event.stopPropagation();"
-                           onclick="event.stopPropagation();">
+                <menupopup observes="hatenabar-link-popup-base">
                     <menuitem label="{{Config}}"
                               observes="hatenabar-cmd-open-user-link"
                               hatena:link="counter:id:$:edit"/>
@@ -446,10 +416,7 @@
                            tooltiptext="{{Hatena Graph}}"
                            command="hatenabar-cmd-open-top-or-user-link"
                            hatena:link="graph:">
-                <menupopup tooltiptext=""
-                           onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
-                           oncommand="event.stopPropagation();"
-                           onclick="event.stopPropagation();">
+                <menupopup observes="hatenabar-link-popup-base">
                     <menuitem label="{{Edit}}"
                               observes="hatenabar-cmd-open-user-link"
                               hatena:link="graph:id:$:edit"/>
