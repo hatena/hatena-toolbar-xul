@@ -288,17 +288,17 @@
                 <menupopup observes="hatenabar-link-popup-base">
                     <menuitem label="{{Favorites}}"
                               observes="hatenabar-cmd-open-user-link"
-                              hatena:link="h:id:$:favorite"/>
+                              hatena:link="k:id:$:favorite"/>
                     <menuitem label="{{Modifications}}"
                               observes="hatenabar-cmd-open-user-link"
-                              hatena:link="h:id:$:modified"/>
+                              hatena:link="k:id:$:modified"/>
                     <menuitem label="{{History}}"
                               observes="hatenabar-cmd-open-user-link"
-                              hatena:link="h:id:$:visited"/>
+                              hatena:link="k:id:$:visited"/>
                     <menuseparator/>
                     <menuitem label="{{Top}}"
                               observes="hatenabar-cmd-open-link"
-                              hatena:link="h:"/>
+                              hatena:link="k:"/>
                 </menupopup>
             </toolbarbutton>
             <toolbarbutton id="hatenabar-message-button"
