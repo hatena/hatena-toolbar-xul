@@ -12,13 +12,14 @@ var Command = {
     },
 
     openContentLink: function Cmd_openContentLink(link, event) {
-        this.openContentLink(link, null, event);
+        this.openContentLinkWith(link, null, event);
     },
 
     openContentLinkWith: function Cmd_openContentLinkWith(link, context, event) {
         if (!/^https?:/.test(link))
             link = HatenaLink.parseToURL(link, context);
-        openUILink(link, event); // XXX 適切な動作を。
+        // XXX タブの親子関係を設定するなどの必要あり。
+        openUILink(link, event); 
     },
 
     openPreferences: function Cmd_openPreferences() {
@@ -44,5 +45,32 @@ var Command = {
 
     clearSearchHistory: function Cmd_clearSearchHistory() {
         InputHistory.searchbar.clear();
+    },
+
+    goRefer: function Cmd_goRefer(link, doc, event) {
+        let cite = doc.location.href;
+        let title = doc.title || '';
+        let body = '';
+        let win = doc.defaultView;
+        if (win) {
+            body = getSelectedText(win);
+            if (!body) {
+                for (let i = 0; i < win.frames.length; i++) {
+                    body = getSelectedText(win.frames[i]);
+                    if (body) break;
+                }
+            }
+        }
+        let url = HatenaLink.parseToURL(link) + '?' +
+                  makeURIQuery({ cite: cite, title: title, body: body });
+        this.openContentLink(url, event);
+
+        function getSelectedText(win) {
+            let text = '';
+            let selection = win.getSelection();
+            for (let i = 0; i < selection.rangeCount; i++)
+                text += (text ? ' ' : '') + selection.getRangeAt(i).toString();
+            return text;
+        }
     },
 };
