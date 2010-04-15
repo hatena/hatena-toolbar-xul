@@ -5,13 +5,15 @@ var UICommand = {
         'hatenabar-has-user',
         'hatenabar-cmd-open-user-link',
         'hatenabar-cmd-open-related-user-link',
+        'hatenabar-cmd-add-bookmark',
+        'hatenabar-cmd-refer-in-diary',
+        'hatenabar-cmd-refer-in-group',
     ],
 
     enableUserRequiredCommands: function UIC_enableUserRequiredCommands() {
         let disabled = !User.user;
         this.userRequiredComands.forEach(function (id) {
             let command = document.getElementById(id);
-            if (!command) return;
             if (disabled)
                 command.setAttribute('disabled', 'true');
             else

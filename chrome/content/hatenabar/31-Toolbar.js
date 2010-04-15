@@ -74,18 +74,12 @@ var Toolbar = {
         Control.updateLinkPopup(event);
     },
 
-
-    openRelatedLink: function Tb_openRelatedLink(link, event) {
-        let context = { url: content.location.href };
-        Command.openContentLinkWith(link, context, event);
-    },
-
-    goReferInDiary: function Tb_goReferInDiary(event) {
+    referInDiary: function Tb_referInDiary(event) {
         Command.goRefer('d:refer', content.document, event);
     },
 
-    goReferInGroup: function Tb_goReferInGroup(event) {
-        let group = Prefs.hatenabar.get('group.selected');
+    referInGroup: function Tb_referInGroup(event) {
+        let group = User.user.get('group.selected');
         Command.goRefer('g:' + group + ':refer', content.document, event);
     },
 };
