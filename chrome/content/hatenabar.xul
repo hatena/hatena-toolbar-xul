@@ -516,6 +516,9 @@
     </toolbox>
 
     <statusbar id="status-bar">
+        <statusbarpanel id="hatenabar-star-status"
+                        class="statusbarpanel-iconic-text"
+                        src="http://www.hatena.ne.jp/favicon.ico"/>
         <statusbarpanel id="hatenabar-bookmark-status"
                         class="statusbarpanel-iconic"
                         src="http://www.hatena.ne.jp/favicon.ico"

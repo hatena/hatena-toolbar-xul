@@ -3,53 +3,55 @@ const EXPORT = ['Star'];
 var Star = {
     SiteConfig: shared.get('Star.SiteConfig'),
 
-    get siteConfigURL () HatenaLink.parseToURL('s:siteconfig.json'),
+    siteConfigURL: HatenaLink.parseToURL('s:siteconfig.json'),
+    // 将来的に国際化すると、設定によってスクリプトの URL が
+    // 変わるかもしれないからゲッタを使う。
     get scriptURL () HatenaLink.parseToURL('s:js:HatenaStar.js'),
 
-    init: function S_init() {
+    init: function Star_init() {
         gBrowser.addEventListener('DOMContentLoaded', this, false);
         gBrowser.addEventListener('hatenabar-stars-loaded', this, false, true);
+        this.loadSiteConfig();
+    },
 
-        if (!this.SiteConfig) {
-            // XXX Use net.http or something else.
-            let xhr = new XMLHttpRequest();
-            xhr.open('GET', this.siteConfigURL);
-            xhr.onload = bind(onSiteConfigLoaded, this);
-            xhr.send(null);
-        }
-
-        function onSiteConfigLoaded(event) {
-            let sc = JSON.parse(event.target.responseText);
-            shared.set('Star.SiteConfig');
-            this.SiteConfig = sc;
+    loadSiteConfig: function Star_loadSiteConfig() {
+        http.get(this.siteConfigURL, null, bind(onSiteConfigLoaded, this));
+        function onSiteConfigLoaded(res) {
+            if (!res.value) return;
+            shared.set(res.value);
+            this.SiteConfig = res.value;
         }
     },
 
-    load: function S_load(doc) {
+    load: function Star_load(doc) {
         let win = doc.defaultView;
-        // XXX return if star is disabled.
-        if (!this.SiteConfig || win.top != win ||
+        if (!this.SiteConfig ||
+            win.top != win ||
             !/^https?:/.test(win.location.protocol) ||
             !(doc instanceof Ci.nsIDOMHTMLDocument))
             return;
         let host = win.location.hostname;
-        let config = this.SiteConfig[host] ||
-                     this.SiteConfig[host.replace(/^[^.]+/, '*')] ||
-                     null;
-        if (!config) return;
-        let path = win.location.pathname;
-        let script = this.scriptURL;
-        let func = 'javascript:(' + this._loadStar.toSource() + ')';
-        for (let i = 0; i < config.length; i++) {
-            if (!path.match(config[i].path)) continue;
-            let code = func + '(' + [config[i], script].map(uneval).join(',') + ');';
-            win.location.href = encodeURI(code);
-            break;
+        let configs = this.SiteConfig[host] ||
+                      this.SiteConfig[host.replace(/^[^.:]+/, '*')] ||
+                      null;
+        let config = null;
+        if (configs) {
+            let path = win.location.pathname;
+            for (let i = 0; i < configs.length; i++) {
+                if (path.match(configs[i].path)) {
+                    config = configs[i];
+                    break;
+                }
+            }
         }
+        let code = 'javascript:(' + this._loadOrCheckStar.toSource() + ')(' +
+            [config, this.scriptURL].map(uneval).join(',') + ');';
+        win.location.href = encodeURI(code);
     },
 
     // This function is executed in the context of the web page.
-    _loadStar: function S__loadStar(entryConfig, scriptSrc) {
+    _loadOrCheckStar: function Star__loadOrCheckStar(config, scriptURL) {
+        if (!config && (!window.Hatena || !Hatena.Star)) return;
         function ensure(object, prop, value) {
             if (typeof object[prop] === 'undefined')
                 object[prop] = value || {};
@@ -57,38 +59,50 @@ var Star = {
         ensure(window, 'Hatena');
         ensure(Hatena, 'Star');
         if (Hatena.Star.loaded) {
-            onStarsLoaded();
+            onPreload();
             return;
+        } else {
+            ensure(Hatena.Star, 'onLoadFunctions', []);
+            Hatena.Star.onLoadFunctions.push(onPreload);
+            Hatena.Star.SiteConfig = config;
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.charset = 'utf-8';
+            script.src = scriptURL;
+            var parent = document.getElementsByTagName('head')[0] ||
+                         document.body;
+            parent.appendChild(script);
         }
-        ensure(Hatena.Star, 'onLoadFunctions', []);
-        Hatena.Star.onLoadFunctions.push(onPreload);
-        Hatena.Star.SiteConfig = entryConfig;
-        var script = document.createElement('script');
-        script.type = 'text/javascript';
-        script.charset = 'utf-8';
-        script.src = scriptSrc;
-        var parent = document.getElementsByTagName('head')[0] || document.body;
-        parent.appendChild(script);
 
         function onPreload() {
+            // load のタイミングがよくわからないのでとりあえず
+            // リスナ登録も即時呼び出しもやってみる。
             Hatena.Star.EntryLoader.addEventListener('load', onStarsLoaded);
+            onStarsLoaded();
         }
         function onStarsLoaded() {
-            if (!Hatena.Star.EntryLoader.entries.length) return;
+            if (!Hatena.Star.EntryLoader.entries ||
+                !Hatena.Star.EntryLoader.entries.length)
+                return;
             var event = document.createEvent('Event');
             event.initEvent('hatenabar-stars-loaded', true, false);
             document.dispatchEvent(event);
         }
     },
 
-    onStarsLoaded: function S_onStarsLoaded(doc) {
-        doc.hatenabar_hasStars = true;
-        //this.dispatch('StarsLoaded', doc);
+    hasEntries: function Star_hasEntries(doc) {
+        return !!doc._hatenabar_hasStars;
     },
 
-    handleEvent: function S_handleEvent(event) {
+    onStarsLoaded: function Star_onStarsLoaded(doc) {
+        doc._hatenabar_hasStars = true;
+        this.dispatch('StarsLoaded', doc);
+    },
+
+    handleEvent: function Star_handleEvent(event) {
         switch (event.type) {
         case 'DOMContentLoaded':
+            // XXX return if star is disabled.
             this.load(event.target);
             break;
         case 'hatenabar-stars-loaded':
@@ -97,5 +111,7 @@ var Star = {
         }
     },
 };
+
+EventService.bless(Star);
 
 doOnLoad(function () Star.init());
