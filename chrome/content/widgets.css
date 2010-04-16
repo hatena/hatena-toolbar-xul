@@ -1,0 +1,8 @@
+toolbarbutton[sidelabel] {
+    -moz-binding: url("chrome://hatenabar/content/widgets.xml#sidelabel-toolbarbutton");
+}
+/*
+toolbarbutton[sidelabel] > .toolbarbutton-icon {
+    -moz-binding: url("chrome://hatenabar/content/widgets.xml#sidelabel-toolbarbutton-icon");
+}
+*/

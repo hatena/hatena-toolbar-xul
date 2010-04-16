@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bindings xmlns="http://www.mozilla.org/xbl"
+          xmlns:xbl="http://www.mozilla.org/xbl"
+          xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+    <binding id="sidelabel-toolbarbutton"
+             extends="chrome://global/content/bindings/toolbarbutton.xml#toolbarbutton">
+        <content>
+            <children includes="observes|template|menupopup|tooltip"/>
+            <xul:hbox class="toolbarbutton-icon"
+                      align="center"
+                      xbl:inherits="toolbarmode,buttonstyle">
+                <xul:image class="toolbarbutton-icon"
+                           xbl:inherits="validate,src=image,toolbarmode,buttonstyle"/>
+                <xul:label class="toolbarbutton-sidetext"
+                           xbl:inherits="value=sidelabel"/>
+            </xul:hbox>
+            <xul:label class="toolbarbutton-text"
+                       crop="right"
+                       flex="1"
+                       xbl:inherits="value=label,accesskey,crop,toolbarmode,buttonstyle"/>
+        </content>
+
+        <implementation>
+            <property name="sideLabel"
+                      onget="return this.getAttribute('sidelabel');"
+                      onset="this.setAttribute('sidelabel', val); return val;"/>
+        </implementation>
+    </binding>
+
+    <binding id="sidelabel-toolbarbutton-icon"
+             extends="chrome://global/content/bindings/general.xml#image">
+        <content>
+            <xul:image xbl:inherits="src"/>
+            <xul:label class="sidelabel-toolbarbutton-sidelabel"
+                       xbl:inherits="value=sidelabel"/>
+        </content>
+    </binding>
+
+</bindings>
