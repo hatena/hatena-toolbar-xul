@@ -37,6 +37,8 @@
         <command id="hatenabar-cmd-refer-in-group"
                  oncommand="hatenabar.Toolbar.referInGroup(event);"
                  onclick="checkForMiddleClick(this, event);"/>
+        <command id="hatenabar-cmd-clear-search-history"
+                 oncommand="hatenabar.Command.clearSearchHistory();"/>
     </commandset>
 
     <broadcasterset id="mainBroadcasterSet">
@@ -100,7 +102,7 @@
                            hatena:link="www:">
                 <menupopup observes="hatenabar-link-popup-base">
                     <menuitem label="{{Clear Search History}}"
-                              oncommand="hatenabar.Command.clearSearchHistory();"/>
+                              observes="hatenabar-cmd-clear-search-history"/>
                     <menuitem label="{{Options...}}"
                               oncommand="hatenabar.Command.openPreferences();"/>
                     <!-- menuitem 要素に command 属性でコマンドを指定した場合、
@@ -130,6 +132,7 @@
             </toolbaritem>
 
             <splitter id="hatenabar-search-splitter"
+                      class="chromeclass-toolbar-additional"
                       resizebefore="closest"
                       resizeafter="flex"
                       tooltiptext="{{Resize Search Field}}">

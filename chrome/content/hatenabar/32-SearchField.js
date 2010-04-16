@@ -18,13 +18,14 @@ var SearchField = {
         let menu = document.createElementNS(XUL_NS, 'menuitem');
         menu.setAttribute('label', '{{Clear Search History}}');
         //menu.setAttribute('accesskey', '');
-        menu.setAttribute('oncommand', "hatenabar.Command.clearSearchHistory();");
+        menu.setAttribute('observes', "hatenabar-cmd-clear-search-history");
         contextMenu.appendChild(menu);
 
         //let item = textbox.parentNode;
         //if (item.nextSibling) {
         //    let splitter = document.createElementNS(XUL_NS, 'splitter');
         //    splitter.setAttribute('id', 'hatenabar-search-splitter');
+        //    splitter.setAttribute('class', 'chromeclass-toolbar-additional');
         //    splitter.setAttribute('resizebefore', 'closest');
         //    splitter.setAttribute('resizeafter', 'flex');
         //    splitter.setAttribute('tooltiptext', '{{Resize Search Field}}');
