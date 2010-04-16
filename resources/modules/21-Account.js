@@ -18,6 +18,7 @@ var Account = {
         let os = ObserverService;
         os.addObserver(this.CookieObserver, 'cookie-changed', false);
         os.addObserver(this.ResponseObserver, 'http-on-examine-response', false);
+        os.addObserver(this.OfflineObserver, 'network:offline-status-changed', false);
         EventService.createListener('unload', method(this, 'destroy'));
     },
 
@@ -25,6 +26,8 @@ var Account = {
         let os = ObserverService;
         os.removeObserver(this.CookieObserver, 'cookie-changed');
         os.removeObserver(this.ResponseObserver, 'htt-on-examine-response');
+        os.removeObserver(this.OfflineObserver, 'network:offline-status-changed');
+        this.setUser(null);
     },
 
     get nameCache Account_get_nameCache() {
@@ -54,8 +57,7 @@ var Account = {
     },
 
     logout: function Account_logout() {
-        // remove cookie
-        p(arguments.callee.name + ' is not yet implemented.');
+        CookieManager.remove(LOGIN_COOKIE_HOST, 'rk', '/', false);
     },
 
     setUser: function Account_setUser(name, rk) {
@@ -81,10 +83,15 @@ var Account = {
         EventService.dispatch('UserChanged', prevUser);
     },
 
-    //getUserNames: function Account_getUserNames() {
-    //    let logins = LoginManager.findLogins({}, LOGIN_ORIGIN, '', null);
-    //    return logins.map(function (login) login.username);
-    //},
+    getUserNames: function Account_getUserNames() {
+        let history = Prefs.hatenabar.get('userHistory', '');
+        return history ? history.split('|') : [];
+    },
+
+    clearUserNames: function Account_clearUserNames(complete) {
+        let history = (!complete && User.user) ? User.user.name : '';
+        Prefs.hatenabar.set('userHistory', history);
+    },
 };
 
 Account.CookieObserver = {
@@ -143,6 +150,15 @@ Account.ResponseObserver = {
         if (rawStream instanceof Ci.nsIMIMEInputStream)
             body = body.replace(/^(?:.+\r\n)+\r\n/, '');
         return parseURIQuery(body);
+    },
+};
+
+Account.OfflineObserver = {
+    observe: function Acnt_OO_observe(subject, topic, data) {
+        // オフラインからオンラインに変わったときは、
+        // ユーザーのセッションが切れていないか確認。
+        if (data === 'online' && User.user)
+            Account.checkLogin(User.user.rk);
     },
 };
 

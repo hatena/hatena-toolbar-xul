@@ -54,7 +54,8 @@ const PrefService =
     getService("@mozilla.org/preferences-service;1",
                [Ci.nsIPrefService, Ci.nsIPrefBranch, Ci.nsIPrefBranch2]);
 const CookieManager =
-    getService("@mozilla.org/cookiemanager;1", Ci.nsICookieManager);
+    getService("@mozilla.org/cookiemanager;1",
+               [Ci.nsICookieManager, Ci.nsICookieManager2]);
 const CookieService=
     getService("@mozilla.org/cookieService;1", Ci.nsICookieService);
 const PromptService =
