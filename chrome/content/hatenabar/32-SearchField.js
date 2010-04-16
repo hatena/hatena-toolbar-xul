@@ -20,6 +20,7 @@ var SearchField = {
         //menu.setAttribute('accesskey', '');
         menu.setAttribute('observes', "hatenabar-cmd-clear-search-history");
         contextMenu.appendChild(menu);
+        contextMenu.addEventListener('popupshowing', this._inputContextListener, false);
 
         //let item = textbox.parentNode;
         //if (item.nextSibling) {
@@ -34,6 +35,10 @@ var SearchField = {
         //}
 
         this.enableHistory();
+    },
+
+    _inputContextListener: function SF__inputContextListener(event) {
+        UICommand.updateClearSearchHistory();
     },
 
     enableHistory: function SF_enableHistory(enable) {

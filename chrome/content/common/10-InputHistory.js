@@ -36,6 +36,10 @@ extend(InputHistory.prototype, {
         return FormHistory.entryExists(this.key, value);
     },
 
+    hasAny: function IH_hasAny() {
+        return FormHistory.nameExists(this.key);
+    },
+
     clear: function IH_clear() {
         FormHistory.removeEntriesForName(this.key);
     },

@@ -42,6 +42,14 @@ var UICommand = {
                ? event.sourceEvent.target : event.target;
     },
 
+    updateClearSearchHistory: function UIC_updateClearSearchHistory() {
+        let command = document.getElementById('hatenabar-cmd-clear-search-history');
+        if (InputHistory.searchbar.hasAny())
+            command.removeAttribute('disabled');
+        else
+            command.setAttribute('disabled', 'true');
+    },
+
     userRequiredComands: [
         'hatenabar-has-user',
         'hatenabar-cmd-open-user-link',

@@ -101,8 +101,10 @@
                            command="hatenabar-cmd-open-link"
                            hatena:link="www:">
                 <menupopup observes="hatenabar-link-popup-base">
+                    <!--
                     <menuitem label="{{Clear Search History}}"
                               observes="hatenabar-cmd-clear-search-history"/>
+                    -->
                     <menuitem label="{{Options...}}"
                               oncommand="hatenabar.Command.openPreferences();"/>
                     <!-- menuitem 要素に command 属性でコマンドを指定した場合、

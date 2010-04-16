@@ -37,6 +37,8 @@ function testEntryOperations() {
     hist.remove('foo');
     assert.isFalse(hist.has('foo'));
     assert.isTrue(hist.has('bar'));
+    assert.isTrue(hist.hasAny());
     hist.clear();
     assert.isFalse(hist.has('bar'));
+    assert.isFalse(hist.hasAny());
 }
