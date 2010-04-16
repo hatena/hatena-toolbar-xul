@@ -516,6 +516,12 @@
     </toolbox>
 
     <statusbar id="status-bar">
+        <statusbarpanel id="hatenabar-bookmark-status"
+                        class="statusbarpanel-iconic"
+                        src="http://www.hatena.ne.jp/favicon.ico"
+                        tooltiptext="{{Add to Hatena Bookmarks}}"
+                        onclick="hatenabar.UICommand.addOrViewBookmark(event);"
+                        hatena:link="b:entry"/>
     </statusbar>
 
     <popupset id="mainPopupSet">

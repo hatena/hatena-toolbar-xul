@@ -19,6 +19,13 @@ var UICommand = {
         Command.openUILink(link, event);
     },
 
+    addOrViewBookmark: function UIC_addOrViewBookmark(event) {
+        if (event.button === 0 || event.button === 1)
+            Bookmark.add(content);
+        else
+            this.openRelatedLink(event);
+    },
+
     getLink: function UIC_getLink(event) {
         for (let node = this.getTarget(event); node; node = node.parentNode) {
             let link = node.getAttributeNS(HATENA_NS, 'link');
