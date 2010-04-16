@@ -13,8 +13,11 @@ function User(name, options) {
 };
 
 User.prototype = {
-    get name() this._name,
-    get rk() this.options.rk,
+    get name User_get_name() this._name,
+
+    get rk User_get_rk() this.options.rk || '',
+    set rk User_set_rk(rk) this.options.rk = rk,
+    
     //get bookmarkHomepage() UserUtils.getHomepage(this.name, 'b'),
     //getProfileIcon: function user_getProfileIcon(isLarge) {
     //    return UserUtils.getProfileIcon(this.name, isLarge);
@@ -37,7 +40,8 @@ User.prototype = {
 
     _checkGroups: function User__checkGroups() {
         let url = HatenaLink.parseToURL('g:') + 'rkgroup';
-        http.getWithRetry(url, { rk: this.rk }, bind(onGotGroups, this));
+        http.getWithRetry({ url: url, query: { rk: this.rk } },
+                          bind(onGotGroups, this));
         function onGotGroups(res) {
             if (!res.ok || !res.xml || res.xml.rkgroup.@userid != this.name)
                 return;
@@ -46,7 +50,8 @@ User.prototype = {
         }
     },
 
-    onLogin: function User_onLogin() {
+    onLogin: function User_onLogin(rk) {
+        this.options.rk = rk;
         this._groups = [];
         this._groupTimer = new Timer(23 * 60 * 1000);
         this._groupTimer.start();
@@ -55,7 +60,9 @@ User.prototype = {
             this._groupTimer.createListener('timer', checkGroups);
         checkGroups();
     },
+
     onLogout: function User_onLogout() {
+        this.options.rk = '';
         this._groupTimer.stop();
         this._groupListener.unlisten();
         this._groups = this._groupTimer = this._groupListener = null;
@@ -65,8 +72,7 @@ User.prototype = {
 extend(User, {
     user: null,
     login: function User_loginCheck () {
-        http.postWithRetry(MY_NAME_URL, null,
-                           User._login, User.loginErrorHandler);
+        http.postWithRetry(MY_NAME_URL, User._login, User.loginErrorHandler);
     },
     _login: function User__login(res) {
         res = res.value || {};
@@ -181,15 +187,15 @@ User.removeObservers = function User_s_removeObservers() {
 };
 User.addObservers();
 
-User.LoginChecker = new Timer(1000 * 60 * 15); // 15 分
-User.LoginChecker.createListener('timer', function() {
-    if (!User.user) {
-        User.login();
-    }
-});
-User.LoginChecker.start();
+//User.LoginChecker = new Timer(1000 * 60 * 15); // 15 分
+//User.LoginChecker.createListener('timer', function() {
+//    if (!User.user) {
+//        User.login();
+//    }
+//});
+//User.LoginChecker.start();
 
 EventService.createListener('AllModulesLoaded', bind(function () {
     this.loadModules();
-    User.login()
+    //User.login()
 }, this));

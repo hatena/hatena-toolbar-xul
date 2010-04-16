@@ -16,7 +16,7 @@ var Star = {
     },
 
     loadSiteConfig: function Star_loadSiteConfig() {
-        http.get(this.siteConfigURL, null, bind(onSiteConfigLoaded, this));
+        http.get(this.siteConfigURL, bind(onSiteConfigLoaded, this));
         function onSiteConfigLoaded(res) {
             if (!res.value) return;
             shared.set('Star.SiteConfig', res.value);

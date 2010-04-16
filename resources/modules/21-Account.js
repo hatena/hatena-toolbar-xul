@@ -29,33 +29,56 @@ var Account = {
 
     get nameCache Account_get_nameCache() {
         delete this.nameCache;
-        return this.nameCache = new ExpireCache('Account._nameCache', 3 * 60);
+        return this.nameCache = new ExpireCache('Account.nameCache', 3 * 60);
     },
 
-    loginWithRk: function Account_loginWithRk(rk) {
-        p('loginWithRk\n' + rk.quote());
-        let name = this._nameCache.get(rk);
-        if (name) {
-            this.currentUser = new User(name);
-        } else {
-            this.checkLogin(rk);
-        }
+    login: function Account_login(name) {
+        p(arguments.callee.name + ' is not yet implemented.');
     },
 
     checkLogin: function Account_checkLogin(rk) {
-        net.getWithRetry(LOGIN_CHECK_URL, null, bind(onChecked, this));
+        p('checkLogin\n' + rk.quote());
+        let name = this.nameCache.get(rk);
+        if (name) {
+            this.setUser(name, rk);
+            return;
+        }
+        http.postWithRetry({
+            url: LOGIN_CHECK_URL,
+            headers: { Cookie: 'rk=' + rk },
+        }, bind(onChecked, this));
         function onChecked(res) {
             if (!res.ok || !res.value) return;
-            if (res.value.login)
-                this.currentUser = new User(res.value.name);
-            else
-                this.logout();
+            this.setUser(res.value.login ? res.value.name : null, rk);
         }
     },
 
-    logout: function Account_logout(onSuccess, onFailure) {
-        this.currentUser = null;
+    logout: function Account_logout() {
+        // remove cookie
         p(arguments.callee.name + ' is not yet implemented.');
+    },
+
+    setUser: function Account_setUser(name, rk) {
+        let prevUser = User.user;
+        if (prevUser) {
+            if (prevUser.name === name) {
+                prevUser.rk = rk;
+                return;
+            }
+            try { prevUser.onLogout(); }
+            catch (ex) { reportError(ex); }
+        } else if (!name) {
+            return;
+        }
+
+        let user = null;
+        if (name) {
+            user = new User(name);
+            try { user.onLogin(rk); }
+            catch (ex) { reportError(ex); }
+        }
+        User.user = user;
+        EventService.dispatch('UserChanged', prevUser);
     },
 
     //getUserNames: function Account_getUserNames() {
@@ -74,11 +97,11 @@ Account.CookieObserver = {
         switch (data) {
         case 'added':
         case 'changed':
-            Account.loginWithRk(cookie.value);
+            Account.checkLogin(cookie.value);
             break;
         case 'deleted':
         case 'cleared':
-            Account.logout();
+            Account.setUser(null);
             break;
         case 'reload':
             // XXX What should I do here?
@@ -102,7 +125,7 @@ Account.ResponseObserver = {
         try {
             cookie = subject.getResponseHeader('Set-Cookie');
         } catch (ex) {}
-        let match = cookie.match(/\brk=(\w+)/);
+        let match = cookie.match(/^rk=(\w+)/);
         if (!match) return;
         let formData = this.getFormData(subject);
         if (!formData) return;

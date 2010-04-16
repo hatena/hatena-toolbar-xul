@@ -58,7 +58,6 @@ function HTTPConnection(options) {
     this.request = null;
     this.timer = null;
     this.timerListener = null;
-    this.useRkCookie();
     this.connect();
 }
 
@@ -75,15 +74,6 @@ extend(HTTPConnection.prototype, {
         this.request.onprogress = method(this, 'onProgress');
         this.request.send(this.body);
         this.setTimer();
-    },
-
-    useRkCookie: function HTTP_useRkCookie() {
-        let rk = User.user ? User.user.rk : User.rk
-        if (!rk || !HTTPConnection.useRkURLPattern.test(this.url) ||
-            ('useRkCookie' in this.options && !this.options.useRkCookie))
-            return;
-        let cookie = this.headers['Cookie'] || '';
-        this.headers['Cookie'] = (cookie && cookie + '; ') + 'rk=' + rk;
     },
 
     retry: function HTTP_retry() {
@@ -216,33 +206,47 @@ extend(Response.prototype, {
 
 
 var http = {
-    get: function http_get(url, query, onLoad, onError) {
-        return new HTTPConnection({
-            method: 'GET', url: url, query: query,
-            onLoad: onLoad, onError: onError,
-        });
+    get: function http_get(options, onLoad, onError) {
+        return this._connect(options, 'GET', 0, 0, onLoad, onError);
     },
 
-    getWithRetry: function http_getWithRetry(url, query, onLoad, onError, retryCount) {
-        return new HTTPConnection({
-            method: 'GET', url: url, query: query,
-            onLoad: onLoad, onError: onError,
-            timeout: 15, retryCount: retryCount || 3,
-        });
+    getWithRetry: function http_getWithRetry(options, onLoad, onError) {
+        return this._connect(options, 'GET', 15, 3, onLoad, onError);
     },
 
-    post: function http_post(url, query, onLoad, onError) {
-        return new HTTPConnection({
-            method: 'POST', url: url, query: query,
-            onLoad: onLoad, onError: onError,
-        });
+    post: function http_post(options, onLoad, onError) {
+        return this._connect(options, 'POST', 0, 0, onLoad, onError);
     },
 
-    postWithRetry: function http_postWithRetry(url, query, onLoad, onError, retryCount) {
-        return new HTTPConnection({
-            method: 'POST', url: url, query: query,
-            onLoad: onLoad, onError: onError,
-            timeout: 15, retryCount: retryCount || 3,
-        });
+    postWithRetry: function http_postWithRetry(options, onLoad, onError) {
+        return this._connect(options, 'POST', 15, 3, onLoad, onError);
+    },
+
+    _autoRkURLPattern: /^https?:\/\/(?:[\w-]+\.)+hatena\.(?:ne\.jp|com)(?:[:\/]|$)/,
+
+    _connect: function http__connect(options, method, timeout, retryCount,
+                                     onLoad, onError) {
+        let url = options.url;
+        if (typeof options === 'string') {
+            url = options;
+            options = null;
+        }
+        options = extend({
+            method: method, url: url, timeout: timeout,
+            retryCount: retryCount, onLoad: onLoad, onError: onError,
+        }, options);
+
+        if ((typeof options.autoRk === 'undefined' || options.autoRk) &&
+            this._autoRkURLPattern.test(url) &&
+            User.user) {
+            let headers = options.headers || (options.headers = {});
+            let cookie = headers['Cookie'] || '';
+            if (!/(?:^|[;\s])rk=/.test(cookie)) {
+                cookie = (cookie && cookie + '; ') + 'rk=' + User.user.rk;
+                headers['Cookie'] = cookie;
+            }
+        }
+
+        return new HTTPConnection(options);
     },
 };

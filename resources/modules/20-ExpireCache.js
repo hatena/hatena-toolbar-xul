@@ -126,7 +126,7 @@ HTTPCache.prototype = {
             timer.start();
         } else {
             let self = this;
-            http.get(this.createURL(url), null, function (res) {
+            http.get(this.createURL(url), function (res) {
                 callback(self.setResCache(url, res));
             }, function () {
                 cache.set(url, null);
