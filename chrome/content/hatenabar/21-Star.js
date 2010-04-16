@@ -11,15 +11,17 @@ var Star = {
     init: function Star_init() {
         gBrowser.addEventListener('DOMContentLoaded', this, false);
         gBrowser.addEventListener('hatenabar-stars-loaded', this, false, true);
-        this.loadSiteConfig();
+        if (!this.SiteConfig)
+            this.loadSiteConfig();
     },
 
     loadSiteConfig: function Star_loadSiteConfig() {
         http.get(this.siteConfigURL, null, bind(onSiteConfigLoaded, this));
         function onSiteConfigLoaded(res) {
             if (!res.value) return;
-            shared.set(res.value);
+            shared.set('Star.SiteConfig', res.value);
             this.SiteConfig = res.value;
+            p('Star.SiteConfig is updated');
         }
     },
 

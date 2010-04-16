@@ -66,6 +66,27 @@
                      onclick="event.stopPropagation();"/>
     </broadcasterset>
 
+    <popupset id="mainPopupSet">
+        <menupopup id="hatenabar-star-context"
+                   observes="hatenabar-link-popup-base">
+            <menuitem label="{{SiteConfig Wiki}}"
+                      observes="hatenabar-cmd-open-link"
+                      hatena:link="s:siteconfig"/>
+            <!-- XXX 現時点で HatenaLink.js はキーワード記法に
+                 未対応なので URL を直接指定。 -->
+            <menuitem label="{{How to Create SiteConfig}}"
+                      observes="hatenabar-cmd-open-link"
+                      hatena:link="http://d.hatena.ne.jp/keyword/%A4%CF%A4%C6%A4%CA%A5%B9%A5%BF%A1%BCSiteConfig%BA%EE%C0%AE%CA%FD%CB%A1"/>
+            <!--
+            <menuitem label="{{Edit SiteConfig for www.example.org…}}"/>
+            <menuitem label="{{Edit SiteConfig for *.example.org…}}"/>
+            -->
+            <menuseparator/>
+            <menuitem label="{{Reload SiteConfig}}"
+                      oncommand="hatenabar.Star.loadSiteConfig();"/>
+        </menupopup>
+    </popupset>
+
     <toolbarpalette id="BrowserToolbarPalette">
     </toolbarpalette>
 
@@ -517,8 +538,16 @@
 
     <statusbar id="status-bar">
         <statusbarpanel id="hatenabar-star-status"
-                        class="statusbarpanel-iconic-text"
-                        src="http://www.hatena.ne.jp/favicon.ico"/>
+                        class="statusbarpanel-menu-iconic"
+                        src="http://www.hatena.ne.jp/favicon.ico"
+                        context="hatenabar-star-context">
+            <menupopup observes="hatenabar-link-popup-base">
+                <menuitem label="{{About Hatena Star}}"
+                          observes="hatenabar-cmd-open-link"
+                          hatena:link="s:guide"/>
+                <!-- カラースターショップへのリンクもつける? -->
+            </menupopup>
+        </statusbarpanel>
         <statusbarpanel id="hatenabar-bookmark-status"
                         class="statusbarpanel-iconic"
                         src="http://www.hatena.ne.jp/favicon.ico"
@@ -526,9 +555,6 @@
                         onclick="hatenabar.UICommand.addOrViewBookmark(event);"
                         hatena:link="b:entry"/>
     </statusbar>
-
-    <popupset id="mainPopupSet">
-    </popupset>
 
     <!--
     <script type="text/javascript; version=1.8" charset="utf-8">

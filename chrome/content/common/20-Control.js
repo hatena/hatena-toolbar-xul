@@ -34,7 +34,8 @@ var Control = {
             if (menu.disabled || menu.localName !== 'menuitem') continue;
             let link = menu.getAttributeNS(HATENA_NS, 'link');
             if (!link) continue;
-            menu.statusText = HatenaLink.parseToURL(link);
+            menu.statusText =
+                /^https?:/.test(link) ? link : HatenaLink.parseToURL(link);
         }
     },
 

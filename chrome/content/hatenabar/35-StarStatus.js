@@ -6,8 +6,13 @@ var StarStatus = {
     update: function SS_update() {
         let panel = this.panel;
         if (!panel) return;
-        panel.label = new Date().getMilliseconds() + ' ' +
-                      (Star.hasEntries(content.document) ? '\u25cb' : '\u00d7');
+        if (Star.hasEntries(content.document)) {
+            panel.setAttributeNS(HATENA_NS, 'hatena:star', 'true');
+            panel.tooltipText = "{{Hatena Star is available in this page}}";
+        } else {
+            panel.removeAttributeNS(HATENA_NS, 'star');
+            panel.tooltipText = "{{Hatena Star is not available in this page}}";
+        }
     },
 };
 
