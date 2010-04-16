@@ -82,9 +82,42 @@ var Toolbar = {
         let group = User.user.prefs.get('group.selected');
         Command.goRefer('g:' + group + ':refer', content.document, event);
     },
+
+    updateCounter: function Tb_updateCounter() {
+        let url = content.location.href;
+        HTTPCache.bookmarked.get(url, method(this, 'onGotBookmarkedCount', url));
+        HTTPCache.referred.get(url, method(this, 'onGotReferredCount', url));
+    },
+
+    onGotBookmarkedCount: function Tb_onGotBookmarkedCount(url, count) {
+        if (content.location.href !== url) return;
+        let button = document.getElementById('hatenabar-view-bookmark-button');
+        if (!button) return;
+        button.sideLabel = count || '';
+    },
+
+    onGotReferredCount: function Tb_onGotReferredCount(url, xml) {
+        if (content.location.href !== url) return;
+        let aButton = document.getElementById('hatenabar-including-antenna-button');
+        if (aButton) {
+            // API 取得に失敗した場合、http URI なら
+            // とりあえず「含むアンテナ」があるものとする。
+            let hasIncludingAntenna = xml
+                                      ? (xml.count.(@name == 'antenna') == '1')
+                                      : /^https?:/.test(url);
+            aButton.disabled = !hasIncludingAntenna;
+        }
+        let dButton = document.getElementById('hatenabar-referring-diary-button');
+        if (dButton) {
+            let count = xml ? +xml.count.(@name == 'diary') : 0;
+            dButton.sideLabel = count || '';
+        }
+    },
 };
 
 EventService.bless(Toolbar);
+
+Browser.createListener('LocationChanged', method(Toolbar, 'updateCounter'));
 
 doOnLoad(function () {
     let dispatchCustomizeDone = method(Toolbar, 'dispatch', 'CustomizeDone');

@@ -483,11 +483,11 @@
                            tooltiptext="{{Add to Antenna}}"
                            command="hatenabar-cmd-open-related-user-link"
                            hatena:link="a:append"/>
-            <toolbarbutton id="hatenabar-show-bookmark-button"
+            <toolbarbutton id="hatenabar-view-bookmark-button"
                            class="toolbarbutton-1 chromeclass-toolbar-additional"
                            image="http://www.hatena.ne.jp/favicon.ico"
-                           label="{{Show Bookmark Entry}}"
-                           tooltiptext="{{Show Bookmark Entry}}"
+                           label="{{View Bookmark Entry}}"
+                           tooltiptext="{{View Bookmark Entry}}"
                            command="hatenabar-cmd-open-related-link"
                            hatena:link="b:entry"/>
             <toolbarbutton id="hatenabar-add-bookmark-button"
@@ -496,7 +496,7 @@
                            label="{{Add to Bookmark}}"
                            tooltiptext="{{Add to Bookmark}}"
                            command="hatenabar-cmd-add-bookmark"/>
-            <!-- The command of this button is same as show-bookmark-button. -->
+            <!-- The command of this button is same as view-bookmark-button. -->
             <toolbarbutton id="hatenabar-referring-diary-button"
                            class="toolbarbutton-1 chromeclass-toolbar-additional"
                            image="http://www.hatena.ne.jp/favicon.ico"
