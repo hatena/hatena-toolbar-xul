@@ -207,6 +207,24 @@ function makeURIQuery(data) {
     return pairs.join('&').replace(/%20/g, '+');
 }
 
+function parseURIQuery(query) {
+    query = query.replace(/\+/g, '%20');
+    return query.split(/[&;]/).reduce(function (data, field) {
+        let [name, value] = field.split('=').map(tryDecode);
+        data[name] = (data.hasOwnProperty(name))
+                     ? [].concat(data[name], value) : value;
+        return data;
+    }, {});
+
+    function tryDecode(string) {
+        try {
+            return decodeURIComponent(string);
+        } catch (ex) {
+            return string;
+        }
+    }
+}
+
 var createElementBindDocument = function(doc, ns) {
     return function(name, attr) {
         var children = Array.slice(arguments, 2);

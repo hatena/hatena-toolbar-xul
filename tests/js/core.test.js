@@ -89,6 +89,14 @@ function testMakeURIQuery() {
     assert.equals('', makeURIQuery(null));
 }
 
+function testParseURIQuery() {
+    assert.equals({ foo: '42' }, parseURIQuery('foo=42'));
+    assert.equals({ foo: 'bar', baz: [42, 23] },
+                  parseURIQuery('foo=bar&baz=42&baz=23'));
+    assert.equals({ '日本語': '空 白' },
+                  parseURIQuery('%E6%97%A5%E6%9C%AC%E8%AA%9E=%E7%A9%BA+%E7%99%BD'));
+}
+
 function testBindMethod() {
     let f = function(arg) {
         return this.foo + arg;
