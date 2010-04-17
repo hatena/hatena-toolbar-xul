@@ -55,8 +55,18 @@ var AccountCommand = {
                              .QueryInterface(Ci.nsIHttpChannel);
             if (channel.requestMethod !== 'GET') return;
             let nameField = doc.getElementById('login-name');
-            if (nameField && !nameField.value)
+            if (nameField) {
                 nameField.value = name;
+                let passwordField =
+                    nameField.form &&
+                    nameField.form.elements.namedItem('password');
+                if (passwordField) {
+                    passwordField.value = '';
+                    passwordField.focus();
+                    // ユーザー名欄にフォーカスが移るのを防ぐ。
+                    doc.body.setAttribute('onload', '');
+                }
+            }
             dispose();
         }
         function dispose() {
