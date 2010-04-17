@@ -5,6 +5,20 @@ var AccountStatus = {
     get label AS_get_label() byId('hatenabar-account-status-label'),
     get popup AS_get_popup() byId('hatenabar-account-status-popup'),
 
+    updatePanel: function AS_updatePanel(mode) {
+        let panel = this.panel;
+        let label = this.label;
+        if (!panel || !label) return;
+        if (!mode && Account.user)
+            mode = 'in-session';
+        if (mode)
+            panel.setAttributeNS(HATENA_NS, 'hatena:login', mode);
+        else
+            panel.removeAttributeNS(HATENA_NS, 'login');
+        label.value = (mode === 'in-session') ? Account.user.name :
+                      (mode === 'in-progress') ? '{{Trying Login...}}' : '';
+    },
+
     updatePopup: function AS_updatePopup(event) {
         let popup = event.currentTarget;
 
@@ -42,11 +56,7 @@ var AccountStatus = {
         let panel = this.panel;
         let label = this.label;
         if (!panel || !label) return;
-        if (Account.user) {
-            label.value = Account.user.name;
-        } else {
-            label.value = '';
-        }
+        this.updatePanel(null);
     },
 
     onLoginAction: function AS_onLoginAction(listener, action) {
@@ -55,33 +65,13 @@ var AccountStatus = {
         if (!panel || !label) return;
         switch (action) {
         case Account.LOGIN_BEGIN:
-            label.value = '{{Logging-in...}}';
+            this.updatePanel('in-progress');
             break;
         case Account.LOGIN_SUCCESS:
             // Nothing to do.
             break;
-        case Account.LOGIN_IGNORED:
-            // XXX label.value ではなく属性値で判断する。
-            if (label.value === '{{Logging-in...}}')
-                label.value = '';
-            // XXX Should we do something here?
-            break;
-        case Account.LOGIN_NO_PASSWORD:
-            if (label.value === '{{Logging-in...}}')
-                label.value = '';
-            // XXX ログイン画面を新しいブラウザタブに開く。
-            break;
-        case Account.LOGIN_COOKIE_REJECTED:
-            if (label.value === '{{Logging-in...}}')
-                label.value = '';
-            // XXX サードパーティ製のクッキーがオフのときは
-            // 新しくブラウザタブを開いてそこで読み込む。
-            break;
-        case Account.LOGIN_NETWORK_ERROR:
-            if (label.value === '{{Logging-in...}}')
-                label.value = '';
-            // XXX What should I do here?
-            break;
+        default:
+            this.updatePanel(null);
         }
     },
 };
