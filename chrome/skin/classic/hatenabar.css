@@ -4,6 +4,16 @@
     list-style-image: url("chrome://hatenabar/skin/icons.png") !important;
 }
 
+#hatenabar-toolbar .hatenabar-toolbarbutton[type="menu-button"] > .toolbarbutton-menubutton-button {
+    margin: 0px;
+    padding: 4px;
+    -moz-padding-end: 0px;
+}
+#hatenabar-toolbar .hatenabar-toolbarbutton:not([type="menu-button"]) {
+    margin: 0px;
+    padding: 4px;
+}
+
 #hatenabar-main-button {
     -moz-image-region: rect(0px, 16px, 16px, 0px);
 }
