@@ -8,7 +8,7 @@ const LoginManager = getService('@mozilla.org/login-manager;1',
 
 const LOGIN_HOST = 'www.hatena.ne.jp';
 const LOGIN_ORIGIN = 'https://' + LOGIN_HOST;
-const LOGIN_HTTP_ORIGIN = 'http://' + LOGIN_HOST;
+const LOGIN_URL = LOGIN_ORIGIN + '/login';
 const LOGIN_PATH_PATTERN = /^\/login\b/;
 const LOGIN_COOKIE_HOST = '.hatena.ne.jp';
 const LOGIN_CHECK_URL = 'http://b.hatena.ne.jp/my.name';
@@ -36,7 +36,34 @@ var Account = {
     },
 
     login: function Account_login(name) {
-        p(arguments.callee.name + ' is not yet implemented.');
+        let password = this.getPassword(name);
+        if (password === null) {
+            p('No password.  Cannot login.');
+            // XXX ログイン画面を新しいブラウザタブに開く。
+            return;
+        }
+        http.postWithRetry({
+            url: LOGIN_URL,
+            // XXX ログイン状態を保持するか、セッションにとどめるか。
+            query: { name: name, password: password },
+        }, bind(onLoginLoad, this), bind(onLoginError));
+
+        function onLoginLoad(res) {
+            p(arguments.callee.name + ' is not yet implemented.');
+            // XXX サードパーティ製のクッキーがオフのときは
+            // 新しくブラウザタブを開いてそこで読み込む。
+        }
+        function onLoginError(res) {
+            p(arguments.callee.name + ' is not yet implemented.');
+        }
+    },
+
+    getPassword: function Account_getPassword(name) {
+        let logins = LoginManager.findLogins({}, LOGIN_ORIGIN, '', null);
+        for (let i = 0; i < logins.length; i++)
+            if (logins[i].username === name)
+                return logins[i].password;
+        return null;
     },
 
     checkLogin: function Account_checkLogin(rk) {

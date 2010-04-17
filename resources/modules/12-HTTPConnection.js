@@ -81,6 +81,7 @@ extend(HTTPConnection.prototype, {
         this.retryCount--;
         this.dispose();
         this.timer = new Timer(500, 1);
+        this.timer.start();
         this.timerListener =
             this.timer.createListener('timer', method(this, 'delayedRetry'));
         return true;
@@ -104,6 +105,7 @@ extend(HTTPConnection.prototype, {
 
     setTimer: function HTTP_setTimer() {
         this.timer = new Timer(this.timeout * 1000, 1);
+        this.timer.start();
         this.timerListener =
             this.timer.createListener('timer', method(this, 'onTimer'));
     },
@@ -200,8 +202,11 @@ extend(Response.prototype, {
             }
         }
         return this._xml;
-    }
-    // XXX Needs methods or properties to access response headers.
+    },
+
+    getHeader: function Res_getHeader(name) {
+        return this.request.getResponseHeader(name);
+    },
 });
 
 
@@ -236,7 +241,10 @@ var http = {
             retryCount: retryCount, onLoad: onLoad, onError: onError,
         }, options);
 
-        if ((typeof options.autoRk === 'undefined' || options.autoRk) &&
+        // 「サードパーティのクッキーも保存する」が無効になっていても
+        // API が利用できるよう、自力でクッキーを設定してやる。
+        if (Prefs.global.get('network.cookie.cookieBehavior') !== 0 &&
+            (typeof options.autoRk === 'undefined' || options.autoRk) &&
             this._autoRkURLPattern.test(url) &&
             User.user) {
             let headers = options.headers || (options.headers = {});
