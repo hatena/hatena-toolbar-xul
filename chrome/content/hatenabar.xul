@@ -540,11 +540,14 @@
         <statusbarpanel id="hatenabar-account-status"
                         class="statusbarpanel-menu-iconic"
                         label="{{Account}}"
-                        src="http://www.hatena.ne.jp/favicon.ico">
+                        src="http://www.hatena.ne.jp/favicon.ico"
+                        onclick="hatenabar.AccountStatus.onPanelClick(event);">
             <label id="hatenabar-account-status-label"
                    class="statusbarpanel-text"
                    value="{{Account Label}}"/>
-            <menupopup>
+            <menupopup id="hatenabar-account-status-popup"
+                       observes="hatenabar-popup-base"
+                       onpopupshowing="hatenabar.AccountStatus.updatePopup(event);">
                 <menuitem label="{{Clear User History}}"
                           observes="hatenabar-cmd-clear-user-history"/>
                 <menuseparator/>

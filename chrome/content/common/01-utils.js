@@ -15,11 +15,9 @@ function method(self, methodName) {
     return function () self[methodName].apply(self, args.concat(Array.slice(arguments)));
 }
 
-function favicon(uri) {
-    if (typeof uri === "string")
-        uri = IOService.newURI(uri, null, null);
-    return FaviconService.getFaviconImageForPage(uri).spec;
-}
+function byId(id) document.getElementById(id);
+function byClass(className, context)
+    (context || document).getElementsByClassName(className);
 
 function doOnLoad(f) window.addEventListener('load', f, false);
 function doOnUnload(f) window.addEventListener('unload', f, false);
