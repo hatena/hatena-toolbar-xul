@@ -6,8 +6,11 @@ var AccountCommand = {
     },
 
     goLogin: function AC_goLogin(event) {
-        let name = UICommand.getTarget(event).value;
-        if (!name) return;
+        let name = UICommand.getTarget(event).value || null;
+        if (!name) {
+            this.loginInBrowser(null, event);
+            return;
+        }
         Account.createListener('LoginAction', bind(onAction, this));
         Account.login(name);
         function onAction(listener, action, name, password) {
@@ -38,12 +41,21 @@ var AccountCommand = {
         if (isHatenaURL(location))
             url += '?location=' + encodeURIComponent(location);
         openUILink(url, event);
-        gBrowser.addEventListener('DOMContentLoaded', onContentLoaded, false);
+        if (!name) return;
+        // openUILink ではどこのタブにページが読み込まれるか
+        // わからないので、gBrowser にイベントリスナを設定する。
+        gBrowser.addEventListener('DOMContentLoaded', tryFillName, false);
+        // openUILink で新しいウィンドウが開かれた場合や
+        // サーバが応答を返さない場合など、30 秒待っても
+        // ログインページの読み込みを検知できなければ
+        // イベントリスナを削除する。
         let timer = new Timer(30 * 1000, 1);
         timer.createListener('timer', dispose);
         timer.start();
 
-        function onContentLoaded(event) {
+        // 名前を指定してのログインだったら、ログインページ
+        // 読み込み時にユーザー名欄にその名前を記入してやる。
+        function tryFillName(event) {
             let doc = event.originalTarget;
             let win = doc.defaultView;
             if (!win || win.frameElement || win.location.href !== url)
@@ -56,12 +68,17 @@ var AccountCommand = {
             if (channel.requestMethod !== 'GET') return;
             let nameField = doc.getElementById('login-name');
             if (nameField) {
+                // すでにユーザー名が記入されているなら、
+                // パスワードも記入されているかもしれないので、
+                // パスワード欄の値は変更しない。
+                let maybePasswordFilled = (nameField.value === name);
                 nameField.value = name;
                 let passwordField =
                     nameField.form &&
                     nameField.form.elements.namedItem('password');
                 if (passwordField) {
-                    passwordField.value = '';
+                    if (!maybePasswordFilled)
+                        passwordField.value = '';
                     passwordField.focus();
                     // ユーザー名欄にフォーカスが移るのを防ぐ。
                     doc.body.setAttribute('onload', '');
@@ -71,7 +88,7 @@ var AccountCommand = {
         }
         function dispose() {
             timer.dispose();
-            gBrowser.removeEventListener('DOMContentLoaded', onContentLoaded, false);
+            gBrowser.removeEventListener('DOMContentLoaded', tryFillName, false);
         }
     },
 

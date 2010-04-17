@@ -530,6 +530,9 @@
                 <menuitem label="{{Logout}}"
                           observes="hatenabar-cmd-go-logout"/>
                 <menuseparator/>
+                <menuitem id="hatenabar-account-status-login-menu"
+                          label="{{Login}}"
+                          observes="hatenabar-cmd-go-login"/>
             </menupopup>
         </statusbarpanel>
         <statusbarpanel id="hatenabar-star-status"

@@ -34,8 +34,8 @@ var AccountStatus = {
     updatePopup: function AS_updatePopup(event) {
         let popup = event.currentTarget;
 
-        let loginMenus = byClass('hatenabar-login-menuitem', popup)
-        Array.slice(loginMenus).forEach(function (menu) {
+        let userLoginMenus = byClass('hatenabar-login-menuitem', popup)
+        Array.slice(userLoginMenus).forEach(function (menu) {
             menu.parentNode.removeChild(menu);
         });
 
@@ -46,8 +46,6 @@ var AccountStatus = {
         AccountCommand.update();
 
         let names = Account.getUserNames();
-        let separator = popup.lastChild;
-        separator.collapsed = !names.length;
         names.forEach(function (name) {
             let menu = document.createElementNS(XUL_NS, 'menuitem');
             menu.setAttribute('class', 'hatenabar-login-menuitem');
@@ -57,6 +55,8 @@ var AccountStatus = {
             menu.setAttribute('value', name);
             popup.appendChild(menu);
         });
+        let loginMenu = byId('hatenabar-account-status-login-menu');
+        loginMenu.collapsed = !!names.length;
     },
 
     onPanelClick: function AS_onPanelClick(event) {
