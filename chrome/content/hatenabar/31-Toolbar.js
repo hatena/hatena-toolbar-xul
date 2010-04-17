@@ -9,7 +9,7 @@ var Toolbar = {
             let mode = UICommand.getTarget(event).value || '';
             if (this.antennaModes.indexOf(mode) === -1)
                 mode = User.user.prefs.get('antenna.selected', 'antenna');
-            link += 'id:$' + ((mode === 'antenna') ? '' : ':' + mode);
+            link += 'id:?' + ((mode === 'antenna') ? '' : ':' + mode);
             User.user.prefs.set('antenna.selected', mode);
         }
         Command.openUILink(link, event);
@@ -36,10 +36,10 @@ var Toolbar = {
             let group = UICommand.getTarget(event).value ||
                         User.user.prefs.get('group.selected', '');
             if (group) {
-                link += group + ':id:$';
+                link += group + ':id:?';
                 User.user.prefs.set('group.selected', group);
             } else {
-                link += 'id:$:group';
+                link += 'id:?:group';
             }
         }
         Command.openUILink(link, event);
@@ -64,7 +64,7 @@ var Toolbar = {
                 menuitem.setAttribute('observes', 'hatenabar-cmd-open-group');
                 menuitem.setAttribute('value', group);
                 menuitem.setAttributeNS(HATENA_NS, 'hatena:link',
-                                        'g:' + group + ':id:$');
+                                        'g:' + group + ':id:?');
                 popup.insertBefore(menuitem, separator);
             });
             separator.collapsed = false;

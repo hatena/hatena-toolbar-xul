@@ -5,14 +5,8 @@ function testParse() {
     let o;
     o = HatenaLink.parse('d:id:sample:20100401');
     assert.equals('http://d.hatena.ne.jp/sample/20100401', o.url);
-    o = HatenaLink.parse('d:id:$:20100401', { user: 'sample' });
+    o = HatenaLink.parse('d:id:?:20100401', { user: 'sample' });
     assert.equals('http://d.hatena.ne.jp/sample/20100401', o.url);
-}
-
-function testIsUserRequired() {
-    assert.isTrue(HatenaLink.isUserRequired('b:id:$'));
-    assert.isTrue(HatenaLink.isUserRequired('www:my'));
-    assert.isFalse(HatenaLink.isUserRequired('www:'));
 }
 
 function testAntennaLink() {

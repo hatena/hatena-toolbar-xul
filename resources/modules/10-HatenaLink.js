@@ -21,18 +21,13 @@ var HatenaLink = {
     parseToURL: function HL_parseToURL(link, context) {
         return this.parse(link, context).url;
     },
-
-    isUserRequired: function HL_isUserRequired(link) {
-        if (link === 'www:my') return true;
-        return link.indexOf('$') !== -1;
-    },
 };
 
 function hatenaURL(link, context) {
     // XXX 日本語文字などを URI エスケープする必要あり。
     // 基本的には UTF-8 でエスケープするが、diary と keyword だけは EUC-JP。
     return link.replace(/\bid:([^:]+)/, function (match, user, index) {
-        let userPart = (user === '$')
+        let userPart = (user === '?')
                        ? (context.user || (User.user ? User.user.name : ''))
                        : user;
         // d:id:sample が http://d.hatena.ne.jp/sample/ になる

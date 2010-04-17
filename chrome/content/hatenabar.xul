@@ -164,7 +164,7 @@
                               label="{{Antenna}}"
                               observes="hatenabar-cmd-open-antenna"
                               value="antenna"
-                              hatena:link="a:id:$">
+                              hatena:link="a:id:?">
                         <observes element="hatenabar-has-user"
                                   attribute="disabled"/>
                     </menuitem>
@@ -173,7 +173,7 @@
                               label="{{Simple}}"
                               observes="hatenabar-cmd-open-antenna"
                               value="simple"
-                              hatena:link="a:id:$:simple">
+                              hatena:link="a:id:?:simple">
                         <observes element="hatenabar-has-user"
                                   attribute="disabled"/>
                     </menuitem>
@@ -182,17 +182,17 @@
                               label="{{Detail}}"
                               observes="hatenabar-cmd-open-antenna"
                               value="detail"
-                              hatena:link="a:id:$:detail">
+                              hatena:link="a:id:?:detail">
                         <observes element="hatenabar-has-user"
                                   attribute="disabled"/>
                     </menuitem>
                     <menuseparator/>
                     <menuitem label="{{Check List}}"
                               observes="hatenabar-cmd-open-user-link"
-                              hatena:link="a:id:$:checklist"/>
+                              hatena:link="a:id:?:checklist"/>
                     <menuitem label="{{Config}}"
                               observes="hatenabar-cmd-open-user-link"
-                              hatena:link="a:id:$:config"/>
+                              hatena:link="a:id:?:config"/>
                     <menuseparator/>
                     <menuitem label="{{Top}}"
                               observes="hatenabar-cmd-open-link"
@@ -210,14 +210,14 @@
                 <menupopup observes="hatenabar-link-popup-base">
                     <menuitem label="{{Details}}"
                               observes="hatenabar-cmd-open-user-link"
-                              hatena:link="b:id:$:detail"/>
+                              hatena:link="b:id:?:detail"/>
                     <menuitem label="{{Favorites}}"
                               observes="hatenabar-cmd-open-user-link"
-                              hatena:link="b:id:$:favorite"/>
+                              hatena:link="b:id:?:favorite"/>
                     <menuseparator/>
                     <menuitem label="{{Config}}"
                               observes="hatenabar-cmd-open-user-link"
-                              hatena:link="b:id:$:config"/>
+                              hatena:link="b:id:?:config"/>
                     <menuseparator/>
                     <menuitem label="{{Top}}"
                               observes="hatenabar-cmd-open-link"
@@ -235,10 +235,10 @@
                 <menupopup observes="hatenabar-link-popup-base">
                     <menuitem label="{{Edit Diary}}"
                               observes="hatenabar-cmd-open-user-link"
-                              hatena:link="d:id:$:edit"/>
+                              hatena:link="d:id:?:edit"/>
                     <menuitem label="{{Manage Diary}}"
                               observes="hatenabar-cmd-open-user-link"
-                              hatena:link="d:id:$:admin"/>
+                              hatena:link="d:id:?:admin"/>
                     <menuseparator/>
                     <menuitem label="{{Top}}"
                               observes="hatenabar-cmd-open-link"
@@ -256,16 +256,16 @@
                 <menupopup observes="hatenabar-link-popup-base">
                     <menuitem label="{{Upload}}"
                               observes="hatenabar-cmd-open-user-link"
-                              hatena:link="f:id:$:up"/>
+                              hatena:link="f:id:?:up"/>
                     <menuitem label="{{Favorite}}"
                               observes="hatenabar-cmd-open-user-link"
-                              hatena:link="f:id:$:favorite"/>
+                              hatena:link="f:id:?:favorite"/>
                     <menuitem label="{{Edit}}"
                               observes="hatenabar-cmd-open-user-link"
-                              hatena:link="f:id:$:edit"/>
+                              hatena:link="f:id:?:edit"/>
                     <menuitem label="{{Config}}"
                               observes="hatenabar-cmd-open-user-link"
-                              hatena:link="f:id:$:config"/>
+                              hatena:link="f:id:?:config"/>
                     <menuseparator/>
                     <menuitem label="{{Top}}"
                               observes="hatenabar-cmd-open-link"
@@ -284,7 +284,7 @@
                     <menuseparator/>
                     <menuitem label="{{List}}"
                               observes="hatenabar-cmd-open-user-link"
-                              hatena:link="g:id:$:group"/>
+                              hatena:link="g:id:?:group"/>
                     <menuseparator/>
                     <menuitem label="{{Top}}"
                               observes="hatenabar-cmd-open-link"
@@ -298,11 +298,11 @@
                            label="{{Hatena Haiku}}"
                            tooltiptext="{{Hatena Haiku}}"
                            command="hatenabar-cmd-open-top-or-user-link"
-                           hatena:link="h:id:$:following">
+                           hatena:link="h:id:?:following">
                 <menupopup observes="hatenabar-link-popup-base">
                     <menuitem label="{{Entries}}"
                               observes="hatenabar-cmd-open-user-link"
-                              hatena:link="h:id:$"/>
+                              hatena:link="h:id:?"/>
                     <menuseparator/>
                     <menuitem label="{{Hot Keywords}}"
                               observes="hatenabar-cmd-open-link"
@@ -341,13 +341,13 @@
                 <menupopup observes="hatenabar-link-popup-base">
                     <menuitem label="{{Favorites}}"
                               observes="hatenabar-cmd-open-user-link"
-                              hatena:link="k:id:$:favorite"/>
+                              hatena:link="k:id:?:favorite"/>
                     <menuitem label="{{Modifications}}"
                               observes="hatenabar-cmd-open-user-link"
-                              hatena:link="k:id:$:modified"/>
+                              hatena:link="k:id:?:modified"/>
                     <menuitem label="{{History}}"
                               observes="hatenabar-cmd-open-user-link"
-                              hatena:link="k:id:$:visited"/>
+                              hatena:link="k:id:?:visited"/>
                     <menuseparator/>
                     <menuitem label="{{Top}}"
                               observes="hatenabar-cmd-open-link"
@@ -393,13 +393,13 @@
                 <menupopup observes="hatenabar-link-popup-base">
                     <menuitem label="{{Reports}}"
                               observes="hatenabar-cmd-open-user-link"
-                              hatena:link="s:id:$:report"/>
+                              hatena:link="s:id:?:report"/>
                     <menuitem label="{{Stars}}"
                               observes="hatenabar-cmd-open-user-link"
-                              hatena:link="s:id:$:stars"/>
+                              hatena:link="s:id:?:stars"/>
                     <menuitem label="{{Blogs}}"
                               observes="hatenabar-cmd-open-user-link"
-                              hatena:link="s:id:$:blogs"/>
+                              hatena:link="s:id:?:blogs"/>
                     <menuseparator/>
                     <menuitem label="{{Top}}"
                               observes="hatenabar-cmd-open-link"
@@ -413,17 +413,17 @@
                            label="{{Ugomemo Hatena}}"
                            tooltiptext="{{Ugomemo Hatena}}"
                            command="hatenabar-cmd-open-top-or-user-link"
-                           hatena:link="ugomemo:id:$:following">
+                           hatena:link="ugomemo:id:?:following">
                 <menupopup observes="hatenabar-link-popup-base">
                     <!-- Favorites のリンク先が /favorites でなく、
                          Stars のリンク先が /favorites なのは意図的
                          (旧はてなツールバーがそうなっていた)。 -->
                     <menuitem label="{{Favorites}}"
                               observes="hatenabar-cmd-open-user-link"
-                              hatena:link="ugomemo:id:$:following"/>
+                              hatena:link="ugomemo:id:?:following"/>
                     <menuitem label="{{Stars}}"
                               observes="hatenabar-cmd-open-user-link"
-                              hatena:link="ugomemo:id:$:favorites"/>
+                              hatena:link="ugomemo:id:?:favorites"/>
                     <menuseparator/>
                     <menuitem label="{{Hot Movies}}"
                               observes="hatenabar-cmd-open-link"
@@ -454,7 +454,7 @@
                 <menupopup observes="hatenabar-link-popup-base">
                     <menuitem label="{{Config}}"
                               observes="hatenabar-cmd-open-user-link"
-                              hatena:link="counter:id:$:edit"/>
+                              hatena:link="counter:id:?:edit"/>
                     <menuseparator/>
                     <menuitem label="{{Top}}"
                               observes="hatenabar-cmd-open-link"
@@ -472,7 +472,7 @@
                 <menupopup observes="hatenabar-link-popup-base">
                     <menuitem label="{{Edit}}"
                               observes="hatenabar-cmd-open-user-link"
-                              hatena:link="graph:id:$:edit"/>
+                              hatena:link="graph:id:?:edit"/>
                     <menuseparator/>
                     <menuitem label="{{Top}}"
                               observes="hatenabar-cmd-open-link"
