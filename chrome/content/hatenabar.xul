@@ -1,5 +1,6 @@
 <?xml version="1.0" ?>
 <?xml-stylesheet type="text/css" href="chrome://hatenabar/content/widgets.css"?>
+<?xml-stylesheet type="text/css" href="chrome://hatenabar/skin/widgets.css"?>
 <?xml-stylesheet type="text/css" href="chrome://hatenabar/skin/hatenabar.css"?>
 <overlay id="hatenabar-overlay"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"

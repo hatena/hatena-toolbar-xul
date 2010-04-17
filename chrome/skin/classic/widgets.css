@@ -1,0 +1,11 @@
+
+toolbarbutton[sidelabel] > .toolbarbutton-icon > .toolbarbutton-icon {
+    margin: 0;
+}
+toolbarbutton[sidelabel] > .toolbarbutton-icon > .toolbarbutton-sidetext {
+    margin: 0;
+    -moz-margin-start: 3px;
+}
+toolbarbutton[sidelabel=""] > .toolbarbutton-icon > .toolbarbutton-sidetext {
+    visibility: collapse;
+}
