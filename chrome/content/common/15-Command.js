@@ -5,6 +5,8 @@ var Command = {
         this.openUILinkWith(link, null, event);
     },
 
+    // ここで UI Link とは、はてなのヘルプページへのリンクのような、
+    // 現在見ているページとは無関係のページへのものをさす。
     openUILinkWith: function Cmd_openUILinkWith(link, context, event) {
         if (!/^https?:/.test(link))
             link = HatenaLink.parseToURL(link, context);
@@ -15,11 +17,28 @@ var Command = {
         this.openContentLinkWith(link, null, event);
     },
 
+    // ここで Content Link とは、現在見ているページのブックマーク
+    // エントリーページへのリンクのような、現在見ているページと
+    // 関係のあるページへのものをさす。
     openContentLinkWith: function Cmd_openContentLinkWith(link, context, event) {
         if (!/^https?:/.test(link))
             link = HatenaLink.parseToURL(link, context);
-        // XXX タブの親子関係を設定するなどの必要あり。
-        openUILink(link, event); 
+        let where = whereToOpenLink(event);
+        // タブを開かなければ UI Link も Content Link も挙動は同じ。
+        if (where === 'current' || where === 'window' || where === 'save') {
+            openUILinkIn(link, where);
+            return;
+        }
+        // タブを開く場合、openUILink() を使うと、
+        // browser.tabs.loadBookmarksInBackground の値を元に
+        // フォーカスの有無が決められてしまう。Content Link に
+        // 関しては browser.tabs.loadInBackground の値を元に
+        // フォーカスの有無を決めたいので、openUILinkIn() は使わない。
+        let inBackground =
+            Prefs.global.get('browser.tabs.loadInBackground', false);
+        if (where === 'tabshifted')
+            inBackground = !inBackground;
+        getTopWin().gBrowser.loadOneTab(link, null, null, null, inBackground);
     },
 
     openPreferences: function Cmd_openPreferences() {
@@ -28,19 +47,16 @@ var Command = {
 
     goSearch: function Cmd_goSearch(query, event) {
         let link = HatenaLink.parseToURL('b:search', { query: query })
+        let where = whereToOpenLink(event);
         if (event instanceof Ci.nsIDOMKeyEvent) {
-            let newEvent = { shiftKey: false, ctrlKey: false,
-                             metaKey: false, altKey: false, button: 0 };
-            // Alt + Enter で検索したときは常に新しいタブを開き、
-            // そこにフォーカス。
-            if (event.altKey) {
-                newEvent.ctrlKey = newEvent.metaKey = true;
-                if (Prefs.global.get('browser.tabs.loadBookmarksInBackground'))
-                    newEvent.shiftKey = true;
-            }
-            event = newEvent;
+            // Alt + Enter で検索したときは
+            // 常に新しいタブを開き、そこにフォーカス。
+            where = event.altKey
+                ? (Prefs.global.get('browser.tabs.loadBookmarksInBackground', false)
+                   ? 'tabshifted' : 'tab')
+                : 'current';
         }
-        openUILink(link, event);
+        openUILinkIn(link, where);
     },
 
     clearSearchHistory: function Cmd_clearSearchHistory() {
