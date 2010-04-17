@@ -83,10 +83,13 @@ var AccountCommand = {
 
     goLogout: function AC_goLogout(event) {
         Account.logout();
+        this.tryReload();
     },
 
     tryReload: function AC_tryReload() {
-        p(arguments.callee.name + ' is not yet implemented.');
+        // XXX Prefs によっては無効化。
+        if (isHatenaURL(content.location.href))
+            content.location.reload();
     },
 
     update: function AC_update() {

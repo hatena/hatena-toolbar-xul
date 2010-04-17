@@ -543,8 +543,7 @@
                         src="http://www.hatena.ne.jp/favicon.ico"
                         onclick="hatenabar.AccountStatus.onPanelClick(event);">
             <label id="hatenabar-account-status-label"
-                   class="statusbarpanel-text"
-                   value="{{Account Label}}"/>
+                   class="statusbarpanel-text"/>
             <menupopup id="hatenabar-account-status-popup"
                        observes="hatenabar-popup-base"
                        onpopupshowing="hatenabar.AccountStatus.updatePopup(event);">

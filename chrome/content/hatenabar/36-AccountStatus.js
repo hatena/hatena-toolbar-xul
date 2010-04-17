@@ -42,8 +42,8 @@ var AccountStatus = {
         let panel = this.panel;
         let label = this.label;
         if (!panel || !label) return;
-        if (User.user) {
-            label.value = User.user.name;
+        if (Account.user) {
+            label.value = Account.user.name;
         } else {
             label.value = '';
         }
@@ -88,3 +88,4 @@ var AccountStatus = {
 
 Account.createListener('UserChanged', method(AccountStatus, 'onUserChanged'));
 Account.createListener('LoginAction', method(AccountStatus, 'onLoginAction'));
+doOnLoad(method(AccountStatus, 'onUserChanged'));
