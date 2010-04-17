@@ -30,35 +30,50 @@ var Account = {
         this.setUser(null);
     },
 
+    user: null,
+
     get nameCache Account_get_nameCache() {
         delete this.nameCache;
         return this.nameCache = new ExpireCache('Account.nameCache', 3 * 60);
     },
 
+    LOGIN_BEGIN: 1,
+    LOGIN_SUCEESS: 2,
+    LOGIN_IGNORED: 3,
+    LOGIN_NO_PASSWORD: 4,
+    LOGIN_COOKIE_REJECTED: 5,
+    LOGIN_NETWORK_ERROR: 6,
+
     login: function Account_login(name) {
         this.logout();
+        this.dispatch('LoginAction', this.LOGIN_BEGIN);
         let password = this.getPassword(name);
         if (password === null) {
-            p('No password.  Cannot login.');
-            // XXX ログイン画面を新しいブラウザタブに開く。
-            //this.dispatch(...);
+            this.dispatch('LoginAction', this.LOGIN_NO_PASSWORD);
             return;
         }
+        // XXX サードパーティのクッキーが有効かここでチェックしておく。
         http.postWithRetry({
             url: LOGIN_URL,
             // XXX ログイン状態を保持するか、セッションにとどめるか。
             query: { name: name, password: password },
-        }, bind(onLoginLoad, this), bind(onLoginError));
+        }, bind(onLoginLoad, this), bind(onLoginError, this));
 
         function onLoginLoad(res) {
-            p(arguments.callee.name + ' is not yet implemented.');
-            // XXX サードパーティ製のクッキーがオフのときは
-            // 新しくブラウザタブを開いてそこで読み込む。
-            //this.dispatch(<res has Set-Cookie header> ? ... : ...);
+            if (!res.ok) {
+                this.onLoginError(res);
+                return;
+            }
+            let cookies = (res.getHeader('Set-Cookie') || '').split('\n');
+            let hasRk = cookies.some(function (c) /^rk=\w/.test(c));
+            let action = hasRk
+                         ? (this.user ? this.LOGIN_SUCEESS
+                                      : this.LOGIN_COOKIE_REJECTED)
+                         : this.LOGIN_IGNORED;
+            this.dispatch('LoginAction', action);
         }
         function onLoginError(res) {
-            p(arguments.callee.name + ' is not yet implemented.');
-            //this.dispatch(...);
+            this.dispatch('LoginAction', this.LOGIN_NETWORK_ERROR);
         }
     },
 
@@ -91,12 +106,12 @@ var Account = {
         // サードパーティ製クッキーの有効無効にかかわらず
         // これでクッキーを消去できる。
         // クッキーの削除は同期的なので、remove() から
-        // 返ってきた時点で User.user が null になっているはず。
+        // 返ってきた時点で Account.user が null になっているはず。
         CookieManager.remove(LOGIN_COOKIE_HOST, 'rk', '/', false);
     },
 
     setUser: function Account_setUser(name, rk) {
-        let prevUser = User.user;
+        let prevUser = this.user;
         if (prevUser) {
             if (prevUser.name === name) {
                 prevUser.rk = rk;
@@ -114,7 +129,9 @@ var Account = {
             try { user.onLogin(rk); }
             catch (ex) { reportError(ex); }
         }
-        User.user = user;
+        this.user = user;
+        this.dispatch('UserChanged', prevUser);
+        // Dispatch to EventService to keep compatibility.
         EventService.dispatch('UserChanged', prevUser);
     },
 
@@ -131,11 +148,13 @@ var Account = {
     },
 
     clearUserNames: function Account_clearUserNames(complete) {
-        let history = (!complete && User.user) ? User.user.name : '';
+        let history = (!complete && this.user) ? this.user.name : '';
         Prefs.hatenabar.set('userHistory', history);
         // XXX Prefs の extensions.hatenabar.users.name.* も消す?
     },
 };
+
+EventService.bless(Account);
 
 Account.CookieObserver = {
     observe: function Acnt_CO_observe(subject, topic, data) {
@@ -158,7 +177,7 @@ Account.CookieObserver = {
             break;
         }
     },
-}
+};
 
 const nsIHttpChannel = Ci.nsIHttpChannel;
 const nsIUploadChannel = Ci.nsIUploadChannel;
@@ -206,8 +225,8 @@ Account.OfflineObserver = {
     observe: function Acnt_OO_observe(subject, topic, data) {
         // オフラインからオンラインに変わったときは、
         // ユーザーのセッションが切れていないか確認。
-        if (data === 'online' && User.user)
-            Account.checkLogin(User.user.rk);
+        if (data === 'online' && Account.user)
+            Account.checkLogin(Account.user.rk);
     },
 };
 

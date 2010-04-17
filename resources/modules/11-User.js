@@ -68,5 +68,5 @@ User.prototype = {
     },
 };
 
-// User.user is set in Account.js
-User.user = null;
+// Keep compatibility with old versions.
+User.__defineGetter__('user', function () Account.user);

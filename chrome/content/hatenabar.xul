@@ -530,6 +530,17 @@
     </toolbox>
 
     <statusbar id="status-bar">
+        <statusbarpanel id="hatenabar-account-status"
+                        class="statusbarpanel-menu-iconic"
+                        label="{{Account}}"
+                        src="http://www.hatena.ne.jp/favicon.ico">
+            <label id="hatenabar-account-status-label"
+                   class="statusbarpanel-text"
+                   value="{{Account Label}}"/>
+            <menupopup>
+                <menuitem label="{{Login}}"/>
+            </menupopup>
+        </statusbarpanel>
         <statusbarpanel id="hatenabar-star-status"
                         class="statusbarpanel-menu-iconic"
                         src="http://www.hatena.ne.jp/favicon.ico"
