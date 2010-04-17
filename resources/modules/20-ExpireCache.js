@@ -205,8 +205,7 @@ HTTPCache.bookmarked.loadHandler = function(ev) {
 
 HTTPCache.referred = new HTTPCache('ReferredCountCache', {
     expire: 60 * 13,
-    // XXX 直書きをやめる。
-    baseURL: 'http://d.hatena.ne.jp/exist?mode=xml&url=',
+    baseURL: HatenaLink.parseToURL('d:exist') + '?mode=xml&url=',
     serializer: 'xml',
     xml: true,
     encoder: escapeIRI,

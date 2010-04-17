@@ -155,9 +155,12 @@ var Account = {
     },
 
     clearUserNames: function Account_clearUserNames(complete) {
-        let history = (!complete && this.user) ? this.user.name : '';
-        Prefs.hatenabar.set('userHistory', history);
-        // XXX Prefs の extensions.hatenabar.users.name.* も消す?
+        let keptName = (!complete && this.user) ? this.user.name : '';
+        this.getUserNames().forEach(function (name) {
+            if (name === keptName) return;
+            Prefs.hatenabar.getChildPrefs('users.' + name).clearAll();
+        });
+        Prefs.hatenabar.set('userHistory', keptName);
     },
 };
 
