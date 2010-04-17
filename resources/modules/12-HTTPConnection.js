@@ -150,8 +150,6 @@ extend(HTTPConnection.prototype, {
 });
 
 extend(HTTPConnection, {
-    useRkURLPattern: /^https?:\/\/(?:[\w-]+\.)+hatena\.(?:ne\.jp|com)(?:[:\/]|$)/,
-
     Request: XMLHttpRequest,
     Response: Response,
 });
@@ -227,7 +225,9 @@ var http = {
         return this._connect(options, 'POST', 15, 3, onLoad, onError);
     },
 
-    _autoRkURLPattern: /^https?:\/\/(?:[\w-]+\.)+hatena\.(?:ne\.jp|com)(?:[:\/]|$)/,
+    get isThirdPartyCookiesAllowed http_get_isThirdPartyCookiesAllowed() {
+        return Prefs.global.get('network.cookie.cookieBehavior') === 0;
+    },
 
     _connect: function http__connect(options, method, timeout, retryCount,
                                      onLoad, onError) {
@@ -243,9 +243,9 @@ var http = {
 
         // 「サードパーティのクッキーも保存する」が無効になっていても
         // API が利用できるよう、自力でクッキーを設定してやる。
-        if (Prefs.global.get('network.cookie.cookieBehavior') !== 0 &&
+        if (!this.isThirdPartyCookiesAllowed &&
             (typeof options.autoRk === 'undefined' || options.autoRk) &&
-            this._autoRkURLPattern.test(url) &&
+            isHatenaURL(url) &&
             User.user) {
             let headers = options.headers || (options.headers = {});
             let cookie = headers['Cookie'] || '';

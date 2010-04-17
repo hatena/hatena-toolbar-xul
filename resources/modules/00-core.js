@@ -226,6 +226,10 @@ function parseURIQuery(query) {
     }
 }
 
+function isHatenaURL(url) {
+    return /^https?:\/\/(?:[\w\-\u0080-\uffff]+\.)*hatena\.(?:ne\.jp|com)(?::\d+)?(?:\/|$)/.test(url);
+}
+
 var createElementBindDocument = function(doc, ns) {
     return function(name, attr) {
         var children = Array.slice(arguments, 2);

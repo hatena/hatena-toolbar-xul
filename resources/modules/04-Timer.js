@@ -32,6 +32,11 @@ extend(Timer.prototype, {
         this.currentCount = 0;
     },
 
+    dispose: function Timer_dispose() {
+        this.stop();
+        this.getListeners().forEach(function (l) l.unlisten());
+    },
+
     observe: function Timer_observe(subject, topic, data) {
         this.currentCount++;
         this.dispatch('timer');

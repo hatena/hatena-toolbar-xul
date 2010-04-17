@@ -14,6 +14,8 @@ const LOGIN_COOKIE_HOST = '.hatena.ne.jp';
 const LOGIN_CHECK_URL = 'http://b.hatena.ne.jp/my.name';
 
 var Account = {
+    LOGIN_URL: LOGIN_URL,
+
     init: function Account_init() {
         let os = ObserverService;
         os.addObserver(this.CookieObserver, 'cookie-changed', false);
@@ -38,7 +40,7 @@ var Account = {
     },
 
     LOGIN_BEGIN: 1,
-    LOGIN_SUCEESS: 2,
+    LOGIN_SUCCESS: 2,
     LOGIN_IGNORED: 3,
     LOGIN_NO_PASSWORD: 4,
     LOGIN_COOKIE_REJECTED: 5,
@@ -49,10 +51,13 @@ var Account = {
         this.dispatch('LoginAction', this.LOGIN_BEGIN);
         let password = this.getPassword(name);
         if (password === null) {
-            this.dispatch('LoginAction', this.LOGIN_NO_PASSWORD);
+            this.dispatch('LoginAction', this.LOGIN_NO_PASSWORD, name, null);
             return;
         }
-        // XXX サードパーティのクッキーが有効かここでチェックしておく。
+        if (!http.isThirdPartyCookiesAllowed) {
+            this.dispatch('LoginAction', this.LOGIN_COOKIE_REJECTED, name, password);
+            return;
+        }
         http.postWithRetry({
             url: LOGIN_URL,
             // XXX ログイン状態を保持するか、セッションにとどめるか。
@@ -64,16 +69,16 @@ var Account = {
                 this.onLoginError(res);
                 return;
             }
-            let cookies = (res.getHeader('Set-Cookie') || '').split('\n');
-            let hasRk = cookies.some(function (c) /^rk=\w/.test(c));
+            let hasRk = /^rk=\w/m.test(res.getHeader('Set-Cookie') || '');
             let action = hasRk
-                         ? (this.user ? this.LOGIN_SUCEESS
+                         ? (this.user ? this.LOGIN_SUCCESS
                                       : this.LOGIN_COOKIE_REJECTED)
                          : this.LOGIN_IGNORED;
-            this.dispatch('LoginAction', action);
+            this.dispatch('LoginAction', action, name, password);
         }
         function onLoginError(res) {
-            this.dispatch('LoginAction', this.LOGIN_NETWORK_ERROR);
+            this.dispatch('LoginAction', this.LOGIN_NETWORK_ERROR,
+                          name, password);
         }
     },
 

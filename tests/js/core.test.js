@@ -97,6 +97,13 @@ function testParseURIQuery() {
                   parseURIQuery('%E6%97%A5%E6%9C%AC%E8%AA%9E=%E7%A9%BA+%E7%99%BD'));
 }
 
+function testIsHatenaURL() {
+    assert.isTrue(isHatenaURL('http://www.hatena.ne.jp/'));
+    assert.isTrue(isHatenaURL('https://b.hatena.com:80'));
+    assert.isFalse(isHatenaURL('http://www.hatenaine.jp/'));
+    assert.isFalse(isHatenaURL('http://www.hatena.ne.jp:80@example.org/'));
+}
+
 function testBindMethod() {
     let f = function(arg) {
         return this.foo + arg;

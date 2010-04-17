@@ -57,7 +57,7 @@ var AccountStatus = {
         case Account.LOGIN_BEGIN:
             label.value = '{{Logging-in...}}';
             break;
-        case Account.LOGIN_SUCEESS:
+        case Account.LOGIN_SUCCESS:
             // Nothing to do.
             break;
         case Account.LOGIN_IGNORED:
