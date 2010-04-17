@@ -125,6 +125,8 @@ var Account = {
 
         let user = null;
         if (name) {
+            // XXX remember するのは設定で有効になってるときのみにする。
+            this.rememberUserName(name);
             user = new User(name);
             try { user.onLogin(rk); }
             catch (ex) { reportError(ex); }
@@ -203,7 +205,6 @@ Account.ResponseObserver = {
             !formData.name ||
             formData.name.indexOf('@') !== -1)
             return;
-        Account.rememberUserName(formData.name);
         Account.nameCache.set(match[1], formData.name);
     },
 
