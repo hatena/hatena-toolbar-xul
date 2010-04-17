@@ -20,9 +20,25 @@
 
 /* Searchbar */
 
+#hatenabar-search-field {
+    min-height: 22px;
+}
+
 #hatenabar-search-button {
     list-style-image: url("chrome://hatenabar/skin/icons.png");
     -moz-image-region: rect(128px, 16px, 144px, 0px);
+}
+
+#hatenabar-search-splitter {
+    -moz-appearance: none;
+    background: none;
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    min-width: 6px;
+}
+#hatenabar-search-splitter + toolbarseparator {
+    visibility: collapse;
 }
 
 /* Service Links */
