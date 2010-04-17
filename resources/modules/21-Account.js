@@ -36,6 +36,7 @@ var Account = {
     },
 
     login: function Account_login(name) {
+        this.logout();
         let password = this.getPassword(name);
         if (password === null) {
             p('No password.  Cannot login.');
@@ -92,11 +93,6 @@ var Account = {
         // クッキーの削除は同期的なので、remove() から
         // 返ってきた時点で User.user が null になっているはず。
         CookieManager.remove(LOGIN_COOKIE_HOST, 'rk', '/', false);
-    },
-
-    change: function Account_change(name) {
-        this.logout();
-        this.login(name);
     },
 
     setUser: function Account_setUser(name, rk) {
@@ -182,7 +178,12 @@ Account.ResponseObserver = {
         let match = cookie.match(/^rk=(\w+)/);
         if (!match) return;
         let formData = this.getFormData(subject);
-        if (!formData) return;
+        // メールアドレスでもログインできるが、
+        // メールアドレスはユーザ名とみなさない。
+        if (!formData ||
+            !formData.name ||
+            formData.name.indexOf('@') !== -1)
+            return;
         Account.rememberUserName(formData.name);
         Account.nameCache.set(match[1], formData.name);
     },
