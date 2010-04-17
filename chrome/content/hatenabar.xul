@@ -349,17 +349,10 @@
             </toolbarbutton>
             <toolbarbutton id="hatenabar-message-button"
                            class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
-                           type="menu-button"
                            label="{{Hatena Message}}"
                            tooltiptext="{{Hatena Message}}"
                            command="hatenabar-cmd-open-link"
-                           hatena:link="m:">
-                <menupopup observes="hatenabar-link-popup-base">
-                    <menuitem label="{{Top}}"
-                              observes="hatenabar-cmd-open-link"
-                              hatena:link="m:"/>
-                </menupopup>
-            </toolbarbutton>
+                           hatena:link="m:"/>
             <toolbarbutton id="hatenabar-question-button"
                            class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                            type="menu-button"
