@@ -5,22 +5,30 @@ var AccountStatus = {
     get label AS_get_label() byId('hatenabar-account-status-label'),
     get popup AS_get_popup() byId('hatenabar-account-status-popup'),
 
-    updatePanel: function AS_updatePanel(mode) {
+    updatePanel: function AS_updatePanel(inProgressUserName) {
         let panel = this.panel;
         let label = this.label;
         if (!panel || !label) return;
-        let user = Account.user;
-        if (!mode && user)
-            mode = 'in-session';
-        if (mode)
-            panel.setAttributeNS(HATENA_NS, 'hatena:login', mode);
-        else
+        if (inProgressUserName) {
+            panel.setAttributeNS(HATENA_NS, 'hatena:login', 'in-progress');
+            panel.image = '';
+            panel.tooltipText = '{{Trying login as ' + inProgressUserName + '...}}';
+            label.value = '{{Trying login...}}';
+            label.collapsed = false;
+        } else if (Account.user) {
+            let user = Account.user;
+            panel.setAttributeNS(HATENA_NS, 'hatena:login', 'in-session');
+            panel.image = user.getIcon();
+            panel.tooltipText = '{{Has Logged in as ' + user.name + '}}';
+            label.value = user.name;
+            label.collapsed = false;
+        } else {
             panel.removeAttributeNS(HATENA_NS, 'login');
-        panel.image = (mode === 'in-session') ? user.getIcon() : '';
-        let value = (mode === 'in-session') ? user.name :
-                    (mode === 'in-progress') ? '{{Trying Login...}}' : '';
-        label.value = value;
-        label.collapsed = !value;
+            panel.image = '';
+            panel.tooltipText = '{{Not logging in Hatena}}';
+            label.value = '';
+            label.collapsed = true;
+        }
     },
 
     updatePopup: function AS_updatePopup(event) {
@@ -57,19 +65,16 @@ var AccountStatus = {
     },
 
     onUserChanged: function AS_onUserChanged() {
-        let panel = this.panel;
-        let label = this.label;
-        if (!panel || !label) return;
         this.updatePanel(null);
     },
 
-    onLoginAction: function AS_onLoginAction(listener, action) {
+    onLoginAction: function AS_onLoginAction(listener, action, name) {
         let panel = this.panel;
         let label = this.label;
         if (!panel || !label) return;
         switch (action) {
         case Account.LOGIN_BEGIN:
-            this.updatePanel('in-progress');
+            this.updatePanel(name);
             break;
         case Account.LOGIN_SUCCESS:
             // Nothing to do.
@@ -82,4 +87,4 @@ var AccountStatus = {
 
 Account.createListener('UserChanged', method(AccountStatus, 'onUserChanged'));
 Account.createListener('LoginAction', method(AccountStatus, 'onLoginAction'));
-doOnLoad(method(AccountStatus, 'onUserChanged'));
+doOnLoad(method(AccountStatus, 'updatePanel', null));

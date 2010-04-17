@@ -48,7 +48,7 @@ var Account = {
 
     login: function Account_login(name) {
         this.logout();
-        this.dispatch('LoginAction', this.LOGIN_BEGIN);
+        this.dispatch('LoginAction', this.LOGIN_BEGIN, name, null);
         let password = this.getPassword(name);
         if (password === null) {
             this.dispatch('LoginAction', this.LOGIN_NO_PASSWORD, name, null);

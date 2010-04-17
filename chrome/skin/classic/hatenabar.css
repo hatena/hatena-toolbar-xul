@@ -130,6 +130,9 @@
     list-style-image: url("chrome://hatenabar/skin/icons.png");
     -moz-image-region: rect(32px, 48px, 48px, 32px);
 }
+#hatenabar-account-status[hatena|login] {
+    -moz-image-region: rect(0px, 48px, 16px, 32px);
+}
 
 #hatenabar-star-status {
     list-style-image: url("chrome://hatenabar/skin/icons.png");
