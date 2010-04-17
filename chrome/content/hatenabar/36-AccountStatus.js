@@ -15,8 +15,10 @@ var AccountStatus = {
             panel.setAttributeNS(HATENA_NS, 'hatena:login', mode);
         else
             panel.removeAttributeNS(HATENA_NS, 'login');
-        label.value = (mode === 'in-session') ? Account.user.name :
-                      (mode === 'in-progress') ? '{{Trying Login...}}' : '';
+        let value = (mode === 'in-session') ? Account.user.name :
+                    (mode === 'in-progress') ? '{{Trying Login...}}' : '';
+        label.value = value;
+        label.collapsed = !value;
     },
 
     updatePopup: function AS_updatePopup(event) {
