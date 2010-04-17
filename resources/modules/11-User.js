@@ -17,17 +17,11 @@ User.prototype = {
     get rk User_get_rk() this.options.rk || '',
     set rk User_set_rk(rk) this.options.rk = rk,
     
-    //get bookmarkHomepage() UserUtils.getHomepage(this.name, 'b'),
-    //getProfileIcon: function user_getProfileIcon(isLarge) {
-    //    return UserUtils.getProfileIcon(this.name, isLarge);
-    //},
-    //
-    //clear: function user_clear() {
-    //    if (this._db) {
-    //        this._db.connection.close();
-    //        p(this._name + "'s database is closed");
-    //    }
-    //},
+    getIcon: function user_getIcon(isLarge) {
+        let name = this.name;
+        return HatenaLink.parseToURL('www:users:') + name.substring(0, 2) +
+               '/' + name + '/profile' + (isLarge ? '' : '_s') + '.gif';
+    },
 
     get prefs User_get_prefs() {
         if (!this._prefs)

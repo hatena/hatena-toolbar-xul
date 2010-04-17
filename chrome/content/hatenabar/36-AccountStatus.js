@@ -9,13 +9,15 @@ var AccountStatus = {
         let panel = this.panel;
         let label = this.label;
         if (!panel || !label) return;
-        if (!mode && Account.user)
+        let user = Account.user;
+        if (!mode && user)
             mode = 'in-session';
         if (mode)
             panel.setAttributeNS(HATENA_NS, 'hatena:login', mode);
         else
             panel.removeAttributeNS(HATENA_NS, 'login');
-        let value = (mode === 'in-session') ? Account.user.name :
+        panel.image = (mode === 'in-session') ? user.getIcon() : '';
+        let value = (mode === 'in-session') ? user.name :
                     (mode === 'in-progress') ? '{{Trying Login...}}' : '';
         label.value = value;
         label.collapsed = !value;
