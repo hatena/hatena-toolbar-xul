@@ -1,0 +1,9 @@
+1 つのボタンに対し、できれば 4 種類のアイコンを用意し、
+これを縦に並べて 1 枚の画像中に含める。4 種類とはそれぞれ
+通常時、マウスホバー時、無効化時、アクティブ時用のもので、
+次のようなセレクタで指定する。
+
+#button-id { /* 通常時 */ }
+#button-id:not([disabled="true"]):hover { /* マウスホバー時 */ }
+#button-id[disabled="true"] { /* 無効化時 */ }
+#button-id:not([disabled="true"]):hover:active { /* アクティブ時 */ }

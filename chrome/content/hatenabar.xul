@@ -1,5 +1,6 @@
 <?xml version="1.0" ?>
 <?xml-stylesheet type="text/css" href="chrome://hatenabar/content/widgets.css"?>
+<?xml-stylesheet type="text/css" href="chrome://hatenabar/skin/hatenabar.css"?>
 <overlay id="hatenabar-overlay"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
          xmlns:hatena="http://www.hatena.ne.jp/">
@@ -100,9 +101,8 @@
                  accesskey="&hBookmark.toolbar.titleKey;"
             -->
             <toolbarbutton id="hatenabar-main-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                            type="menu-button"
-                           image="http://www.hatena.ne.jp/favicon.ico"
                            label="{{Hatena}}"
                            tooltiptext="{{Hatena}}"
                            command="hatenabar-cmd-open-link"
@@ -133,7 +133,7 @@
                          flex="1"
                          onkeypress="hatenabar.SearchField.onKeyPress(event);">
                     <hbox>
-                        <image src="http://www.hatena.ne.jp/favicon.ico"
+                        <image id="hatenabar-search-button"
                                tooltiptext="{{Search}}"
                                onclick="hatenabar.SearchField.onButtonClick(event);"/>
                     </hbox>
@@ -151,9 +151,8 @@
             <toolbarseparator/>
 
             <toolbarbutton id="hatenabar-antenna-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                            type="menu-button"
-                           image="http://www.hatena.ne.jp/favicon.ico"
                            label="{{Hatena Antenna}}"
                            tooltiptext="{{Hatena Antenna}}"
                            command="hatenabar-cmd-open-antenna">
@@ -200,9 +199,8 @@
                 </menupopup>
             </toolbarbutton>
             <toolbarbutton id="hatenabar-bookmark-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                            type="menu-button"
-                           image="http://www.hatena.ne.jp/favicon.ico"
                            label="{{Hatena Bookmark}}"
                            tooltiptext="{{Hatena Bookmark}}"
                            command="hatenabar-cmd-open-top-or-user-link"
@@ -225,9 +223,8 @@
                 </menupopup>
             </toolbarbutton>
             <toolbarbutton id="hatenabar-diary-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                            type="menu-button"
-                           image="http://www.hatena.ne.jp/favicon.ico"
                            label="{{Hatena Diary}}"
                            tooltiptext="{{Hatena Diary}}"
                            command="hatenabar-cmd-open-top-or-user-link"
@@ -246,9 +243,8 @@
                 </menupopup>
             </toolbarbutton>
             <toolbarbutton id="hatenabar-fotolife-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                            type="menu-button"
-                           image="http://www.hatena.ne.jp/favicon.ico"
                            label="{{Hatena Fotolife}}"
                            tooltiptext="{{Hatena Fotolife}}"
                            command="hatenabar-cmd-open-top-or-user-link"
@@ -273,9 +269,8 @@
                 </menupopup>
             </toolbarbutton>
             <toolbarbutton id="hatenabar-group-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                            type="menu-button"
-                           image="http://www.hatena.ne.jp/favicon.ico"
                            label="{{Hatena Group}}"
                            tooltiptext="{{Hatena Group}}"
                            command="hatenabar-cmd-open-group">
@@ -292,9 +287,8 @@
                 </menupopup>
             </toolbarbutton>
             <toolbarbutton id="hatenabar-haiku-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                            type="menu-button"
-                           image="http://www.hatena.ne.jp/favicon.ico"
                            label="{{Hatena Haiku}}"
                            tooltiptext="{{Hatena Haiku}}"
                            command="hatenabar-cmd-open-top-or-user-link"
@@ -317,9 +311,8 @@
                 </menupopup>
             </toolbarbutton>
             <toolbarbutton id="hatenabar-idea-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                            type="menu-button"
-                           image="http://www.hatena.ne.jp/favicon.ico"
                            label="{{Hatena Idea}}"
                            tooltiptext="{{Hatena Idea}}"
                            command="hatenabar-cmd-open-top-or-user-link"
@@ -331,9 +324,8 @@
                 </menupopup>
             </toolbarbutton>
             <toolbarbutton id="hatenabar-keyword-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                            type="menu-button"
-                           image="http://www.hatena.ne.jp/favicon.ico"
                            label="{{Hatena Keyword}}"
                            tooltiptext="{{Hatena Keyword}}"
                            command="hatenabar-cmd-open-top-or-user-link"
@@ -355,9 +347,8 @@
                 </menupopup>
             </toolbarbutton>
             <toolbarbutton id="hatenabar-message-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                            type="menu-button"
-                           image="http://www.hatena.ne.jp/favicon.ico"
                            label="{{Hatena Message}}"
                            tooltiptext="{{Hatena Message}}"
                            command="hatenabar-cmd-open-link"
@@ -369,9 +360,8 @@
                 </menupopup>
             </toolbarbutton>
             <toolbarbutton id="hatenabar-question-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                            type="menu-button"
-                           image="http://www.hatena.ne.jp/favicon.ico"
                            label="{{Question Hatena}}"
                            tooltiptext="{{Question Hatena}}"
                            command="hatenabar-cmd-open-top-or-user-link"
@@ -383,9 +373,8 @@
                 </menupopup>
             </toolbarbutton>
             <toolbarbutton id="hatenabar-star-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                            type="menu-button"
-                           image="http://www.hatena.ne.jp/favicon.ico"
                            label="{{Hatena Star}}"
                            tooltiptext="{{Hatena Star}}"
                            command="hatenabar-cmd-open-top-or-user-link"
@@ -407,9 +396,8 @@
                 </menupopup>
             </toolbarbutton>
             <toolbarbutton id="hatenabar-ugomemo-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                            type="menu-button"
-                           image="http://www.hatena.ne.jp/favicon.ico"
                            label="{{Ugomemo Hatena}}"
                            tooltiptext="{{Ugomemo Hatena}}"
                            command="hatenabar-cmd-open-top-or-user-link"
@@ -444,9 +432,8 @@
                 </menupopup>
             </toolbarbutton>
             <toolbarbutton id="hatenabar-counter-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                            type="menu-button"
-                           image="http://www.hatena.ne.jp/favicon.ico"
                            label="{{Hatena Counter}}"
                            tooltiptext="{{Hatena Counter}}"
                            command="hatenabar-cmd-open-top-or-user-link"
@@ -462,9 +449,8 @@
                 </menupopup>
             </toolbarbutton>
             <toolbarbutton id="hatenabar-graph-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                            type="menu-button"
-                           image="http://www.hatena.ne.jp/favicon.ico"
                            label="{{Hatena Graph}}"
                            tooltiptext="{{Hatena Graph}}"
                            command="hatenabar-cmd-open-top-or-user-link"
@@ -483,51 +469,44 @@
             <toolbarseparator/>
 
             <toolbarbutton id="hatenabar-including-antenna-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional"
-                           image="http://www.hatena.ne.jp/favicon.ico"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                            label="{{Including Antennas}}"
                            tooltiptext="{{Including Antennas}}"
                            command="hatenabar-cmd-open-related-link"
                            hatena:link="a:include"/>
             <toolbarbutton id="hatenabar-add-antenna-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-user-required"
-                           image="http://www.hatena.ne.jp/favicon.ico"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                            label="{{Add to Antenna}}"
                            tooltiptext="{{Add to Antenna}}"
                            command="hatenabar-cmd-open-related-user-link"
                            hatena:link="a:append"/>
             <toolbarbutton id="hatenabar-view-bookmark-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional"
-                           image="http://www.hatena.ne.jp/favicon.ico"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                            label="{{View Bookmark Entry}}"
                            sidelabel=""
                            tooltiptext="{{View Bookmark Entry}}"
                            command="hatenabar-cmd-open-related-link"
                            hatena:link="b:entry"/>
             <toolbarbutton id="hatenabar-add-bookmark-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-user-required"
-                           image="http://www.hatena.ne.jp/favicon.ico"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                            label="{{Add to Bookmark}}"
                            tooltiptext="{{Add to Bookmark}}"
                            command="hatenabar-cmd-add-bookmark"/>
             <!-- The command of this button is same as view-bookmark-button. -->
             <toolbarbutton id="hatenabar-referring-diary-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional"
-                           image="http://www.hatena.ne.jp/favicon.ico"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                            label="{{Referring Diaries}}"
                            sidelabel=""
                            tooltiptext="{{Referring Diaries}}"
                            command="hatenabar-cmd-open-related-link"
                            hatena:link="b:entry"/>
             <toolbarbutton id="hatenabar-diary-refer-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-user-required"
-                           image="http://www.hatena.ne.jp/favicon.ico"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                            label="{{Refer in Diary}}"
                            tooltiptext="{{Refer in Diary}}"
                            command="hatenabar-cmd-refer-in-diary"/>
             <toolbarbutton id="hatenabar-group-refer-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-user-required"
-                           image="http://www.hatena.ne.jp/favicon.ico"
+                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                            label="{{Refer in Group}}"
                            tooltiptext="{{Refer in Group}}"
                            command="hatenabar-cmd-refer-in-group"/>
@@ -539,8 +518,6 @@
     <statusbar id="status-bar">
         <statusbarpanel id="hatenabar-account-status"
                         class="statusbarpanel-menu-iconic"
-                        label="{{Account}}"
-                        src="http://www.hatena.ne.jp/favicon.ico"
                         onclick="hatenabar.AccountStatus.onPanelClick(event);">
             <label id="hatenabar-account-status-label"
                    class="statusbarpanel-text"/>
@@ -557,7 +534,6 @@
         </statusbarpanel>
         <statusbarpanel id="hatenabar-star-status"
                         class="statusbarpanel-menu-iconic"
-                        src="http://www.hatena.ne.jp/favicon.ico"
                         context="hatenabar-star-context">
             <menupopup observes="hatenabar-link-popup-base">
                 <menuitem label="{{About Hatena Star}}"
@@ -568,7 +544,6 @@
         </statusbarpanel>
         <statusbarpanel id="hatenabar-bookmark-status"
                         class="statusbarpanel-iconic"
-                        src="http://www.hatena.ne.jp/favicon.ico"
                         tooltiptext="{{Add to Hatena Bookmarks}}"
                         onclick="hatenabar.UICommand.addOrViewBookmark(event);"
                         hatena:link="b:entry"/>
