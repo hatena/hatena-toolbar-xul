@@ -46,7 +46,8 @@ var Command = {
     },
 
     goSearch: function Cmd_goSearch(query, event) {
-        let link = HatenaLink.parseToURL('b:search', { query: query })
+        let link = Prefs.hatenabar.get('searchbar.link');
+        let url = HatenaLink.parseToURL(link, { query: query })
         let where = whereToOpenLink(event);
         if (event instanceof Ci.nsIDOMKeyEvent) {
             // Alt + Enter で検索したときは
@@ -56,7 +57,7 @@ var Command = {
                    ? 'tabshifted' : 'tab')
                 : 'current';
         }
-        openUILinkIn(link, where);
+        openUILinkIn(url, where);
     },
 
     clearSearchHistory: function Cmd_clearSearchHistory() {

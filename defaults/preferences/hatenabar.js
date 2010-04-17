@@ -1,5 +1,8 @@
 
 //pref("extensions.hatenabar.profile.version", 1);
 
-// for debug
+// For debug
 pref("extensions.hatenabar.debug.log", false);
+
+// Searchbar
+pref("extensions.hatenabar.searchbar.link", "b:search");

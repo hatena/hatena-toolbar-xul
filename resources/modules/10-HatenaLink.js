@@ -148,6 +148,13 @@ HatenaLink.schemes = {
         return { url: hatenaURL(link, context) };
     },
 
+    search: function HL_scheme_search(link, context) {
+        let url = hatenaURL(link, context);
+        if (link.substring(7) === 'search')
+            url += '?ie=utf8&word=' + encodeURIComponent(context.query);
+        return { url: url };
+    },
+
     // HatenaLink.parse('http://example.org/:title=Example') returns
     // { url: "http://example.org/", text: "Example" }.
     //http: function HL_scheme_http(link, context) {},

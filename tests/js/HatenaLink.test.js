@@ -150,3 +150,9 @@ function testGraphLink() {
     assert.equals('http://graph.hatena.ne.jp/', u('graph:'));
     assert.equals('http://graph.hatena.ne.jp/sample/', u('graph:id:sample'));
 }
+
+function testSearchLink() {
+    let u = method(HatenaLink, 'parseToURL');
+    assert.equals('http://search.hatena.ne.jp/search?ie=utf8&word=%E3%81%AF%E3%81%A6%E3%81%AA',
+                  u('search:search', { query: 'はてな' }));
+}
