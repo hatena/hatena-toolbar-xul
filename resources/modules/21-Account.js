@@ -40,6 +40,7 @@ var Account = {
         if (password === null) {
             p('No password.  Cannot login.');
             // XXX ログイン画面を新しいブラウザタブに開く。
+            //this.dispatch(...);
             return;
         }
         http.postWithRetry({
@@ -52,9 +53,11 @@ var Account = {
             p(arguments.callee.name + ' is not yet implemented.');
             // XXX サードパーティ製のクッキーがオフのときは
             // 新しくブラウザタブを開いてそこで読み込む。
+            //this.dispatch(<res has Set-Cookie header> ? ... : ...);
         }
         function onLoginError(res) {
             p(arguments.callee.name + ' is not yet implemented.');
+            //this.dispatch(...);
         }
     },
 
@@ -84,7 +87,16 @@ var Account = {
     },
 
     logout: function Account_logout() {
+        // サードパーティ製クッキーの有効無効にかかわらず
+        // これでクッキーを消去できる。
+        // クッキーの削除は同期的なので、remove() から
+        // 返ってきた時点で User.user が null になっているはず。
         CookieManager.remove(LOGIN_COOKIE_HOST, 'rk', '/', false);
+    },
+
+    change: function Account_change(name) {
+        this.logout();
+        this.login(name);
     },
 
     setUser: function Account_setUser(name, rk) {
@@ -115,9 +127,17 @@ var Account = {
         return history ? history.split('|') : [];
     },
 
+    rememberUserName: function Account_rememberUserName(name) {
+        let names = this.getUserNames();
+        if (names.indexOf(name) !== -1) return;
+        names.push(name);
+        Prefs.hatenabar.set('userHistory', names.join('|'));
+    },
+
     clearUserNames: function Account_clearUserNames(complete) {
         let history = (!complete && User.user) ? User.user.name : '';
         Prefs.hatenabar.set('userHistory', history);
+        // XXX Prefs の extensions.hatenabar.users.name.* も消す?
     },
 };
 
@@ -163,6 +183,7 @@ Account.ResponseObserver = {
         if (!match) return;
         let formData = this.getFormData(subject);
         if (!formData) return;
+        Account.rememberUserName(formData.name);
         Account.nameCache.set(match[1], formData.name);
     },
 
