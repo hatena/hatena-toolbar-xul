@@ -39,6 +39,12 @@ function testBookmarkLink() {
                   u('b:entry', { url: 'https://example.org/' }));
 }
 
+function testCocoLink() {
+    let u = method(HatenaLink, 'parseToURL');
+    assert.equals('http://c.hatena.ne.jp/', u('c:'));
+    assert.equals('http://c.hatena.ne.jp/sample/', u('c:id:sample'));
+}
+
 function testDiaryLink() {
     let u = method(HatenaLink, 'parseToURL');
     assert.equals('http://d.hatena.ne.jp/', u('d:'));
@@ -107,6 +113,11 @@ function testMessageLink() {
     assert.equals('http://m.hatena.ne.jp/', u('m:'));
 }
 
+function testNanoLink() {
+    let u = method(HatenaLink, 'parseToURL');
+    assert.equals('http://n.hatena.ne.jp/', u('n:'));
+}
+
 function testQuestionLink() {
     let u = method(HatenaLink, 'parseToURL');
     assert.equals('http://q.hatena.ne.jp/', u('q:'));
@@ -147,6 +158,19 @@ function testGraphLink() {
     let u = method(HatenaLink, 'parseToURL');
     assert.equals('http://graph.hatena.ne.jp/', u('graph:'));
     assert.equals('http://graph.hatena.ne.jp/sample/', u('graph:id:sample'));
+}
+
+function testHappieLink() {
+    let u = method(HatenaLink, 'parseToURL');
+    assert.equals('http://happie.hatena.ne.jp/', u('happie:'));
+    assert.equals('http://happie.hatena.ne.jp/edit', u('happie:edit'));
+}
+
+function testMonoLink() {
+    let u = method(HatenaLink, 'parseToURL');
+    assert.equals('http://mono.hatena.ne.jp/', u('mono:'));
+    assert.equals('http://mono.hatena.ne.jp/sample/', u('mono:id:sample'));
+    assert.equals('http://mono.hatena.ne.jp/mono', u('mono:mono'));
 }
 
 function testSearchLink() {

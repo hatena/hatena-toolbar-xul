@@ -103,6 +103,16 @@
 <!ENTITY hatenabar.graph.edit.label "編集">
 <!ENTITY hatenabar.graph.top.label "トップ">
 
+<!ENTITY hatenabar.coco.label "はてなココ">
+<!ENTITY hatenabar.coco.friendTL.label "ともだちの新着">
+<!ENTITY hatenabar.coco.happieEdit.label "ハッピィを編集">
+<!ENTITY hatenabar.coco.top.label "トップ">
+
+<!ENTITY hatenabar.monolith.label "はてなモノリス">
+<!ENTITY hatenabar.monolith.mono.label "モノページ">
+<!ENTITY hatenabar.monolith.config.label "設定">
+<!ENTITY hatenabar.monolith.top.label "トップ">
+
 <!-- Page Actions -->
 
 <!ENTITY hatenabar.actions.includingAntenna.label "含むアンテナ">

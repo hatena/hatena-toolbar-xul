@@ -468,6 +468,46 @@
                           hatena:link="graph:"/>
             </menupopup>
         </toolbarbutton>
+        <toolbarbutton id="hatenabar-coco-button"
+                       class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
+                       type="menu-button"
+                       label="&hatenabar.coco.label;"
+                       tooltiptext="&hatenabar.coco.label;"
+                       command="hatenabar-cmd-open-top-or-user-link"
+                       hatena:link="c:">
+            <menupopup observes="hatenabar-link-popup-base">
+                <menuitem label="&hatenabar.coco.friendTL.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="n:"/>
+                <menuitem label="&hatenabar.coco.happieEdit.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="happie:edit"/>
+                <menuseparator/>
+                <menuitem label="&hatenabar.coco.top.label;"
+                          observes="hatenabar-cmd-open-link"
+                          hatena:link="c:"/>
+            </menupopup>
+        </toolbarbutton>
+        <toolbarbutton id="hatenabar-monolith-button"
+                       class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
+                       type="menu-button"
+                       label="&hatenabar.monolith.label;"
+                       tooltiptext="&hatenabar.monolith.label;"
+                       command="hatenabar-cmd-open-top-or-user-link"
+                       hatena:link="mono:">
+            <menupopup observes="hatenabar-link-popup-base">
+                <menuitem label="&hatenabar.monolith.mono.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="mono:mono"/>
+                <menuitem label="&hatenabar.monolith.config.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="mono:id:?:config"/>
+                <menuseparator/>
+                <menuitem label="&hatenabar.monolith.top.label;"
+                          observes="hatenabar-cmd-open-link"
+                          hatena:link="mono:"/>
+            </menupopup>
+        </toolbarbutton>
 
         <toolbarbutton id="hatenabar-including-antenna-button"
                        class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
@@ -523,7 +563,7 @@
                  iconsize="small"
                  defaulticonsize="small"
                  customizable="true"
-                 defaultset="hatenabar-main-button,hatenabar-search-item,separator,hatenabar-antenna-button,hatenabar-bookmark-button,hatenabar-diary-button,hatenabar-fotolife-button,hatenabar-group-button,hatenabar-haiku-button,hatenabar-idea-button,hatenabar-keyword-button,hatenabar-message-button,hatenabar-question-button,hatenabar-star-button,hatenabar-ugomemo-button,hatenabar-counter-button,hatenabar-graph-button,separator,hatenabar-including-antenna-button,hatenabar-add-antenna-button,hatenabar-view-bookmark-button,hatenabar-add-bookmark-button,hatenabar-referring-diary-button,hatenabar-diary-refer-button,hatenabar-group-refer-button,spring"
+                 defaultset="hatenabar-main-button,hatenabar-search-item,separator,hatenabar-antenna-button,hatenabar-bookmark-button,hatenabar-diary-button,hatenabar-fotolife-button,hatenabar-group-button,hatenabar-haiku-button,hatenabar-idea-button,hatenabar-keyword-button,hatenabar-message-button,hatenabar-question-button,hatenabar-star-button,hatenabar-ugomemo-button,hatenabar-counter-button,hatenabar-graph-button,hatenabar-coco-button,hatenabar-monolith-button,separator,hatenabar-including-antenna-button,hatenabar-add-antenna-button,hatenabar-view-bookmark-button,hatenabar-add-bookmark-button,hatenabar-referring-diary-button,hatenabar-diary-refer-button,hatenabar-group-refer-button,spring"
                  context="toolbar-context-menu"/>
     </toolbox>
 

@@ -110,6 +110,14 @@ textbox[type="autocomplete"]:not([enablehistory="true"]) > .hatenabar-autocomple
     -moz-image-region: rect(128px, 64px, 144px, 48px);
 }
 
+#hatenabar-coco-button {
+    -moz-image-region: rect(128px, 112px, 144px, 96px);
+}
+
+#hatenabar-monolith-button {
+    -moz-image-region: rect(128px, 128px, 144px, 112px);
+}
+
 /* Page Actions */
 
 #hatenabar-including-antenna-button {

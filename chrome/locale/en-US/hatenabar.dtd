@@ -103,6 +103,16 @@
 <!ENTITY hatenabar.graph.edit.label "Edit">
 <!ENTITY hatenabar.graph.top.label "Top">
 
+<!ENTITY hatenabar.coco.label "Hatena Coco">
+<!ENTITY hatenabar.coco.friendTL.label "Friends' Timeline">
+<!ENTITY hatenabar.coco.happieEdit.label "Edit Happie">
+<!ENTITY hatenabar.coco.top.label "Top">
+
+<!ENTITY hatenabar.monolith.label "Hatena Monolith">
+<!ENTITY hatenabar.monolith.mono.label "Mono Page">
+<!ENTITY hatenabar.monolith.config.label "Config">
+<!ENTITY hatenabar.monolith.top.label "Top">
+
 <!-- Page Actions -->
 
 <!ENTITY hatenabar.actions.includingAntenna.label "Including Antennas">

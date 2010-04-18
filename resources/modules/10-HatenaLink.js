@@ -70,6 +70,10 @@ HatenaLink.schemes = {
         return { url: url };
     },
 
+    c: function HL_scheme_c(link, context) {
+        return { url: hatenaURL(link, context) };
+    },
+
     // XXX 日本語文字は EUC-JP で URI エスケープ。
     d: function HL_scheme_d(link, context) {
         return { url: hatenaURL(link, context) };
@@ -112,6 +116,10 @@ HatenaLink.schemes = {
         return { url: hatenaURL(link, context) };
     },
 
+    n: function HL_scheme_n(link, context) {
+        return { url: hatenaURL(link, context) };
+    },
+
     q: function HL_scheme_q(link, context) {
         return { url: hatenaURL(link, context) };
     },
@@ -143,6 +151,14 @@ HatenaLink.schemes = {
     },
 
     graph: function HL_scheme_graph(link, context) {
+        return { url: hatenaURL(link, context) };
+    },
+
+    happie: function HL_scheme_happie(link, context) {
+        return { url: hatenaURL(link, context) };
+    },
+
+    mono: function HL_scheme_mono(link, context) {
         return { url: hatenaURL(link, context) };
     },
 
