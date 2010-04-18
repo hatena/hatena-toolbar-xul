@@ -33,12 +33,21 @@ extend(Prefs.prototype, {
             return defaultValue;
         }
 
-        if (type && type instanceof Ci.nsIJSIID) {
+        if (type instanceof Ci.nsIJSIID) {
             if (type.equals(Ci.nsIPrefLocalizedString) ||
                 type.equals(Ci.nsISupportsString)) {
                 return prefBranch.getComplexValue(name, type).data;
             }
             return prefBranch.getComplexValue(name, type);
+        }
+        if (type === JSON ||
+            Object.prototype.toString.call(type) === '[object JSON]') {
+            let json = prefBranch.getComplexValue(name, Ci.nsISupportsString).data;
+            try {
+                return JSON.parse(json);
+            } catch (ex) {
+                return null;
+            }
         }
 
         switch (type || prefType) {
@@ -56,7 +65,7 @@ extend(Prefs.prototype, {
     set: function Prefs_set(name, value, type) {
         let prefBranch = this.prefBranch;
 
-        if (type && type instanceof Ci.nsIJSIID) {
+        if (type instanceof Ci.nsIJSIID) {
             if (value instanceof type) {
                 prefBranch.setComplexValue(name, type, value);
                 return;
@@ -68,8 +77,11 @@ extend(Prefs.prototype, {
                 return;
             }
             type = nsIPrefBranch.PREF_STRING;
-        }
-        if (!type) {
+        } else if (type === JSON ||
+                   Object.prototype.toString.call(type) === '[object JSON]') {
+            value = JSON.stringify(value);
+            type = nsIPrefBranch.PREF_STRING;
+        } else if (!type) {
             type = prefBranch.getPrefType(name);
             if (type === nsIPrefBranch.PREF_INVALID) {
                 switch (typeof value) {

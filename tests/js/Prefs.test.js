@@ -1,3 +1,4 @@
+Components.utils.import('resource://hatenabar/modules/00-core.js');
 Components.utils.import('resource://hatenabar/modules/03-Prefs.js');
 
 function setUp() {
@@ -6,6 +7,8 @@ function setUp() {
     utils.setPref('extensions.hatenabar.intbar', 3);
     utils.setPref('extensions.hatenabar.strja', '日本語');
     utils.setPref('extensions.hatenabar.bar', 'bar');
+    utils.setPref('extensions.hatenabar.json.foo', '{"foo":42,"bar":23}');
+    utils.setPref('extensions.hatenabar.json.bar', '');
     utils.setPref('extensions.hatenabar.hogehoge.hugahuga', 100);
     utils.setPref('toplevel.bar', 'foo');
     //Prefs.global.register();
@@ -41,6 +44,11 @@ function testPref() {
     assert.equals('THROWN', status, 'Throw for not existing prefs.');
 
     assert.equals(42, Prefs.global.get('toplevel.bar', 42));
+
+    assert.equals({ foo: 42, bar: 23 },
+                  Prefs.hatenabar.get('json.foo', null, JSON));
+    Prefs.hatenabar.set('json.bar', [42, 23], JSON);
+    assert.equals('[42,23]', utils.getPref('extensions.hatenabar.json.bar'));
 }
 
 function testGetChildPrefs() {
