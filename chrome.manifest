@@ -5,4 +5,4 @@ skin	hatenabar	classic/1.0	chrome/skin/classic/
 resource	hatenabar	resources/
 
 overlay	chrome://browser/content/browser.xul	chrome://hatenabar/content/hatenabar.xul
-style	chrome://global/content/customizeToolbar.xul	chrome://hatenabar/skin/toolbar.css
+style	chrome://global/content/customizeToolbar.xul	chrome://hatenabar/skin/hatenabar.css
