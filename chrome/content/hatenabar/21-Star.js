@@ -2,6 +2,7 @@ const EXPORT = ['Star'];
 
 var Star = {
     SiteConfig: shared.get('Star.SiteConfig'),
+    prefs: Prefs.hatenabar.getChildPrefs('star'),
 
     siteConfigURL: HatenaLink.parseToURL('s:siteconfig.json'),
     // 将来的に国際化すると、設定によってスクリプトの URL が
@@ -32,13 +33,13 @@ var Star = {
             !/^https?:/.test(win.location.protocol) ||
             !(doc instanceof Ci.nsIDOMHTMLDocument))
             return;
-        let host = win.location.hostname;
-        let configs = this.SiteConfig[host] ||
-                      this.SiteConfig[host.replace(/^[^.:]+/, '*')] ||
-                      null;
         let config = null;
-        if (configs) {
+        if (this.prefs.get('anywhere')) {
+            let host = win.location.hostname;
             let path = win.location.pathname;
+            let configs = this.SiteConfig[host] ||
+                          this.SiteConfig[host.replace(/^[^.:]+/, '*')] ||
+                          [];
             for (let i = 0; i < configs.length; i++) {
                 if (path.match(configs[i].path)) {
                     config = configs[i];
