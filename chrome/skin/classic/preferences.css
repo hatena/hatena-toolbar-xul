@@ -1,0 +1,22 @@
+
+/* チェックボックスに画像を指定したとき、
+ * 画像の高さが引き伸ばされる問題を解決する。
+ */
+.checkbox-label-box {
+    -moz-box-align: center;
+}
+
+/* Statusbar */
+
+[preference="account.showStatus"] {
+    list-style-image: url("chrome://hatenabar/skin/icons.png");
+    -moz-image-region: rect(0px, 48px, 16px, 32px);
+}
+[preference="star.showStatus"] {
+    list-style-image: url("chrome://hatenabar/skin/icons.png");
+    -moz-image-region: rect(0px, 64px, 16px, 48px);
+}
+[preference="bookmark.showStatus"] {
+    list-style-image: url("chrome://hatenabar/skin/icons.png");
+    -moz-image-region: rect(0px, 144px, 16px, 128px);
+}
