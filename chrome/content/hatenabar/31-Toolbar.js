@@ -115,6 +115,67 @@ var Toolbar = {
             dButton.sideLabel = count || '';
         }
     },
+
+    initContextMenu: function Tb_initContextMenu() {
+        this.contextMenu = byId('toolbar-context-menu');
+        this.hideButtonSeparator =
+            byId('hatenabar-toolbar-context-separator');
+        this.hideButtonMenu =
+            byId('hatenabar-toolbar-context-hide-button-menu');
+        addAfter(window, 'onViewToolbarsPopupShowing',
+                 method(this, 'onContextShowing'));
+        this.contextMenu.addEventListener('popuphidden',
+                                          method(this, 'onContextHidden'),
+                                          false);
+        this.onContextHidden();
+    },
+
+    hideContextButton: function Tb_hideContextButton(event) {
+        let button = byId(UICommand.getTarget(event).value);
+        let toolbar = button.parentNode;
+        toolbar.removeChild(button);
+        if (toolbar.localName !== 'toolbar') return;
+        this.persist(toolbar);
+    },
+
+    persist: function Tb_persist(toolbar) {
+        let currentSet = toolbar.currentSet;
+        toolbar.setAttribute('currentset', currentSet);
+        if (toolbar.hasAttribute('customindex')) {
+            let toolbarSet = gNavToolbox.toolbarset;
+            let prefix = toolbar.toolbarName + ':';
+            let i = 0;
+            while (true) {
+                let attr = 'toolbar' + ++i;
+                let value = toolbarSet.getAttribute(attr);
+                if (!value) break;
+                if (value.indexOf(prefix) !== 0) continue;
+                toolbarSet.setAttribute(attr, prefix + currentSet);
+                document.persist(toolbarSet.id, attr);
+                break;
+            }
+        } else {
+            document.persist(toolbar.id, 'currentset');
+        }
+    },
+
+    onContextShowing: function Tb_onContextShowing(event) {
+        let button = document.popupNode;
+        if (!button ||
+            button.localName !== 'toolbarbutton' ||
+            button.className.split(/\s+/).indexOf('hatenabar-toolbarbutton') === -1)
+            return;
+        this.hideButtonMenu.value = button.id;
+        let popup = this.contextMenu;
+        popup.insertBefore(this.hideButtonSeparator, popup.firstChild);
+        popup.insertBefore(this.hideButtonMenu, popup.firstChild);
+    },
+
+    onContextHidden: function Tb_onContextHidden(event) {
+        if (!this.hideButtonMenu.parentNode) return;
+        this.contextMenu.removeChild(this.hideButtonMenu);
+        this.contextMenu.removeChild(this.hideButtonSeparator);
+    },
 };
 
 EventService.bless(Toolbar);
@@ -127,4 +188,6 @@ doOnLoad(function () {
     addBefore(window, 'BrowserCustomizeToolbar', dispatchWillCustomize);
     addAfter(window, 'BrowserToolboxCustomizeDone', dispatchCustomizeDone);
     setTimeout(dispatchCustomizeDone, 0);
+
+    Toolbar.initContextMenu();
 });

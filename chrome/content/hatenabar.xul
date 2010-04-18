@@ -84,6 +84,13 @@
         </menupopup>
     </popupset>
 
+    <popup id="toolbar-context-menu">
+        <menuseparator id="hatenabar-toolbar-context-separator"/>
+        <menuitem id="hatenabar-toolbar-context-hide-button-menu"
+                  label="{{Hide This Button}}"
+                  oncommand="hatenabar.Toolbar.hideContextButton(event);"/>
+    </popup>
+
     <toolbarpalette id="BrowserToolbarPalette">
             <toolbarbutton id="hatenabar-main-button"
                            class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
