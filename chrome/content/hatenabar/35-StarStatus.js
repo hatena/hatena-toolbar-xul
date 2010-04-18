@@ -8,10 +8,10 @@ var StarStatus = {
         if (!panel) return;
         if (Star.hasEntries(content.document)) {
             panel.setAttributeNS(HATENA_NS, 'hatena:star', 'true');
-            panel.tooltipText = "{{Hatena Star is available in this page}}";
+            panel.tooltipText = panel.getAttribute('enabledtooltiptext');
         } else {
             panel.removeAttributeNS(HATENA_NS, 'star');
-            panel.tooltipText = "{{Hatena Star is not available in this page}}";
+            panel.tooltipText = panel.getAttribute('disabledtooltiptext');
         }
     },
 };

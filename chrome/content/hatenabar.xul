@@ -526,6 +526,8 @@
         </statusbarpanel>
         <statusbarpanel id="hatenabar-star-status"
                         class="statusbarpanel-menu-iconic"
+                        enabledtooltiptext="&hatenabar.starStatus.enabled.tooltip;"
+                        disabledtooltiptext="&hatenabar.starStatus.disabled.tooltip;"
                         context="hatenabar-star-context">
             <menupopup observes="hatenabar-link-popup-base">
                 <menuitem label="&hatenabar.starStatus.about.label;"

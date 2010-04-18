@@ -111,6 +111,8 @@
 <!ENTITY hatenabar.account.logout.label "ログアウト">
 <!ENTITY hatenabar.account.clearHistory.label "ユーザー履歴を消去">
 
+<!ENTITY hatenabar.starStatus.enabled.tooltip "このページでスターをつけられます">
+<!ENTITY hatenabar.starStatus.disabled.tooltip "このページではスターをつけられません">
 <!ENTITY hatenabar.starStatus.about.label "はてなスターについて">
 <!ENTITY hatenabar.star.siteConfig.wiki.label "SiteConfig Wiki">
 <!ENTITY hatenabar.star.siteConfig.howTo.label "SiteConfig の作成方法">

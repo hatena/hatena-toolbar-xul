@@ -111,6 +111,8 @@
 <!ENTITY hatenabar.account.logout.label "Logout">
 <!ENTITY hatenabar.account.clearHistory.label "Clear User History">
 
+<!ENTITY hatenabar.starStatus.enabled.tooltip "You can add stars in this page">
+<!ENTITY hatenabar.starStatus.disabled.tooltip "You cannot add stars in this page">
 <!ENTITY hatenabar.starStatus.about.label "About Hatena Star">
 <!ENTITY hatenabar.star.siteConfig.wiki.label "SiteConfig Wiki">
 <!ENTITY hatenabar.star.siteConfig.howTo.label "How to Create SiteConfig">
