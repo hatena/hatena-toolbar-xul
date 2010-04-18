@@ -101,9 +101,9 @@
 <!ENTITY hatenabar.actions.addAntenna.label "Add to Antennas">
 <!ENTITY hatenabar.actions.viewBookmark.label "View Bookmark Entry">
 <!ENTITY hatenabar.actions.addBookmark.label "Add to Bookmarks">
-<!ENTITY hatenabar.actions.referringDiary.label "Referring Diaries">
-<!ENTITY hatenabar.actions.referInDiary.label "Refer in Diary">
-<!ENTITY hatenabar.actions.referInGroup.label "Refer in Group">
+<!ENTITY hatenabar.actions.referringDiary.label "Quoting Diaries">
+<!ENTITY hatenabar.actions.referInDiary.label "Quote in Diary">
+<!ENTITY hatenabar.actions.referInGroup.label "Quote in Group">
 
 <!-- Statusbar -->
 

@@ -102,8 +102,8 @@
 <!ENTITY hatenabar.actions.viewBookmark.label "ブックマークのエントリ">
 <!ENTITY hatenabar.actions.addBookmark.label "ブックマークに追加">
 <!ENTITY hatenabar.actions.referringDiary.label "含む日記">
-<!ENTITY hatenabar.actions.referInDiary.label "日記で言及する">
-<!ENTITY hatenabar.actions.referInGroup.label "グループで言及する">
+<!ENTITY hatenabar.actions.referInDiary.label "日記に引用する">
+<!ENTITY hatenabar.actions.referInGroup.label "グループに引用する">
 
 <!-- Statusbar -->
 
