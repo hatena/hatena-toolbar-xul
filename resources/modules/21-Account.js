@@ -91,7 +91,7 @@ var Account = {
     },
 
     checkLogin: function Account_checkLogin(rk) {
-        p('checkLogin\n' + rk.quote());
+        p('checkLogin\n' + rk);
         let name = this.nameCache.get(rk);
         if (name) {
             this.setUser(name, rk);
