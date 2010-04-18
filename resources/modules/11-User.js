@@ -29,7 +29,10 @@ User.prototype = {
         return this._prefs;
     },
 
-    get groups User_get_groups() (this._groups || []).concat(),
+    get groups User_get_groups() {
+        let names = this.prefs.get('group.names', '');
+        return names ? names.split('|') : [];
+    },
 
     _checkGroups: function User__checkGroups() {
         let url = HatenaLink.parseToURL('g:') + 'rkgroup';
@@ -38,27 +41,25 @@ User.prototype = {
         function onGotGroups(res) {
             if (!res.ok || !res.xml || res.xml.rkgroup.@userid != this.name)
                 return;
-            this._groups =
-                ['' + group for each (group in res.xml.rkgroup.group)];
+            let groups = [group for each (group in res.xml.rkgroup.group)];
+            this.prefs.set('group.names', groups.join('|'));
         }
     },
 
     onLogin: function User_onLogin(rk) {
         this.options.rk = rk;
-        this._groups = [];
+
         this._groupTimer = new Timer(23 * 60 * 1000);
         this._groupTimer.start();
         let checkGroups = method(this, '_checkGroups');
-        this._groupListener =
-            this._groupTimer.createListener('timer', checkGroups);
+        this._groupTimer.createListener('timer', checkGroups);
         checkGroups();
     },
 
     onLogout: function User_onLogout() {
         this.options.rk = '';
-        this._groupTimer.stop();
-        this._groupListener.unlisten();
-        this._groups = this._groupTimer = this._groupListener = null;
+        this._groupTimer.dispose();
+        this._groupTimer = null;
     },
 };
 

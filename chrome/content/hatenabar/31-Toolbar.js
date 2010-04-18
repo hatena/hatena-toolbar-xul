@@ -32,14 +32,15 @@ var Toolbar = {
 
     openGroup: function Tb_openGroup(event) {
         let link = 'g:';
-        if (Account.user) {
+        let user = Account.user;
+        if (user) {
             let group = UICommand.getTarget(event).value ||
-                        User.user.prefs.get('group.selected', '');
-            if (Account.user.groups.indexOf(group) === -1)
+                        user.prefs.get('group.selected', '');
+            if (user.groups.indexOf(group) === -1)
                 group = '';
             if (group) {
                 link += group + ':id:?';
-                User.user.prefs.set('group.selected', group);
+                user.prefs.set('group.selected', group);
             } else {
                 link += 'id:?:group';
             }

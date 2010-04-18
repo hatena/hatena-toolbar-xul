@@ -46,7 +46,7 @@ extend(Prefs.prototype, {
             try {
                 return JSON.parse(json);
             } catch (ex) {
-                return null;
+                return defaultValue;
             }
         }
 
