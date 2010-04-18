@@ -143,7 +143,7 @@ var Account = {
     },
 
     getUserNames: function Account_getUserNames() {
-        let history = Prefs.hatenabar.get('userHistory', '');
+        let history = Prefs.hatenabar.get('account.history', '');
         return history ? history.split('|') : [];
     },
 
@@ -151,7 +151,7 @@ var Account = {
         let names = this.getUserNames();
         if (names.indexOf(name) !== -1) return;
         names.push(name);
-        Prefs.hatenabar.set('userHistory', names.join('|'));
+        Prefs.hatenabar.set('account.history', names.join('|'));
     },
 
     clearUserNames: function Account_clearUserNames(complete) {
@@ -160,7 +160,7 @@ var Account = {
             if (name === keptName) return;
             Prefs.hatenabar.getChildPrefs('users.' + name).clearAll();
         });
-        Prefs.hatenabar.set('userHistory', keptName);
+        Prefs.hatenabar.set('account.history', keptName);
     },
 };
 

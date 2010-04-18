@@ -1,6 +1,8 @@
 const EXPORT = ['AccountCommand'];
 
 var AccountCommand = {
+    prefs: Prefs.hatenabar.getChildPrefs('account'),
+
     clearHistory: function AC_clearHistory() {
         Account.clearUserNames();
     },
@@ -114,8 +116,8 @@ var AccountCommand = {
     },
 
     tryReload: function AC_tryReload() {
-        // XXX Prefs によっては無効化。
-        if (isHatenaURL(content.location.href))
+        if (this.prefs.get('reloadOnChange') &&
+            isHatenaURL(content.location.href))
             content.location.reload();
     },
 
