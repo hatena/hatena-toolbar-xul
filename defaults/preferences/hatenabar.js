@@ -9,7 +9,7 @@ pref("extensions.hatenabar.account.history", "");
 pref("extensions.hatenabar.account.reloadOnChange", true);
 
 // Searchbar
-pref("extensions.hatenabar.searchbar.link", "b:search");
+pref("extensions.hatenabar.searchbar.link", "search:search");
 
 // Star
 pref("extensions.hatenabar.star.anywhere", true);
