@@ -15,7 +15,8 @@
 
 <!-- Searchbar -->
 
-<!ENTITY hatenabar.search.tooltip "ここに検索後を入力してください">
+<!ENTITY hatenabar.search.label "はてなツールバー 検索">
+<!ENTITY hatenabar.search.field.tooltip "ここに検索後を入力してください">
 <!ENTITY hatenabar.search.button.tooltip "検索">
 <!ENTITY hatenabar.search.clearHistory.label "検索履歴を消去">
 <!ENTITY hatenabar.search.clearHistory.key "L">

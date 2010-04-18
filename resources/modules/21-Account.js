@@ -23,7 +23,7 @@ var Account = {
         os.addObserver(this.OfflineObserver, 'network:offline-status-changed', false);
         EventService.createListener('unload', method(this, 'destroy'));
 
-        let timer = new Timer(220, 1);
+        let timer = new Timer(777, 1);
         timer.start();
         timer.createListener('timer', bind(tryCheckLogin, this));
         function tryCheckLogin() {

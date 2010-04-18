@@ -15,7 +15,8 @@
 
 <!-- Searchbar -->
 
-<!ENTITY hatenabar.search.tooltip "Enter search words here">
+<!ENTITY hatenabar.search.label "Hatena Toolbar Search">
+<!ENTITY hatenabar.search.field.tooltip "Enter search words here">
 <!ENTITY hatenabar.search.button.tooltip "Search">
 <!ENTITY hatenabar.search.clearHistory.label "Clear Search History">
 <!ENTITY hatenabar.search.clearHistory.key "L">

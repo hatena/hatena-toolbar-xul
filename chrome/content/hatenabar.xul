@@ -119,6 +119,7 @@
         </toolbarbutton>
 
         <toolbaritem id="hatenabar-search-item"
+                     title="&hatenabar.search.label;"
                      align="center" width="180" persist="width">
             <textbox id="hatenabar-search-field"
                      class="hatenabar-menu-autocomplete"
@@ -126,7 +127,7 @@
                      autocompletesearch="form-history"
                      enablehistory="true"
                      flex="1"
-                     tooltiptext="&hatenabar.search.tooltip;"
+                     tooltiptext="&hatenabar.search.field.tooltip;"
                      clearhistorylabel="&hatenabar.search.clearHistory.label;"
                      clearhistoryaccesskey="&hatenabar.search.clearHistory.key;"
                      resizertooltiptext="&hatenabar.search.resizer.tooltip;"
