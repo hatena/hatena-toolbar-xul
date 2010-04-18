@@ -29,6 +29,10 @@
     -moz-image-region: rect(128px, 16px, 144px, 0px);
 }
 
+textbox[type="autocomplete"]:not([enablehistory="true"]) > .hatenabar-autocomplete-button-box {
+    -moz-padding-end: 3px;
+}
+
 #hatenabar-search-splitter {
     -moz-appearance: none;
     background: none;

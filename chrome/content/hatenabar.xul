@@ -107,13 +107,15 @@
                 </menupopup>
             </toolbarbutton>
 
-            <toolbaritem id="hatenabar-search-item" align="center" width="180">
+            <toolbaritem id="hatenabar-search-item"
+                         align="center" width="180" persist="width">
                 <textbox id="hatenabar-search-field"
                          type="autocomplete"
                          autocompletesearch="form-history"
+                         enablehistory="true"
                          flex="1"
                          onkeypress="hatenabar.SearchField.onKeyPress(event);">
-                    <hbox>
+                    <hbox class="hatenabar-autocomplete-button-box">
                         <image id="hatenabar-search-button"
                                tooltiptext="{{Search}}"
                                onclick="hatenabar.SearchField.onButtonClick(event);"/>
