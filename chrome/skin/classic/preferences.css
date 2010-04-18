@@ -6,6 +6,17 @@
     -moz-box-align: center;
 }
 
+/* Searchbar */
+
+[preference="searchbar.link"] > [value="search:search"] {
+    list-style-image: url("chrome://hatenabar/skin/icons.png");
+    -moz-image-region: rect(128px, 16px, 144px, 0px);
+}
+[preference="searchbar.link"] > [value="b:search"] {
+    list-style-image: url("chrome://hatenabar/skin/icons.png");
+    -moz-image-region: rect(64px, 32px, 80px, 16px);
+}
+
 /* Statusbar */
 
 [preference="account.showStatus"] {

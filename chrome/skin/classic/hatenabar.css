@@ -28,6 +28,9 @@
     list-style-image: url("chrome://hatenabar/skin/icons.png");
     -moz-image-region: rect(128px, 16px, 144px, 0px);
 }
+[hatena|link="b:search"] > hbox > #hatenabar-search-button {
+    -moz-image-region: rect(64px, 32px, 80px, 16px);
+}
 
 textbox[type="autocomplete"]:not([enablehistory="true"]) > .hatenabar-autocomplete-button-box {
     -moz-padding-end: 3px;

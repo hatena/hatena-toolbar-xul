@@ -3,6 +3,7 @@ const EXPORT = ['SearchField'];
 var SearchField = {
     get inputHistory SF_get_inputHistory() InputHistory.searchbar,
     get textbox SF_get_textbox() byId('hatenabar-search-field'),
+    get button SF_get_button() byId('hatenabar-search-button'),
 
     formFillPrefs: new Prefs('browser.formfill'),
 
@@ -55,6 +56,7 @@ var SearchField = {
         }
 
         this.enableHistory();
+        this.updateLink();
     },
 
     _inputContextListener: function SF__inputContextListener(event) {
@@ -70,6 +72,13 @@ var SearchField = {
             textbox.setAttribute('enablehistory', 'true');
         else
             textbox.removeAttribute('enablehistory');
+    },
+
+    updateLink: function SF_updateLink() {
+        let textbox = this.textbox;
+        if (!textbox) return;
+        let link = Prefs.hatenabar.get('searchbar.link');
+        textbox.setAttributeNS(HATENA_NS, 'hatena:link', link);
     },
 
     goSearch: function SF_goSearch(event) {
@@ -100,3 +109,5 @@ Toolbar.createListener('WillCustomize', method(SearchField, 'onCustomize'));
 Toolbar.createListener('CustomizeDone', method(SearchField, 'init'));
 SearchField.formFillPrefs.createListener(
     'enable', method(SearchField, 'enableHistory', undefined));
+Prefs.hatenabar.createListener('searchbar.link',
+                               method(SearchField, 'updateLink'));
