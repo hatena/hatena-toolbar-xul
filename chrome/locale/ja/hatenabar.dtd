@@ -38,13 +38,16 @@
 <!ENTITY hatenabar.bookmark.top.label "トップ">
 
 <!ENTITY hatenabar.diary.label "はてなダイアリー">
-<!ENTITY hatenabar.diary.edit.label "編集">
+<!ENTITY hatenabar.diary.archive.label "記事一覧">
+<!ENTITY hatenabar.diary.edit.label "記事を書く">
+<!ENTITY hatenabar.diary.about.label "プロフィール">
 <!ENTITY hatenabar.diary.config.label "管理">
 <!ENTITY hatenabar.diary.top.label "トップ">
 
 <!ENTITY hatenabar.fotolife.label "はてなフォトライフ">
 <!ENTITY hatenabar.fotolife.upload.label "アップロード">
-<!ENTITY hatenabar.fotolife.favorites.label "お気に入り">
+<!ENTITY hatenabar.fotolife.follow.label "お気に入り">
+<!ENTITY hatenabar.fotolife.star.label "スター">
 <!ENTITY hatenabar.fotolife.edit.label "編集">
 <!ENTITY hatenabar.fotolife.config.label "設定">
 <!ENTITY hatenabar.fotolife.top.label "トップ">
@@ -71,6 +74,10 @@
 <!ENTITY hatenabar.message.label "はてなメッセージ">
 
 <!ENTITY hatenabar.question.label "人力検索はてな">
+<!ENTITY hatenabar.question.questionlist.label "質問履歴">
+<!ENTITY hatenabar.question.answerlist.label "回答履歴">
+<!ENTITY hatenabar.question.watchlist.label "ウォッチリスト">
+<!ENTITY hatenabar.question.config.label "設定">
 <!ENTITY hatenabar.question.top.label "トップ">
 
 <!ENTITY hatenabar.star.label "はてなスター">

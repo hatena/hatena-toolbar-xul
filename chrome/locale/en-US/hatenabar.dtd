@@ -38,13 +38,16 @@
 <!ENTITY hatenabar.bookmark.top.label "top">
 
 <!ENTITY hatenabar.diary.label "Hatena Diary">
-<!ENTITY hatenabar.diary.edit.label "Edit">
+<!ENTITY hatenabar.diary.archive.label "Article List">
+<!ENTITY hatenabar.diary.edit.label "Write Article">
+<!ENTITY hatenabar.diary.about.label "Profile">
 <!ENTITY hatenabar.diary.config.label "Config">
 <!ENTITY hatenabar.diary.top.label "Top">
 
 <!ENTITY hatenabar.fotolife.label "Hatena Fotolife">
 <!ENTITY hatenabar.fotolife.upload.label "Upload">
-<!ENTITY hatenabar.fotolife.favorites.label "Favorites">
+<!ENTITY hatenabar.fotolife.follow.label "Favorites">
+<!ENTITY hatenabar.fotolife.star.label "Stars">
 <!ENTITY hatenabar.fotolife.edit.label "Edit">
 <!ENTITY hatenabar.fotolife.config.label "Config">
 <!ENTITY hatenabar.fotolife.top.label "Top">
@@ -60,6 +63,10 @@
 <!ENTITY hatenabar.haiku.top.label "Top">
 
 <!ENTITY hatenabar.idea.label "Hatena Idea">
+<!ENTITY hatenabar.idea.questionlist.label "Question List">
+<!ENTITY hatenabar.idea.answerlist.label "Answer List">
+<!ENTITY hatenabar.idea.watchlist.label "Watch List">
+<!ENTITY hatenabar.idea.config.label "Config">
 <!ENTITY hatenabar.idea.top.label "Top">
 
 <!ENTITY hatenabar.keyword.label "Hatena Keyword">

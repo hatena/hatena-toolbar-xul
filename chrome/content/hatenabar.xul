@@ -218,9 +218,15 @@
                        command="hatenabar-cmd-open-top-or-user-link"
                        hatena:link="d:">
             <menupopup observes="hatenabar-link-popup-base">
+                <menuitem label="&hatenabar.diary.archive.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="d:id:?:archive"/>
                 <menuitem label="&hatenabar.diary.edit.label;"
                           observes="hatenabar-cmd-open-user-link"
                           hatena:link="d:id:?:edit"/>
+                <menuitem label="&hatenabar.diary.about.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="d:id:?:about"/>
                 <menuitem label="&hatenabar.diary.config.label;"
                           observes="hatenabar-cmd-open-user-link"
                           hatena:link="d:id:?:admin"/>
@@ -241,7 +247,10 @@
                 <menuitem label="&hatenabar.fotolife.upload.label;"
                           observes="hatenabar-cmd-open-user-link"
                           hatena:link="f:id:?:up"/>
-                <menuitem label="&hatenabar.fotolife.favorites.label;"
+                <menuitem label="&hatenabar.fotolife.follow.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="f:id:?:follow"/>
+                <menuitem label="&hatenabar.fotolife.star.label;"
                           observes="hatenabar-cmd-open-user-link"
                           hatena:link="f:id:?:favorite"/>
                 <menuitem label="&hatenabar.fotolife.edit.label;"
@@ -348,6 +357,19 @@
                        command="hatenabar-cmd-open-top-or-user-link"
                        hatena:link="q:">
             <menupopup observes="hatenabar-link-popup-base">
+                <menuitem label="&hatenabar.question.questionlist.label;"
+                          observes="hatenabar-cmd-open-link"
+                          hatena:link="q:id:?:questionlist"/>
+                <menuitem label="&hatenabar.question.answerlist.label;"
+                          observes="hatenabar-cmd-open-link"
+                          hatena:link="q:id:?:answerlist"/>
+                <menuitem label="&hatenabar.question.watchlist.label;"
+                          observes="hatenabar-cmd-open-link"
+                          hatena:link="q:id:?:watchlist"/>
+                <menuitem label="&hatenabar.question.config.label;"
+                          observes="hatenabar-cmd-open-link"
+                          hatena:link="q:id:?:config"/>
+                <menuseparator/>
                 <menuitem label="&hatenabar.question.top.label;"
                           observes="hatenabar-cmd-open-link"
                           hatena:link="q:"/>
