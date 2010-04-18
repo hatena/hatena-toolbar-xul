@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
                   preference="account.showStatus"/>
         <vbox class="indent">
             <checkbox label="{{Remember user history}}"
-                      preference="account.rememberHistory">
+                      preference="account.rememberHistory"/>
             <checkbox label="{{Reload page on login or logout}}"
                       preference="account.reloadOnChange"/>
         </vbox>
