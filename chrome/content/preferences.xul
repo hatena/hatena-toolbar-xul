@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet href="chrome://global/skin" type="text/css"?>
-
 <prefwindow id="hatenabar-preferences"
             xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
             title="{{Hatena Toolbar Preferences}}">
+
+<script type="application/javascript" src="chrome://browser/content/utilityOverlay.js"/>
+<script type="application/javascript"><![CDATA[
+
+// prefwindow 要素が初期化される前に autoloader.js を読み込むと、
+// prefwindow 要素の初期化が強制的に開始されてしまいエラーになる。
+// これを防ぐため、文書木の構築が完了してから autoloader.js を読み込む。
+document.addEventListener('DOMContentLoaded', function () {
+    let script = document.createElementNS('http://www.w3.org/1999/xhtml', 'script');
+    script.setAttribute('type', 'application/javascript');
+    script.setAttribute('src', 'chrome://hatenabar/content/autoloader.js');
+    document.documentElement.appendChild(script);
+}, false);
+
+]]></script>
 
 <prefpane id="general-pane"
           label="{{General}}">
@@ -22,27 +36,25 @@
                     type="bool"/>
     </preferences>
 
-    <vbox>
-        <label value="{{Search Engine in Searchbar}}"/>
-        <radiogroup preference="searchbar.link"
-                    orient="horizontal">
-            <radio label="{{Hatena Search}}"
-                   value="search:search"/>
-            <radio label="{{Hatena Bookmark Search}}"
-                   value="b:search"/>
-        </radiogroup>
+    <label value="{{Search Engine in Searchbar}}"/>
+    <radiogroup preference="searchbar.link"
+                orient="horizontal">
+        <radio label="{{Hatena Search}}"
+               value="search:search"/>
+        <radio label="{{Hatena Bookmark Search}}"
+               value="b:search"/>
+    </radiogroup>
 
-        <groupbox>
-            <caption label="{{Statusbar}}"/>
+    <groupbox>
+        <caption label="{{Statusbar}}"/>
 
-            <checkbox label="{{Show Account Panel}}"
-                      preference="account.showStatus"/>
-            <checkbox label="{{Show Star Panel}}"
-                      preference="star.showStatus"/>
-            <checkbox label="{{Show Add-to-Bookmark Button}}"
-                      preference="bookmark.showStatus"/>
-        </groupbox>
-    </vbox>
+        <checkbox label="{{Show Account Panel}}"
+                  preference="account.showStatus"/>
+        <checkbox label="{{Show Star Panel}}"
+                  preference="star.showStatus"/>
+        <checkbox label="{{Show Add-to-Bookmark Button}}"
+                  preference="bookmark.showStatus"/>
+    </groupbox>
 </prefpane>
 
 <prefpane id="bookmark-ext-pane"
@@ -50,12 +62,7 @@
     <preferences>
     </preferences>
 
-    <vbox>
-        <label value="{{Hatena Bookmark Extension}}"/>
-    </vbox>
+    <label value="{{Hatena Bookmark Extension}}"/>
 </prefpane>
-
-<script type="application/javascript" src="chrome://browser/content/utilityOverlay.js"/>
-<script type="application/javascript" src="chrome://hatenabar/content/autoloader.js"/>
 
 </prefwindow>

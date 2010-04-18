@@ -510,7 +510,7 @@ let _loaderHelper = {
         let node = win.document.firstChild;
         let root = win.document.documentElement;
         let ourURIPattern =
-            new RegExp('\\bchrome://' + EXTENSION_HOST + '/content/[\\w./-]');
+            new RegExp('\\bchrome://' + EXTENSION_HOST + '/content/[\\w./-]+');
         for (; node !== root; node = node.nextSibling) {
             let match;
             if (node.nodeType === node.PROCESSING_INSTRUCTION_NODE &&
