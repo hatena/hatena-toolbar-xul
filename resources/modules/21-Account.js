@@ -22,6 +22,22 @@ var Account = {
         os.addObserver(this.ResponseObserver, 'http-on-examine-response', false);
         os.addObserver(this.OfflineObserver, 'network:offline-status-changed', false);
         EventService.createListener('unload', method(this, 'destroy'));
+
+        let timer = new Timer(220, 1);
+        timer.start();
+        timer.createListener('timer', bind(tryCheckLogin, this));
+        function tryCheckLogin() {
+            timer.dispose();
+            if (this.user) return;
+            let cookies = CookieManager.enumerator;
+            while (cookies.hasMoreElements()) {
+                let cookie = cookies.getNext().QueryInterface(Ci.nsICookie);
+                if (cookie.host === LOGIN_COOKIE_HOST && cookie.name === 'rk') {
+                    this.checkLogin(cookie.value);
+                    break;
+                }
+            }
+        }
     },
 
     destroy: function Account_destroy() {
@@ -130,8 +146,8 @@ var Account = {
 
         let user = null;
         if (name) {
-            // XXX remember するのは設定で有効になってるときのみにする。
-            this.rememberUserName(name);
+            if (Prefs.hatenabar.get('account.rememberHistory'))
+                this.rememberUserName(name);
             user = new User(name);
             try { user.onLogin(rk); }
             catch (ex) { reportError(ex); }

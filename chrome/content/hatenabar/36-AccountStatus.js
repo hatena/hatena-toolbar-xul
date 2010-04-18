@@ -69,8 +69,15 @@ var AccountStatus = {
             menu.setAttribute('value', name);
             popup.appendChild(menu);
         }, this);
+        let separator = byId('hatenabar-account-status-login-separator');
         let loginMenu = byId('hatenabar-account-status-login-menu');
-        loginMenu.collapsed = !!names.length;
+        if (Account.user) {
+            separator.collapsed = !names.length;
+            loginMenu.collapsed = true;
+        } else {
+            separator.collapsed = false;
+            loginMenu.collapsed = !!names.length;
+        }
     },
 
     onPanelClick: function AS_onPanelClick(event) {

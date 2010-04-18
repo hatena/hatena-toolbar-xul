@@ -518,7 +518,7 @@
                 <menuseparator/>
                 <menuitem label="&hatenabar.account.logout.label;"
                           observes="hatenabar-cmd-go-logout"/>
-                <menuseparator/>
+                <menuseparator id="hatenabar-account-status-login-separator"/>
                 <menuitem id="hatenabar-account-status-login-menu"
                           label="&hatenabar.account.login.label;"
                           observes="hatenabar-cmd-go-login"/>
