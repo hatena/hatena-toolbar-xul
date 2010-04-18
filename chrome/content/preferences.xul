@@ -22,9 +22,15 @@ document.addEventListener('DOMContentLoaded', function () {
 <prefpane id="general-pane"
           label="{{General}}">
     <preferences>
+        <preference id="account.rememberHistory"
+                    name="extensions.hatenabar.account.rememberHistory"
+                    type="bool"/>
         <preference id="searchbar.link"
                     name="extensions.hatenabar.searchbar.link"
-                    type="unichar"/>
+                    type="string"/>
+        <preference id="star.anywhere"
+                    name="extensions.hatenabar.star.anywhere"
+                    type="bool"/>
         <preference id="account.showStatus"
                     name="extensions.hatenabar.account.showStatus"
                     type="bool"/>
@@ -36,15 +42,22 @@ document.addEventListener('DOMContentLoaded', function () {
                     type="bool"/>
     </preferences>
 
-    <label value="{{Search Engine in Searchbar}}"/>
-    <radiogroup preference="searchbar.link"
-                orient="horizontal">
-        <radio label="{{Hatena Search}}"
-               value="search:search"/>
-        <radio label="{{Hatena Bookmark Search}}"
-               value="b:search"/>
-    </radiogroup>
+    <groupbox>
+        <caption label="{{All Works}}"/>
 
+        <checkbox label="{{Remember User History}}"
+                  preference="account.rememberHistory"/>
+        <label value="{{Search Engine in Searchbar}}"/>
+        <radiogroup preference="searchbar.link"
+                    orient="horizontal">
+            <radio label="{{Hatena Search}}"
+                   value="search:search"/>
+            <radio label="{{Hatena Bookmark Search}}"
+                   value="b:search"/>
+        </radiogroup>
+        <checkbox label="{{Use Hatena Star anywhere}}"
+                  preference="star.anywhere"/>
+    </groupbox>
     <groupbox>
         <caption label="{{Statusbar}}"/>
 
