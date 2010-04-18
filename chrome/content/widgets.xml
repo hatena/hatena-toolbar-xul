@@ -3,6 +3,27 @@
           xmlns:xbl="http://www.mozilla.org/xbl"
           xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
+    <binding id="command-link"
+             extends="chrome://global/content/bindings/text.xml#text-link">
+        <implementation>
+            <constructor><![CDATA[
+                this.href = '';
+            ]]></constructor>
+
+            <property name="accessibleType" readonly="true"
+                      onget="return Components.interfaces.nsIAccessibleProvider.XULButton"/>
+
+            <method name="open">
+                <parameter name="event"/>
+                <body><![CDATA[
+                    if (!this.hasAttribute('oncommand')) return;
+                    let onCommand = new Function('event', this.getAttribute('oncommand'));
+                    onCommand.call(this, event);
+                ]]></body>
+            </method>
+        </implementation>
+    </binding>
+
     <binding id="sidelabel-toolbarbutton"
              extends="chrome://global/content/bindings/toolbarbutton.xml#toolbarbutton">
         <content>
@@ -28,12 +49,21 @@
         </implementation>
     </binding>
 
-    <binding id="sidelabel-toolbarbutton-icon"
-             extends="chrome://global/content/bindings/general.xml#image">
-        <content>
-            <xul:image xbl:inherits="src"/>
-            <xul:label class="sidelabel-toolbarbutton-sidelabel"
-                       xbl:inherits="value=sidelabel"/>
+    <binding id="menu-autocomplete-popup"
+             extends="chrome://global/content/bindings/autocomplete.xml#autocomplete-result-popup">
+        <content ignorekeys="true">
+            <xul:tree anonid="tree" class="autocomplete-tree plain"
+                      hidecolumnpicker="true" flex="1" seltype="single">
+                <xul:treecols anonid="treecols">
+                    <xul:treecol id="treecolAutoCompleteValue"
+                                 class="autocomplete-treecol"
+                                 flex="1" overflow="true"/>
+                </xul:treecols>
+                <xul:treechildren class="autocomplete-treebody"/>
+            </xul:tree>
+            <xul:vbox>
+                <children/>
+            </xul:vbox>
         </content>
     </binding>
 

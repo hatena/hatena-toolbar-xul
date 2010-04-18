@@ -110,6 +110,7 @@
             <toolbaritem id="hatenabar-search-item"
                          align="center" width="180" persist="width">
                 <textbox id="hatenabar-search-field"
+                         class="hatenabar-menu-autocomplete"
                          type="autocomplete"
                          autocompletesearch="form-history"
                          enablehistory="true"

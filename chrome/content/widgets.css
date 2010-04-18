@@ -1,8 +1,17 @@
+/* command-link */
+
+.hatenabar-command-link {
+    -moz-binding: url("chrome://hatenabar/content/widgets.xml#command-link");
+}
+
+/* sidelabel-toolbarbutton */
+
 toolbarbutton[sidelabel] {
     -moz-binding: url("chrome://hatenabar/content/widgets.xml#sidelabel-toolbarbutton");
 }
-/*
-toolbarbutton[sidelabel] > .toolbarbutton-icon {
-    -moz-binding: url("chrome://hatenabar/content/widgets.xml#sidelabel-toolbarbutton-icon");
+
+/* menu-autocomplte */
+
+.hatenabar-menu-autocomplete > .autocomplete-result-popupset > panel[type="autocomplete"] {
+    -moz-binding: url("chrome://hatenabar/content/widgets.xml#menu-autocomplete-popup");
 }
-*/

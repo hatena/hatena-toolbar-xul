@@ -33,6 +33,10 @@ textbox[type="autocomplete"]:not([enablehistory="true"]) > .hatenabar-autocomple
     -moz-padding-end: 3px;
 }
 
+.hatenabar-menu-autocomplete-popup-box {
+    font-size: smaller;
+}
+
 #hatenabar-search-splitter {
     -moz-appearance: none;
     background: none;

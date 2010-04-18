@@ -11,6 +11,7 @@ var SearchField = {
         if (!textbox) return;
         textbox.searchParam = this.inputHistory.key;
 
+        // 入力欄のコンテキストメニューに履歴消去を追加。
         let inputBox = document.getAnonymousElementByAttribute(textbox, 'anonid', 'textbox-input-box');
         let contextMenu = document.getAnonymousElementByAttribute(inputBox, 'anonid', 'input-box-contextmenu');
         contextMenu.appendChild(document.createElementNS(XUL_NS, 'menuseparator'));
@@ -20,6 +21,17 @@ var SearchField = {
         menu.setAttribute('observes', "hatenabar-cmd-clear-search-history");
         contextMenu.appendChild(menu);
         contextMenu.addEventListener('popupshowing', this._inputContextListener, false);
+
+        // 自動補完メニューに履歴消去を追加。
+        let box = document.createElementNS(XUL_NS, 'hbox');
+        box.className = "hatenabar-menu-autocomplete-popup-box";
+        box.setAttribute('pack', 'end');
+        let link = document.createElementNS(XUL_NS, 'label');
+        link.className = "text-link hatenabar-command-link";
+        link.setAttribute('value', '{{Clear Search History}}');
+        link.setAttribute('command', 'hatenabar-cmd-clear-search-history');
+        box.appendChild(link);
+        textbox.popup.appendChild(box);
 
         let item = textbox.parentNode;
         if (item.nextSibling) {
