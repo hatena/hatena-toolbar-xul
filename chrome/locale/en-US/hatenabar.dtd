@@ -4,6 +4,7 @@
 <!ENTITY hatenabar.toolbar.key "H">
 
 <!ENTITY hatenabar.toolbar.context.hideButton.label "Hide This Button">
+<!ENTITY hatenabar.toolbar.context.hideButton.key "T">
 
 <!-- Main Menu -->
 
@@ -16,7 +17,9 @@
 
 <!ENTITY hatenabar.search.tooltip "Enter search words here">
 <!ENTITY hatenabar.search.button.tooltip "Search">
-<!ENTITY hatenabar.search.splitter.tooltip "Resize Searchbar">
+<!ENTITY hatenabar.search.clearHistory.label "Clear Search History">
+<!ENTITY hatenabar.search.clearHistory.key "L">
+<!ENTITY hatenabar.search.resizer.tooltip "Resize Searchbar">
 
 <!-- Services -->
 

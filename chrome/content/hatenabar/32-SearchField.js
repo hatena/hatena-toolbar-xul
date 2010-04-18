@@ -16,8 +16,8 @@ var SearchField = {
         let contextMenu = document.getAnonymousElementByAttribute(inputBox, 'anonid', 'input-box-contextmenu');
         contextMenu.appendChild(document.createElementNS(XUL_NS, 'menuseparator'));
         let menu = document.createElementNS(XUL_NS, 'menuitem');
-        menu.setAttribute('label', '{{Clear Search History}}');
-        //menu.setAttribute('accesskey', '');
+        menu.setAttribute('label', textbox.getAttribute('clearhistorylabel'));
+        menu.setAttribute('accesskey', textbox.getAttribute('clearhistoryaccesskey'));
         menu.setAttribute('observes', "hatenabar-cmd-clear-search-history");
         contextMenu.appendChild(menu);
         contextMenu.addEventListener('popupshowing', this._inputContextListener, false);
@@ -28,7 +28,7 @@ var SearchField = {
         box.setAttribute('pack', 'end');
         let link = document.createElementNS(XUL_NS, 'label');
         link.className = "text-link hatenabar-command-link";
-        link.setAttribute('value', '{{Clear Search History}}');
+        link.setAttribute('value', textbox.getAttribute('clearhistorylabel'));
         link.setAttribute('command', 'hatenabar-cmd-clear-search-history');
         box.appendChild(link);
         textbox.popup.appendChild(box);
@@ -36,11 +36,12 @@ var SearchField = {
         let item = textbox.parentNode;
         if (item.nextSibling) {
             let splitter = document.createElementNS(XUL_NS, 'splitter');
-            splitter.setAttribute('id', 'hatenabar-search-splitter');
-            splitter.setAttribute('class', 'chromeclass-toolbar-additional');
+            splitter.id = 'hatenabar-search-splitter';
+            splitter.className = 'chromeclass-toolbar-additional';
             splitter.setAttribute('resizebefore', 'closest');
             splitter.setAttribute('resizeafter', 'flex');
-            splitter.setAttribute('tooltiptext', '{{Resize Search Field}}');
+            splitter.setAttribute('tooltiptext',
+                                  textbox.getAttribute('resizertooltiptext'));
             if (item.nextSibling.localName === 'toolbarseparator') {
                 let separator = document.createElementNS(XUL_NS, 'toolbarseparator');
                 separator.setAttribute('flex', '1');

@@ -89,6 +89,7 @@
         <menuseparator id="hatenabar-toolbar-context-separator"/>
         <menuitem id="hatenabar-toolbar-context-hide-button-menu"
                   label="&hatenabar.toolbar.context.hideButton.label;"
+                  accesskey="&hatenabar.toolbar.context.hideButton.key;"
                   oncommand="hatenabar.Toolbar.hideContextButton(event);"/>
     </popup>
 
@@ -126,6 +127,9 @@
                      enablehistory="true"
                      flex="1"
                      tooltiptext="&hatenabar.search.tooltip;"
+                     clearhistorylabel="&hatenabar.search.clearHistory.label;"
+                     clearhistoryaccesskey="&hatenabar.search.clearHistory.key;"
+                     resizertooltiptext="&hatenabar.search.resizer.tooltip;"
                      onkeypress="hatenabar.SearchField.onKeyPress(event);">
                 <hbox class="hatenabar-autocomplete-button-box">
                     <image id="hatenabar-search-button"

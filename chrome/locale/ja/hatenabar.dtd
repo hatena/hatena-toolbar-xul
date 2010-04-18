@@ -4,6 +4,7 @@
 <!ENTITY hatenabar.toolbar.key "H">
 
 <!ENTITY hatenabar.toolbar.context.hideButton.label "このボタンを非表示にする">
+<!ENTITY hatenabar.toolbar.context.hideButton.key "T">
 
 <!-- Main Menu -->
 
@@ -16,7 +17,9 @@
 
 <!ENTITY hatenabar.search.tooltip "ここに検索後を入力してください">
 <!ENTITY hatenabar.search.button.tooltip "検索">
-<!ENTITY hatenabar.search.splitter.tooltip "検索バーのサイズを変更する">
+<!ENTITY hatenabar.search.clearHistory.label "検索履歴を消去">
+<!ENTITY hatenabar.search.clearHistory.key "L">
+<!ENTITY hatenabar.search.resizer.tooltip "検索バーのサイズを変更する">
 
 <!-- Services -->
 
