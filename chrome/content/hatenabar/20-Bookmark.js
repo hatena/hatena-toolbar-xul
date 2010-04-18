@@ -45,7 +45,8 @@ var Bookmark = {
         if (!input) return;
         let query = input.value;
         let href = HatenaLink.parseToURL('b:search', { query: query });
-        let text = '{{Search "' + query + '" by Hatena Search}}';
+        let text =
+            Browser.strings.get('bookmark.searchOnWeb.button.tooltip', query);
         let src = HatenaLink.parseToURL('b:images:search-mini.png');
         let code = 'javascript:(' + this._addSearchButton.toSource() + ')(' +
             [config, href, text, src].map(uneval).join(',') + ')';

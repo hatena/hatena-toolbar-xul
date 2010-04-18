@@ -28,6 +28,9 @@ document.addEventListener('DOMContentLoaded', function () {
         <preference id="searchbar.link"
                     name="extensions.hatenabar.searchbar.link"
                     type="string"/>
+        <preference id="bookmark.showSearchOnWeb"
+                    name="extensions.hatenabar.bookmark.showSearchOnWeb"
+                    type="bool"/>
         <preference id="star.anywhere"
                     name="extensions.hatenabar.star.anywhere"
                     type="bool"/>
@@ -55,6 +58,8 @@ document.addEventListener('DOMContentLoaded', function () {
             <radio label="{{Hatena Bookmark Search}}"
                    value="b:search"/>
         </radiogroup>
+        <checkbox label="{{Show &quot;Search by Hatena Bookmark&quot; button in Search Results}}"
+                  preference="bookmark.showSearchOnWeb"/>
         <checkbox label="{{Use Hatena Star anywhere}}"
                   preference="star.anywhere"/>
     </groupbox>
