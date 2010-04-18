@@ -17,6 +17,8 @@ var Browser = {
         gBrowser.removeProgressListener(this);
     },
 
+    strings: new Strings('hatenabar.properties'),
+
     onLocationChange: function Browser_onLocationChange(progress, request, location) {
         this.dispatch('LocationChanged', progress, request, location);
     },

@@ -7,8 +7,11 @@ const StringBundleService = getService('@mozilla.org/intl/stringbundle;1',
 
 const BASE_URL = 'chrome://' + EXTENSION_HOST + '/locale/';
 
-function Strings(url) {
+function Strings(url, prefix) {
     this.url = (url.indexOf(':') === -1) ? BASE_URL + url : url;
+    this.prefix = prefix
+        ? ((prefix[prefix.length - 1] === '.') ? prefix : prefix + '.')
+        : '';
     this._bundle = null;
 }
 
@@ -19,9 +22,16 @@ extend(Strings.prototype, {
     },
 
     get: function Strings_get(name, args) {
+        let fullName = this.prefix + name;
         if (arguments.length === 1)
-            return this.bundle.GetStringFromName(name);
+            return this.bundle.GetStringFromName(fullName);
         args = [].concat(args);
-        return this.bundle.formatStringFromName(name, args, args.length);
+        return this.bundle.formatStringFromName(fullName, args, args.length);
+    },
+
+    getChildStrings: function Strings_getChildStrings(prefix) {
+        let strings = new Strings(this.url, this.prefix + prefix);
+        strings._bundle = this._bundle;
+        return strings;
     },
 });

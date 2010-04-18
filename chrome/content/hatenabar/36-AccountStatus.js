@@ -5,6 +5,8 @@ var AccountStatus = {
     get label AS_get_label() byId('hatenabar-account-status-label'),
     get popup AS_get_popup() byId('hatenabar-account-status-popup'),
 
+    strings: Browser.strings.getChildStrings('account'),
+
     updatePanel: function AS_updatePanel(inProgressUserName) {
         let panel = this.panel;
         let label = this.label;
@@ -12,20 +14,21 @@ var AccountStatus = {
         if (inProgressUserName) {
             panel.setAttributeNS(HATENA_NS, 'hatena:login', 'in-progress');
             panel.image = '';
-            panel.tooltipText = '{{Trying login as ' + inProgressUserName + '...}}';
-            label.value = '{{Trying login...}}';
+            panel.tooltipText = this.strings.get('inProgress.tooltip',
+                                                 inProgressUserName);
+            label.value = this.strings.get('inProgress.label');
             label.collapsed = false;
         } else if (Account.user) {
             let user = Account.user;
             panel.setAttributeNS(HATENA_NS, 'hatena:login', 'in-session');
             panel.image = user.getIcon();
-            panel.tooltipText = '{{Has Logged in as ' + user.name + '}}';
+            panel.tooltipText = this.strings.get('asUser.tooltip', user.name);
             label.value = user.name;
             label.collapsed = false;
         } else {
             panel.removeAttributeNS(HATENA_NS, 'login');
             panel.image = '';
-            panel.tooltipText = '{{Not logging in Hatena}}';
+            panel.tooltipText = this.strings.get('asGuest.tooltip');
             label.value = '';
             label.collapsed = true;
         }
@@ -50,11 +53,12 @@ var AccountStatus = {
             let menu = document.createElementNS(XUL_NS, 'menuitem');
             menu.setAttribute('class', 'hatenabar-login-menuitem');
             menu.setAttribute('label', name);
-            menu.setAttribute('tooltiptext', '{{Login as ' + name + '}}');
+            menu.setAttribute('tooltiptext',
+                              this.strings.get('loginAs.tooltip', name));
             menu.setAttribute('observes', 'hatenabar-cmd-go-login');
             menu.setAttribute('value', name);
             popup.appendChild(menu);
-        });
+        }, this);
         let loginMenu = byId('hatenabar-account-status-login-menu');
         loginMenu.collapsed = !!names.length;
     },

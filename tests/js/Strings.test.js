@@ -28,3 +28,12 @@ function testAbbrevedURL() {
     let strings = new Strings('Strings.test.properties');
     assert.equals('Hello, world!', strings.get('hello'));
 }
+
+function testGetChildStrings() {
+    let s1 = new Strings('Strings.test.properties', 'foo');
+    assert.equals('foo.bar', s1.get('bar'));
+    assert.equals('foo.bar.baz', s1.get('bar.baz'));
+
+    let s2 = s1.getChildStrings('bar');
+    assert.equals('foo.bar.baz', s2.get('baz'));
+}
