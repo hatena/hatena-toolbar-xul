@@ -47,6 +47,10 @@ var SearchField = {
                 splitter.appendChild(separator);
             }
             item.parentNode.insertBefore(splitter, item.nextSibling);
+            // textbox.popup が splitter による
+            // サイズ変更の対象になってしまうのを防ぐ。
+            textbox.popup.setAttribute('onpopuphidden',
+                                       "this.removeAttribute('width');");
         }
 
         this.enableHistory();
