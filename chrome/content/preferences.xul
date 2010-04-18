@@ -26,6 +26,9 @@ document.addEventListener('DOMContentLoaded', function () {
         <preference id="account.rememberHistory"
                     name="extensions.hatenabar.account.rememberHistory"
                     type="bool"/>
+        <preference id="account.reloadOnChange"
+                    name="extensions.hatenabar.account.reloadOnChange"
+                    type="bool"/>
         <preference id="searchbar.link"
                     name="extensions.hatenabar.searchbar.link"
                     type="string"/>
@@ -49,17 +52,17 @@ document.addEventListener('DOMContentLoaded', function () {
     <groupbox>
         <caption label="{{All Works}}"/>
 
-        <checkbox label="{{Remember User History}}"
-                  preference="account.rememberHistory"/>
-        <label value="{{Search Engine in Searchbar}}"/>
-        <radiogroup preference="searchbar.link"
-                    orient="horizontal">
+        <label value="{{Search engine in searchbar}}"
+               control="searchbar-link-group"/>
+        <radiogroup id="searchbar-link-group"
+                    preference="searchbar.link">
             <radio label="{{Hatena Search}}"
                    value="search:search"/>
             <radio label="{{Hatena Bookmark Search}}"
                    value="b:search"/>
         </radiogroup>
-        <checkbox label="{{Show &quot;Search by Hatena Bookmark&quot; button in Search Results}}"
+        <separator class="thin"/>
+        <checkbox label="{{Show &quot;Search by Hatena Bookmark&quot; button in search results}}"
                   preference="bookmark.showSearchOnWeb"/>
         <checkbox label="{{Use Hatena Star anywhere}}"
                   preference="star.anywhere"/>
@@ -67,11 +70,17 @@ document.addEventListener('DOMContentLoaded', function () {
     <groupbox>
         <caption label="{{Statusbar}}"/>
 
-        <checkbox label="{{Show Account Panel}}"
+        <checkbox label="{{Show account panel}}"
                   preference="account.showStatus"/>
-        <checkbox label="{{Show Star Panel}}"
+        <vbox class="indent">
+            <checkbox label="{{Remember user history}}"
+                      preference="account.rememberHistory">
+            <checkbox label="{{Reload page on login or logout}}"
+                      preference="account.reloadOnChange"/>
+        </vbox>
+        <checkbox label="{{Show Star panel}}"
                   preference="star.showStatus"/>
-        <checkbox label="{{Show Add-to-Bookmark Button}}"
+        <checkbox label="{{Show Add-to-Bookmark button}}"
                   preference="bookmark.showStatus"/>
     </groupbox>
 </prefpane>
