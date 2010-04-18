@@ -1,0 +1,114 @@
+<!-- Toolbar -->
+
+<!ENTITY hatenabar.toolbar.label "Hatena Toolbar">
+<!ENTITY hatenabar.toolbar.key "H">
+
+<!ENTITY hatenabar.toolbar.context.hideButton.label "Hide This Button">
+
+<!-- Main Menu -->
+
+<!ENTITY hatenabar.main.label "Hatena">
+<!ENTITY hatenabar.main.prefs.label "Preferences…">
+<!ENTITY hatenabar.main.my.label "My Hatena">
+<!ENTITY hatenabar.main.help.label "Help">
+
+<!-- Searchbar -->
+
+<!ENTITY hatenabar.search.tooltip "Enter search words here">
+<!ENTITY hatenabar.search.button.tooltip "Search">
+<!ENTITY hatenabar.search.splitter.tooltip "Resize Searchbar">
+
+<!-- Services -->
+
+<!ENTITY hatenabar.antenna.label "Hatena Antenna">
+<!ENTITY hatenabar.antenna.antenna.label "Antenna">
+<!ENTITY hatenabar.antenna.simple.label "Simple">
+<!ENTITY hatenabar.antenna.detail.label "Detail">
+<!ENTITY hatenabar.antenna.checklist.label "Checklist">
+<!ENTITY hatenabar.antenna.config.label "Config">
+<!ENTITY hatenabar.antenna.top.label "Top">
+
+<!ENTITY hatenabar.bookmark.label "Hatena Bookmark">
+<!ENTITY hatenabar.bookmark.favorites.label "Favorites">
+<!ENTITY hatenabar.bookmark.config.label "Config">
+<!ENTITY hatenabar.bookmark.top.label "top">
+
+<!ENTITY hatenabar.diary.label "Hatena Diary">
+<!ENTITY hatenabar.diary.edit.label "Edit">
+<!ENTITY hatenabar.diary.config.label "Config">
+<!ENTITY hatenabar.diary.top.label "Top">
+
+<!ENTITY hatenabar.fotolife.label "Hatena Fotolife">
+<!ENTITY hatenabar.fotolife.upload.label "Upload">
+<!ENTITY hatenabar.fotolife.favorites.label "Favorites">
+<!ENTITY hatenabar.fotolife.edit.label "Edit">
+<!ENTITY hatenabar.fotolife.config.label "Config">
+<!ENTITY hatenabar.fotolife.top.label "Top">
+
+<!ENTITY hatenabar.group.label "Hatena Group">
+<!ENTITY hatenabar.group.list.label "Group List">
+<!ENTITY hatenabar.group.top.label "Top">
+
+<!ENTITY hatenabar.haiku.label "Hatena Haiku">
+<!ENTITY hatenabar.haiku.entries.label "Entries">
+<!ENTITY hatenabar.haiku.hotKeywords.label "Hot Keywords">
+<!ENTITY hatenabar.haiku.album.label "Album">
+<!ENTITY hatenabar.haiku.top.label "Top">
+
+<!ENTITY hatenabar.idea.label "Hatena Idea">
+<!ENTITY hatenabar.idea.top.label "Top">
+
+<!ENTITY hatenabar.keyword.label "Hatena Keyword">
+<!ENTITY hatenabar.keyword.favorites.label "Favorites">
+<!ENTITY hatenabar.keyword.modifications.label "Modifications">
+<!ENTITY hatenabar.keyword.history.label "History">
+<!ENTITY hatenabar.keyword.top.label "Top">
+
+<!ENTITY hatenabar.message.label "Hatena Message">
+
+<!ENTITY hatenabar.question.label "Question Hatena">
+<!ENTITY hatenabar.question.top.label "Top">
+
+<!ENTITY hatenabar.star.label "Hatena Star">
+<!ENTITY hatenabar.star.reports.label "Reports">
+<!ENTITY hatenabar.star.stars.label "Stars">
+<!ENTITY hatenabar.star.blogs.label "Blogs">
+<!ENTITY hatenabar.star.top.label "Top">
+
+<!ENTITY hatenabar.ugomemo.label "Ugomemo Hatena">
+<!ENTITY hatenabar.ugomemo.favorites.label "Favorites">
+<!ENTITY hatenabar.ugomemo.stars.label "Stars">
+<!ENTITY hatenabar.ugomemo.hotMovies.label "Hot Movies">
+<!ENTITY hatenabar.ugomemo.movies.label "Movies">
+<!ENTITY hatenabar.ugomemo.ranking.label "Ranking">
+<!ENTITY hatenabar.ugomemo.channels.label "Channels">
+<!ENTITY hatenabar.ugomemo.top.label "Top">
+
+<!ENTITY hatenabar.counter.label "Hatena Counter">
+<!ENTITY hatenabar.counter.config.label "Config">
+<!ENTITY hatenabar.counter.top.label "Top">
+
+<!ENTITY hatenabar.graph.label "Hatena Graph">
+<!ENTITY hatenabar.graph.edit.label "Edit">
+<!ENTITY hatenabar.graph.top.label "Top">
+
+<!-- Page Actions -->
+
+<!ENTITY hatenabar.actions.includingAntenna.label "Including Antennas">
+<!ENTITY hatenabar.actions.addAntenna.label "Add to Antennas">
+<!ENTITY hatenabar.actions.viewBookmark.label "View Bookmark Entry">
+<!ENTITY hatenabar.actions.addBookmark.label "Add to Bookmarks">
+<!ENTITY hatenabar.actions.referringDiary.label "Referring Diaries">
+<!ENTITY hatenabar.actions.referInDiary.label "Refer in Diary">
+<!ENTITY hatenabar.actions.referInGroup.label "Refer in Group">
+
+<!-- Statusbar -->
+
+<!ENTITY hatenabar.account.login.label "Login…">
+<!ENTITY hatenabar.account.logout.label "Logout">
+<!ENTITY hatenabar.account.clearHistory.label "Clear User History">
+
+<!ENTITY hatenabar.starStatus.about.label "About Hatena Star">
+<!ENTITY hatenabar.star.siteConfig.wiki.label "SiteConfig Wiki">
+<!ENTITY hatenabar.star.siteConfig.howTo.label "How to Create SiteConfig">
+<!ENTITY hatenabar.star.siteConfig.reload.label "Reload SiteConfig">

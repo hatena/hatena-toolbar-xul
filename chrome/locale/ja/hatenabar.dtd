@@ -1,0 +1,114 @@
+<!-- Toolbar -->
+
+<!ENTITY hatenabar.toolbar.label "はてなツールバー">
+<!ENTITY hatenabar.toolbar.key "H">
+
+<!ENTITY hatenabar.toolbar.context.hideButton.label "このボタンを非表示にする">
+
+<!-- Main Menu -->
+
+<!ENTITY hatenabar.main.label "はてな">
+<!ENTITY hatenabar.main.prefs.label "設定...">
+<!ENTITY hatenabar.main.my.label "My はてな">
+<!ENTITY hatenabar.main.help.label "ヘルプ">
+
+<!-- Searchbar -->
+
+<!ENTITY hatenabar.search.tooltip "ここに検索後を入力してください">
+<!ENTITY hatenabar.search.button.tooltip "検索">
+<!ENTITY hatenabar.search.splitter.tooltip "検索バーのサイズを変更する">
+
+<!-- Services -->
+
+<!ENTITY hatenabar.antenna.label "はてなアンテナ">
+<!ENTITY hatenabar.antenna.antenna.label "アンテナ">
+<!ENTITY hatenabar.antenna.simple.label "シンプル">
+<!ENTITY hatenabar.antenna.detail.label "詳細">
+<!ENTITY hatenabar.antenna.checklist.label "ページ一覧">
+<!ENTITY hatenabar.antenna.config.label "設定">
+<!ENTITY hatenabar.antenna.top.label "トップ">
+
+<!ENTITY hatenabar.bookmark.label "はてなブックマーク">
+<!ENTITY hatenabar.bookmark.favorites.label "お気に入り">
+<!ENTITY hatenabar.bookmark.config.label "設定">
+<!ENTITY hatenabar.bookmark.top.label "トップ">
+
+<!ENTITY hatenabar.diary.label "はてなダイアリー">
+<!ENTITY hatenabar.diary.edit.label "編集">
+<!ENTITY hatenabar.diary.config.label "管理">
+<!ENTITY hatenabar.diary.top.label "トップ">
+
+<!ENTITY hatenabar.fotolife.label "はてなフォトライフ">
+<!ENTITY hatenabar.fotolife.upload.label "アップロード">
+<!ENTITY hatenabar.fotolife.favorites.label "お気に入り">
+<!ENTITY hatenabar.fotolife.edit.label "編集">
+<!ENTITY hatenabar.fotolife.config.label "設定">
+<!ENTITY hatenabar.fotolife.top.label "トップ">
+
+<!ENTITY hatenabar.group.label "はてなグループ">
+<!ENTITY hatenabar.group.list.label "グループ一覧">
+<!ENTITY hatenabar.group.top.label "トップ">
+
+<!ENTITY hatenabar.haiku.label "はてなハイク">
+<!ENTITY hatenabar.haiku.entries.label "エントリー">
+<!ENTITY hatenabar.haiku.hotKeywords.label "ホットキーワード">
+<!ENTITY hatenabar.haiku.album.label "アルバム">
+<!ENTITY hatenabar.haiku.top.label "トップ">
+
+<!ENTITY hatenabar.idea.label "はてなアイデア">
+<!ENTITY hatenabar.idea.top.label "トップ">
+
+<!ENTITY hatenabar.keyword.label "はてなキーワード">
+<!ENTITY hatenabar.keyword.favorites.label "お気に入り">
+<!ENTITY hatenabar.keyword.modifications.label "編集履歴">
+<!ENTITY hatenabar.keyword.history.label "閲覧履歴">
+<!ENTITY hatenabar.keyword.top.label "トップ">
+
+<!ENTITY hatenabar.message.label "はてなメッセージ">
+
+<!ENTITY hatenabar.question.label "人力検索はてな">
+<!ENTITY hatenabar.question.top.label "トップ">
+
+<!ENTITY hatenabar.star.label "はてなスター">
+<!ENTITY hatenabar.star.reports.label "レポート">
+<!ENTITY hatenabar.star.stars.label "スター">
+<!ENTITY hatenabar.star.blogs.label "ブログ">
+<!ENTITY hatenabar.star.top.label "トップ">
+
+<!ENTITY hatenabar.ugomemo.label "うごメモはてな">
+<!ENTITY hatenabar.ugomemo.favorites.label "お気に入り">
+<!ENTITY hatenabar.ugomemo.stars.label "スター">
+<!ENTITY hatenabar.ugomemo.hotMovies.label "人気作品">
+<!ENTITY hatenabar.ugomemo.movies.label "新着作品">
+<!ENTITY hatenabar.ugomemo.ranking.label "ランキング">
+<!ENTITY hatenabar.ugomemo.channels.label "チャンネル">
+<!ENTITY hatenabar.ugomemo.top.label "トップ">
+
+<!ENTITY hatenabar.counter.label "はてなカウンター">
+<!ENTITY hatenabar.counter.config.label "設定">
+<!ENTITY hatenabar.counter.top.label "トップ">
+
+<!ENTITY hatenabar.graph.label "はてなグラフ">
+<!ENTITY hatenabar.graph.edit.label "編集">
+<!ENTITY hatenabar.graph.top.label "トップ">
+
+<!-- Page Actions -->
+
+<!ENTITY hatenabar.actions.includingAntenna.label "含むアンテナ">
+<!ENTITY hatenabar.actions.addAntenna.label "アンテナに追加">
+<!ENTITY hatenabar.actions.viewBookmark.label "ブックマークのエントリ">
+<!ENTITY hatenabar.actions.addBookmark.label "ブックマークに追加">
+<!ENTITY hatenabar.actions.referringDiary.label "含む日記">
+<!ENTITY hatenabar.actions.referInDiary.label "日記で言及する">
+<!ENTITY hatenabar.actions.referInGroup.label "グループで言及する">
+
+<!-- Statusbar -->
+
+<!ENTITY hatenabar.account.login.label "ログイン...">
+<!ENTITY hatenabar.account.logout.label "ログアウト">
+<!ENTITY hatenabar.account.clearHistory.label "ユーザー履歴を消去">
+
+<!ENTITY hatenabar.starStatus.about.label "はてなスターについて">
+<!ENTITY hatenabar.star.siteConfig.wiki.label "SiteConfig Wiki">
+<!ENTITY hatenabar.star.siteConfig.howTo.label "SiteConfig の作成方法">
+<!ENTITY hatenabar.star.siteConfig.reload.label "SiteConfig を再読み込み">

@@ -2,6 +2,7 @@
 <?xml-stylesheet type="text/css" href="chrome://hatenabar/content/widgets.css"?>
 <?xml-stylesheet type="text/css" href="chrome://hatenabar/skin/widgets.css"?>
 <?xml-stylesheet type="text/css" href="chrome://hatenabar/skin/hatenabar.css"?>
+<!DOCTYPE overlay SYSTEM "chrome://hatenabar/locale/hatenabar.dtd">
 <overlay id="hatenabar-overlay"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
          xmlns:hatena="http://www.hatena.ne.jp/">
@@ -66,12 +67,12 @@
     <popupset id="mainPopupSet">
         <menupopup id="hatenabar-star-context"
                    observes="hatenabar-link-popup-base">
-            <menuitem label="{{SiteConfig Wiki}}"
+            <menuitem label="&hatenabar.star.siteConfig.wiki.label;"
                       observes="hatenabar-cmd-open-link"
                       hatena:link="s:siteconfig"/>
             <!-- XXX 現時点で HatenaLink.js はキーワード記法に
                  未対応なので URL を直接指定。 -->
-            <menuitem label="{{How to Create SiteConfig}}"
+            <menuitem label="&hatenabar.star.siteConfig.howTo.label;"
                       observes="hatenabar-cmd-open-link"
                       hatena:link="http://d.hatena.ne.jp/keyword/%A4%CF%A4%C6%A4%CA%A5%B9%A5%BF%A1%BCSiteConfig%BA%EE%C0%AE%CA%FD%CB%A1"/>
             <!--
@@ -79,7 +80,7 @@
             <menuitem label="{{Edit SiteConfig for *.example.org…}}"/>
             -->
             <menuseparator/>
-            <menuitem label="{{Reload SiteConfig}}"
+            <menuitem label="&hatenabar.star.siteConfig.reload.label;"
                       oncommand="hatenabar.Star.loadSiteConfig();"/>
         </menupopup>
     </popupset>
@@ -87,416 +88,416 @@
     <popup id="toolbar-context-menu">
         <menuseparator id="hatenabar-toolbar-context-separator"/>
         <menuitem id="hatenabar-toolbar-context-hide-button-menu"
-                  label="{{Hide This Button}}"
+                  label="&hatenabar.toolbar.context.hideButton.label;"
                   oncommand="hatenabar.Toolbar.hideContextButton(event);"/>
     </popup>
 
     <toolbarpalette id="BrowserToolbarPalette">
-            <toolbarbutton id="hatenabar-main-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
-                           type="menu-button"
-                           label="{{Hatena}}"
-                           tooltiptext="{{Hatena}}"
-                           command="hatenabar-cmd-open-link"
-                           hatena:link="www:">
-                <menupopup observes="hatenabar-link-popup-base">
-                    <menuitem label="{{Options...}}"
-                              oncommand="hatenabar.Command.openPreferences();"/>
-                    <!-- menuitem 要素に command 属性でコマンドを指定した場合、
-                         なぜか onclick 属性が転送されないので、
-                         代わりにobserves 属性で属性を転送する。 -->
-                    <menuitem label="{{My Hatena}}"
-                              observes="hatenabar-cmd-open-user-link"
-                              hatena:link="www:my"/>
-                    <menuitem label="{{Help}}"
-                              observes="hatenabar-cmd-open-link"
-                              hatena:link="www:tool:firefox"/>
-                </menupopup>
-            </toolbarbutton>
+        <toolbarbutton id="hatenabar-main-button"
 
-            <toolbaritem id="hatenabar-search-item"
-                         align="center" width="180" persist="width">
-                <textbox id="hatenabar-search-field"
-                         class="hatenabar-menu-autocomplete"
-                         type="autocomplete"
-                         autocompletesearch="form-history"
-                         enablehistory="true"
-                         flex="1"
-                         onkeypress="hatenabar.SearchField.onKeyPress(event);">
-                    <hbox class="hatenabar-autocomplete-button-box">
-                        <image id="hatenabar-search-button"
-                               tooltiptext="{{Search}}"
-                               onclick="hatenabar.SearchField.onButtonClick(event);"/>
-                    </hbox>
-                </textbox>
-            </toolbaritem>
 
-            <toolbarbutton id="hatenabar-antenna-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
-                           type="menu-button"
-                           label="{{Hatena Antenna}}"
-                           tooltiptext="{{Hatena Antenna}}"
-                           command="hatenabar-cmd-open-antenna">
-                <menupopup observes="hatenabar-popup-base"
-                           onpopupshowing="hatenabar.Toolbar.updateAntennaPopup(event);">
-                    <menuitem type="radio"
-                              name="hatenabar-antenna-mode"
-                              label="{{Antenna}}"
-                              observes="hatenabar-cmd-open-antenna"
-                              value="antenna"
-                              hatena:link="a:id:?">
-                        <observes element="hatenabar-has-user"
-                                  attribute="disabled"/>
-                    </menuitem>
-                    <menuitem type="radio"
-                              name="hatenabar-antenna-mode"
-                              label="{{Simple}}"
-                              observes="hatenabar-cmd-open-antenna"
-                              value="simple"
-                              hatena:link="a:id:?:simple">
-                        <observes element="hatenabar-has-user"
-                                  attribute="disabled"/>
-                    </menuitem>
-                    <menuitem type="radio"
-                              name="hatenabar-antenna-mode"
-                              label="{{Detail}}"
-                              observes="hatenabar-cmd-open-antenna"
-                              value="detail"
-                              hatena:link="a:id:?:detail">
-                        <observes element="hatenabar-has-user"
-                                  attribute="disabled"/>
-                    </menuitem>
-                    <menuseparator/>
-                    <menuitem label="{{Check List}}"
-                              observes="hatenabar-cmd-open-user-link"
-                              hatena:link="a:id:?:checklist"/>
-                    <menuitem label="{{Config}}"
-                              observes="hatenabar-cmd-open-user-link"
-                              hatena:link="a:id:?:config"/>
-                    <menuseparator/>
-                    <menuitem label="{{Top}}"
-                              observes="hatenabar-cmd-open-link"
-                              hatena:link="a:"/>
-                </menupopup>
-            </toolbarbutton>
-            <toolbarbutton id="hatenabar-bookmark-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
-                           type="menu-button"
-                           label="{{Hatena Bookmark}}"
-                           tooltiptext="{{Hatena Bookmark}}"
-                           command="hatenabar-cmd-open-top-or-user-link"
-                           hatena:link="b:">
-                <menupopup observes="hatenabar-popup-base"
-                           onpopupshowing="hatenabar.Toolbar.updateBookmarkPopup(event);">
-                    <menuitem label="{{Favorites}}"
-                              observes="hatenabar-cmd-open-user-link"
-                              hatena:link="b:id:?:favorite"/>
-                    <menuseparator id="hatenabar-bookmark-tabs-separator"/>
-                    <menuitem label="{{Config}}"
-                              observes="hatenabar-cmd-open-user-link"
-                              hatena:link="b:id:?:config"/>
-                    <menuseparator/>
-                    <menuitem label="{{Top}}"
-                              observes="hatenabar-cmd-open-link"
-                              hatena:link="b:"/>
-                </menupopup>
-            </toolbarbutton>
-            <toolbarbutton id="hatenabar-diary-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
-                           type="menu-button"
-                           label="{{Hatena Diary}}"
-                           tooltiptext="{{Hatena Diary}}"
-                           command="hatenabar-cmd-open-top-or-user-link"
-                           hatena:link="d:">
-                <menupopup observes="hatenabar-link-popup-base">
-                    <menuitem label="{{Edit Diary}}"
-                              observes="hatenabar-cmd-open-user-link"
-                              hatena:link="d:id:?:edit"/>
-                    <menuitem label="{{Manage Diary}}"
-                              observes="hatenabar-cmd-open-user-link"
-                              hatena:link="d:id:?:admin"/>
-                    <menuseparator/>
-                    <menuitem label="{{Top}}"
-                              observes="hatenabar-cmd-open-link"
-                              hatena:link="d:"/>
-                </menupopup>
-            </toolbarbutton>
-            <toolbarbutton id="hatenabar-fotolife-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
-                           type="menu-button"
-                           label="{{Hatena Fotolife}}"
-                           tooltiptext="{{Hatena Fotolife}}"
-                           command="hatenabar-cmd-open-top-or-user-link"
-                           hatena:link="f:">
-                <menupopup observes="hatenabar-link-popup-base">
-                    <menuitem label="{{Upload}}"
-                              observes="hatenabar-cmd-open-user-link"
-                              hatena:link="f:id:?:up"/>
-                    <menuitem label="{{Favorite}}"
-                              observes="hatenabar-cmd-open-user-link"
-                              hatena:link="f:id:?:favorite"/>
-                    <menuitem label="{{Edit}}"
-                              observes="hatenabar-cmd-open-user-link"
-                              hatena:link="f:id:?:edit"/>
-                    <menuitem label="{{Config}}"
-                              observes="hatenabar-cmd-open-user-link"
-                              hatena:link="f:id:?:config"/>
-                    <menuseparator/>
-                    <menuitem label="{{Top}}"
-                              observes="hatenabar-cmd-open-link"
-                              hatena:link="f:"/>
-                </menupopup>
-            </toolbarbutton>
-            <toolbarbutton id="hatenabar-group-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
-                           type="menu-button"
-                           label="{{Hatena Group}}"
-                           tooltiptext="{{Hatena Group}}"
-                           command="hatenabar-cmd-open-group">
-                <menupopup observes="hatenabar-popup-base"
-                           onpopupshowing="hatenabar.Toolbar.updateGroupPopup(event);">
-                    <menuseparator/>
-                    <menuitem label="{{List}}"
-                              observes="hatenabar-cmd-open-user-link"
-                              hatena:link="g:id:?:group"/>
-                    <menuseparator/>
-                    <menuitem label="{{Top}}"
-                              observes="hatenabar-cmd-open-link"
-                              hatena:link="g:"/>
-                </menupopup>
-            </toolbarbutton>
-            <toolbarbutton id="hatenabar-haiku-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
-                           type="menu-button"
-                           label="{{Hatena Haiku}}"
-                           tooltiptext="{{Hatena Haiku}}"
-                           command="hatenabar-cmd-open-top-or-user-link"
-                           hatena:link="h:id:?:following">
-                <menupopup observes="hatenabar-link-popup-base">
-                    <menuitem label="{{Entries}}"
-                              observes="hatenabar-cmd-open-user-link"
-                              hatena:link="h:id:?"/>
-                    <menuseparator/>
-                    <menuitem label="{{Hot Keywords}}"
-                              observes="hatenabar-cmd-open-link"
-                              hatena:link="h:hotkeywords"/>
-                    <menuitem label="{{Album}}"
-                              observes="hatenabar-cmd-open-link"
-                              hatena:link="h:album"/>
-                    <menuseparator/>
-                    <menuitem label="{{Top}}"
-                              observes="hatenabar-cmd-open-link"
-                              hatena:link="h:"/>
-                </menupopup>
-            </toolbarbutton>
-            <toolbarbutton id="hatenabar-idea-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
-                           type="menu-button"
-                           label="{{Hatena Idea}}"
-                           tooltiptext="{{Hatena Idea}}"
-                           command="hatenabar-cmd-open-top-or-user-link"
-                           hatena:link="i:">
-                <menupopup observes="hatenabar-link-popup-base">
-                    <menuitem label="{{Top}}"
-                              observes="hatenabar-cmd-open-link"
-                              hatena:link="h:"/>
-                </menupopup>
-            </toolbarbutton>
-            <toolbarbutton id="hatenabar-keyword-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
-                           type="menu-button"
-                           label="{{Hatena Keyword}}"
-                           tooltiptext="{{Hatena Keyword}}"
-                           command="hatenabar-cmd-open-top-or-user-link"
-                           hatena:link="k:">
-                <menupopup observes="hatenabar-link-popup-base">
-                    <menuitem label="{{Favorites}}"
-                              observes="hatenabar-cmd-open-user-link"
-                              hatena:link="k:id:?:favorite"/>
-                    <menuitem label="{{Modifications}}"
-                              observes="hatenabar-cmd-open-user-link"
-                              hatena:link="k:id:?:modified"/>
-                    <menuitem label="{{History}}"
-                              observes="hatenabar-cmd-open-user-link"
-                              hatena:link="k:id:?:visited"/>
-                    <menuseparator/>
-                    <menuitem label="{{Top}}"
-                              observes="hatenabar-cmd-open-link"
-                              hatena:link="k:"/>
-                </menupopup>
-            </toolbarbutton>
-            <toolbarbutton id="hatenabar-message-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
-                           label="{{Hatena Message}}"
-                           tooltiptext="{{Hatena Message}}"
-                           command="hatenabar-cmd-open-link"
-                           hatena:link="m:"/>
-            <toolbarbutton id="hatenabar-question-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
-                           type="menu-button"
-                           label="{{Question Hatena}}"
-                           tooltiptext="{{Question Hatena}}"
-                           command="hatenabar-cmd-open-top-or-user-link"
-                           hatena:link="q:">
-                <menupopup observes="hatenabar-link-popup-base">
-                    <menuitem label="{{Top}}"
-                              observes="hatenabar-cmd-open-link"
-                              hatena:link="q:"/>
-                </menupopup>
-            </toolbarbutton>
-            <toolbarbutton id="hatenabar-star-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
-                           type="menu-button"
-                           label="{{Hatena Star}}"
-                           tooltiptext="{{Hatena Star}}"
-                           command="hatenabar-cmd-open-top-or-user-link"
-                           hatena:link="s:">
-                <menupopup observes="hatenabar-link-popup-base">
-                    <menuitem label="{{Reports}}"
-                              observes="hatenabar-cmd-open-user-link"
-                              hatena:link="s:id:?:report"/>
-                    <menuitem label="{{Stars}}"
-                              observes="hatenabar-cmd-open-user-link"
-                              hatena:link="s:id:?:stars"/>
-                    <menuitem label="{{Blogs}}"
-                              observes="hatenabar-cmd-open-user-link"
-                              hatena:link="s:id:?:blogs"/>
-                    <menuseparator/>
-                    <menuitem label="{{Top}}"
-                              observes="hatenabar-cmd-open-link"
-                              hatena:link="s:"/>
-                </menupopup>
-            </toolbarbutton>
-            <toolbarbutton id="hatenabar-ugomemo-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
-                           type="menu-button"
-                           label="{{Ugomemo Hatena}}"
-                           tooltiptext="{{Ugomemo Hatena}}"
-                           command="hatenabar-cmd-open-top-or-user-link"
-                           hatena:link="ugomemo:id:?:following">
-                <menupopup observes="hatenabar-link-popup-base">
-                    <!-- Favorites のリンク先が /favorites でなく、
-                         Stars のリンク先が /favorites なのは意図的
-                         (旧はてなツールバーがそうなっていた)。 -->
-                    <menuitem label="{{Favorites}}"
-                              observes="hatenabar-cmd-open-user-link"
-                              hatena:link="ugomemo:id:?:following"/>
-                    <menuitem label="{{Stars}}"
-                              observes="hatenabar-cmd-open-user-link"
-                              hatena:link="ugomemo:id:?:favorites"/>
-                    <menuseparator/>
-                    <menuitem label="{{Hot Movies}}"
-                              observes="hatenabar-cmd-open-link"
-                              hatena:link="ugomemo:hotmovies"/>
-                    <menuitem label="{{Movies}}"
-                              observes="hatenabar-cmd-open-link"
-                              hatena:link="ugomemo:movies"/>
-                    <menuitem label="{{Ranking}}"
-                              observes="hatenabar-cmd-open-link"
-                              hatena:link="ugomemo:ranking"/>
-                    <menuitem label="{{Channels}}"
-                              observes="hatenabar-cmd-open-link"
-                              hatena:link="ugomemo:channels.top"/>
-                    <menuseparator/>
-                    <menuitem label="{{Top}}"
-                              observes="hatenabar-cmd-open-link"
-                              hatena:link="ugomemo:"/>
-                </menupopup>
-            </toolbarbutton>
-            <toolbarbutton id="hatenabar-counter-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
-                           type="menu-button"
-                           label="{{Hatena Counter}}"
-                           tooltiptext="{{Hatena Counter}}"
-                           command="hatenabar-cmd-open-top-or-user-link"
-                           hatena:link="counter:">
-                <menupopup observes="hatenabar-link-popup-base">
-                    <menuitem label="{{Config}}"
-                              observes="hatenabar-cmd-open-user-link"
-                              hatena:link="counter:id:?:edit"/>
-                    <menuseparator/>
-                    <menuitem label="{{Top}}"
-                              observes="hatenabar-cmd-open-link"
-                              hatena:link="counter:"/>
-                </menupopup>
-            </toolbarbutton>
-            <toolbarbutton id="hatenabar-graph-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
-                           type="menu-button"
-                           label="{{Hatena Graph}}"
-                           tooltiptext="{{Hatena Graph}}"
-                           command="hatenabar-cmd-open-top-or-user-link"
-                           hatena:link="graph:">
-                <menupopup observes="hatenabar-link-popup-base">
-                    <menuitem label="{{Edit}}"
-                              observes="hatenabar-cmd-open-user-link"
-                              hatena:link="graph:id:?:edit"/>
-                    <menuseparator/>
-                    <menuitem label="{{Top}}"
-                              observes="hatenabar-cmd-open-link"
-                              hatena:link="graph:"/>
-                </menupopup>
-            </toolbarbutton>
+                       class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
+                       type="menu-button"
+                       label="&hatenabar.main.label;"
+                       tooltiptext="&hatenabar.main.label;"
+                       command="hatenabar-cmd-open-link"
+                       hatena:link="www:">
+            <menupopup observes="hatenabar-link-popup-base">
+                <menuitem label="&hatenabar.main.prefs.label;"
+                          oncommand="hatenabar.Command.openPreferences();"/>
+                <!-- menuitem 要素に command 属性でコマンドを指定した場合、
+                     なぜか onclick 属性が転送されないので、
+                     代わりにobserves 属性で属性を転送する。 -->
+                <menuitem label="&hatenabar.main.my.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="www:my"/>
+                <menuitem label="&hatenabar.main.help.label;"
+                          observes="hatenabar-cmd-open-link"
+                          hatena:link="www:tool:firefox"/>
+            </menupopup>
+        </toolbarbutton>
 
-            <toolbarbutton id="hatenabar-including-antenna-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
-                           label="{{Including Antennas}}"
-                           tooltiptext="{{Including Antennas}}"
-                           command="hatenabar-cmd-open-related-link"
-                           hatena:link="a:include"/>
-            <toolbarbutton id="hatenabar-add-antenna-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
-                           label="{{Add to Antenna}}"
-                           tooltiptext="{{Add to Antenna}}"
-                           command="hatenabar-cmd-open-related-user-link"
-                           hatena:link="a:append"/>
-            <toolbarbutton id="hatenabar-view-bookmark-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
-                           label="{{View Bookmark Entry}}"
-                           sidelabel=""
-                           tooltiptext="{{View Bookmark Entry}}"
-                           command="hatenabar-cmd-open-related-link"
-                           hatena:link="b:entry"/>
-            <toolbarbutton id="hatenabar-add-bookmark-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
-                           label="{{Add to Bookmark}}"
-                           tooltiptext="{{Add to Bookmark}}"
-                           command="hatenabar-cmd-add-bookmark"/>
-            <!-- The command of this button is same as view-bookmark-button. -->
-            <toolbarbutton id="hatenabar-referring-diary-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
-                           label="{{Referring Diaries}}"
-                           sidelabel=""
-                           tooltiptext="{{Referring Diaries}}"
-                           command="hatenabar-cmd-open-related-link"
-                           hatena:link="b:entry"/>
-            <toolbarbutton id="hatenabar-diary-refer-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
-                           label="{{Refer in Diary}}"
-                           tooltiptext="{{Refer in Diary}}"
-                           command="hatenabar-cmd-refer-in-diary"/>
-            <toolbarbutton id="hatenabar-group-refer-button"
-                           class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
-                           label="{{Refer in Group}}"
-                           tooltiptext="{{Refer in Group}}"
-                           command="hatenabar-cmd-refer-in-group"/>
+        <toolbaritem id="hatenabar-search-item"
+                     align="center" width="180" persist="width">
+            <textbox id="hatenabar-search-field"
+                     class="hatenabar-menu-autocomplete"
+                     type="autocomplete"
+                     autocompletesearch="form-history"
+                     enablehistory="true"
+                     flex="1"
+                     tooltiptext="&hatenabar.search.tooltip;"
+                     onkeypress="hatenabar.SearchField.onKeyPress(event);">
+                <hbox class="hatenabar-autocomplete-button-box">
+                    <image id="hatenabar-search-button"
+                           tooltiptext="&hatenabar.search.button.tooltip;"
+                           onclick="hatenabar.SearchField.onButtonClick(event);"/>
+                </hbox>
+            </textbox>
+        </toolbaritem>
+
+        <toolbarbutton id="hatenabar-antenna-button"
+                       class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
+                       type="menu-button"
+                       label="&hatenabar.antenna.label;"
+                       tooltiptext="&hatenabar.antenna.label;"
+                       command="hatenabar-cmd-open-antenna">
+            <menupopup observes="hatenabar-popup-base"
+                       onpopupshowing="hatenabar.Toolbar.updateAntennaPopup(event);">
+                <menuitem type="radio"
+                          name="hatenabar-antenna-mode"
+                          label="&hatenabar.antenna.antenna.label;"
+                          observes="hatenabar-cmd-open-antenna"
+                          value="antenna"
+                          hatena:link="a:id:?">
+                    <observes element="hatenabar-has-user"
+                              attribute="disabled"/>
+                </menuitem>
+                <menuitem type="radio"
+                          name="hatenabar-antenna-mode"
+                          label="&hatenabar.antenna.simple.label;"
+                          observes="hatenabar-cmd-open-antenna"
+                          value="simple"
+                          hatena:link="a:id:?:simple">
+                    <observes element="hatenabar-has-user"
+                              attribute="disabled"/>
+                </menuitem>
+                <menuitem type="radio"
+                          name="hatenabar-antenna-mode"
+                          label="&hatenabar.antenna.detail.label;"
+                          observes="hatenabar-cmd-open-antenna"
+                          value="detail"
+                          hatena:link="a:id:?:detail">
+                    <observes element="hatenabar-has-user"
+                              attribute="disabled"/>
+                </menuitem>
+                <menuseparator/>
+                <menuitem label="&hatenabar.antenna.checklist.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="a:id:?:checklist"/>
+                <menuitem label="&hatenabar.antenna.config.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="a:id:?:config"/>
+                <menuseparator/>
+                <menuitem label="&hatenabar.antenna.top.label;"
+                          observes="hatenabar-cmd-open-link"
+                          hatena:link="a:"/>
+            </menupopup>
+        </toolbarbutton>
+        <toolbarbutton id="hatenabar-bookmark-button"
+                       class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
+                       type="menu-button"
+                       label="&hatenabar.bookmark.label;"
+                       tooltiptext="&hatenabar.bookmark.label;"
+                       command="hatenabar-cmd-open-top-or-user-link"
+                       hatena:link="b:">
+            <menupopup observes="hatenabar-popup-base"
+                       onpopupshowing="hatenabar.Toolbar.updateBookmarkPopup(event);">
+                <menuitem label="&hatenabar.bookmark.favorites.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="b:id:?:favorite"/>
+                <menuseparator id="hatenabar-bookmark-tabs-separator"/>
+                <menuitem label="&hatenabar.bookmark.config.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="b:id:?:config"/>
+                <menuseparator/>
+                <menuitem label="&hatenabar.bookmark.top.label;"
+                          observes="hatenabar-cmd-open-link"
+                          hatena:link="b:"/>
+            </menupopup>
+        </toolbarbutton>
+        <toolbarbutton id="hatenabar-diary-button"
+                       class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
+                       type="menu-button"
+                       label="&hatenabar.diary.label;"
+                       tooltiptext="&hatenabar.diary.label;"
+                       command="hatenabar-cmd-open-top-or-user-link"
+                       hatena:link="d:">
+            <menupopup observes="hatenabar-link-popup-base">
+                <menuitem label="&hatenabar.diary.edit.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="d:id:?:edit"/>
+                <menuitem label="&hatenabar.diary.config.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="d:id:?:admin"/>
+                <menuseparator/>
+                <menuitem label="&hatenabar.diary.top.label;"
+                          observes="hatenabar-cmd-open-link"
+                          hatena:link="d:"/>
+            </menupopup>
+        </toolbarbutton>
+        <toolbarbutton id="hatenabar-fotolife-button"
+                       class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
+                       type="menu-button"
+                       label="&hatenabar.fotolife.label;"
+                       tooltiptext="&hatenabar.fotolife.label;"
+                       command="hatenabar-cmd-open-top-or-user-link"
+                       hatena:link="f:">
+            <menupopup observes="hatenabar-link-popup-base">
+                <menuitem label="&hatenabar.fotolife.upload.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="f:id:?:up"/>
+                <menuitem label="&hatenabar.fotolife.favorites.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="f:id:?:favorite"/>
+                <menuitem label="&hatenabar.fotolife.edit.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="f:id:?:edit"/>
+                <menuitem label="&hatenabar.fotolife.config.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="f:id:?:config"/>
+                <menuseparator/>
+                <menuitem label="&hatenabar.fotolife.top.label;"
+                          observes="hatenabar-cmd-open-link"
+                          hatena:link="f:"/>
+            </menupopup>
+        </toolbarbutton>
+        <toolbarbutton id="hatenabar-group-button"
+                       class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
+                       type="menu-button"
+                       label="&hatenabar.group.label;"
+                       tooltiptext="&hatenabar.group.label;"
+                       command="hatenabar-cmd-open-group">
+            <menupopup observes="hatenabar-popup-base"
+                       onpopupshowing="hatenabar.Toolbar.updateGroupPopup(event);">
+                <menuseparator/>
+                <menuitem label="&hatenabar.group.list.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="g:id:?:group"/>
+                <menuseparator/>
+                <menuitem label="&hatenabar.group.top.label;"
+                          observes="hatenabar-cmd-open-link"
+                          hatena:link="g:"/>
+            </menupopup>
+        </toolbarbutton>
+        <toolbarbutton id="hatenabar-haiku-button"
+                       class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
+                       type="menu-button"
+                       label="&hatenabar.haiku.label;"
+                       tooltiptext="&hatenabar.haiku.label;"
+                       command="hatenabar-cmd-open-top-or-user-link"
+                       hatena:link="h:id:?:following">
+            <menupopup observes="hatenabar-link-popup-base">
+                <menuitem label="&hatenabar.haiku.entries.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="h:id:?"/>
+                <menuseparator/>
+                <menuitem label="&hatenabar.haiku.hotKeywords.label;"
+                          observes="hatenabar-cmd-open-link"
+                          hatena:link="h:hotkeywords"/>
+                <menuitem label="&hatenabar.haiku.album.label;"
+                          observes="hatenabar-cmd-open-link"
+                          hatena:link="h:album"/>
+                <menuseparator/>
+                <menuitem label="&hatenabar.haiku.top.label;"
+                          observes="hatenabar-cmd-open-link"
+                          hatena:link="h:"/>
+            </menupopup>
+        </toolbarbutton>
+        <toolbarbutton id="hatenabar-idea-button"
+                       class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
+                       type="menu-button"
+                       label="&hatenabar.idea.label;"
+                       tooltiptext="&hatenabar.idea.label;"
+                       command="hatenabar-cmd-open-top-or-user-link"
+                       hatena:link="i:">
+            <menupopup observes="hatenabar-link-popup-base">
+                <menuitem label="&hatenabar.idea.top.label;"
+                          observes="hatenabar-cmd-open-link"
+                          hatena:link="h:"/>
+            </menupopup>
+        </toolbarbutton>
+        <toolbarbutton id="hatenabar-keyword-button"
+                       class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
+                       type="menu-button"
+                       label="&hatenabar.keyword.label;"
+                       tooltiptext="&hatenabar.keyword.label;"
+                       command="hatenabar-cmd-open-top-or-user-link"
+                       hatena:link="k:">
+            <menupopup observes="hatenabar-link-popup-base">
+                <menuitem label="&hatenabar.keyword.favorites.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="k:id:?:favorite"/>
+                <menuitem label="&hatenabar.keyword.modifications.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="k:id:?:modified"/>
+                <menuitem label="&hatenabar.keyword.history.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="k:id:?:visited"/>
+                <menuseparator/>
+                <menuitem label="&hatenabar.keyword.top.label;"
+                          observes="hatenabar-cmd-open-link"
+                          hatena:link="k:"/>
+            </menupopup>
+        </toolbarbutton>
+        <toolbarbutton id="hatenabar-message-button"
+                       class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
+                       label="&hatenabar.message.label;"
+                       tooltiptext="&hatenabar.message.label;"
+                       command="hatenabar-cmd-open-link"
+                       hatena:link="m:"/>
+        <toolbarbutton id="hatenabar-question-button"
+                       class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
+                       type="menu-button"
+                       label="&hatenabar.question.label;"
+                       tooltiptext="&hatenabar.question.label;"
+                       command="hatenabar-cmd-open-top-or-user-link"
+                       hatena:link="q:">
+            <menupopup observes="hatenabar-link-popup-base">
+                <menuitem label="&hatenabar.question.top.label;"
+                          observes="hatenabar-cmd-open-link"
+                          hatena:link="q:"/>
+            </menupopup>
+        </toolbarbutton>
+        <toolbarbutton id="hatenabar-star-button"
+                       class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
+                       type="menu-button"
+                       label="&hatenabar.star.label;"
+                       tooltiptext="&hatenabar.star.label;"
+                       command="hatenabar-cmd-open-top-or-user-link"
+                       hatena:link="s:">
+            <menupopup observes="hatenabar-link-popup-base">
+                <menuitem label="&hatenabar.star.reports.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="s:id:?:report"/>
+                <menuitem label="&hatenabar.star.stars.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="s:id:?:stars"/>
+                <menuitem label="&hatenabar.star.blogs.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="s:id:?:blogs"/>
+                <menuseparator/>
+                <menuitem label="&hatenabar.star.top.label;"
+                          observes="hatenabar-cmd-open-link"
+                          hatena:link="s:"/>
+            </menupopup>
+        </toolbarbutton>
+        <toolbarbutton id="hatenabar-ugomemo-button"
+                       class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
+                       type="menu-button"
+                       label="&hatenabar.ugomemo.label;"
+                       tooltiptext="&hatenabar.ugomemo.label;"
+                       command="hatenabar-cmd-open-top-or-user-link"
+                       hatena:link="ugomemo:id:?:following">
+            <menupopup observes="hatenabar-link-popup-base">
+                <!-- Favorites のリンク先が /favorites でなく、
+                     Stars のリンク先が /favorites なのは意図的
+                     (旧はてなツールバーがそうなっていた)。 -->
+                <menuitem label="&hatenabar.ugomemo.favorites.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="ugomemo:id:?:following"/>
+                <menuitem label="&hatenabar.ugomemo.stars.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="ugomemo:id:?:favorites"/>
+                <menuseparator/>
+                <menuitem label="&hatenabar.ugomemo.hotMovies.label;"
+                          observes="hatenabar-cmd-open-link"
+                          hatena:link="ugomemo:hotmovies"/>
+                <menuitem label="&hatenabar.ugomemo.movies.label;"
+                          observes="hatenabar-cmd-open-link"
+                          hatena:link="ugomemo:movies"/>
+                <menuitem label="&hatenabar.ugomemo.ranking.label;"
+                          observes="hatenabar-cmd-open-link"
+                          hatena:link="ugomemo:ranking"/>
+                <menuitem label="&hatenabar.ugomemo.channels.label;"
+                          observes="hatenabar-cmd-open-link"
+                          hatena:link="ugomemo:channels.top"/>
+                <menuseparator/>
+                <menuitem label="&hatenabar.ugomemo.top.label;"
+                          observes="hatenabar-cmd-open-link"
+                          hatena:link="ugomemo:"/>
+            </menupopup>
+        </toolbarbutton>
+        <toolbarbutton id="hatenabar-counter-button"
+                       class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
+                       type="menu-button"
+                       label="&hatenabar.counter.label;"
+                       tooltiptext="&hatenabar.counter.label;"
+                       command="hatenabar-cmd-open-top-or-user-link"
+                       hatena:link="counter:">
+            <menupopup observes="hatenabar-link-popup-base">
+                <menuitem label="&hatenabar.counter.config.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="counter:id:?:edit"/>
+                <menuseparator/>
+                <menuitem label="&hatenabar.counter.top.label;"
+                          observes="hatenabar-cmd-open-link"
+                          hatena:link="counter:"/>
+            </menupopup>
+        </toolbarbutton>
+        <toolbarbutton id="hatenabar-graph-button"
+                       class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
+                       type="menu-button"
+                       label="&hatenabar.graph.label;"
+                       tooltiptext="&hatenabar.graph.label;"
+                       command="hatenabar-cmd-open-top-or-user-link"
+                       hatena:link="graph:">
+            <menupopup observes="hatenabar-link-popup-base">
+                <menuitem label="&hatenabar.graph.edit.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="graph:id:?:edit"/>
+                <menuseparator/>
+                <menuitem label="&hatenabar.graph.top.label;"
+                          observes="hatenabar-cmd-open-link"
+                          hatena:link="graph:"/>
+            </menupopup>
+        </toolbarbutton>
+
+        <toolbarbutton id="hatenabar-including-antenna-button"
+                       class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
+                       label="&hatenabar.actions.includingAntenna.label;"
+                       tooltiptext="&hatenabar.actions.includingAntenna.label;"
+                       command="hatenabar-cmd-open-related-link"
+                       hatena:link="a:include"/>
+        <toolbarbutton id="hatenabar-add-antenna-button"
+                       class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
+                       label="&hatenabar.actions.addAntenna.label;"
+                       tooltiptext="&hatenabar.actions.addAntenna.label;"
+                       command="hatenabar-cmd-open-related-user-link"
+                       hatena:link="a:append"/>
+        <toolbarbutton id="hatenabar-view-bookmark-button"
+                       class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
+                       label="&hatenabar.actions.viewBookmark.label;"
+                       sidelabel=""
+                       tooltiptext="&hatenabar.actions.viewBookmark.label;"
+                       command="hatenabar-cmd-open-related-link"
+                       hatena:link="b:entry"/>
+        <toolbarbutton id="hatenabar-add-bookmark-button"
+                       class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
+                       label="&hatenabar.actions.addBookmark.label;"
+                       tooltiptext="&hatenabar.actions.addBookmark.label;"
+                       command="hatenabar-cmd-add-bookmark"/>
+        <!-- The command of this button is same as view-bookmark-button. -->
+        <toolbarbutton id="hatenabar-referring-diary-button"
+                       class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
+                       label="&hatenabar.actions.referringDiary.label;"
+                       sidelabel=""
+                       tooltiptext="&hatenabar.actions.referringDiary.label;"
+                       command="hatenabar-cmd-open-related-link"
+                       hatena:link="b:entry"/>
+        <toolbarbutton id="hatenabar-diary-refer-button"
+                       class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
+                       label="&hatenabar.actions.referInDiary.label;"
+                       tooltiptext="&hatenabar.actions.referInDiary.label;"
+                       command="hatenabar-cmd-refer-in-diary"/>
+        <toolbarbutton id="hatenabar-group-refer-button"
+                       class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
+                       label="&hatenabar.actions.referInGroup.label;"
+                       tooltiptext="&hatenabar.actions.referInGroup.label;"
+                       command="hatenabar-cmd-refer-in-group"/>
     </toolbarpalette>
 
     <toolbox id="navigator-toolbox">
         <toolbar id="hatenabar-toolbar"
                  class="chromeclass-toolbar-additional"
-                 toolbarname="{{Hatena Toolbar}}"
+                 toolbarname="&hatenabar.toolbar.label;"
+                 accesskey="&hatenabar.toolbar.key;"
                  mode="icons"
                  defaultmode="icons"
                  iconsize="small"
                  defaulticonsize="small"
                  customizable="true"
                  defaultset="hatenabar-main-button,hatenabar-search-item,separator,hatenabar-antenna-button,hatenabar-bookmark-button,hatenabar-diary-button,hatenabar-fotolife-button,hatenabar-group-button,hatenabar-haiku-button,hatenabar-idea-button,hatenabar-keyword-button,hatenabar-message-button,hatenabar-question-button,hatenabar-star-button,hatenabar-ugomemo-button,hatenabar-counter-button,hatenabar-graph-button,separator,hatenabar-including-antenna-button,hatenabar-add-antenna-button,hatenabar-view-bookmark-button,hatenabar-add-bookmark-button,hatenabar-referring-diary-button,hatenabar-diary-refer-button,hatenabar-group-refer-button,spring"
-                 context="toolbar-context-menu">
-            <!--
-                 accesskey="&hBookmark.toolbar.titleKey;"
-            -->
-        </toolbar>
+                 context="toolbar-context-menu"/>
     </toolbox>
 
     <statusbar id="status-bar">
@@ -508,14 +509,14 @@
             <menupopup id="hatenabar-account-status-popup"
                        observes="hatenabar-popup-base"
                        onpopupshowing="hatenabar.AccountStatus.updatePopup(event);">
-                <menuitem label="{{Clear User History}}"
+                <menuitem label="&hatenabar.account.clearHistory.label;"
                           observes="hatenabar-cmd-clear-user-history"/>
                 <menuseparator/>
-                <menuitem label="{{Logout}}"
+                <menuitem label="&hatenabar.account.logout.label;"
                           observes="hatenabar-cmd-go-logout"/>
                 <menuseparator/>
                 <menuitem id="hatenabar-account-status-login-menu"
-                          label="{{Login}}"
+                          label="&hatenabar.account.login.label;"
                           observes="hatenabar-cmd-go-login"/>
             </menupopup>
         </statusbarpanel>
@@ -523,7 +524,7 @@
                         class="statusbarpanel-menu-iconic"
                         context="hatenabar-star-context">
             <menupopup observes="hatenabar-link-popup-base">
-                <menuitem label="{{About Hatena Star}}"
+                <menuitem label="&hatenabar.starStatus.about.label;"
                           observes="hatenabar-cmd-open-link"
                           hatena:link="s:guide"/>
                 <!-- カラースターショップへのリンクもつける? -->
@@ -531,7 +532,7 @@
         </statusbarpanel>
         <statusbarpanel id="hatenabar-bookmark-status"
                         class="statusbarpanel-iconic"
-                        tooltiptext="{{Add to Hatena Bookmarks}}"
+                        tooltiptext="&hatenabar.actions.addBookmark.label;"
                         onclick="hatenabar.UICommand.addOrViewBookmark(event);"
                         hatena:link="b:entry"/>
     </statusbar>
