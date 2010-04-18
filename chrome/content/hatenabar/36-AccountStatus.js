@@ -5,9 +5,19 @@ var AccountStatus = {
     get label AS_get_label() byId('hatenabar-account-status-label'),
     get popup AS_get_popup() byId('hatenabar-account-status-popup'),
 
+    isShown: true,
     strings: Browser.strings.getChildStrings('account'),
 
+    updateDisplay: function AS_updateDisplay() {
+        let show = Prefs.hatenabar.get('account.showStatus');
+        this.isShown = show;
+        if (show)
+            this.updatePanel(null);
+        this.panel.collapsed = !show;
+    },
+
     updatePanel: function AS_updatePanel(inProgressUserName) {
+        if (!this.isShown) return;
         let panel = this.panel;
         let label = this.label;
         if (!panel || !label) return;
@@ -73,9 +83,6 @@ var AccountStatus = {
     },
 
     onLoginAction: function AS_onLoginAction(listener, action, name) {
-        let panel = this.panel;
-        let label = this.label;
-        if (!panel || !label) return;
         switch (action) {
         case Account.LOGIN_BEGIN:
             this.updatePanel(name);
@@ -91,4 +98,8 @@ var AccountStatus = {
 
 Account.createListener('UserChanged', method(AccountStatus, 'onUserChanged'));
 Account.createListener('LoginAction', method(AccountStatus, 'onLoginAction'));
-doOnLoad(method(AccountStatus, 'updatePanel', null));
+doOnLoad(function () {
+    let updateDisplay = method(AccountStatus, 'updateDisplay');
+    Prefs.hatenabar.createListener('account.showStatus', updateDisplay);
+    updateDisplay();
+});
