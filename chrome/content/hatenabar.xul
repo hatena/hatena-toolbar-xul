@@ -85,22 +85,6 @@
     </popupset>
 
     <toolbarpalette id="BrowserToolbarPalette">
-    </toolbarpalette>
-
-    <toolbox id="navigator-toolbox">
-        <toolbar id="hatenabar-toolbar"
-                 class="chromeclass-toolbar-additional"
-                 mode="icons"
-                 defaultmode="icons"
-                 iconsize="small"
-                 defaulticonsize="small"
-                 toolbarname="{{Hatena Toolbar}}"
-                 context="toolbar-context-menu">
-            <!--
-                 customizable="true"
-                 defaultset=""
-                 accesskey="&hBookmark.toolbar.titleKey;"
-            -->
             <toolbarbutton id="hatenabar-main-button"
                            class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                            type="menu-button"
@@ -109,10 +93,6 @@
                            command="hatenabar-cmd-open-link"
                            hatena:link="www:">
                 <menupopup observes="hatenabar-link-popup-base">
-                    <!--
-                    <menuitem label="{{Clear Search History}}"
-                              observes="hatenabar-cmd-clear-search-history"/>
-                    -->
                     <menuitem label="{{Options...}}"
                               oncommand="hatenabar.Command.openPreferences();"/>
                     <!-- menuitem 要素に command 属性でコマンドを指定した場合、
@@ -140,16 +120,6 @@
                     </hbox>
                 </textbox>
             </toolbaritem>
-
-            <splitter id="hatenabar-search-splitter"
-                      class="chromeclass-toolbar-additional"
-                      resizebefore="closest"
-                      resizeafter="flex"
-                      tooltiptext="{{Resize Search Field}}">
-                <toolbarseparator flex="1"/>
-            </splitter>
-
-            <toolbarseparator/>
 
             <toolbarbutton id="hatenabar-antenna-button"
                            class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
@@ -460,8 +430,6 @@
                 </menupopup>
             </toolbarbutton>
 
-            <toolbarseparator/>
-
             <toolbarbutton id="hatenabar-including-antenna-button"
                            class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                            label="{{Including Antennas}}"
@@ -504,8 +472,22 @@
                            label="{{Refer in Group}}"
                            tooltiptext="{{Refer in Group}}"
                            command="hatenabar-cmd-refer-in-group"/>
+    </toolbarpalette>
 
-            <toolbarspring flex="1"/>
+    <toolbox id="navigator-toolbox">
+        <toolbar id="hatenabar-toolbar"
+                 class="chromeclass-toolbar-additional"
+                 toolbarname="{{Hatena Toolbar}}"
+                 mode="icons"
+                 defaultmode="icons"
+                 iconsize="small"
+                 defaulticonsize="small"
+                 customizable="true"
+                 defaultset="hatenabar-main-button,hatenabar-search-item,separator,hatenabar-antenna-button,hatenabar-bookmark-button,hatenabar-diary-button,hatenabar-fotolife-button,hatenabar-group-button,hatenabar-haiku-button,hatenabar-idea-button,hatenabar-keyword-button,hatenabar-message-button,hatenabar-question-button,hatenabar-star-button,hatenabar-ugomemo-button,hatenabar-counter-button,hatenabar-graph-button,separator,hatenabar-including-antenna-button,hatenabar-add-antenna-button,hatenabar-view-bookmark-button,hatenabar-add-bookmark-button,hatenabar-referring-diary-button,hatenabar-diary-refer-button,hatenabar-group-refer-button,spring"
+                 context="toolbar-context-menu">
+            <!--
+                 accesskey="&hBookmark.toolbar.titleKey;"
+            -->
         </toolbar>
     </toolbox>
 

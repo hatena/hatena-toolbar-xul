@@ -159,6 +159,10 @@
 #hatenabar-account-status[hatena|login] {
     -moz-image-region: rect(0px, 48px, 16px, 32px);
 }
+#hatenabar-account-status > .statusbarpanel-icon {
+    width: 16px;
+    height: 16px;
+}
 
 #hatenabar-star-status {
     list-style-image: url("chrome://hatenabar/skin/icons.png");

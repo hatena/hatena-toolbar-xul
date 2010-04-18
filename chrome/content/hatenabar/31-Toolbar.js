@@ -122,7 +122,9 @@ EventService.bless(Toolbar);
 Browser.createListener('LocationChanged', method(Toolbar, 'updateCounter'));
 
 doOnLoad(function () {
+    let dispatchWillCustomize = method(Toolbar, 'dispatch', 'WillCustomize');
     let dispatchCustomizeDone = method(Toolbar, 'dispatch', 'CustomizeDone');
+    addBefore(window, 'BrowserCustomizeToolbar', dispatchWillCustomize);
     addAfter(window, 'BrowserToolboxCustomizeDone', dispatchCustomizeDone);
     setTimeout(dispatchCustomizeDone, 0);
 });
