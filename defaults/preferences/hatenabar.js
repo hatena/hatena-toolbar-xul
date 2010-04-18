@@ -14,6 +14,7 @@ pref("extensions.hatenabar.account.showStatus", true);
 pref("extensions.hatenabar.searchbar.link", "search:search");
 
 // Bookmark
+pref("extensions.hatenabar.bookmark.showSearchOnWeb", true);
 pref("extensions.hatenabar.bookmark.showStatus", true);
 
 // Star

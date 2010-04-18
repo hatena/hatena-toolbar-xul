@@ -3,8 +3,19 @@ const EXPORT = ['Bookmark'];
 var Bookmark = {
     init: function B_init() {
         gBrowser.addEventListener('DOMContentLoaded', this, false);
+
+        let update = method(this, 'updateShouldAddSearchButton');
+        Prefs.hatenabar.createListener('bookmark.showSearchOnWeb', update);
+        update();
     },
 
+    shouldAddSearchButton: false,
+
+    updateShouldAddSearchButton: function B_updateShouldAddSearchButton() {
+        this.shouldAddSearchButton =
+            Prefs.hatenabar.get('bookmark.showSearchOnWeb');
+    },
+    
     add: function B_add(win) {
         if (typeof hBookmark !== 'undefined') {
             hBookmark.AddPanelManager.showPanel(win);
@@ -77,7 +88,8 @@ var Bookmark = {
     },
 
     handleEvent: function B_handleEvent(event) {
-        if (event.type === 'DOMContentLoaded')
+        if (event.type === 'DOMContentLoaded' &&
+            this.shouldAddSearchButton)
             this.addSearchButton(event.target.defaultView);
     },
 };
