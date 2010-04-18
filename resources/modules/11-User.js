@@ -46,20 +46,41 @@ User.prototype = {
         }
     },
 
+    get bookmarkTabs User_get_bookmarkTabs() {
+        return this.prefs.get('bookmark.tabs', [], JSON);
+    },
+
+    _checkBookmarkTabs: function User__checkBookmarkTabs() {
+        let url = HatenaLink.parseToURL('b:my.tabs');
+        http.getWithRetry(url, bind(onGotTabs, this));
+        function onGotTabs(res) {
+            if (!res.ok || !res.value || !res.value.tabs) return;
+            this.prefs.set('bookmark.tabs', res.value.tabs, JSON);
+        }
+    },
+
     onLogin: function User_onLogin(rk) {
         this.options.rk = rk;
 
-        this._groupTimer = new Timer(23 * 60 * 1000);
-        this._groupTimer.start();
         let checkGroups = method(this, '_checkGroups');
+        this._groupTimer = new Timer(23 * 60 * 1000);
         this._groupTimer.createListener('timer', checkGroups);
+        this._groupTimer.start();
         checkGroups();
+
+        let checkBTabs = method(this, '_checkBookmarkTabs');
+        this._bTabTimer = new Timer(29 * 60 * 1000);
+        this._bTabTimer.createListener('timer', checkBTabs);
+        this._bTabTimer.start();
+        checkBTabs();
     },
 
     onLogout: function User_onLogout() {
         this.options.rk = '';
         this._groupTimer.dispose();
         this._groupTimer = null;
+        this._bTabTimer.dispose();
+        this._bTabTimer = null;
     },
 };
 

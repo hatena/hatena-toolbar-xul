@@ -30,6 +30,29 @@ var Toolbar = {
         Control.updateLinkPopup(event);
     },
 
+    updateBookmarkPopup: function Tb_updateBookmarkPopup(event) {
+        let popup = event.target;
+        let tabMenus = byClass('hatenabar-bookmark-tab-menu', popup);
+        Array.slice(tabMenus).forEach(function (menu) {
+            menu.parentNode.removeChild(menu);
+        });
+        let user = Account.user;
+        if (user) {
+            let bookmarkOrigin = HatenaLink.parseToURL('b:').slice(0, -1);
+            let separator = byId('hatenabar-bookmark-tabs-separator');
+            user.bookmarkTabs.forEach(function (tab) {
+                let menu = document.createElementNS(XUL_NS, 'menuitem');
+                menu.className = 'hatenabar-bookmark-tab-menu';
+                menu.setAttribute('label', tab.label);
+                menu.setAttribute('observes', 'hatenabar-cmd-open-user-link');
+                menu.setAttributeNS(HATENA_NS, 'hatena:link',
+                                    bookmarkOrigin + tab.path);
+                popup.insertBefore(menu, separator);
+            });
+        }
+        Control.updateLinkPopup(event);
+    },
+
     openGroup: function Tb_openGroup(event) {
         let link = 'g:';
         let user = Account.user;

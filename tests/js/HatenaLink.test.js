@@ -37,8 +37,6 @@ function testBookmarkLink() {
                   u('b:entry', { url: 'http://example.org/#fragment' }));
     assert.equals('http://b.hatena.ne.jp/entry/s/example.org/',
                   u('b:entry', { url: 'https://example.org/' }));
-    assert.equals('http://b.hatena.ne.jp/sample/?mode=detail',
-                  u('b:id:sample:detail'));
 }
 
 function testDiaryLink() {

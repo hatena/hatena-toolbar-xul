@@ -186,14 +186,12 @@
                            tooltiptext="{{Hatena Bookmark}}"
                            command="hatenabar-cmd-open-top-or-user-link"
                            hatena:link="b:">
-                <menupopup observes="hatenabar-link-popup-base">
-                    <menuitem label="{{Details}}"
-                              observes="hatenabar-cmd-open-user-link"
-                              hatena:link="b:id:?:detail"/>
+                <menupopup observes="hatenabar-popup-base"
+                           onpopupshowing="hatenabar.Toolbar.updateBookmarkPopup(event);">
                     <menuitem label="{{Favorites}}"
                               observes="hatenabar-cmd-open-user-link"
                               hatena:link="b:id:?:favorite"/>
-                    <menuseparator/>
+                    <menuseparator id="hatenabar-bookmark-tabs-separator"/>
                     <menuitem label="{{Config}}"
                               observes="hatenabar-cmd-open-user-link"
                               hatena:link="b:id:?:config"/>

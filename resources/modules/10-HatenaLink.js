@@ -55,8 +55,6 @@ HatenaLink.schemes = {
         // -> http://b.hatena.ne.jp/sample/hatena/
         link = link.replace(/\b(id:[^:]+:)t:(.+)/, '$1$2:');
         let url = hatenaURL(link, context);
-        if (/:detail$/.test(link))
-            url = url.replace(/detail$/, '?mode=detail');
         let type = link.substring(2);
         switch (type) {
         case 'search':
