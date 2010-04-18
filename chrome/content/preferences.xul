@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="chrome://global/skin" type="text/css"?>
+
+<prefwindow id="hatenabar-preferences"
+            xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+            title="{{Hatena Toolbar Preferences}}">
+
+<prefpane id="general-pane"
+          label="{{General}}">
+    <preferences>
+        <preference id="searchbar.link"
+                    name="extensions.hatenabar.searchbar.link"
+                    type="unichar"/>
+        <preference id="account.showStatus"
+                    name="extensions.hatenabar.account.showStatus"
+                    type="bool"/>
+        <preference id="star.showStatus"
+                    name="extensions.hatenabar.star.showStatus"
+                    type="bool"/>
+        <preference id="bookmark.showStatus"
+                    name="extensions.hatenabar.bookmark.showStatus"
+                    type="bool"/>
+    </preferences>
+
+    <vbox>
+        <label value="{{Search Engine in Searchbar}}"/>
+        <radiogroup preference="searchbar.link"
+                    orient="horizontal">
+            <radio label="{{Hatena Search}}"
+                   value="search:search"/>
+            <radio label="{{Hatena Bookmark Search}}"
+                   value="b:search"/>
+        </radiogroup>
+
+        <groupbox>
+            <caption label="{{Statusbar}}"/>
+
+            <checkbox label="{{Show Account Panel}}"
+                      preference="account.showStatus"/>
+            <checkbox label="{{Show Star Panel}}"
+                      preference="star.showStatus"/>
+            <checkbox label="{{Show Add-to-Bookmark Button}}"
+                      preference="bookmark.showStatus"/>
+        </groupbox>
+    </vbox>
+</prefpane>
+
+<prefpane id="bookmark-ext-pane"
+          label="{{Bookmark Extension}}">
+    <preferences>
+    </preferences>
+
+    <vbox>
+        <label value="{{Hatena Bookmark Extension}}"/>
+    </vbox>
+</prefpane>
+
+<script type="application/javascript" src="chrome://browser/content/utilityOverlay.js"/>
+<script type="application/javascript" src="chrome://hatenabar/content/autoloader.js"/>
+
+</prefwindow>

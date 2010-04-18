@@ -5,7 +5,7 @@
         <em:id>{03be6b1a-4501-4b15-b4eb-a0c623136b4a}</em:id>
         <em:version>0.7.0a1</em:version>
         <em:type>2</em:type>
-        <!--<em:optionsURL>chrome://hatenabar/content/hatenaPreference.xul</em:optionsURL>-->
+        <em:optionsURL>chrome://hatenabar/content/preferences.xul</em:optionsURL>
         <!--<em:iconURL>chrome://hatenabar/content/skin/HatenaLogo32.png</em:iconURL>-->
 
         <em:localized>

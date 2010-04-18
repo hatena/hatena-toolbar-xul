@@ -7,7 +7,7 @@
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
          xmlns:hatena="http://www.hatena.ne.jp/">
 
-    <script type="application/javascript" src="autoloader.js"></script>
+    <script type="application/javascript" src="chrome://hatenabar/content/autoloader.js"/>
 
     <commandset id="mainCommandSet">
         <command id="hatenabar-cmd-open-link"

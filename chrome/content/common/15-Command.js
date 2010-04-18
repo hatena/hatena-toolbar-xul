@@ -42,7 +42,11 @@ var Command = {
     },
 
     openPreferences: function Cmd_openPreferences() {
-        p(arguments.callee.name + ': not yet implemented...');
+        let features = 'chrome,titlebar,toolbar,centerscreen,' +
+                       (Prefs.global.get('browser.preferences.instantApply')
+                        ? 'dialog=no' : 'modal');
+        window.openDialog('chrome://hatenabar/content/preferences.xul',
+                          'hatenabar-preferences', features);
     },
 
     goSearch: function Cmd_goSearch(query, event) {
