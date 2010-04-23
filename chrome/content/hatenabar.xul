@@ -317,7 +317,7 @@
             <menupopup observes="hatenabar-link-popup-base">
                 <menuitem label="&hatenabar.idea.top.label;"
                           observes="hatenabar-cmd-open-link"
-                          hatena:link="h:"/>
+                          hatena:link="i:"/>
             </menupopup>
         </toolbarbutton>
         <toolbarbutton id="hatenabar-keyword-button"
