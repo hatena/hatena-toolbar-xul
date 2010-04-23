@@ -9,6 +9,7 @@ function Prefs(branch) {
     if (branch && branch[branch.length - 1] !== '.')
         branch += '.';
     this._branch = branch || '';
+    this._prefBranch = null;
 }
 
 EventService.bless(Prefs.prototype);
@@ -23,6 +24,12 @@ extend(Prefs.prototype, {
     },
 
     get branch Prefs_get_branch() this._branch,
+
+    get defaults Prefs_get_defaults() {
+        let prefs = new Prefs(this.branch);
+        prefs._prefBranch = PrefService.getDefaultBranch(prefs.branch);
+        return prefs;
+    },
 
     get: function Prefs_get(name, defaultValue, type) {
         let prefBranch = this.prefBranch;

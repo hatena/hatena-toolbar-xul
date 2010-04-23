@@ -1,6 +1,4 @@
 
-//pref("extensions.hatenabar.profile.version", 1);
-
 // For debug
 pref("extensions.hatenabar.debug.log", false);
 

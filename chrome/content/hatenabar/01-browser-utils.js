@@ -19,6 +19,13 @@ var Browser = {
 
     strings: new Strings('hatenabar.properties'),
 
+    isFirstWindow: (function () {
+        if (shared.has('IsBrowserWindowOpened'))
+            return false;
+        shared.set('IsBrowserWindowOpened', true);
+        return true;
+    })(),
+
     onLocationChange: function Browser_onLocationChange(progress, request, location) {
         this.dispatch('LocationChanged', progress, request, location);
     },
