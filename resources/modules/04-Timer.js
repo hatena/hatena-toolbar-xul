@@ -13,7 +13,7 @@ function Timer(interval, repeatCount) {
 EventService.bless(Timer.prototype);
 
 extend(Timer.prototype, {
-    get isRunning Timer_get_isRunning() !!this.timer,
+    get isRunning() !!this.timer,
 
     start: function Timer_start() {
         if (this.timer) return;

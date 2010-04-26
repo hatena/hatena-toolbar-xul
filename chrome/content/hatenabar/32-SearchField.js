@@ -1,9 +1,9 @@
 const EXPORT = ['SearchField'];
 
 var SearchField = {
-    get inputHistory SF_get_inputHistory() InputHistory.searchbar,
-    get textbox SF_get_textbox() byId('hatenabar-search-field'),
-    get button SF_get_button() byId('hatenabar-search-button'),
+    get inputHistory() InputHistory.searchbar,
+    get textbox() byId('hatenabar-search-field'),
+    get button() byId('hatenabar-search-button'),
 
     formFillPrefs: new Prefs('browser.formfill'),
 

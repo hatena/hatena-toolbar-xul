@@ -7,7 +7,7 @@ var Star = {
     siteConfigURL: HatenaLink.parseToURL('s:siteconfig.json'),
     // 将来的に国際化すると、設定によってスクリプトの URL が
     // 変わるかもしれないからゲッタを使う。
-    get scriptURL () HatenaLink.parseToURL('s:js:HatenaStar.js'),
+    get scriptURL() HatenaLink.parseToURL('s:js:HatenaStar.js'),
 
     init: function Star_init() {
         gBrowser.addEventListener('DOMContentLoaded', this, false);

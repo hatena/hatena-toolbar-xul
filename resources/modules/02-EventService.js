@@ -115,8 +115,8 @@ extend(Listener.prototype, {
     },
 
     // Make Listener partially compatible with nsIDOMEvent.
-    get type Listener_get_type() this.event,
-    get currentTarget Listener_get_currentTarget() this.target,
+    get type() this.event,
+    get currentTarget() this.target,
 });
 
 

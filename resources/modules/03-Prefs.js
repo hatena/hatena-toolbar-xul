@@ -15,7 +15,7 @@ function Prefs(branch) {
 EventService.bless(Prefs.prototype);
 
 extend(Prefs.prototype, {
-    get prefBranch Prefs_get_prefBranch() {
+    get prefBranch() {
         if (!this._prefBranch) {
             this._prefBranch = PrefService.getBranch(this._branch)
                                           .QueryInterface(Ci.nsIPrefBranch2);
@@ -23,9 +23,9 @@ extend(Prefs.prototype, {
         return this._prefBranch;
     },
 
-    get branch Prefs_get_branch() this._branch,
+    get branch() this._branch,
 
-    get defaults Prefs_get_defaults() {
+    get defaults() {
         let prefs = new Prefs(this.branch);
         prefs._prefBranch = PrefService.getDefaultBranch(prefs.branch);
         return prefs;

@@ -12,10 +12,10 @@ function User(name, options) {
 };
 
 User.prototype = {
-    get name User_get_name() this._name,
+    get name() this._name,
 
-    get rk User_get_rk() this.options.rk || '',
-    set rk User_set_rk(rk) this.options.rk = rk,
+    get rk() this.options.rk || '',
+    set rk(rk) this.options.rk = rk,
     
     getIcon: function user_getIcon(isLarge) {
         let name = this.name;
@@ -23,13 +23,13 @@ User.prototype = {
                '/' + name + '/profile' + (isLarge ? '' : '_s') + '.gif';
     },
 
-    get prefs User_get_prefs() {
+    get prefs() {
         if (!this._prefs)
             this._prefs = Prefs.hatenabar.getChildPrefs('users.' + this.name);
         return this._prefs;
     },
 
-    get groups User_get_groups() {
+    get groups() {
         let names = this.prefs.get('group.names', '');
         return names ? names.split('|') : [];
     },
@@ -46,7 +46,7 @@ User.prototype = {
         }
     },
 
-    get bookmarkTabs User_get_bookmarkTabs() {
+    get bookmarkTabs() {
         return this.prefs.get('bookmark.tabs', [], JSON);
     },
 

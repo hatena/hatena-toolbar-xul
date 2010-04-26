@@ -16,7 +16,7 @@ function Strings(url, prefix) {
 }
 
 extend(Strings.prototype, {
-    get bundle Strings_get_bundle() {
+    get bundle() {
         return this._bundle ||
                (this._bundle = StringBundleService.createBundle(this.url));
     },

@@ -163,7 +163,7 @@ function Response(connection) {
 }
 
 extend(Response.prototype, {
-    get status Res_get_status() {
+    get status() {
         if (this._status === -1) {
             try {
                 this._status = this.request.status;
@@ -173,10 +173,10 @@ extend(Response.prototype, {
         }
         return this._status;
     },
-    get ok Res_get_ok() this.status === 200,
-    get doc Res_get_doc() this.request.responseXML,
-    get text Res_get_text() this.request.responseText,
-    get value Res_get_value() {
+    get ok() this.status === 200,
+    get doc() this.request.responseXML,
+    get text() this.request.responseText,
+    get value() {
         if (this._value === undefined) {
             try {
                 this._value = JSON.parse(this.text);
@@ -186,7 +186,7 @@ extend(Response.prototype, {
         }
         return this._value;
     },
-    get xml Res_get_xml() {
+    get xml() {
         if (this._xml === undefined) {
             let doc = this.doc;
             // 非 XML な MIME 型を持つ文書でも一応 XML として解析してみる。
@@ -225,7 +225,7 @@ var http = {
         return this._connect(options, 'POST', 15, 3, onLoad, onError);
     },
 
-    get isThirdPartyCookiesAllowed http_get_isThirdPartyCookiesAllowed() {
+    get isThirdPartyCookiesAllowed() {
         return Prefs.global.get('network.cookie.cookieBehavior') === 0;
     },
 

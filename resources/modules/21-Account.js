@@ -50,7 +50,7 @@ var Account = {
 
     user: null,
 
-    get nameCache Account_get_nameCache() {
+    get nameCache() {
         delete this.nameCache;
         return this.nameCache = new ExpireCache('Account.nameCache', 3 * 60);
     },

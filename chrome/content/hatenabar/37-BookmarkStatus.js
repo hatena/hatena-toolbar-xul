@@ -2,7 +2,7 @@ const EXPORT = ['BookmarkStatus'];
 
 var BookmarkStatus = {
     isShown: true,
-    get panel AS_get_panel() byId('hatenabar-bookmark-status'),
+    get panel() byId('hatenabar-bookmark-status'),
 
     updateDisplay: function BS_updateDisplay() {
         let show = Prefs.hatenabar.get('bookmark.showStatus');

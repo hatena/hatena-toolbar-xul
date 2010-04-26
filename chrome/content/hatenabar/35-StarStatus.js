@@ -3,7 +3,7 @@ const EXPORT = ['StarStatus'];
 var StarStatus = {
     isShown: true,
 
-    get panel SS_get_panel() byId('hatenabar-star-status'),
+    get panel() byId('hatenabar-star-status'),
 
     update: function SS_update() {
         if (!this.isShown) return;

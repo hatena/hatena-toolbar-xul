@@ -9,7 +9,7 @@ function InputHistory(name) {
 }
 
 extend(InputHistory.prototype, {
-    get key IH_get_key() {
+    get key() {
         if (!this._key) {
             let prefKey = 'inputHistory.keys.' + this.name;
             let uuid = Prefs.hatenabar.get(prefKey, '');

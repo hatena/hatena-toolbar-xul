@@ -1,9 +1,9 @@
 const EXPORT = ['AccountStatus'];
 
 var AccountStatus = {
-    get panel AS_get_panel() byId('hatenabar-account-status'),
-    get label AS_get_label() byId('hatenabar-account-status-label'),
-    get popup AS_get_popup() byId('hatenabar-account-status-popup'),
+    get panel() byId('hatenabar-account-status'),
+    get label() byId('hatenabar-account-status-label'),
+    get popup() byId('hatenabar-account-status-popup'),
 
     isShown: true,
     strings: Browser.strings.getChildStrings('account'),
