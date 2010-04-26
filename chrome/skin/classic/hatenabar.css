@@ -190,31 +190,34 @@ textbox[type="autocomplete"]:not([enablehistory="true"]) > .hatenabar-autocomple
     -moz-border-radius-topleft: 2px;
     -moz-border-radius-bottomleft: 2px;
     padding: 0px 1px;
+    -moz-box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);
 }
 .hatenabar-checker > .checker-text-box {
-    background-color: #314dd7;
-    background-image: -moz-linear-gradient(top, #4772e5, #314dd7);
-    border-top: 1px solid #2a448d;
-    -moz-border-end: 1px solid #2a448d;
+    color: #000000;
+    text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-top: 1px solid #83817e;
+    -moz-border-start: 1px solid #38538a;
+    -moz-border-end: 1px solid #cdcac4;
     -moz-border-radius-topright: 2px;
     -moz-border-radius-bottomright: 2px;
     padding: 0px 3px;
     min-width: 36px;
+    -moz-box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);
 }
 .hatenabar-checker > .checker-text-box > .checker-text {
-    color: #ffffff;
-    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
     margin: 0px;
 }
 
 .hatenabar-checker-iconic > .checker-icon-box {
-    background-color: #314dd7;
-    background-image: -moz-linear-gradient(top, #4772e5, #314dd7);
-    border-top: 1px solid #2a448d;
-    -moz-border-start: 1px solid #2a448d;
-    -moz-border-end: 1px solid #2a448d;
+    background-color: #4566e3;
+    background-image: -moz-linear-gradient(top, #5f8ceb, #4566e3);
+    border-top: 1px solid #38538a;
+    -moz-border-start: 1px solid #38538a;
+    -moz-border-end: 1px solid #38538a;
     -moz-border-radius: 2px;
     padding: 0px 3px;
+    -moz-box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);
 }
 .hatenabar-checker-iconic[disabled="true"] > .checker-icon-box {
     background-color: rgba(0, 0, 0, 0.15);
