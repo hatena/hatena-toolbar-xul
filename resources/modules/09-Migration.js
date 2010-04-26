@@ -62,6 +62,11 @@ Migration.processes = [
         let searchLink = oldPrefs.get('bookmarksearch', false)
                          ? 'b:search' : 'search:search'
         prefs.set('searchbar.link', searchLink);
+
+        // Link
+        let open = oldPrefs.get('open', 0);
+        let openIn = ['current', 'tabfocused', 'tabblurred', 'window'][open];
+        prefs.set('link.openIn', openIn);
     },
 ];
 
