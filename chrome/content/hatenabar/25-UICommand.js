@@ -63,10 +63,10 @@ var UICommand = {
     _prevUserListener: null,
 
     onUserChanged: function UIC_onUserChanged() {
-        let isLogin = !!User.user;
+        let user = Account.user;
         this.userRequiredComands.forEach(function (id) {
             let command = document.getElementById(id);
-            if (isLogin)
+            if (user)
                 command.removeAttribute('disabled');
             else
                 command.setAttribute('disabled', 'true');
@@ -76,17 +76,17 @@ var UICommand = {
             this._prevUserListener.unlisten();
             this._prevUserListener = null;
         }
-        let groupChanged = method(this, 'onSelectedGroupChanged');
-        if (isLogin) {
+        let groupSelected = method(this, 'onGroupSelected');
+        if (user) {
             this._prevUserListener =
-                User.user.prefs.createListener('group.selected', groupChanged);
+                user.createListener('GroupSelected', groupSelected);
         }
-        groupChanged();
+        groupSelected();
     },
 
-    onSelectedGroupChanged: function UIC_onSelectedGroupChanged() {
+    onGroupSelected: function UIC_onGroupSelected() {
         let command = byId('hatenabar-cmd-refer-in-selected-group');
-        if (User.user && User.user.prefs.get('group.selected', ''))
+        if (Account.user && Account.user.selectedGroup)
             command.removeAttribute('disabled');
         else
             command.setAttribute('disabled', 'true');

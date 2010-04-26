@@ -5,20 +5,19 @@ var Toolbar = {
 
     openAntenna: function Tb_openAntenna(event) {
         let link = 'a:';
-        if (User.user) {
+        if (Account.user) {
             let mode = UICommand.getTarget(event).value || '';
             if (this.antennaModes.indexOf(mode) === -1)
-                mode = User.user.prefs.get('antenna.selected', 'antenna');
+                mode = Account.user.selectedAntenna;
             link += 'id:?' + ((mode === 'antenna') ? '' : ':' + mode);
-            User.user.prefs.set('antenna.selected', mode);
+            Account.user.selectedAntenna = mode;
         }
         Command.openUILink(link, event);
     },
 
     updateAntennaPopup: function Tb_updateAntennaPopup(event) {
         let popup = event.target;
-        let mode = User.user
-            ? User.user.prefs.get('antenna.selected', 'antenna') : 'antenna';
+        let mode = Account.user ? Account.user.selectedAntenna : 'antenna';
         let radios =
             popup.getElementsByAttribute('name', 'hatenabar-antenna-mode');
         Array.forEach(radios, function (menuitem) {
@@ -57,13 +56,12 @@ var Toolbar = {
         let link = 'g:';
         let user = Account.user;
         if (user) {
-            let group = UICommand.getTarget(event).value ||
-                        user.prefs.get('group.selected', '');
+            let group = UICommand.getTarget(event).value || user.selectedGroup;
             if (user.groups.indexOf(group) === -1)
                 group = '';
             if (group) {
                 link += group + ':id:?';
-                user.prefs.set('group.selected', group);
+                user.selectedGroup = group;
             } else {
                 link += 'id:?:group';
             }
@@ -80,7 +78,7 @@ var Toolbar = {
         let separator = byId('hatenabar-group-list-separator');
         let quoteMenu = byId('hatenabar-group-quote-menu');
         if (Account.user && Account.user.groups.length) {
-            let selected = Account.user.prefs.get('group.selected', '');
+            let selected = Account.user.selectedGroup;
             Account.user.groups.forEach(function (group) {
                 let menuitem = document.createElementNS(XUL_NS, 'menuitem');
                 menuitem.setAttribute('type', 'radio');
@@ -125,8 +123,8 @@ var Toolbar = {
 
     referInGroup: function Tb_referInGroup(event) {
         let group = UICommand.getTarget(event).value ||
-                    Account.user.prefs.get('group.selected');
-        Account.user.prefs.set('group.selected', group);
+                    Account.user.selectedGroup;
+        Account.user.selectedGroup = group;
         Command.goRefer('g:' + group + ':refer', content.document, event);
     },
 
