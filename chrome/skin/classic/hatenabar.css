@@ -193,7 +193,6 @@ textbox[type="autocomplete"]:not([enablehistory="true"]) > .hatenabar-autocomple
     -moz-box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);
 }
 .hatenabar-checker > .checker-text-box {
-    color: #000000;
     text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1);
     background-color: rgba(255, 255, 255, 0.1);
     border-top: 1px solid #83817e;
