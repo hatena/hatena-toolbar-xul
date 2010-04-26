@@ -1,0 +1,32 @@
+<!ENTITY prefWindow.title "Hatena Toolbar Preferences">
+
+<!-- General -->
+
+<!ENTITY general.label "General">
+
+<!ENTITY searchbar.link.label "Searchbar">
+<!ENTITY searchbar.link.hatenaSearch.label "Search using Hatena Search">
+<!ENTITY searchbar.link.bookmarkSearch.label "Search using Hatena Bookmark Search">
+
+<!ENTITY general.webPages.label "Web Pages">
+<!ENTITY bookmark.showSearchOnWeb.label "Show &quot;Search using Hatena Bookmark&quot; button in search result pages">
+<!ENTITY star.anywhere.label "Enable Star anywhere">
+
+<!ENTITY general.statusbar.label "Statusbar">
+<!ENTITY account.showStatus.label "Show user history panel">
+<!ENTITY account.rememberHistory.label "Remember user history">
+<!ENTITY account.reloadOnChange.label "Reload page on login/logout">
+<!ENTITY star.showStatus.label "Show Star panel">
+<!ENTITY bookmark.showStatus.label "Show Add-to-Bookmark panel">
+
+<!-- More Convenient -->
+
+<!ENTITY convenient.label "More Convenient">
+
+<!ENTITY convenient.bookmark.label "Hatena Bookmark">
+<!ENTITY convenient.bookmark.description "Hatena Bookmark Extension help you to add or search bookmarks more conveniently">
+<!ENTITY convenient.bookmark.learnMore.label "Learn more">
+<!ENTITY convenient.bookmark.learnMore.url "http://b.hatena.ne.jp/guide/firefox_addon">
+<!ENTITY convenient.bookmark.installNow.label "Install now">
+<!ENTITY convenient.bookmark.installNow.url "https://addons.mozilla.org/firefox/addon/11285">
+<!ENTITY bookmark.useHatenaBookmarkExtension.label "Use Edit-Screen of Hatena Bookmark when adding to bookmarks">

@@ -1,0 +1,32 @@
+<!ENTITY prefWindow.title "はてなツールバーの設定">
+
+<!-- General -->
+
+<!ENTITY general.label "一般">
+
+<!ENTITY searchbar.link.label "検索バー">
+<!ENTITY searchbar.link.hatenaSearch.label "はてな検索を使う">
+<!ENTITY searchbar.link.bookmarkSearch.label "はてなブックマーク検索を使う">
+
+<!ENTITY general.webPages.label "Web ページ">
+<!ENTITY bookmark.showSearchOnWeb.label "検索結果ページに &quot;はてなブックマークで検索&quot; ボタンを表示する">
+<!ENTITY star.anywhere.label "どこでもはてなスターを有効にする">
+
+<!ENTITY general.statusbar.label "ステータスバー">
+<!ENTITY account.showStatus.label "ユーザー履歴パネルを表示する">
+<!ENTITY account.rememberHistory.label "ユーザー履歴を保存する">
+<!ENTITY account.reloadOnChange.label "ログイン / ログアウトしたときにページを再読み込みする">
+<!ENTITY star.showStatus.label "スターパネルを表示する">
+<!ENTITY bookmark.showStatus.label "ブックマーク追加パネルを表示する">
+
+<!-- More Convenient -->
+
+<!ENTITY convenient.label "もっと便利に">
+
+<!ENTITY convenient.bookmark.label "はてなブックマーク">
+<!ENTITY convenient.bookmark.description "はてなブックマーク拡張を使うと、ブックマークの追加や検索がより便利に行えます">
+<!ENTITY convenient.bookmark.learnMore.label "もっと詳しく">
+<!ENTITY convenient.bookmark.learnMore.url "http://b.hatena.ne.jp/guide/firefox_addon">
+<!ENTITY convenient.bookmark.installNow.label "今すぐインストール">
+<!ENTITY convenient.bookmark.installNow.url "https://addons.mozilla.jp/firefox/eula/11285">
+<!ENTITY bookmark.useHatenaBookmarkExtension.label "ブックマークを追加するとき、はてなブックマーク拡張の追加画面を利用する">

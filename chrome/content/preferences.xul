@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/css" href="chrome://global/skin"?>
 <?xml-stylesheet type="text/css" href="chrome://hatenabar/skin/preferences.css"?>
+<!DOCTYPE prefwindow SYSTEM "chrome://hatenabar/locale/preferences.dtd">
 <prefwindow id="hatenabar-preferences"
             xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-            title="{{Hatena Toolbar Preferences}}">
+            title="&prefWindow.title;">
 
 <script type="application/javascript" src="chrome://browser/content/utilityOverlay.js"/>
 <script type="application/javascript"><![CDATA[
@@ -21,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
 ]]></script>
 
 <prefpane id="general-pane"
-          label="{{General}}">
+          label="&general.label;">
     <preferences>
         <preference id="account.rememberHistory"
                     name="extensions.hatenabar.account.rememberHistory"
@@ -50,43 +51,44 @@ document.addEventListener('DOMContentLoaded', function () {
     </preferences>
 
     <groupbox>
-        <caption label="{{All Works}}"/>
+        <caption label="&searchbar.link.label;"/>
 
-        <label value="{{Search engine in searchbar}}"
-               control="searchbar-link-group"/>
         <radiogroup id="searchbar-link-group"
                     preference="searchbar.link">
-            <radio label="{{Hatena Search}}"
+            <radio label="&searchbar.link.hatenaSearch.label;"
                    value="search:search"/>
-            <radio label="{{Hatena Bookmark Search}}"
+            <radio label="&searchbar.link.bookmarkSearch.label;"
                    value="b:search"/>
         </radiogroup>
-        <separator class="thin"/>
-        <checkbox label="{{Show &quot;Search by Hatena Bookmark&quot; button in search results}}"
-                  preference="bookmark.showSearchOnWeb"/>
-        <checkbox label="{{Use Hatena Star anywhere}}"
-                  preference="star.anywhere"/>
     </groupbox>
     <groupbox>
-        <caption label="{{Statusbar}}"/>
+        <caption label="&general.webPages.label;"/>
 
-        <checkbox label="{{Show account panel}}"
+        <checkbox label="&star.anywhere.label;"
+                  preference="star.anywhere"/>
+        <checkbox label="&bookmark.showSearchOnWeb.label;"
+                  preference="bookmark.showSearchOnWeb"/>
+    </groupbox>
+    <groupbox>
+        <caption label="&general.statusbar.label;"/>
+
+        <checkbox label="&account.showStatus.label;"
                   preference="account.showStatus"/>
         <vbox class="indent">
-            <checkbox label="{{Remember user history}}"
+            <checkbox label="&account.rememberHistory.label;"
                       preference="account.rememberHistory"/>
-            <checkbox label="{{Reload page on login or logout}}"
+            <checkbox label="&account.reloadOnChange.label;"
                       preference="account.reloadOnChange"/>
         </vbox>
-        <checkbox label="{{Show Star panel}}"
+        <checkbox label="&star.showStatus.label;"
                   preference="star.showStatus"/>
-        <checkbox label="{{Show Add-to-Bookmark button}}"
+        <checkbox label="&bookmark.showStatus.label;"
                   preference="bookmark.showStatus"/>
     </groupbox>
 </prefpane>
 
-<prefpane id="extensions-pane"
-          label="{{More Convenient}}">
+<prefpane id="conveninet-pane"
+          label="&convenient.label;">
     <preferences>
         <preference id="bookmark.useHatenaBookmarkExtension"
                     name="extensions.hatenabar.bookmark.useHatenaBookmarkExtension"
@@ -94,15 +96,19 @@ document.addEventListener('DOMContentLoaded', function () {
     </preferences>
 
     <groupbox>
-        <caption label="{{Hatena Bookmark}}"/>
+        <caption label="&convenient.bookmark.label;"/>
 
-        <description>{{Hatena Bookmark Extension make you more happy}}</description>
+        <description>&convenient.bookmark.description;</description>
         <hbox>
-            <label class="text-link" value="{{Lean More}}" href="http://b.hatena.ne.jp/guide/firefox_addon"/>
-            <label class="text-link" value="{{Install Now}}" href="https://addons.mozilla.org/firefox/addon/11285"/>
+            <label class="text-link"
+                   value="&convenient.bookmark.learnMore.label;"
+                   href="&convenient.bookmark.learnMore.url;"/>
+            <label class="text-link"
+                   value="&convenient.bookmark.installNow.label;"
+                   href="&convenient.bookmark.installNow.url;"/>
         </hbox>
         <separator/>
-        <checkbox label="{{Use Edit Screen of Hatena Bookmark when adding to bookmarks}}"
+        <checkbox label="&bookmark.useHatenaBookmarkExtension.label;"
                   preference="bookmark.useHatenaBookmarkExtension"/>
     </groupbox>
 </prefpane>
