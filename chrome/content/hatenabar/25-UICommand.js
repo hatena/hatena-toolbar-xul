@@ -1,13 +1,14 @@
 const EXPORT = ['UICommand'];
 
 var UICommand = {
-    openLink: function UIC_openLink(event) {
-        Command.openUILink(this.getLink(event), event);
+    openLink: function UIC_openLink(event, link) {
+        Command.openUILink(link || this.getLink(event), event);
     },
 
-    openRelatedLink: function UIC_openRelatedLink(event) {
+    openRelatedLink: function UIC_openRelatedLink(event, link) {
+        link = link || this.getLink(event);
         let context = { url: content.location.href };
-        Command.openContentLinkWith(this.getLink(event), context, event);
+        Command.openContentLinkWith(link, context, event);
     },
 
     openTopOrUserLink: function UIC_openTopOrUserLink(event) {
@@ -54,8 +55,10 @@ var UICommand = {
         'hatenabar-has-user',
         'hatenabar-cmd-open-user-link',
         'hatenabar-cmd-open-related-user-link',
+        'hatenabar-cmd-add-antenna',
         'hatenabar-cmd-add-bookmark',
         'hatenabar-cmd-refer-in-diary',
+        'hatenabar-cmd-refer-in-group',
     ],
     _prevUserListener: null,
 
@@ -82,7 +85,7 @@ var UICommand = {
     },
 
     onSelectedGroupChanged: function UIC_onSelectedGroupChanged() {
-        let command = document.getElementById('hatenabar-cmd-refer-in-group');
+        let command = byId('hatenabar-cmd-refer-in-selected-group');
         if (User.user && User.user.prefs.get('group.selected', ''))
             command.removeAttribute('disabled');
         else
