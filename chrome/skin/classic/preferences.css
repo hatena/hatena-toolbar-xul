@@ -29,5 +29,5 @@
 }
 [preference="bookmark.showStatus"] {
     list-style-image: url("chrome://hatenabar/skin/icons.png");
-    -moz-image-region: rect(0px, 144px, 16px, 128px);
+    -moz-image-region: rect(0px, 272px, 16px, 256px);
 }
