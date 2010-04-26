@@ -129,6 +129,8 @@
             </menupopup>
         </toolbarbutton>
 
+        <!-- Searchbar -->
+
         <toolbaritem id="hatenabar-search-item"
                      class="chromeclass-toolbar-additional"
                      title="&hatenabar.search.label;"
@@ -151,6 +153,8 @@
                 </hbox>
             </textbox>
         </toolbaritem>
+
+        <!-- Services -->
 
         <toolbarbutton id="hatenabar-antenna-button"
                        class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
@@ -537,6 +541,8 @@
             </menupopup>
         </toolbarbutton>
 
+        <!-- Page Actions -->
+
         <toolbarbutton id="hatenabar-including-antenna-button"
                        class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                        label="&hatenabar.actions.includingAntenna.label;"
@@ -574,6 +580,8 @@
                        label="&hatenabar.actions.referInGroup.label;"
                        tooltiptext="&hatenabar.actions.referInGroup.label;"
                        command="hatenabar-cmd-refer-in-selected-group"/>
+
+        <!-- Checkers (Counters) -->
 
         <toolbaritem id="hatenabar-check-antenna-item"
                      class="chromeclass-toolbar-additional"
