@@ -77,10 +77,11 @@ var Toolbar = {
         Array.slice(radios).forEach(function (menuitem) {
             menuitem.parentNode.removeChild(menuitem);
         });
-        if (User.user && User.user.groups.length) {
-            let separator = popup.firstChild;
-            let selected = User.user.prefs.get('group.selected', '');
-            User.user.groups.forEach(function (group) {
+        let separator = byId('hatenabar-group-list-separator');
+        let quoteMenu = byId('hatenabar-group-quote-menu');
+        if (Account.user && Account.user.groups.length) {
+            let selected = Account.user.prefs.get('group.selected', '');
+            Account.user.groups.forEach(function (group) {
                 let menuitem = document.createElementNS(XUL_NS, 'menuitem');
                 menuitem.setAttribute('type', 'radio');
                 menuitem.setAttribute('name', 'hatenabar-group-id');
@@ -94,10 +95,28 @@ var Toolbar = {
                 popup.insertBefore(menuitem, separator);
             });
             separator.collapsed = false;
+            quoteMenu.disabled = false;
         } else {
-            popup.firstChild.collapsed = true;
+            separator.collapsed = true;
+            quoteMenu.disabled = true;
         }
         Control.updateLinkPopup(event);
+    },
+
+    updateQuoteInGroupPopup: function Tb_updateQuoteInGroupPopup(event) {
+        // Stop initialization of parent menupopup.
+        event.stopPropagation();
+        if (!Account.user) return;
+        let popup = event.target;
+        while (popup.firstChild)
+            popup.removeChild(popup.firstChild);
+        Account.user.groups.forEach(function (group) {
+            let menuitem = document.createElementNS(XUL_NS, 'menuitem');
+            menuitem.setAttribute('label', group);
+            menuitem.setAttribute('observes', 'hatenabar-cmd-refer-in-group');
+            menuitem.setAttribute('value', group);
+            popup.appendChild(menuitem);
+        });
     },
 
     referInDiary: function Tb_referInDiary(event) {
@@ -105,7 +124,9 @@ var Toolbar = {
     },
 
     referInGroup: function Tb_referInGroup(event) {
-        let group = User.user.prefs.get('group.selected');
+        let group = UICommand.getTarget(event).value ||
+                    Account.user.prefs.get('group.selected');
+        Account.user.prefs.set('group.selected', group);
         Command.goRefer('g:' + group + ':refer', content.document, event);
     },
 

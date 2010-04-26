@@ -295,7 +295,13 @@
                        command="hatenabar-cmd-open-group">
             <menupopup observes="hatenabar-popup-base"
                        onpopupshowing="hatenabar.Toolbar.updateGroupPopup(event);">
+                <menu id="hatenabar-group-quote-menu"
+                      label="&hatenabar.group.quote.label;">
+                    <menupopup observes="hatenabar-popup-base"
+                               onpopupshowing="hatenabar.Toolbar.updateQuoteInGroupPopup(event);"/>
+                </menu>
                 <menuseparator/>
+                <menuseparator id="hatenabar-group-list-separator"/>
                 <menuitem label="&hatenabar.group.list.label;"
                           observes="hatenabar-cmd-open-user-link"
                           hatena:link="g:id:?:group"/>
