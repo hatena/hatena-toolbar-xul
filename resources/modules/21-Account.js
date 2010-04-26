@@ -24,20 +24,35 @@ var Account = {
         EventService.createListener('unload', method(this, 'destroy'));
 
         let timer = new Timer(777, 1);
+        timer.createListener('timer', method(this, 'delayedInit'));
         timer.start();
-        timer.createListener('timer', bind(tryCheckLogin, this));
-        function tryCheckLogin() {
-            timer.dispose();
-            if (this.user) return;
-            let cookies = CookieManager.enumerator;
-            while (cookies.hasMoreElements()) {
-                let cookie = cookies.getNext().QueryInterface(Ci.nsICookie);
-                if (cookie.host === LOGIN_COOKIE_HOST && cookie.name === 'rk') {
-                    this.checkLogin(cookie.value);
-                    break;
-                }
-            }
+    },
+
+    delayedInit: function Account_delayedInit() {
+        if (this.user) return;
+        let rk = this.findRk();
+        if (!rk) return;
+        this.checkLogin(rk);
+
+        let timer = new Timer(4300, 5);
+        timer.createListener('timer', bind(onAccountCheckTimer, this));
+        timer.start();
+        function onAccountCheckTimer() {
+            if (this.user)
+                timer.dispose();
+            else
+                this.checkLogin(rk);
         }
+    },
+
+    findRk: function Account_findRk() {
+        let cookies = CookieManager.enumerator;
+        while (cookies.hasMoreElements()) {
+            let cookie = cookies.getNext().QueryInterface(Ci.nsICookie);
+            if (cookie.host === LOGIN_COOKIE_HOST && cookie.name === 'rk')
+                return cookie.value;
+        }
+        return null;
     },
 
     destroy: function Account_destroy() {
