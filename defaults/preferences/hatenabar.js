@@ -20,5 +20,9 @@ pref("extensions.hatenabar.bookmark.useHatenaBookmarkExtension", true);
 pref("extensions.hatenabar.star.anywhere", true);
 pref("extensions.hatenabar.star.showStatus", true);
 
+// link.openIn: the possible values are "current", "tab", "tabshifted",
+// "tabfocused", "tabblurred", "window", and "save".
+pref("extensions.hatenabar.link.openIn", "current");
+
 // Checker for Including Antennas, Bookmark Count, and Quoting Diaries
 pref("extensions.hatenabar.checker.ignoreList", "[\"^https://.*$\",\"^https?://192\\\\.168\\\\.\\\\d+\\\\.\\\\d+.*$\",\"^https?://172\\\\.((1[6-9])|(2[0-9])|(3[0-1]))\\\\.\\\\d+\\\\.\\\\d+.*$\",\"^https?://10\\\\.\\\\d+\\\\.\\\\d+\\\\.\\\\d+.*$\"]");

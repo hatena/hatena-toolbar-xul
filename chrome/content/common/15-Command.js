@@ -1,5 +1,8 @@
 const EXPORT = ['Command'];
 
+const UI_TAB_IN_BG_PREF = 'browser.tabs.loadBookmarksInBackground';
+const CONTENT_TAB_IN_BG_PREF = 'browser.tabs.loadInBackground';
+
 var Command = {
     openUILink: function Cmd_openUILink(link, event) {
         this.openUILinkWith(link, null, event);
@@ -10,7 +13,8 @@ var Command = {
     openUILinkWith: function Cmd_openUILinkWith(link, context, event) {
         if (!/^https?:/.test(link))
             link = HatenaLink.parseToURL(link, context);
-        openUILink(link, event);
+        let where = this.whereToOpenLink(event, true);
+        openUILinkIn(link, where);
     },
 
     openContentLink: function Cmd_openContentLink(link, event) {
@@ -23,7 +27,7 @@ var Command = {
     openContentLinkWith: function Cmd_openContentLinkWith(link, context, event) {
         if (!/^https?:/.test(link))
             link = HatenaLink.parseToURL(link, context);
-        let where = whereToOpenLink(event);
+        let where = this.whereToOpenLink(event, false);
         // タブを開かなければ UI Link も Content Link も挙動は同じ。
         if (where === 'current' || where === 'window' || where === 'save') {
             openUILinkIn(link, where);
@@ -34,11 +38,22 @@ var Command = {
         // フォーカスの有無が決められてしまう。Content Link に
         // 関しては browser.tabs.loadInBackground の値を元に
         // フォーカスの有無を決めたいので、openUILinkIn() は使わない。
-        let inBackground =
-            Prefs.global.get('browser.tabs.loadInBackground', false);
+        let inBackground = Prefs.global.get(CONTENT_TAB_IN_BG_PREF, false);
         if (where === 'tabshifted')
             inBackground = !inBackground;
         getTopWin().gBrowser.loadOneTab(link, null, null, null, inBackground);
+    },
+
+    whereToOpenLink: function Cmd_whereToOpenLink(event, isUILink) {
+        let where = whereToOpenLink(event);
+        if (where !== 'current') return where;
+        where = Prefs.hatenabar.get('link.openIn', where);
+        if (where !== 'tabfocused' && where !== 'tabblurred') return where;
+        let inBackground = Prefs.global.get(isUILink ? UI_TAB_IN_BG_PREF
+                                                     : CONTENT_TAB_IN_BG_PREF);
+        let wantsFocus = (where === 'tabfocused');
+        return inBackground ? (wantsFocus ? 'tabshifted' : 'tab')
+                            : (wantsFocus ? 'tab' : 'tabshifted');
     },
 
     openPreferences: function Cmd_openPreferences() {
@@ -52,14 +67,14 @@ var Command = {
     goSearch: function Cmd_goSearch(query, event) {
         let link = Prefs.hatenabar.get('searchbar.link');
         let url = HatenaLink.parseToURL(link, { query: query })
-        let where = whereToOpenLink(event);
+        let where = this.whereToOpenLink(event, true);
         if (event instanceof Ci.nsIDOMKeyEvent) {
             // Alt + Enter で検索したときは
             // 常に新しいタブを開き、そこにフォーカス。
             where = event.altKey
                 ? (Prefs.global.get('browser.tabs.loadBookmarksInBackground', false)
                    ? 'tabshifted' : 'tab')
-                : 'current';
+                : Prefs.hatenabar.get('link.openIn', where);
         }
         openUILinkIn(url, where);
     },
