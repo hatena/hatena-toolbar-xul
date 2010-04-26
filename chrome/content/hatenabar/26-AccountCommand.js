@@ -42,7 +42,7 @@ var AccountCommand = {
         let location = content.location.href;
         if (isHatenaURL(location))
             url += '?location=' + encodeURIComponent(location);
-        openUILink(url, event);
+        Command.openUILink(url, event);
         if (!name) return;
         // openUILink ではどこのタブにページが読み込まれるか
         // わからないので、gBrowser にイベントリスナを設定する。
@@ -107,7 +107,8 @@ var AccountCommand = {
         postData.addHeader('Content-Type', 'application/x-www-form-urlencoded');
         postData.addContentLength = true;
         postData.setData(body);
-        openUILink(Account.LOGIN_URL, event, false, false, false, postData);
+        let where = Command.whereToOpenLink(event);
+        openUILinkIn(Account.LOGIN_URL, where, false, postData);
     },
 
     goLogout: function AC_goLogout(event) {
