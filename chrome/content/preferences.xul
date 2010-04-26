@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </groupbox>
 </prefpane>
 
-<prefpane id="conveninet-pane"
+<prefpane id="convenient-pane"
           label="&convenient.label;">
     <preferences>
         <preference id="bookmark.useHatenaBookmarkExtension"
@@ -98,16 +98,21 @@ document.addEventListener('DOMContentLoaded', function () {
     <groupbox>
         <caption label="&convenient.bookmark.label;"/>
 
-        <description>&convenient.bookmark.description;</description>
-        <hbox>
-            <label class="text-link"
-                   value="&convenient.bookmark.learnMore.label;"
-                   href="&convenient.bookmark.learnMore.url;"/>
-            <label class="text-link"
-                   value="&convenient.bookmark.installNow.label;"
-                   href="&convenient.bookmark.installNow.url;"/>
+        <hbox align="start" pack="center">
+            <image src="chrome://hatenabar/skin/bookmark-extension.png"/>
+            <separator orient="vertical"/>
+            <vbox align="start">
+                <description id="convenient-bookmark-description">&convenient.bookmark.description;</description>
+                <separator class="thin"/>
+                <label class="text-link"
+                       value="&convenient.bookmark.learnMore.label;"
+                       href="&convenient.bookmark.learnMore.url;"/>
+                <label class="text-link"
+                       value="&convenient.bookmark.installNow.label;"
+                       href="&convenient.bookmark.installNow.url;"/>
+            </vbox>
         </hbox>
-        <separator/>
+        <separator class="thin"/>
         <checkbox label="&bookmark.useHatenaBookmarkExtension.label;"
                   preference="bookmark.useHatenaBookmarkExtension"/>
     </groupbox>

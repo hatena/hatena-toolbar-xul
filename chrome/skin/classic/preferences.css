@@ -36,3 +36,10 @@
     list-style-image: url("chrome://hatenabar/skin/icons.png");
     -moz-image-region: rect(0px, 272px, 16px, 256px);
 }
+
+/* Bookmark Extension */
+
+#convenient-bookmark-description {
+    text-align: justify;
+    max-width: 14em;
+}
