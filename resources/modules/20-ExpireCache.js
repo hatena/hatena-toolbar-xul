@@ -189,8 +189,7 @@ HTTPCache.bookmarked.isValid = function(url) {
 };
 
 HTTPCache.bookmarked.createFilter = function(ev) {
-    //let filters = eval( '(' + HTTPCache.bookmarked.prefs.get('counterIgnoreList') + ')');
-    let filters = ['\^https:\/\/.*\$', '\^https?:\/\/192\\.168\\.\\d+\\.\\d+.*\$', '\^https?:\/\/172\\.((1[6-9])|(2[0-9])|(3[0-1]))\\.\\d+\\.\\d+.*\$', '\^https?:\/\/10\\.\\d+\\.\\d+\\.\\d+.*\$'];
+    let filters = HTTPCache.bookmarked.prefs.get('checker.ignoreList', [], JSON);
     HTTPCache.bookmarked.setFilter(filters);
 };
 
@@ -200,7 +199,7 @@ HTTPCache.bookmarked.setFilter = function(filters) {
 
 HTTPCache.bookmarked.loadHandler = function(ev) {
     HTTPCache.bookmarked.createFilter();
-    //HTTPCache.bookmarked.prefs.createListener('counterIgnoreList', HTTPCache.bookmarked.createFilter);
+    HTTPCache.bookmarked.prefs.createListener('checker.ignoreList', HTTPCache.bookmarked.createFilter);
 };
 
 HTTPCache.referred = new HTTPCache('ReferredCountCache', {
