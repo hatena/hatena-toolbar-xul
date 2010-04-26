@@ -70,10 +70,6 @@
 <!ENTITY hatenabar.haiku.top.label "Top">
 
 <!ENTITY hatenabar.idea.label "Hatena Idea">
-<!ENTITY hatenabar.idea.questionlist.label "Question History">
-<!ENTITY hatenabar.idea.answerlist.label "Answer History">
-<!ENTITY hatenabar.idea.watchlist.label "Watchlist">
-<!ENTITY hatenabar.idea.config.label "Settings">
 <!ENTITY hatenabar.idea.top.label "Top">
 
 <!ENTITY hatenabar.keyword.label "Hatena Keyword">
@@ -85,6 +81,10 @@
 <!ENTITY hatenabar.message.label "Hatena Message">
 
 <!ENTITY hatenabar.question.label "Hatena Question">
+<!ENTITY hatenabar.question.questionlist.label "Question History">
+<!ENTITY hatenabar.question.answerlist.label "Answer History">
+<!ENTITY hatenabar.question.watchlist.label "Watchlist">
+<!ENTITY hatenabar.question.config.label "Settings">
 <!ENTITY hatenabar.question.top.label "Top">
 
 <!ENTITY hatenabar.star.label "Hatena Star">
