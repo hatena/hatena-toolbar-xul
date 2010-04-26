@@ -2,13 +2,28 @@ const EXPORT = ['BrowserMigration'];
 
 var BrowserMigration = {
     run: function BM_run() {
-        if (!Browser.isFirstWindow || !Migration.isFirstRunAfterUpdate)
+        if (!Browser.isFirstWindow) return;
+        if (Migration.isFirstRun) {
+            this.runFirst();
             return;
+        }
+        if (!Migration.isFirstRunAfterUpdate) return;
         this.processes.slice(Migration.prevVersion).forEach(function (process) {
             if (!process) return;
             try { process.call(this) }
             catch (ex) { reportError(ex); }
         }, this);
+    },
+
+    runFirst: function BM_runFirst() {
+        doOnLoad(method(this, 'applyBookmarkStatusbar'));
+    },
+
+    applyBookmarkStatusbar: function BM_applyBookmarkStatusbar() {
+        if (typeof 'hBookmark' !== 'undefined' &&
+            Prefs.global.get('extensions.hatenabookmark.statusbar.addButton', false)) {
+            Prefs.hatenabar.set('bookmark.showStatus', false);
+        }
     },
 };
 
@@ -65,6 +80,9 @@ BrowserMigration.processes = [
             toolbar.currentSet = toolbarSet.join(',');
             document.persist(toolbar.id, 'currentset');
         }
+
+        // Bookmark Statusbar Panel
+        doOnLoad(method(BrowserMigration, 'applyBookmarkStatusbar'));
     },
 ];
 
