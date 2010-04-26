@@ -61,8 +61,10 @@ var AccountStatus = {
         let names = Account.getUserNames();
         names.forEach(function (name) {
             let menu = document.createElementNS(XUL_NS, 'menuitem');
-            menu.setAttribute('class', 'hatenabar-login-menuitem');
+            menu.setAttribute('class',
+                              'menuitem-iconic hatenabar-login-menuitem');
             menu.setAttribute('label', name);
+            menu.setAttribute('image', new User(name).getIcon());
             menu.setAttribute('tooltiptext',
                               this.strings.get('loginAs.tooltip', name));
             menu.setAttribute('observes', 'hatenabar-cmd-go-login');
