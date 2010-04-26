@@ -1,4 +1,4 @@
-<!ENTITY prefWindow.title "Hatena Toolbar Preferences">
+<!ENTITY prefWindow.title "Hatena Toolbar Settings">
 
 <!-- General -->
 
@@ -24,9 +24,9 @@
 <!ENTITY convenient.label "More Convenient">
 
 <!ENTITY convenient.bookmark.label "Hatena Bookmark">
-<!ENTITY convenient.bookmark.description "Hatena Bookmark Extension help you to add or search bookmarks more conveniently">
+<!ENTITY convenient.bookmark.description "Use Hatena Bookmark Extension to add or search bookmarks more easily">
 <!ENTITY convenient.bookmark.learnMore.label "Learn more">
 <!ENTITY convenient.bookmark.learnMore.url "http://b.hatena.ne.jp/guide/firefox_addon">
 <!ENTITY convenient.bookmark.installNow.label "Install now">
 <!ENTITY convenient.bookmark.installNow.url "https://addons.mozilla.org/firefox/addon/11285">
-<!ENTITY bookmark.useHatenaBookmarkExtension.label "Use Edit-Screen of Hatena Bookmark when adding to bookmarks">
+<!ENTITY bookmark.useHatenaBookmarkExtension.label "Use Hatena Bookmark Extension edit-screen when adding bookmarks">

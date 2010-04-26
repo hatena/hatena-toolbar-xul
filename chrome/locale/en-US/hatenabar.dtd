@@ -9,7 +9,7 @@
 <!-- Main Menu -->
 
 <!ENTITY hatenabar.main.label "Hatena">
-<!ENTITY hatenabar.main.prefs.label "Preferences…">
+<!ENTITY hatenabar.main.prefs.label "Settings…">
 <!ENTITY hatenabar.main.my.label "My Hatena">
 <!ENTITY hatenabar.main.help.label "Help">
 
@@ -29,7 +29,7 @@
 <!ENTITY hatenabar.antenna.add.label "Add to Antennas">
 <!ENTITY hatenabar.antenna.antenna.label "Antenna">
 <!ENTITY hatenabar.antenna.simple.label "Simple">
-<!ENTITY hatenabar.antenna.detail.label "Detail">
+<!ENTITY hatenabar.antenna.detail.label "Details">
 <!ENTITY hatenabar.antenna.checklist.label "Checklist">
 <!ENTITY hatenabar.antenna.config.label "Config">
 <!ENTITY hatenabar.antenna.top.label "Top">
@@ -55,11 +55,11 @@
 <!ENTITY hatenabar.fotolife.follow.label "Favorites">
 <!ENTITY hatenabar.fotolife.star.label "Stars">
 <!ENTITY hatenabar.fotolife.edit.label "Edit">
-<!ENTITY hatenabar.fotolife.config.label "Config">
+<!ENTITY hatenabar.fotolife.config.label "Settings">
 <!ENTITY hatenabar.fotolife.top.label "Top">
 
 <!ENTITY hatenabar.group.label "Hatena Group">
-<!ENTITY hatenabar.group.quote.label "Quote in">
+<!ENTITY hatenabar.group.quote.label "Quote in Group">
 <!ENTITY hatenabar.group.list.label "Group List">
 <!ENTITY hatenabar.group.top.label "Top">
 
@@ -70,10 +70,10 @@
 <!ENTITY hatenabar.haiku.top.label "Top">
 
 <!ENTITY hatenabar.idea.label "Hatena Idea">
-<!ENTITY hatenabar.idea.questionlist.label "Question List">
-<!ENTITY hatenabar.idea.answerlist.label "Answer List">
-<!ENTITY hatenabar.idea.watchlist.label "Watch List">
-<!ENTITY hatenabar.idea.config.label "Config">
+<!ENTITY hatenabar.idea.questionlist.label "Question History">
+<!ENTITY hatenabar.idea.answerlist.label "Answer History">
+<!ENTITY hatenabar.idea.watchlist.label "Watchlist">
+<!ENTITY hatenabar.idea.config.label "Settings">
 <!ENTITY hatenabar.idea.top.label "Top">
 
 <!ENTITY hatenabar.keyword.label "Hatena Keyword">
@@ -84,7 +84,7 @@
 
 <!ENTITY hatenabar.message.label "Hatena Message">
 
-<!ENTITY hatenabar.question.label "Question Hatena">
+<!ENTITY hatenabar.question.label "Hatena Question">
 <!ENTITY hatenabar.question.top.label "Top">
 
 <!ENTITY hatenabar.star.label "Hatena Star">
@@ -93,10 +93,10 @@
 <!ENTITY hatenabar.star.blogs.label "Blogs">
 <!ENTITY hatenabar.star.top.label "Top">
 
-<!ENTITY hatenabar.ugomemo.label "Ugomemo Hatena">
+<!ENTITY hatenabar.ugomemo.label "Flipnote Hatena">
 <!ENTITY hatenabar.ugomemo.favorites.label "Favorites">
 <!ENTITY hatenabar.ugomemo.stars.label "Stars">
-<!ENTITY hatenabar.ugomemo.hotMovies.label "Hot Movies">
+<!ENTITY hatenabar.ugomemo.hotMovies.label "Hot Flipnotes">
 <!ENTITY hatenabar.ugomemo.movies.label "Movies">
 <!ENTITY hatenabar.ugomemo.ranking.label "Ranking">
 <!ENTITY hatenabar.ugomemo.channels.label "Channels">
@@ -111,13 +111,13 @@
 <!ENTITY hatenabar.graph.top.label "Top">
 
 <!ENTITY hatenabar.coco.label "Hatena Coco">
-<!ENTITY hatenabar.coco.friendTL.label "Friends' Timeline">
+<!ENTITY hatenabar.coco.friendTL.label "Friends Timeline">
 <!ENTITY hatenabar.coco.happieEdit.label "Edit Happie">
 <!ENTITY hatenabar.coco.top.label "Top">
 
 <!ENTITY hatenabar.monolith.label "Hatena Monolith">
-<!ENTITY hatenabar.monolith.mono.label "Mono Page">
-<!ENTITY hatenabar.monolith.config.label "Config">
+<!ENTITY hatenabar.monolith.mono.label "Items Page">
+<!ENTITY hatenabar.monolith.config.label "Settings">
 <!ENTITY hatenabar.monolith.top.label "Top">
 
 <!-- Page Actions -->
