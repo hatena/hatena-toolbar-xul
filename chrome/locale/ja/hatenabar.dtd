@@ -25,6 +25,8 @@
 <!-- Services -->
 
 <!ENTITY hatenabar.antenna.label "はてなアンテナ">
+<!ENTITY hatenabar.antenna.including.label "含むアンテナ">
+<!ENTITY hatenabar.antenna.add.label "アンテナに追加">
 <!ENTITY hatenabar.antenna.antenna.label "アンテナ">
 <!ENTITY hatenabar.antenna.simple.label "シンプル">
 <!ENTITY hatenabar.antenna.detail.label "詳細">
@@ -33,11 +35,15 @@
 <!ENTITY hatenabar.antenna.top.label "トップ">
 
 <!ENTITY hatenabar.bookmark.label "はてなブックマーク">
+<!ENTITY hatenabar.bookmark.entry.label "ブックマークエントリ">
+<!ENTITY hatenabar.bookmark.add.label "ブックマークに追加">
 <!ENTITY hatenabar.bookmark.favorites.label "お気に入り">
 <!ENTITY hatenabar.bookmark.config.label "設定">
 <!ENTITY hatenabar.bookmark.top.label "トップ">
 
 <!ENTITY hatenabar.diary.label "はてなダイアリー">
+<!ENTITY hatenabar.diary.referring.label "含む日記">
+<!ENTITY hatenabar.diary.quote.label "引用する">
 <!ENTITY hatenabar.diary.archive.label "記事一覧">
 <!ENTITY hatenabar.diary.edit.label "記事を書く">
 <!ENTITY hatenabar.diary.about.label "プロフィール">

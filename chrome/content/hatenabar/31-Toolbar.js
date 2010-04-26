@@ -109,10 +109,14 @@ var Toolbar = {
         Command.goRefer('g:' + group + ':refer', content.document, event);
     },
 
+    get includingAntennaCommand() byId('hatenabar-cmd-open-including-antenna'),
+
     updateCounter: function Tb_updateCounter() {
         let url = content.location.href;
         HTTPCache.bookmarked.get(url, method(this, 'onGotBookmarkedCount', url));
         HTTPCache.referred.get(url, method(this, 'onGotReferredCount', url));
+        // XXX including antennaの確認をしないなら、
+        // ここでincluding antennaコマンドを有効にしておく?
     },
 
     onGotBookmarkedCount: function Tb_onGotBookmarkedCount(url, count) {
@@ -124,15 +128,17 @@ var Toolbar = {
 
     onGotReferredCount: function Tb_onGotReferredCount(url, xml) {
         if (content.location.href !== url) return;
-        let aButton = document.getElementById('hatenabar-including-antenna-button');
-        if (aButton) {
-            // API 取得に失敗した場合、http URI なら
-            // とりあえず「含むアンテナ」があるものとする。
-            let hasIncludingAntenna = xml
-                                      ? (xml.count.(@name == 'antenna') == '1')
-                                      : /^https?:/.test(url);
-            aButton.disabled = !hasIncludingAntenna;
-        }
+
+        // API 取得に失敗した場合、http URI なら
+        // とりあえず「含むアンテナ」があるものとする。
+        let hasIncludingAntenna = xml
+                                  ? (xml.count.(@name == 'antenna') == '1')
+                                  : /^https?:/.test(url);
+        if (hasIncludingAntenna)
+            this.includingAntennaCommand.removeAttribute('disabled');
+        else
+            this.includingAntennaCommand.setAttribute('disabled', 'true');
+
         let dButton = document.getElementById('hatenabar-referring-diary-button');
         if (dButton) {
             let count = xml ? +xml.count.(@name == 'diary') : 0;

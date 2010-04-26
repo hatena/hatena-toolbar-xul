@@ -25,6 +25,8 @@
 <!-- Services -->
 
 <!ENTITY hatenabar.antenna.label "Hatena Antenna">
+<!ENTITY hatenabar.antenna.including.label "Including Antennas">
+<!ENTITY hatenabar.antenna.add.label "Add to Antennas">
 <!ENTITY hatenabar.antenna.antenna.label "Antenna">
 <!ENTITY hatenabar.antenna.simple.label "Simple">
 <!ENTITY hatenabar.antenna.detail.label "Detail">
@@ -33,11 +35,15 @@
 <!ENTITY hatenabar.antenna.top.label "Top">
 
 <!ENTITY hatenabar.bookmark.label "Hatena Bookmark">
+<!ENTITY hatenabar.bookmark.entry.label "View Bookmark Entry">
+<!ENTITY hatenabar.bookmark.add.label "Add to Bookmarks">
 <!ENTITY hatenabar.bookmark.favorites.label "Favorites">
 <!ENTITY hatenabar.bookmark.config.label "Config">
 <!ENTITY hatenabar.bookmark.top.label "top">
 
 <!ENTITY hatenabar.diary.label "Hatena Diary">
+<!ENTITY hatenabar.diary.referring.label "Quoting Diaries">
+<!ENTITY hatenabar.diary.quote.label "Quote in Diary">
 <!ENTITY hatenabar.diary.archive.label "Article List">
 <!ENTITY hatenabar.diary.edit.label "Write Article">
 <!ENTITY hatenabar.diary.about.label "Profile">

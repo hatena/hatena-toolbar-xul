@@ -52,9 +52,9 @@ var UICommand = {
     },
 
     userRequiredComands: [
-        'hatenabar-has-user',
         'hatenabar-cmd-open-user-link',
         'hatenabar-cmd-open-related-user-link',
+        'hatenabar-cmd-open-antenna',
         'hatenabar-cmd-add-antenna',
         'hatenabar-cmd-add-bookmark',
         'hatenabar-cmd-refer-in-diary',

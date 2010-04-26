@@ -30,12 +30,17 @@ var Control = {
             popup.hatenabar_isListeningActivity = true;
         }
 
+        // ブラウザウィンドウから読み込まれるとは
+        // 限らないので、一応 content の有無を確認。
+        let context = (typeof content !== 'undefined' &&
+                       content && content.location)
+                      ? { url: content.location.href } : null;
         for (let menu = popup.firstChild; menu; menu = menu.nextSibling) {
             if (menu.disabled || menu.localName !== 'menuitem') continue;
             let link = menu.getAttributeNS(HATENA_NS, 'link');
             if (!link) continue;
-            menu.statusText =
-                /^https?:/.test(link) ? link : HatenaLink.parseToURL(link);
+            menu.statusText = /^https?:/.test(link)
+                              ? link : HatenaLink.parseToURL(link, context);
         }
     },
 
