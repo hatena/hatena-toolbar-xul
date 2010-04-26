@@ -130,6 +130,10 @@
 <!ENTITY hatenabar.actions.referInDiary.label "日記に引用する">
 <!ENTITY hatenabar.actions.referInGroup.label "グループに引用する">
 
+<!ENTITY hatenabar.checker.antenna.label "含むアンテナの確認">
+<!ENTITY hatenabar.checker.bookmark.label "ブックマークカウンター">
+<!ENTITY hatenabar.checker.diary.label "含む日記カウンター">
+
 <!-- Statusbar -->
 
 <!ENTITY hatenabar.account.login.label "ログイン...">

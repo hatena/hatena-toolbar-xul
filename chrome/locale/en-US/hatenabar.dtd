@@ -130,6 +130,10 @@
 <!ENTITY hatenabar.actions.referInDiary.label "Quote in Diary">
 <!ENTITY hatenabar.actions.referInGroup.label "Quote in Group">
 
+<!ENTITY hatenabar.checker.antenna.label "Including Antennas Checker">
+<!ENTITY hatenabar.checker.bookmark.label "Bookmark Counter">
+<!ENTITY hatenabar.checker.diary.label "Quoting Diary Counter">
+
 <!-- Statusbar -->
 
 <!ENTITY hatenabar.account.login.label "Login…">

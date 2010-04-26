@@ -577,6 +577,21 @@
                        label="&hatenabar.actions.referInGroup.label;"
                        tooltiptext="&hatenabar.actions.referInGroup.label;"
                        command="hatenabar-cmd-refer-in-selected-group"/>
+        <toolbaritem id="hatenabar-check-antenna-item"
+                     title="&hatenabar.checker.antenna.label;"
+                     align="center">
+            <label value="{{A}}"/>
+        </toolbaritem>
+        <toolbaritem id="hatenabar-check-bookmark-item"
+                     title="&hatenabar.checker.bookmark.label;"
+                     align="center">
+            <label value="{{B}}"/>
+        </toolbaritem>
+        <toolbaritem id="hatenabar-check-diary-item"
+                     title="&hatenabar.checker.diary.label;"
+                     align="center">
+            <label value="{{D}}"/>
+        </toolbaritem>
     </toolbarpalette>
 
     <toolbox id="navigator-toolbox">
@@ -589,7 +604,7 @@
                  iconsize="small"
                  defaulticonsize="small"
                  customizable="true"
-                 defaultset="hatenabar-main-button,hatenabar-search-item,separator,hatenabar-antenna-button,hatenabar-bookmark-button,hatenabar-diary-button,hatenabar-fotolife-button,hatenabar-group-button,hatenabar-haiku-button,hatenabar-idea-button,hatenabar-keyword-button,hatenabar-message-button,hatenabar-question-button,hatenabar-star-button,hatenabar-ugomemo-button,hatenabar-counter-button,hatenabar-graph-button,hatenabar-coco-button,hatenabar-monolith-button,separator,hatenabar-including-antenna-button,hatenabar-add-antenna-button,hatenabar-view-bookmark-button,hatenabar-add-bookmark-button,hatenabar-referring-diary-button,hatenabar-diary-refer-button,hatenabar-group-refer-button,spring"
+                 defaultset="hatenabar-main-button,hatenabar-search-item,separator,hatenabar-antenna-button,hatenabar-bookmark-button,hatenabar-diary-button,hatenabar-fotolife-button,hatenabar-group-button,hatenabar-haiku-button,hatenabar-idea-button,hatenabar-keyword-button,hatenabar-message-button,hatenabar-question-button,hatenabar-star-button,hatenabar-ugomemo-button,hatenabar-counter-button,hatenabar-graph-button,hatenabar-coco-button,hatenabar-monolith-button,separator,hatenabar-check-antenna-item,hatenabar-check-bookmark-item,hatenabar-check-diary-item,hatenabar-including-antenna-button,hatenabar-add-antenna-button,hatenabar-view-bookmark-button,hatenabar-add-bookmark-button,hatenabar-referring-diary-button,hatenabar-diary-refer-button,hatenabar-group-refer-button,spring"
                  context="toolbar-context-menu"/>
     </toolbox>
 
