@@ -220,12 +220,14 @@ var Toolbar = {
     },
 
     onContextShowing: function Tb_onContextShowing(event) {
-        let button = document.popupNode;
-        if (!button ||
-            button.localName !== 'toolbarbutton' ||
-            button.className.split(/\s+/).indexOf('hatenabar-toolbarbutton') === -1)
+        let node = document.popupNode;
+        if (!node ||
+            node.localName !== 'toolbarbutton' ||
+            !/\bhatenabar-(?:toolbarbutton|checker)\b/.test(node.className))
             return;
-        this.hideButtonMenu.value = button.id;
+        if (node.parentNode.localName === 'toolbaritem')
+            node = node.parentNode;
+        this.hideButtonMenu.value = node.id;
         let popup = this.contextMenu;
         popup.insertBefore(this.hideButtonSeparator, popup.firstChild);
         popup.insertBefore(this.hideButtonMenu, popup.firstChild);
