@@ -17,7 +17,8 @@ var Bookmark = {
     },
     
     add: function B_add(win) {
-        if (typeof hBookmark !== 'undefined') {
+        if (Prefs.hatenabar.get('bookmark.useHatenaBookmarkExtension') &&
+            typeof hBookmark !== 'undefined') {
             hBookmark.AddPanelManager.showPanel(win);
             return;
         }

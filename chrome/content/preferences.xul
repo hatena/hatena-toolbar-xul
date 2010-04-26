@@ -85,12 +85,26 @@ document.addEventListener('DOMContentLoaded', function () {
     </groupbox>
 </prefpane>
 
-<prefpane id="bookmark-ext-pane"
-          label="{{Bookmark Extension}}">
+<prefpane id="extensions-pane"
+          label="{{Other Extension}}">
     <preferences>
+        <preference id="bookmark.useHatenaBookmarkExtension"
+                    name="extensions.hatenabar.bookmark.useHatenaBookmarkExtension"
+                    type="bool"/>
     </preferences>
 
-    <label value="{{Hatena Bookmark Extension}}"/>
+    <groupbox>
+        <caption label="{{Hatena Bookmark}}"/>
+
+        <description>{{Hatena Bookmark Extension make you more happy.}}</description>
+        <hbox>
+            <label class="text-link" value="{{Lean More}}" href="http://b.hatena.ne.jp/guide/firefox_addon"/>
+            <label class="text-link" value="{{Install Now}}" href="https://addons.mozilla.org/firefox/addon/11285"/>
+        </hbox>
+        <separator/>
+        <checkbox label="{{Use Edit Screen of Hatena Bookmark when adding to bookmarks}}"
+                  preference="bookmark.useHatenaBookmarkExtension"/>
+    </groupbox>
 </prefpane>
 
 </prefwindow>
