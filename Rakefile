@@ -61,7 +61,7 @@ task :create_extension_xpi => [
   install_rdf_file = File.new('install.rdf','r')
   install_rdf_xmldoc = Document.new(install_rdf_file)
   version_number = ""
-  install_rdf_xmldoc.elements.each('RDF/Description/em:version') do |element|
+  install_rdf_xmldoc.elements.each('rdf:RDF/rdf:Description/em:version') do |element|
     version_number = element.text
   end
 
@@ -80,7 +80,7 @@ task :update_update_manifest => [:create_extension_xpi] do
   File.open('update.rdf','r') do |f|
     update_rdf_xmldoc = Document.new(f.read)
 
-    update_rdf_xmldoc.elements.each('//RDF:Description') do |element|
+    update_rdf_xmldoc.elements.each('//rdf:Description') do |element|
       if element.attributes['em:version']
         element.attributes['em:version'] = version_number
       end
@@ -139,7 +139,7 @@ end
 def extension_id
   open('install.rdf','r') do |file|
     install_rdf_xmldoc = Document.new(file)
-    install_rdf_xmldoc.elements.each('RDF/Description/em:id') do |element|
+    install_rdf_xmldoc.elements.each('rdf:RDF/rdf:Description/em:id') do |element|
       return element.text
     end
   end
@@ -148,7 +148,7 @@ end
 def version_number
   open('install.rdf') do |f|
     install_rdf_xmldoc = Document.new(f.read)
-    install_rdf_xmldoc.elements.each('RDF/Description/em:version') do |element|
+    install_rdf_xmldoc.elements.each('rdf:RDF/rdf:Description/em:version') do |element|
       return element.text
     end
   end
