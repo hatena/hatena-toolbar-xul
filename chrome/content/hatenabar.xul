@@ -620,7 +620,7 @@
                  iconsize="small"
                  defaulticonsize="small"
                  customizable="true"
-                 defaultset="hatenabar-main-button,hatenabar-search-item,separator,hatenabar-antenna-button,hatenabar-bookmark-button,hatenabar-diary-button,hatenabar-fotolife-button,hatenabar-group-button,hatenabar-haiku-button,hatenabar-idea-button,hatenabar-keyword-button,hatenabar-message-button,hatenabar-question-button,hatenabar-star-button,hatenabar-ugomemo-button,hatenabar-counter-button,hatenabar-graph-button,hatenabar-coco-button,hatenabar-monolith-button,separator,hatenabar-check-antenna-item,hatenabar-check-bookmark-item,hatenabar-check-diary-item,hatenabar-including-antenna-button,hatenabar-add-antenna-button,hatenabar-view-bookmark-button,hatenabar-add-bookmark-button,hatenabar-referring-diary-button,hatenabar-diary-refer-button,hatenabar-group-refer-button,spring"
+                 defaultset="hatenabar-main-button,hatenabar-search-item,separator,hatenabar-antenna-button,hatenabar-bookmark-button,hatenabar-diary-button,hatenabar-fotolife-button,hatenabar-group-button,hatenabar-haiku-button,hatenabar-idea-button,hatenabar-question-button,hatenabar-ugomemo-button,separator,hatenabar-check-antenna-item,hatenabar-check-bookmark-item,hatenabar-check-diary-item,spring"
                  context="toolbar-context-menu"/>
     </toolbox>
 
