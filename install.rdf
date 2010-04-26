@@ -12,7 +12,7 @@
           <rdf:Description>
             <em:locale>en-US</em:locale>
             <em:name>Hatena Toolbar</em:name>
-            <em:description>{{The Hatenabar for Firefox}}</em:description>
+            <em:description>Help you to use serveces of Hatena or to log in to Hatena.</em:description>
             <em:creator>Hatena</em:creator>
             <em:contributor>Shinji Tanaka</em:contributor>
             <em:homepageURL>http://www.hatena.ne.jp/tool/firefox</em:homepageURL>
@@ -22,7 +22,7 @@
           <rdf:Description>
             <em:locale>ja</em:locale>
             <em:name>はてなツールバー</em:name>
-            <em:description>{{The Hatenabar for Firefox}}</em:description>
+            <em:description>はてなのサービスの利用やはてなへのログインを簡単に行えるようにします。</em:description>
             <em:creator>株式会社はてな</em:creator>
             <em:contributor>Shinji Tanaka</em:contributor>
             <em:homepageURL>http://www.hatena.ne.jp/tool/firefox</em:homepageURL>
