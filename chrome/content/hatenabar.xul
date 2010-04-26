@@ -589,7 +589,7 @@
                      align="center">
             <toolbarbutton id="hatenabar-check-antenna-button"
                            class="hatenabar-checker-iconic"
-                           tooltiptext="&hatenabar.checker.antenna.label;"
+                           tooltiptext="&hatenabar.checker.antenna.tooltip;"
                            command="hatenabar-cmd-open-including-antenna"/>
         </toolbaritem>
         <toolbaritem id="hatenabar-check-bookmark-item"
@@ -600,7 +600,7 @@
                            class="hatenabar-checker"
                            defaultlabel="-"
                            label="-"
-                           tooltiptext="&hatenabar.checker.bookmark.label;"
+                           tooltiptext="&hatenabar.checker.bookmark.tooltip;"
                            command="hatenabar-cmd-open-related-link"
                            hatena:link="b:entry"/>
         </toolbaritem>
@@ -612,7 +612,7 @@
                            class="hatenabar-checker"
                            defaultlabel="-"
                            label="-"
-                           tooltiptext="&hatenabar.checker.diary.label;"
+                           tooltiptext="&hatenabar.checker.diary.tooltip;"
                            command="hatenabar-cmd-open-related-link"
                            hatena:link="b:entry:reldiary"/>
         </toolbaritem>
