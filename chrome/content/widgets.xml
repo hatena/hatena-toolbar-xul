@@ -51,7 +51,7 @@
 
     <binding id="menu-autocomplete-popup"
              extends="chrome://global/content/bindings/autocomplete.xml#autocomplete-result-popup">
-        <content ignorekeys="true" tooltiptext="">
+        <content ignorekeys="true" tooltiptext="" context="">
             <xul:tree anonid="tree" class="autocomplete-tree plain"
                       hidecolumnpicker="true" flex="1" seltype="single">
                 <xul:treecols anonid="treecols">

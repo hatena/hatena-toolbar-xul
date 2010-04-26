@@ -66,10 +66,12 @@
     <broadcasterset id="mainBroadcasterSet">
         <broadcaster id="hatenabar-popup-base"
                      tooltiptext=""
+                     context=""
                      oncommand="event.stopPropagation();"
                      onclick="event.stopPropagation();"/>
         <broadcaster id="hatenabar-link-popup-base"
                      tooltiptext=""
+                     context=""
                      onpopupshowing="hatenabar.Control.updateLinkPopup(event);"
                      oncommand="event.stopPropagation();"
                      onclick="event.stopPropagation();"/>
