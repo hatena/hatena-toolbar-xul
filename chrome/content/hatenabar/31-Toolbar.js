@@ -131,20 +131,28 @@ var Toolbar = {
     },
 
     get includingAntennaCommand() byId('hatenabar-cmd-open-including-antenna'),
+    get antennaChecker() byId('hatenabar-check-antenna-button'),
+    get bookmarkChecker() byId('hatenabar-check-bookmark-button'),
+    get diaryChecker() byId('hatenabar-check-diary-button'),
 
     updateCounter: function Tb_updateCounter() {
         let url = content.location.href;
-        HTTPCache.bookmarked.get(url, method(this, 'onGotBookmarkedCount', url));
-        HTTPCache.referred.get(url, method(this, 'onGotReferredCount', url));
-        // XXX including antennaの確認をしないなら、
-        // ここでincluding antennaコマンドを有効にしておく?
+        if (this.bookmarkChecker)
+            HTTPCache.bookmarked.get(url, method(this, 'onGotBookmarkedCount', url));
+        let antennaChecker = this.antennaChecker;
+        if (antennaChecker || this.diaryChecker)
+            HTTPCache.referred.get(url, method(this, 'onGotReferredCount', url));
+        if (!antennaChecker)
+            this.includingAntennaCommand.removeAttribute('disabled');
     },
 
     onGotBookmarkedCount: function Tb_onGotBookmarkedCount(url, count) {
         if (content.location.href !== url) return;
-        let button = document.getElementById('hatenabar-view-bookmark-button');
-        if (!button) return;
-        button.sideLabel = count || '';
+        let checker = this.bookmarkChecker;
+        if (!checker) return;
+        checker.label = (typeof count === 'string')
+                        ? (count || '0')
+                        : checker.getAttribute('defaultlabel');
     },
 
     onGotReferredCount: function Tb_onGotReferredCount(url, xml) {
@@ -160,10 +168,11 @@ var Toolbar = {
         else
             this.includingAntennaCommand.setAttribute('disabled', 'true');
 
-        let dButton = document.getElementById('hatenabar-referring-diary-button');
-        if (dButton) {
-            let count = xml ? +xml.count.(@name == 'diary') : 0;
-            dButton.sideLabel = count || '';
+        let diaryChecker = this.diaryChecker;
+        if (diaryChecker) {
+            diaryChecker.label = xml
+                ? +xml.count.(@name == 'diary')
+                : diaryChecker.getAttribute('defaultlabel');
         }
     },
 

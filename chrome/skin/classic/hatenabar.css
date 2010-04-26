@@ -169,6 +169,75 @@ textbox[type="autocomplete"]:not([enablehistory="true"]) > .hatenabar-autocomple
     -moz-image-region: rect(32px, 192px, 48px, 176px);
 }
 
+/* Checkers and Counters */
+
+.hatenabar-checker,
+.hatenabar-checker-iconic {
+    -moz-appearance: none !important;
+    margin: 0px 1px;
+    padding: 0px;
+    border: none;
+    cursor: pointer;
+    list-style-image: url("chrome://hatenabar/skin/icons.png");
+}
+
+.hatenabar-checker > .checker-icon-box {
+    background-color: #4566e3;
+    background-image: -moz-linear-gradient(top, #5f8ceb, #4566e3);
+    border-top: 1px solid #38538a;
+    -moz-border-start: 1px solid #38538a;
+    -moz-border-radius-topleft: 2px;
+    -moz-border-radius-bottomleft: 2px;
+    padding: 1px;
+}
+.hatenabar-checker > .checker-text-box {
+    background-color: #314dd7;
+    background-image: -moz-linear-gradient(top, #4772e5, #314dd7);
+    border-top: 1px solid #2a448d;
+    -moz-border-end: 1px solid #2a448d;
+    -moz-border-radius-topright: 2px;
+    -moz-border-radius-bottomright: 2px;
+    padding: 1px 3px;
+    min-width: 36px;
+}
+.hatenabar-checker > .checker-text-box > .checker-text {
+    color: #ffffff;
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+    margin: 0px;
+}
+
+.hatenabar-checker-iconic > .checker-icon-box {
+    background-color: #314dd7;
+    background-image: -moz-linear-gradient(top, #4772e5, #314dd7);
+    border-top: 1px solid #2a448d;
+    -moz-border-start: 1px solid #2a448d;
+    -moz-border-end: 1px solid #2a448d;
+    -moz-border-radius: 2px;
+    padding: 1px;
+}
+.hatenabar-checker-iconic[disabled="true"] > .checker-icon-box {
+    background-color: rgba(0, 0, 0, 0.15);
+    background-image: none;
+    border-top: 1px solid #888580;
+    -moz-border-start: 1px solid #aeaba5;
+    -moz-border-end: 1px solid #aeaba5;
+}
+
+.hatenabar-checker:not([disabled="true"]):hover:active,
+.hatenabar-checker-iconic:not([disabled="true"]):hover:active {
+    outline: 1px dotted;
+}
+
+#hatenabar-check-antenna-button {
+    -moz-image-region: rect(0px, 208px, 16px, 192px);
+}
+#hatenabar-check-bookmark-button {
+    -moz-image-region: rect(0px, 224px, 16px, 208px);
+}
+#hatenabar-check-diary-button {
+    -moz-image-region: rect(0px, 240px, 16px, 224px);
+}
+
 /* Statusbar */
 
 #hatenabar-account-status {

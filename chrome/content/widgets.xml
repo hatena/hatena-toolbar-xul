@@ -61,9 +61,33 @@
                 </xul:treecols>
                 <xul:treechildren class="autocomplete-treebody"/>
             </xul:tree>
-            <xul:vbox>
-                <children/>
-            </xul:vbox>
+            <children/>
+        </content>
+    </binding>
+
+    <binding id="checker"
+             extends="chrome://global/content/bindings/toolbarbutton.xml#toolbarbutton">
+        <content align="stretch">
+            <children includes="observes|template|menupopup|tooltip"/>
+            <xul:hbox class="checker-icon-box" align="center">
+                <xul:image class="checker-icon"
+                           xbl:inherits="validate,src=image,toolbarmode,buttonstyle"/>
+            </xul:hbox>
+            <xul:hbox class="checker-text-box" align="center" pack="end">
+                <xul:label class="checker-text"
+                           xbl:inherits="value=label,accesskey,crop,toolbarmode,buttonstyle"/>
+            </xul:hbox>
+        </content>
+    </binding>
+
+    <binding id="checker-iconic"
+             extends="chrome://global/content/bindings/toolbarbutton.xml#toolbarbutton">
+        <content align="stretch">
+            <children includes="observes|template|menupopup|tooltip"/>
+            <xul:hbox class="checker-icon-box" align="center">
+                <xul:image class="checker-icon"
+                           xbl:inherits="validate,src=image,toolbarmode,buttonstyle"/>
+            </xul:hbox>
         </content>
     </binding>
 

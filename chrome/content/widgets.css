@@ -15,3 +15,12 @@ toolbarbutton[sidelabel] {
 .hatenabar-menu-autocomplete > .autocomplete-result-popupset > panel[type="autocomplete"] {
     -moz-binding: url("chrome://hatenabar/content/widgets.xml#menu-autocomplete-popup");
 }
+
+/* checker */
+
+.hatenabar-checker {
+    -moz-binding: url("chrome://hatenabar/content/widgets.xml#checker");
+}
+.hatenabar-checker-iconic {
+    -moz-binding: url("chrome://hatenabar/content/widgets.xml#checker-iconic");
+}

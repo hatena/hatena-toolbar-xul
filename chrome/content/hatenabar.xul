@@ -130,6 +130,7 @@
         </toolbarbutton>
 
         <toolbaritem id="hatenabar-search-item"
+                     class="chromeclass-toolbar-additional"
                      title="&hatenabar.search.label;"
                      align="center" width="180" persist="width">
             <textbox id="hatenabar-search-field"
@@ -550,7 +551,6 @@
         <toolbarbutton id="hatenabar-view-bookmark-button"
                        class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                        label="&hatenabar.actions.viewBookmark.label;"
-                       sidelabel=""
                        tooltiptext="&hatenabar.actions.viewBookmark.label;"
                        command="hatenabar-cmd-open-related-link"
                        hatena:link="b:entry"/>
@@ -563,7 +563,6 @@
         <toolbarbutton id="hatenabar-referring-diary-button"
                        class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                        label="&hatenabar.actions.referringDiary.label;"
-                       sidelabel=""
                        tooltiptext="&hatenabar.actions.referringDiary.label;"
                        command="hatenabar-cmd-open-related-link"
                        hatena:link="b:entry"/>
@@ -577,20 +576,40 @@
                        label="&hatenabar.actions.referInGroup.label;"
                        tooltiptext="&hatenabar.actions.referInGroup.label;"
                        command="hatenabar-cmd-refer-in-selected-group"/>
+
         <toolbaritem id="hatenabar-check-antenna-item"
+                     class="chromeclass-toolbar-additional"
                      title="&hatenabar.checker.antenna.label;"
                      align="center">
-            <label value="{{A}}"/>
+            <toolbarbutton id="hatenabar-check-antenna-button"
+                           class="hatenabar-checker-iconic"
+                           tooltiptext="&hatenabar.checker.antenna.label;"
+                           command="hatenabar-cmd-open-including-antenna"/>
         </toolbaritem>
         <toolbaritem id="hatenabar-check-bookmark-item"
+                     class="chromeclass-toolbar-additional"
                      title="&hatenabar.checker.bookmark.label;"
                      align="center">
-            <label value="{{B}}"/>
+            <toolbarbutton id="hatenabar-check-bookmark-button"
+                           class="hatenabar-checker"
+                           defaultlabel="-"
+                           label="-"
+                           tooltiptext="&hatenabar.checker.bookmark.label;"
+                           command="hatenabar-cmd-open-related-link"
+                           hatena:link="b:entry"/>
         </toolbaritem>
         <toolbaritem id="hatenabar-check-diary-item"
+                     class="chromeclass-toolbar-additional"
                      title="&hatenabar.checker.diary.label;"
                      align="center">
-            <label value="{{D}}"/>
+            <!-- XXX #including-diary or something else -->
+            <toolbarbutton id="hatenabar-check-diary-button"
+                           class="hatenabar-checker"
+                           defaultlabel="-"
+                           label="-"
+                           tooltiptext="&hatenabar.checker.diary.label;"
+                           command="hatenabar-cmd-open-related-link"
+                           hatena:link="b:entry"/>
         </toolbaritem>
     </toolbarpalette>
 
