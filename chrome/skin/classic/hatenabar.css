@@ -174,9 +174,10 @@ textbox[type="autocomplete"]:not([enablehistory="true"]) > .hatenabar-autocomple
 .hatenabar-checker,
 .hatenabar-checker-iconic {
     -moz-appearance: none !important;
-    margin: 0px 1px;
+    margin: 0px 2px;
     padding: 0px;
     border: none;
+    min-height: 22px;
     cursor: pointer;
     list-style-image: url("chrome://hatenabar/skin/icons.png");
 }
@@ -213,7 +214,7 @@ textbox[type="autocomplete"]:not([enablehistory="true"]) > .hatenabar-autocomple
     -moz-border-start: 1px solid #2a448d;
     -moz-border-end: 1px solid #2a448d;
     -moz-border-radius: 2px;
-    padding: 1px;
+    padding: 1px 3px;
 }
 .hatenabar-checker-iconic[disabled="true"] > .checker-icon-box {
     background-color: rgba(0, 0, 0, 0.15);
