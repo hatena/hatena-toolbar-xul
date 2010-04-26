@@ -234,10 +234,9 @@
                        command="hatenabar-cmd-open-top-or-user-link"
                        hatena:link="d:">
             <menupopup observes="hatenabar-link-popup-base">
-                <!-- XXX #including-diary or something else -->
                 <menuitem label="&hatenabar.diary.referring.label;"
                           observes="hatenabar-cmd-open-related-link"
-                          hatena:link="b:entry"/>
+                          hatena:link="b:entry:reldiary"/>
                 <menuitem label="&hatenabar.diary.quote.label;"
                           observes="hatenabar-cmd-refer-in-diary"/>
                 <menuseparator/>
@@ -559,13 +558,12 @@
                        label="&hatenabar.actions.addBookmark.label;"
                        tooltiptext="&hatenabar.actions.addBookmark.label;"
                        command="hatenabar-cmd-add-bookmark"/>
-        <!-- XXX #including-diary or something else -->
         <toolbarbutton id="hatenabar-referring-diary-button"
                        class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                        label="&hatenabar.actions.referringDiary.label;"
                        tooltiptext="&hatenabar.actions.referringDiary.label;"
                        command="hatenabar-cmd-open-related-link"
-                       hatena:link="b:entry"/>
+                       hatena:link="b:entry:reldiary"/>
         <toolbarbutton id="hatenabar-diary-refer-button"
                        class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                        label="&hatenabar.actions.referInDiary.label;"
@@ -602,14 +600,13 @@
                      class="chromeclass-toolbar-additional"
                      title="&hatenabar.checker.diary.label;"
                      align="center">
-            <!-- XXX #including-diary or something else -->
             <toolbarbutton id="hatenabar-check-diary-button"
                            class="hatenabar-checker"
                            defaultlabel="-"
                            label="-"
                            tooltiptext="&hatenabar.checker.diary.label;"
                            command="hatenabar-cmd-open-related-link"
-                           hatena:link="b:entry"/>
+                           hatena:link="b:entry:reldiary"/>
         </toolbaritem>
     </toolbarpalette>
 

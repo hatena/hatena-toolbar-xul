@@ -60,11 +60,17 @@ HatenaLink.schemes = {
         case 'search':
             url += '?via=hatenabar&q=' + encodeURIComponent(context.query);
             break;
+        case 'entry:reldiary':
+            // 9 is |'/reldiary'.length|.
+            url = url.substring(0, url.length - 9);
+            /* FALL THROUGH */
         case 'entry':
             let suffix = iri2uri(context.url).replace(/#/g, '%23');
             url += suffix.replace(/^http(s)?:\/\//, function (match, ssl) {
                 return ssl ? '/s/' : '/';
             });
+            if (type == 'entry:reldiary')
+                url += '#reldiary';
             break;
         }
         return { url: url };

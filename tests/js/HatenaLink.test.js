@@ -37,6 +37,8 @@ function testBookmarkLink() {
                   u('b:entry', { url: 'http://example.org/#fragment' }));
     assert.equals('http://b.hatena.ne.jp/entry/s/example.org/',
                   u('b:entry', { url: 'https://example.org/' }));
+    assert.equals('http://b.hatena.ne.jp/entry/s/example.org/#reldiary',
+                  u('b:entry:reldiary', { url: 'https://example.org/' }));
 }
 
 function testCocoLink() {
