@@ -194,6 +194,13 @@ var Toolbar = {
         let button = byId(UICommand.getTarget(event).value);
         let toolbar = button.parentNode;
         toolbar.removeChild(button);
+        let palette = gNavToolbox.palette;
+        // Firefox 3.0 は常に全ツールバー項目が palette に
+        // 含まれているが、3.6 では非表示の項目しか含まれていない。
+        // いずれにせよその後のカスタマイズが期待通り動くよう、
+        // 非表示になったボタンが palette に含まれるようにしておく。
+        if (!Array.some(palette.childNodes, function (i) i.id === button.id))
+            palette.appendChild(button);
         if (toolbar.localName !== 'toolbar') return;
         this.persist(toolbar);
     },
