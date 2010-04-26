@@ -6,6 +6,11 @@
     -moz-box-align: center;
 }
 
+/* 各ペイン用のアイコンを用意していないので表示しない。 */
+.paneButtonIcon {
+    height: 5px;
+}
+
 /* Searchbar */
 
 [preference="searchbar.link"] > [value="search:search"] {
