@@ -25,8 +25,8 @@
 <!-- Services -->
 
 <!ENTITY hatenabar.antenna.label "はてなアンテナ">
-<!ENTITY hatenabar.antenna.including.label "含むアンテナ">
-<!ENTITY hatenabar.antenna.add.label "アンテナに追加">
+<!ENTITY hatenabar.antenna.including.label "このページを含むアンテナ">
+<!ENTITY hatenabar.antenna.add.label "このページをアンテナに追加">
 <!ENTITY hatenabar.antenna.antenna.label "アンテナ">
 <!ENTITY hatenabar.antenna.simple.label "シンプル">
 <!ENTITY hatenabar.antenna.detail.label "詳細">
@@ -35,15 +35,15 @@
 <!ENTITY hatenabar.antenna.top.label "トップ">
 
 <!ENTITY hatenabar.bookmark.label "はてなブックマーク">
-<!ENTITY hatenabar.bookmark.entry.label "ブックマークエントリ">
-<!ENTITY hatenabar.bookmark.add.label "ブックマークに追加">
+<!ENTITY hatenabar.bookmark.entry.label "このページのブックマークエントリー">
+<!ENTITY hatenabar.bookmark.add.label "このページをブックマークに追加">
 <!ENTITY hatenabar.bookmark.favorites.label "お気に入り">
 <!ENTITY hatenabar.bookmark.config.label "設定">
 <!ENTITY hatenabar.bookmark.top.label "トップ">
 
 <!ENTITY hatenabar.diary.label "はてなダイアリー">
-<!ENTITY hatenabar.diary.referring.label "含む日記">
-<!ENTITY hatenabar.diary.quote.label "引用する">
+<!ENTITY hatenabar.diary.referring.label "このページを含む日記">
+<!ENTITY hatenabar.diary.quote.label "このページを引用する">
 <!ENTITY hatenabar.diary.archive.label "記事一覧">
 <!ENTITY hatenabar.diary.edit.label "記事を書く">
 <!ENTITY hatenabar.diary.about.label "プロフィール">
@@ -59,7 +59,7 @@
 <!ENTITY hatenabar.fotolife.top.label "トップ">
 
 <!ENTITY hatenabar.group.label "はてなグループ">
-<!ENTITY hatenabar.group.quote.label "引用する">
+<!ENTITY hatenabar.group.quote.label "このページを引用する">
 <!ENTITY hatenabar.group.list.label "グループ一覧">
 <!ENTITY hatenabar.group.top.label "トップ">
 
@@ -131,8 +131,11 @@
 <!ENTITY hatenabar.actions.referInGroup.label "グループに引用する">
 
 <!ENTITY hatenabar.checker.antenna.label "含むアンテナの確認">
+<!ENTITY hatenabar.checker.antenna.tooltip "このページを含むアンテナ">
 <!ENTITY hatenabar.checker.bookmark.label "ブックマークカウンター">
+<!ENTITY hatenabar.checker.bookmark.tooltip "このページのブックマーク数">
 <!ENTITY hatenabar.checker.diary.label "含む日記カウンター">
+<!ENTITY hatenabar.checker.diary.tooltip "このページを含む日記の数">
 
 <!-- Statusbar -->
 

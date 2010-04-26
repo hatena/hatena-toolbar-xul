@@ -25,8 +25,8 @@
 <!-- Services -->
 
 <!ENTITY hatenabar.antenna.label "Hatena Antenna">
-<!ENTITY hatenabar.antenna.including.label "Including Antennas">
-<!ENTITY hatenabar.antenna.add.label "Add to Antennas">
+<!ENTITY hatenabar.antenna.including.label "Antennas Including This Page">
+<!ENTITY hatenabar.antenna.add.label "Add This Page to Antennas">
 <!ENTITY hatenabar.antenna.antenna.label "Antenna">
 <!ENTITY hatenabar.antenna.simple.label "Simple">
 <!ENTITY hatenabar.antenna.detail.label "Details">
@@ -35,15 +35,15 @@
 <!ENTITY hatenabar.antenna.top.label "Top">
 
 <!ENTITY hatenabar.bookmark.label "Hatena Bookmark">
-<!ENTITY hatenabar.bookmark.entry.label "View Bookmark Entry">
-<!ENTITY hatenabar.bookmark.add.label "Add to Bookmarks">
+<!ENTITY hatenabar.bookmark.entry.label "View Bookmark Entry for This Page">
+<!ENTITY hatenabar.bookmark.add.label "Add This Page to Bookmarks">
 <!ENTITY hatenabar.bookmark.favorites.label "Favorites">
 <!ENTITY hatenabar.bookmark.config.label "Config">
 <!ENTITY hatenabar.bookmark.top.label "top">
 
 <!ENTITY hatenabar.diary.label "Hatena Diary">
-<!ENTITY hatenabar.diary.referring.label "Quoting Diaries">
-<!ENTITY hatenabar.diary.quote.label "Quote in Diary">
+<!ENTITY hatenabar.diary.referring.label "Diaries Quoting This Page">
+<!ENTITY hatenabar.diary.quote.label "Quote This Page in Diary">
 <!ENTITY hatenabar.diary.archive.label "Article List">
 <!ENTITY hatenabar.diary.edit.label "Write Article">
 <!ENTITY hatenabar.diary.about.label "Profile">
@@ -59,7 +59,7 @@
 <!ENTITY hatenabar.fotolife.top.label "Top">
 
 <!ENTITY hatenabar.group.label "Hatena Group">
-<!ENTITY hatenabar.group.quote.label "Quote in Group">
+<!ENTITY hatenabar.group.quote.label "Quote This Page in Group">
 <!ENTITY hatenabar.group.list.label "Group List">
 <!ENTITY hatenabar.group.top.label "Top">
 
@@ -131,8 +131,11 @@
 <!ENTITY hatenabar.actions.referInGroup.label "Quote in Group">
 
 <!ENTITY hatenabar.checker.antenna.label "Including Antennas Checker">
+<!ENTITY hatenabar.checker.antenna.tooltip "Antennas including this page">
 <!ENTITY hatenabar.checker.bookmark.label "Bookmark Counter">
+<!ENTITY hatenabar.checker.bookmark.tooltip "Number of bookmarks for this page">
 <!ENTITY hatenabar.checker.diary.label "Quoting Diary Counter">
+<!ENTITY hatenabar.checker.diary.tooltip "Number of diaries quoting this page">
 
 <!-- Statusbar -->
 
