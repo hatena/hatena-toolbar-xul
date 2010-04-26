@@ -6,7 +6,7 @@
         <em:version>0.7.0a1</em:version>
         <em:type>2</em:type>
         <em:optionsURL>chrome://hatenabar/content/preferences.xul</em:optionsURL>
-        <!--<em:iconURL>chrome://hatenabar/content/skin/HatenaLogo32.png</em:iconURL>-->
+        <em:iconURL>chrome://hatenabar/skin/hatena-32x32.png</em:iconURL>
 
         <em:localized>
           <rdf:Description>
