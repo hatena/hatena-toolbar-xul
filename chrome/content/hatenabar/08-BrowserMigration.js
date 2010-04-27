@@ -40,7 +40,9 @@ BrowserMigration.processes = [
 
         // Toolbar Items
         document.addEventListener('DOMContentLoaded', migrateToolbar, false);
-        function migrateToolbar() {
+        function migrateToolbar(event) {
+            if (event.target !== document) return;
+            document.removeEventListener(event.type, migrateToolbar, false);
             let toolbar = byId('hatenabar-toolbar');
             if (!toolbar) return;
             let toolbarSet = ['hatenabar-main-button'];
@@ -72,6 +74,7 @@ BrowserMigration.processes = [
                 ['antenna.included', true, 'hatenabar-check-antenna-item'],
                 ['bookmark.entry', true, 'hatenabar-check-bookmark-item'],
                 ['diary.referred', true, 'hatenabar-check-diary-item'],
+                ['', true, 'spring'],
             ];
             toolbarButtonProps.forEach(function ([key, defaultShow, id]) {
                 if (!key || oldPrefs.get(key, defaultShow))
