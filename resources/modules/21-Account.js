@@ -24,35 +24,13 @@ var Account = {
         EventService.createListener('unload', method(this, 'destroy'));
 
         let timer = new Timer(777, 1);
-        timer.createListener('timer', method(this, 'delayedInit'));
+        timer.createListener('timer', bind(delayedInit, this));
         timer.start();
-    },
-
-    delayedInit: function Account_delayedInit() {
-        if (this.user) return;
-        let rk = this.findRk();
-        if (!rk) return;
-        this.checkLogin(rk);
-
-        let timer = new Timer(4300, 5);
-        timer.createListener('timer', bind(onAccountCheckTimer, this));
-        timer.start();
-        function onAccountCheckTimer() {
-            if (this.user)
-                timer.dispose();
-            else
-                this.checkLogin(rk);
+        function delayedInit() {
+            if (!this.user)
+                this.checkLogin(null);
+            timer.dispose();
         }
-    },
-
-    findRk: function Account_findRk() {
-        let cookies = CookieManager.enumerator;
-        while (cookies.hasMoreElements()) {
-            let cookie = cookies.getNext().QueryInterface(Ci.nsICookie);
-            if (cookie.host === LOGIN_COOKIE_HOST && cookie.name === 'rk')
-                return cookie.value;
-        }
-        return null;
     },
 
     destroy: function Account_destroy() {
@@ -89,11 +67,12 @@ var Account = {
             this.dispatch('LoginAction', this.LOGIN_COOKIE_REJECTED, name, password);
             return;
         }
-        http.postWithRetry({
-            url: LOGIN_URL,
-            // XXX ログイン状態を保持するか、セッションにとどめるか。
-            query: { name: name, password: password },
-        }, bind(onLoginLoad, this), bind(onLoginError, this));
+        let query = { name: name, password: password };
+        if (Prefs.hatenabar.get('account.persist'))
+            query.persistent = 1;
+        http.postWithRetry({ url: LOGIN_URL, query: query },
+                           bind(onLoginLoad, this),
+                           bind(onLoginError, this));
 
         function onLoginLoad(res) {
             if (!res.ok) {
@@ -122,6 +101,8 @@ var Account = {
     },
 
     checkLogin: function Account_checkLogin(rk) {
+        rk = rk || this.findRk();
+        if (!rk) return;
         p('checkLogin\n' + rk);
         let name = this.nameCache.get(rk);
         if (name) {
@@ -131,11 +112,23 @@ var Account = {
         http.postWithRetry({
             url: LOGIN_CHECK_URL,
             headers: { Cookie: 'rk=' + rk },
+            timeout: 7,
+            retryCount: 5,
         }, bind(onChecked, this));
         function onChecked(res) {
             if (!res.ok || !res.value) return;
             this.setUser(res.value.login ? res.value.name : null, rk);
         }
+    },
+
+    findRk: function Account_findRk() {
+        let cookies = CookieManager.enumerator;
+        while (cookies.hasMoreElements()) {
+            let cookie = cookies.getNext().QueryInterface(Ci.nsICookie);
+            if (cookie.host === LOGIN_COOKIE_HOST && cookie.name === 'rk')
+                return cookie.value;
+        }
+        return null;
     },
 
     logout: function Account_logout() {

@@ -5,6 +5,7 @@ pref("extensions.hatenabar.debug.log", false);
 // Account
 pref("extensions.hatenabar.account.rememberHistory", true);
 pref("extensions.hatenabar.account.history", "");
+pref("extensions.hatenabar.account.persist", true);
 pref("extensions.hatenabar.account.reloadOnChange", true);
 pref("extensions.hatenabar.account.showStatus", true);
 
