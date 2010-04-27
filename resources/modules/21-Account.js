@@ -68,8 +68,10 @@ var Account = {
             return;
         }
         let query = { name: name, password: password };
-        if (Prefs.hatenabar.get('account.persist'))
+        if (Prefs.hatenabar.get('account.persist')) {
             query.persistent = 1;
+            query.fixrk = 1;
+        }
         http.postWithRetry({ url: LOGIN_URL, query: query },
                            bind(onLoginLoad, this),
                            bind(onLoginError, this));

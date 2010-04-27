@@ -101,6 +101,10 @@ var AccountCommand = {
         let location = content.location.href;
         if (isHatenaURL(location))
             query.location = location;
+        if (Prefs.hatenabar.get('account.persist')) {
+            query.persistent = 1;
+            query.fixrk = 1;
+        }
         let body = createInstance('@mozilla.org/io/string-input-stream;1',
                                   Ci.nsIStringInputStream);
         body.setData(makeURIQuery(query), -1);
