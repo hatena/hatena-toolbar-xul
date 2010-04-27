@@ -176,7 +176,6 @@ textbox[type="autocomplete"]:not([enablehistory="true"]) > .hatenabar-autocomple
     margin: 0px 2px;
     padding: 0px;
     border: none;
-    min-height: 20px;
     cursor: pointer;
     list-style-image: url("chrome://hatenabar/skin/icons.png");
 }
@@ -186,13 +185,12 @@ textbox[type="autocomplete"]:not([enablehistory="true"]) > .hatenabar-autocomple
 }
 
 .hatenabar-checker > .checker-icon-box {
-    background-color: #d8d4cd;
-    background-image: -moz-linear-gradient(top, #d8d4cd, #bfbcb4);
-    border-top: 1px solid #918f8a;
-    -moz-border-start: 1px solid #bdbab2;
+    background-color: #5279e7;
+    border-top: 1px solid #37519b;
+    -moz-border-start: 1px solid #4e74dd;
+    -moz-border-end: 1px solid #4e74dd;
     -moz-border-radius-topleft: 2px;
     -moz-border-radius-bottomleft: 2px;
-    padding: 0px 1px;
     -moz-box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);
 }
 .hatenabar-checker > .checker-text-box {
@@ -208,22 +206,20 @@ textbox[type="autocomplete"]:not([enablehistory="true"]) > .hatenabar-autocomple
     -moz-box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);
 }
 .hatenabar-checker > .checker-text-box > .checker-text {
-    margin: 0px;
+    margin: -1px 0px;
 }
 
 .hatenabar-checker-iconic > .checker-icon-box {
-    background-color: #d8d4cd;
-    background-image: -moz-linear-gradient(top, #d8d4cd, #bfbcb4);
-    border-top: 1px solid #918f8a;
-    -moz-border-start: 1px solid #bdbab2;
-    -moz-border-end: 1px solid #bdbab2;
+    background-color: #5279e7;
+    border-top: 1px solid #37519b;
+    -moz-border-start: 1px solid #4e74dd;
+    -moz-border-end: 1px solid #4e74dd;
     -moz-border-radius: 2px;
-    padding: 0px 2px;
+    padding: 0px 1px;
     -moz-box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);
 }
 .hatenabar-checker-iconic[disabled="true"] > .checker-icon-box {
-    background-color: #b4b1aa;
-    background-image: none;
+    background-color: rgba(0, 0, 0, 0.15);
     border-top: 1px solid #888580;
     -moz-border-start: 1px solid #aeaba5;
     -moz-border-end: 1px solid #aeaba5;
