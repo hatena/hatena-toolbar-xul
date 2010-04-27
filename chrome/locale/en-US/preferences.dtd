@@ -9,6 +9,7 @@
 <!ENTITY searchbar.link.bookmarkSearch.label "Search using Hatena Bookmark Search">
 
 <!ENTITY general.webPages.label "Web Pages">
+<!ENTITY link.openIn.label "Open page in a new Tab">
 <!ENTITY bookmark.showSearchOnWeb.label "Show &quot;Search using Hatena Bookmark&quot; button in search result pages">
 <!ENTITY star.anywhere.label "Enable Star anywhere">
 

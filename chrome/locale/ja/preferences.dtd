@@ -9,6 +9,7 @@
 <!ENTITY searchbar.link.bookmarkSearch.label "はてなブックマーク検索を使う">
 
 <!ENTITY general.webPages.label "Web ページ">
+<!ENTITY link.openIn.label "ページを新しいタブで開く">
 <!ENTITY bookmark.showSearchOnWeb.label "検索結果ページに &quot;はてなブックマークで検索&quot; ボタンを表示する">
 <!ENTITY star.anywhere.label "どこでもはてなスターを有効にする">
 

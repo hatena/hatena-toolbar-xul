@@ -33,6 +33,9 @@ document.addEventListener('DOMContentLoaded', function () {
         <preference id="searchbar.link"
                     name="extensions.hatenabar.searchbar.link"
                     type="string"/>
+        <preference id="link.openIn"
+                    name="extensions.hatenabar.link.openIn"
+                    type="string"/>
         <preference id="bookmark.showSearchOnWeb"
                     name="extensions.hatenabar.bookmark.showSearchOnWeb"
                     type="bool"/>
@@ -64,6 +67,10 @@ document.addEventListener('DOMContentLoaded', function () {
     <groupbox>
         <caption label="&general.webPages.label;"/>
 
+        <checkbox label="&link.openIn.label;"
+                  preference="link.openIn"
+                  onsyncfrompreference="return document.getElementById(this.getAttribute('preference')).value !== 'current';"
+                  onsynctopreference="return this.checked ? 'tab' : 'current';"/>
         <checkbox label="&star.anywhere.label;"
                   preference="star.anywhere"/>
         <checkbox label="&bookmark.showSearchOnWeb.label;"
