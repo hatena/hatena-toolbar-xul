@@ -105,7 +105,6 @@ var Star = {
     handleEvent: function Star_handleEvent(event) {
         switch (event.type) {
         case 'DOMContentLoaded':
-            // XXX return if star is disabled.
             this.load(event.target);
             break;
         case 'hatenabar-stars-loaded':
