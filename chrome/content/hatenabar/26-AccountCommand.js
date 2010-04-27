@@ -23,9 +23,11 @@ var AccountCommand = {
                 this.tryReload();
                 break;
             case Account.LOGIN_IGNORED:
-            case Account.LOGIN_NETWORK_ERROR:
-                // XXX Should we show some alert?
+                // XXX What should we do here?
                 break;
+            case Account.LOGIN_NETWORK_ERROR:
+                p('Failed to login because of a network error.');
+                /* FALL THROUGH */
             case Account.LOGIN_NO_PASSWORD:
                 this.loginInBrowser(name, event);
                 break;

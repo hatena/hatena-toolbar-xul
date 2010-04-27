@@ -59,7 +59,7 @@ var Account = {
         this.logout();
         this.dispatch('LoginAction', this.LOGIN_BEGIN, name, null);
         let password = this.getPassword(name);
-        if (password === null) {
+        if (!password) {
             this.dispatch('LoginAction', this.LOGIN_NO_PASSWORD, name, null);
             return;
         }
