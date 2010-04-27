@@ -28,23 +28,8 @@ var Account = {
         timer.start();
         function delayedInit() {
             if (!this.user)
-                this.tryCheckLogin();
+                this.checkLogin(null);
             timer.dispose();
-        }
-    },
-
-    tryCheckLogin: function Account_tryCheckLogin() {
-        let timer = new Timer(5555, 5);
-        timer.createListener('timer', bind(onLoginCheckTimer, this));
-        timer.start();
-        this.checkLogin(null);
-
-        function onLoginCheckTimer() {
-            if (this.user) {
-                timer.dispose();
-                return;
-            }
-            this.checkLogin(null);
         }
     },
 
