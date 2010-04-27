@@ -28,20 +28,13 @@ var Command = {
         if (!/^https?:/.test(link))
             link = HatenaLink.parseToURL(link, context);
         let where = this.whereToOpenLink(event, false);
-        // タブを開かなければ UI Link も Content Link も挙動は同じ。
-        if (where === 'current' || where === 'window' || where === 'save') {
-            openUILinkIn(link, where);
-            return;
-        }
-        // タブを開く場合、openUILink() を使うと、
-        // browser.tabs.loadBookmarksInBackground の値を元に
-        // フォーカスの有無が決められてしまう。Content Link に
-        // 関しては browser.tabs.loadInBackground の値を元に
-        // フォーカスの有無を決めたいので、openUILinkIn() は使わない。
-        let inBackground = Prefs.global.get(CONTENT_TAB_IN_BG_PREF, false);
-        if (where === 'tabshifted')
-            inBackground = !inBackground;
-        getTopWin().gBrowser.loadOneTab(link, null, null, null, inBackground);
+        // Tree Style Tab をインストールしている場合、
+        // 現在のページと関連するページは同じタブグループで開きたい。
+        if ((where === "tab" || where === "tabshifted") &&
+            Prefs.hatenabar.get("link.useTreeStyleTab") &&
+            typeof TreeStyleTabService !== "undefined")
+            TreeStyleTabService.readyToOpenChildTab(getTopWin().gBrowser.currentTab, false);
+        openUILinkIn(link, where);
     },
 
     whereToOpenLink: function Cmd_whereToOpenLink(event, isUILink) {
@@ -49,8 +42,14 @@ var Command = {
         if (where !== 'current') return where;
         where = Prefs.hatenabar.get('link.openIn', where);
         if (where !== 'tabfocused' && where !== 'tabblurred') return where;
-        let inBackground = Prefs.global.get(isUILink ? UI_TAB_IN_BG_PREF
-                                                     : CONTENT_TAB_IN_BG_PREF);
+        // Content Link に関しては browser.tabs.loadInBackground の値を
+        // 元にフォーカスの有無を決めたい、と思っていたけれど、
+        // Content Link でもメニューから開く際は
+        // browser.tabs.loadBookmarksInBackground
+        // を見た方がいい気がしてきた。
+        //let inBackground = Prefs.global.get(isUILink ? UI_TAB_IN_BG_PREF
+        //                                             : CONTENT_TAB_IN_BG_PREF);
+        let inBackground = Prefs.global.get(UI_TAB_IN_BG_PREF);
         let wantsFocus = (where === 'tabfocused');
         return inBackground ? (wantsFocus ? 'tabshifted' : 'tab')
                             : (wantsFocus ? 'tab' : 'tabshifted');
