@@ -251,7 +251,7 @@
                           hatena:link="d:id:?:archive"/>
                 <menuitem label="&hatenabar.diary.edit.label;"
                           observes="hatenabar-cmd-open-user-link"
-                          hatena:link="d:id:?:edit"/>
+                          hatena:link="d:edit"/>
                 <menuitem label="&hatenabar.diary.about.label;"
                           observes="hatenabar-cmd-open-user-link"
                           hatena:link="d:id:?:about"/>
