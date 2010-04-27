@@ -1,6 +1,13 @@
 const EXPORT = ['Toolbar'];
 
 var Toolbar = {
+    toggle: function Tb_toggle() {
+        let toolbar = byId('hatenabar-toolbar');
+        if (!toolbar) return;
+        toolbar.collapsed = !toolbar.collapsed;
+        document.persist(toolbar.id, 'collapsed');
+    },
+
     antennaModes: ['antenna', 'simple', 'detail'],
 
     openAntenna: function Tb_openAntenna(event) {

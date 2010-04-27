@@ -77,6 +77,21 @@
                      onclick="event.stopPropagation();"/>
     </broadcasterset>
 
+    <keyset id="mainKeyset">
+        <key id="hatenabar-key-toggle-toolbar"
+             keycode="VK_F9" modifiers="accel"
+             oncommand="hatenabar.Toolbar.toggle();"/>
+        <key id="hatenabar-key-toggle-toolbar-2"
+             keycode="VK_F9" modifiers="shift"
+             oncommand="hatenabar.Toolbar.toggle();"/>
+        <key id="hatenabar-key-focus-search-field"
+             keycode="VK_F11" modifiers="accel"
+             oncommand="hatenabar.SearchField.focus();"/>
+        <key id="hatenabar-key-focus-search-field-2"
+             keycode="VK_F11" modifiers="shift"
+             oncommand="hatenabar.SearchField.focus();"/>
+    </keyset>
+
     <popupset id="mainPopupSet">
         <menupopup id="hatenabar-star-context"
                    observes="hatenabar-link-popup-base">

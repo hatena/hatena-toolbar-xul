@@ -74,6 +74,13 @@ var SearchField = {
             textbox.removeAttribute('enablehistory');
     },
 
+    focus: function SF_focus() {
+        let textbox = this.textbox;
+        if (!textbox) return;
+        textbox.select();
+        textbox.focus();
+    },
+
     updateLink: function SF_updateLink() {
         let textbox = this.textbox;
         if (!textbox) return;
