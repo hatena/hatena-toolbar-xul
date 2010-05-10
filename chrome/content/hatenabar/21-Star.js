@@ -96,7 +96,7 @@ var Star = {
     },
 
     hasEntries: function Star_hasEntries(doc) {
-        return !!doc._hatenabar_hasStars;
+        return !!(doc && doc._hatenabar_hasStars);
     },
 
     onStarsLoaded: function Star_onStarsLoaded(doc) {
