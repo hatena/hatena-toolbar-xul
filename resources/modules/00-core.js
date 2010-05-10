@@ -141,7 +141,8 @@ var log = {
 // Cu.reportError() だとエラーコンソールにログが
 // 表示されないことがあるので、念のため p() も使う。
 function reportError(error) {
-    p(error + (error.stack ? '\n' + error.stack : ''));
+    if (nowDebug)
+        p(error + (error.stack ? '\n' + error.stack : ''));
     Cu.reportError(error);
 }
 
