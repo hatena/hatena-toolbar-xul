@@ -4,12 +4,12 @@
     list-style-image: url("chrome://hatenabar/skin/icons.png") !important;
 }
 
-#hatenabar-toolbar .hatenabar-toolbarbutton:not([type="menu-button"]),
-#hatenabar-toolbar .hatenabar-toolbarbutton[type="menu-button"] > .toolbarbutton-menubutton-button {
+toolbar[mode="icons"][iconsize="small"] .toolbarbutton-1.hatenabar-toolbarbutton:not([type="menu-button"]),
+toolbar[mode="icons"][iconsize="small"] .toolbarbutton-1.hatenabar-toolbarbutton[type="menu-button"] > .toolbarbutton-menubutton-button {
     margin: 0px;
     padding: 4px;
 }
-#hatenabar-toolbar .hatenabar-toolbarbutton[type="menu-button"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon {
+toolbar[mode="icons"][iconsize="small"] .toolbarbutton-1.hatenabar-toolbarbutton[type="menu-button"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon {
     margin: 0px;
 }
 
