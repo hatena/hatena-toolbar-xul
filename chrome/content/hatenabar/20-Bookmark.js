@@ -51,8 +51,9 @@ var Bookmark = {
         let src = HatenaLink.parseToURL('b:images:search-mini.png');
         let code = 'javascript:(' + this._addSearchButton.toSource() + ')(' +
             [config, href, text, src].map(uneval).join(',') + ')';
-        win.location.href = encodeURI(code);
-
+        // 同期で読み込んで何かあるとことなので念のために遅延させる。
+        //win.location.href = encodeURI(code);
+        win.setTimeout(function () win.location.href = encodeURI(code), 11);
     },
 
     // This function is executed in the context of the web page.
