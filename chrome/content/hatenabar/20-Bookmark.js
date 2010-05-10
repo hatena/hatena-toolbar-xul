@@ -86,7 +86,9 @@ var Bookmark = {
         img.src = src;
         img.alt = text;
         img.style.border = 'none';
+        img.style.verticalAlign = 'middle';
         a.appendChild(img);
+        container.appendChild(document.createTextNode(' '));
         container.appendChild(a);
     },
 
@@ -105,14 +107,14 @@ Bookmark.SiteConfig = {
         'form': 'gs',
         'input':'q',
         'parent': true,
-        'xpath': '//table/tbody/tr/td[@class="nobr xsm"]',
+        'xpath': '//table/tbody/tr/td[@class="nobr xsm"] | id("subform_ctrl")/div/a[@class="gl nobr"]',
     },
     'www.google.com': {
         'path': '^/search',
         'form': 'gs',
         'input':'q',
         'parent': true,
-        'xpath': '//table/tbody/tr/td[@class="nobr xsm"]',
+        'xpath': '//table/tbody/tr/td[@class="nobr xsm"] | id("subform_ctrl")/div/a[@class="gl nobr"]',
     },
     'search.yahoo.co.jp': {
         'form': 'sbn',
