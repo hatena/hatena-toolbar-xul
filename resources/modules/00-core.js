@@ -297,22 +297,25 @@ function method(self, methodName) {
  * @returns {Object}
  *     渡されたオブジェクトが属するコンテキストのグローバルオブジェクト。
  */
-function getGlobalObject(obj) {
-    // スコープチェーンの最奥にあるのがグローバルオブジェクトであると
-    // 推測できる。ただし、関数に関してはスコープチェーンの
-    // 先頭オブジェクトがアクティベーションオブジェクトかもしれず、
-    // その場合 __parent__ の値が null となってスコープチェーンを
-    // たどれないので、代わりにプロトタイプチェーンの先頭にある
-    // オブジェクトを起点としてスコープチェーンをたどる。
-    while (true) {
-        if (obj.__parent__)
-            obj = obj.__parent__;
-        else if (typeof obj === 'function' && obj.__proto__)
-            obj = obj.__proto__;
-        else
-            break;
+function getGlobalObject(obj) Cu.getGlobalForObject(obj);
+if (!Cu.getGlobalForObject) {
+    getGlobalObject = function getGlobalObject(obj) {
+        // スコープチェーンの最奥にあるのがグローバルオブジェクトであると
+        // 推測できる。ただし、関数に関してはスコープチェーンの
+        // 先頭オブジェクトがアクティベーションオブジェクトかもしれず、
+        // その場合 __parent__ の値が null となってスコープチェーンを
+        // たどれないので、代わりにプロトタイプチェーンの先頭にある
+        // オブジェクトを起点としてスコープチェーンをたどる。
+        while (true) {
+            if (obj.__parent__)
+                obj = obj.__parent__;
+            else if (typeof obj === 'function' && obj.__proto__)
+                obj = obj.__proto__;
+            else
+                break;
+        }
+        return obj;
     }
-    return obj;
 }
 
 // 特定のウィンドウに属さない辞書用オブジェクトの作成
