@@ -87,6 +87,18 @@ BrowserMigration.processes = [
         // Bookmark Statusbar Panel
         doOnLoad(method(BrowserMigration, 'applyBookmarkStatusbar'));
     },
+    function BrowserMigration_1to2() {},
 ];
 
 BrowserMigration.run();
+
+if (Browser.isFirstWindow &&
+    (Migration.isFirstRun ||
+     (Migration.isFirstRunAfterUpdate && Migration.prevVersion < 2))) {
+    doOnLoad(function () {
+        // ロード直後だとタブが開かないことがあるのでちょっと遅らせる。
+        window.setTimeout(method(gBrowser, 'loadOneTab'), 111,
+                          HatenaLink.parseToURL('www:tool:firefox_start'),
+                          null, null, null, false, false);
+    });
+}

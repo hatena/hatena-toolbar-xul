@@ -4,7 +4,7 @@ loadPrecedingModules();
 const EXPORTED_SYMBOLS = ['Migration'];
 
 var Migration = {
-    CURRENT_VERSION: 1,
+    CURRENT_VERSION: 2,
 
     isFirstRun: false,
     isFirstRunAfterUpdate: false,
@@ -68,6 +68,7 @@ Migration.processes = [
         let openIn = ['current', 'tabfocused', 'tabblurred', 'window'][open];
         prefs.set('link.openIn', openIn);
     },
+    function Migration_1to2() {},
 ];
 
 Migration.run();
