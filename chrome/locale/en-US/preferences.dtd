@@ -31,3 +31,4 @@
 <!ENTITY convenient.bookmark.installNow.label "Install now">
 <!ENTITY convenient.bookmark.installNow.url "https://addons.mozilla.org/firefox/addon/11285">
 <!ENTITY bookmark.useHatenaBookmarkExtension.label "Use Hatena Bookmark Extension edit-screen when adding bookmarks">
+<!ENTITY convenient.bookmark.usersInSearch.description "* The feature to show the number of bookmarked users in search result pages are removed because it conforms to a feature in Hatena Bookmark Extension.  If you have used this feature, please use Hatena Bookmark Extension instead.">

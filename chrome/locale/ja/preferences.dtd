@@ -31,3 +31,4 @@
 <!ENTITY convenient.bookmark.installNow.label "今すぐインストール">
 <!ENTITY convenient.bookmark.installNow.url "https://addons.mozilla.jp/firefox/eula/11285">
 <!ENTITY bookmark.useHatenaBookmarkExtension.label "ブックマークを追加するとき、はてなブックマーク拡張の追加画面を利用する">
+<!ENTITY convenient.bookmark.usersInSearch.description "※ Google / Yahoo! の検索結果に「○ users」(はてなブックマークでのブックマーク数) を表示する機能は、はてなブックマーク拡張の機能と一致するため削除されました。この機能をご利用だった方は、はてなブックマーク拡張をお使いください。">

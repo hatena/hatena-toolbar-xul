@@ -122,6 +122,8 @@ document.addEventListener('DOMContentLoaded', function () {
         <separator class="thin"/>
         <checkbox label="&bookmark.useHatenaBookmarkExtension.label;"
                   preference="bookmark.useHatenaBookmarkExtension"/>
+        <separator class="thin"/>
+        <description id="convenient-bookmark-usersInSearch-description">&convenient.bookmark.usersInSearch.description;</description>
     </groupbox>
 </prefpane>
 
