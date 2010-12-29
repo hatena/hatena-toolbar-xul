@@ -4,7 +4,7 @@
  */
 
 if (nowDebug) {
-    Application.console.open();
+    toErrorConsole();
 }
 
 

@@ -1,5 +1,5 @@
 Components.utils.import('resource://hatenabar/modules/00-core.js');
-loadPrecedingModules();
+loadPrecedingModules.call(this);
 EventService.createListener('AllModulesLoaded', bind(function () {
     Cu.import('resource://' + EXTENSION_HOST + '/modules/11-User.js', this);
 }, this));

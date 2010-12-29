@@ -528,10 +528,9 @@ let _loaderHelper = {
         return this.unique(scripts);
     },
 
-    loadScripts: function lh_loadScripts(scripts, target) {
-        let global = getGlobalObject(target);
+    loadScripts: function lh_loadScripts(scripts, target, createObject) {
         scripts.forEach(function (script) {
-            let env = new global.Object();
+            let env = createObject();
             env.__proto__ = target;
             loadSubScript(script, env);
             if (env.EXPORT)
@@ -566,15 +565,15 @@ function loadPrecedingModules() {
 }
 
 /* This should be called from chrome pages. */
-function loadForURI(uri) {
+function loadForURI(uri, createObject) {
     let scripts = _loaderHelper.getScriptsForURI(uri);
-    _loaderHelper.loadScripts(scripts, this);
+    _loaderHelper.loadScripts(scripts, this, createObject);
 }
 
 /* This should be called from chrome pages. */
-function loadForWindow(win) {
+function loadForWindow(win, createObject) {
     let scripts = _loaderHelper.getScriptsForWindow(win);
-    _loaderHelper.loadScripts(scripts, this);
+    _loaderHelper.loadScripts(scripts, this, createObject);
 }
 
 /*

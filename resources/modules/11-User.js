@@ -1,5 +1,5 @@
 Components.utils.import('resource://hatenabar/modules/00-core.js');
-loadPrecedingModules();
+loadPrecedingModules.call(this);
 EventService.createListener('AllModulesLoaded', method(this, 'loadModules'));
 
 const EXPORTED_SYMBOLS = ["User"];

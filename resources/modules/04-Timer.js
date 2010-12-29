@@ -1,5 +1,5 @@
 Components.utils.import('resource://hatenabar/modules/00-core.js');
-loadPrecedingModules();
+loadPrecedingModules.call(this);
 
 const EXPORTED_SYMBOLS = ['Timer'];
 

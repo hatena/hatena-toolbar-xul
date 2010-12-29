@@ -4,8 +4,9 @@
     <rdf:Description rdf:about="urn:mozilla:install-manifest">
         <em:id>{03be6b1a-4501-4b15-b4eb-a0c623136b4a}</em:id>
         <em:name>Hatena Toolbar</em:name>
-        <em:version>1.0</em:version>
+        <em:version>1.0.1a1</em:version>
         <em:type>2</em:type>
+        <em:unpack>true</em:unpack>
         <em:optionsURL>chrome://hatenabar/content/preferences.xul</em:optionsURL>
         <em:iconURL>chrome://hatenabar/skin/hatena-32x32.png</em:iconURL>
 
@@ -34,7 +35,7 @@
             <rdf:Description>
                 <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
                 <em:minVersion>3.0</em:minVersion>
-                <em:maxVersion>3.7a5pre</em:maxVersion>
+                <em:maxVersion>4.0b9</em:maxVersion>
             </rdf:Description>
         </em:targetApplication>
     </rdf:Description>
