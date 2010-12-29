@@ -14,7 +14,7 @@
 // これを防ぐため、文書木の構築が完了してから autoloader.js を読み込む。
 document.addEventListener('DOMContentLoaded', function () {
     let script = document.createElementNS('http://www.w3.org/1999/xhtml', 'script');
-    script.setAttribute('type', 'application/javascript');
+    script.setAttribute('type', 'application/javascript; version=1.8');
     script.setAttribute('src', 'chrome://hatenabar/content/autoloader.js');
     document.documentElement.appendChild(script);
 }, false);
