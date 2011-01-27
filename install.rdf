@@ -4,7 +4,7 @@
     <rdf:Description rdf:about="urn:mozilla:install-manifest">
         <em:id>{03be6b1a-4501-4b15-b4eb-a0c623136b4a}</em:id>
         <em:name>Hatena Toolbar</em:name>
-        <em:version>1.0.1a1</em:version>
+        <em:version>1.0.1b1</em:version>
         <em:type>2</em:type>
         <em:unpack>true</em:unpack>
         <em:optionsURL>chrome://hatenabar/content/preferences.xul</em:optionsURL>
