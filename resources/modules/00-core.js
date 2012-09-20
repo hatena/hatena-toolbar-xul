@@ -69,9 +69,6 @@ const ChromeRegistry =
 //const CryptoHash = 
 //    createInstance("@mozilla.org/security/hash;1", Ci.nsICryptoHash);
 
-//const StorageStatementWrapper =
-//    Components.Constructor('@mozilla.org/storage/statement-wrapper;1', 'mozIStorageStatementWrapper', 'initialize');
-
 const loadSubScript =
     getService('@mozilla.org/moz/jssubscript-loader;1', Ci.mozIJSSubScriptLoader).loadSubScript;
 
