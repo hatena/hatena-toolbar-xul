@@ -9,6 +9,9 @@ const EXPORTED_SYMBOLS = ["User"];
 function User(name, options) {
     this._name = name;
     this.options = options || {};
+    // テスト時に http を書き換えられるように, インスタンスごとに
+    // http への参照を保持しておく
+    this._http = http;
 };
 
 EventService.bless(User.prototype);
@@ -56,7 +59,7 @@ extend(User.prototype, {
 
     _checkBookmarkTabs: function User__checkBookmarkTabs() {
         let url = HatenaLink.parseToURL('b:my.tabs');
-        http.getWithRetry(url, bind(onGotTabs, this));
+        this._http.getWithRetry(url, bind(onGotTabs, this));
         function onGotTabs(res) {
             if (!res.ok || !res.value || !res.value.tabs) return;
             this._bookmarkTabs = res.value.tabs;
@@ -75,12 +78,15 @@ extend(User.prototype, {
 
     _checkGroups: function User__checkGroups() {
         let url = HatenaLink.parseToURL('g:') + 'rkgroup';
-        http.getWithRetry({ url: url, query: { rk: this.rk } },
+        this._http.getWithRetry({ url: url, query: { rk: this.rk } },
                           bind(onGotGroups, this));
         function onGotGroups(res) {
-            if (!res.ok || !res.xml || res.xml.rkgroup.@userid != this.name)
+            var xml = res.xml;
+            var xpExpr = "/hatena:rkgroup/rkgroup/@userid";
+            if (!res.ok || !xml || evaluateXPath(xml,xpExpr,"string") !== this.name)
                 return;
-            let groups = ['' + group for each (group in res.xml.rkgroup.group)];
+            var groupElems = evaluateXPath(xml,"/hatena:rkgroup/rkgroup/group","all");
+            var groups = groupElems.map(function (e) { return e.textContent });
             this._groups = groups;
             if (this.canRemember)
                 this.prefs.set('group.names', groups.join('|'));
