@@ -31,8 +31,22 @@ ExpireCache.Serializer.uneval = {
 };
 
 ExpireCache.Serializer.xml = {
-    serialize: function (value) value ? value.toXMLString() : '',
-    deserialize: function (value) value ? new XML(value) : null,
+    serialize: function (value) {
+        if ( value ) {
+            var serializer = new XMLSerializer();
+            return serializer.serializeToString( value );
+        } else {
+            return '';
+        }
+    },
+    deserialize: function (value) {
+        if ( value ) {
+            var parser = new DOMParser();
+            return parser.parseFromString( value, "text/xml" );
+        } else {
+            return null;
+        }
+    }
 };
 
 ExpireCache.prototype = {

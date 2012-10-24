@@ -102,10 +102,10 @@ QUnit.asyncTest( "Toolbar.onGotReferredCount メソッド", function () {
     url = "http://test.example.com/";
     attributeChangeLog.splice( 0, attributeChangeLog.length );
     exec_onGotReferredCount( null );
-    deepEqual( attributeChangeLog, [ ["set","disabled","true"] ],
-        "含むアンテナが存在しなので disbled 属性が true に設定される" );
-    strictEqual( diaryCheckerElem.label, 0,
-        "responseXML が null でも Response#xml は存在するので 0 になる" );
+    deepEqual( attributeChangeLog, [ ["remove","disabled"] ],
+        "HTTP GET の結果として XML が取得できなかった場合, URI が HTTP(S) なら含むアンテナへのリンクが有効になる" );
+    strictEqual( diaryCheckerElem.label, "-",
+        "HTTP GET の結果として XML が取得できなかった場合は, 含むブログのラベルはデフォルト文字列になる" );
 
     // HTTP GET に失敗した場合
     url = "http://test.example.com/";

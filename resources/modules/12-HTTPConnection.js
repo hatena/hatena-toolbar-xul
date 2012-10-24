@@ -186,17 +186,31 @@ extend(Response.prototype, {
         }
         return this._value;
     },
+    /**
+     * @response {Document||null} XHR オブジェクトの responseXML プロパティが
+     *      null でなければその値, null なら responseText を解析してみて, うまく
+     *      解析できればその値, できなければ null
+     */
     get xml() {
         if (this._xml === undefined) {
             let doc = this.doc;
-            // 非 XML な MIME 型を持つ文書でも一応 XML として解析してみる。
-            let source = doc
-                ? new XMLSerializer().serializeToString(doc.documentElement)
-                : this.text.replace(/^(?:<\?[\s\S]*?\?>\s*)*/, '');
-            try {
-                this._xml = new XML(source);
-            } catch (ex) {
-                this._xml = null;
+            if ( doc ) {
+                this._xml = doc;
+            } else {
+                // 非 XML な MIME 型を持つ文書でも一応 XML として解析してみる。
+                try {
+                    this._xml = (new DOMParser()).parseFromString(this.text, "application/xml");
+                    // DOMParser で parse できなかった場合, 例外が出るのではなく
+                    // エラー通知用の Document オブジェクトが返ってくる
+                    var docElem = this._xml.documentElement;
+                    if ( docElem.namespaceURI ===
+                            "http://www.mozilla.org/newlayout/xml/parsererror.xml"
+                            && docElem.localName === "parsererror" ) {
+                        this._xml = null;
+                    }
+                } catch (ex) {
+                    this._xml = null;
+                }
             }
         }
         return this._xml;

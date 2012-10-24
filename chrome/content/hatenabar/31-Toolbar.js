@@ -160,14 +160,17 @@ var Toolbar = {
                         : checker.getAttribute('defaultlabel');
     },
 
+    /**
+     * @param {Document} xml XML 文書を表す Document オブジェクト
+     */
     onGotReferredCount: function Tb_onGotReferredCount(url, xml) {
         if (content.location.href !== url) return;
 
         // API 取得に失敗した場合、http URI なら
         // とりあえず「含むアンテナ」があるものとする。
         let hasIncludingAntenna = xml
-                                  ? (xml.count.(@name == 'antenna') == '1')
-                                  : /^https?:/.test(url);
+                ? evaluateXPath( xml, "/existxml/count[@name='antenna']", "string" ) === "1"
+                : /^https?:/.test( url );
         if (hasIncludingAntenna)
             this.includingAntennaCommand.removeAttribute('disabled');
         else
@@ -176,7 +179,7 @@ var Toolbar = {
         let diaryChecker = this.diaryChecker;
         if (diaryChecker) {
             diaryChecker.label = xml
-                ? +xml.count.(@name == 'diary')
+                ? +evaluateXPath( xml, "/existxml/count[@name='diary']", "string" )
                 : diaryChecker.getAttribute('defaultlabel');
         }
     },

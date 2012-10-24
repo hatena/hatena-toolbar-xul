@@ -81,9 +81,12 @@ extend(User.prototype, {
         this._http.getWithRetry({ url: url, query: { rk: this.rk } },
                           bind(onGotGroups, this));
         function onGotGroups(res) {
-            if (!res.ok || !res.xml || res.xml.rkgroup.@userid != this.name)
+            var xml = res.xml;
+            var xpExpr = "/hatena:rkgroup/rkgroup/@userid";
+            if (!res.ok || !xml || evaluateXPath(xml,xpExpr,"string") !== this.name)
                 return;
-            let groups = ['' + group for each (group in res.xml.rkgroup.group)];
+            var groupElems = evaluateXPath(xml,"/hatena:rkgroup/rkgroup/group","all");
+            var groups = groupElems.map(function (e) { return e.textContent });
             this._groups = groups;
             if (this.canRemember)
                 this.prefs.set('group.names', groups.join('|'));
