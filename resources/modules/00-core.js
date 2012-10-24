@@ -641,6 +641,59 @@ function addAfter(target, name, after) {
     }
 }
 
+
+// https://developer.mozilla.org/en-US/docs/Using_XPath より
+// Evaluate an XPath expression aExpression against a given DOM node
+// or Document object (aNode), returning the results as an array
+// thanks wanderingstan at morethanwarm dot mail dot com for the
+// initial work.
+function evaluateXPath( aNode, aExpr, aResultType ) {
+    if ( typeof aResultType === "undefined" ) {
+        aResultType = "all";
+    }
+    var typeOp = evaluateXPath.typeMap[aResultType];
+    if ( typeof typeOp === "undefined" ) {
+        throw new Error( "argument error: third arg '" + aResultType + "' is invalid" );
+    }
+    var xpe = new XPathEvaluator();
+    var nsResolver = xpe.createNSResolver(aNode.ownerDocument == null ?
+            aNode.documentElement : aNode.ownerDocument.documentElement);
+    var result = xpe.evaluate(aExpr, aNode, nsResolver, typeOp.param, null);
+    return typeOp.resproc( result );
+}
+evaluateXPath.typeMap = {
+    "string": {
+        param: XPathResult.STRING_TYPE,
+        resproc: function ( res ) { return res.stringValue }
+    },
+    "number": {
+        param: XPathResult.NUMBER_TYPE,
+        resproc: function ( res ) { return res.numberValue }
+    },
+    "boolean": {
+        param: XPathResult.BOOLEAN_TYPE,
+        resproc: function ( res ) { return res.booleanValue }
+    },
+    // 以下, ノードの取得
+    "first": {
+        param: XPathResult.FIRST_ORDERED_NODE_TYPE,
+        resproc: function ( res ) { return res.singleNodeValue }
+    },
+    "any": {
+        param: XPathResult.ANY_UNORDERED_NODE_TYPE,
+        resproc: function ( res ) { return res.singleNodeValue }
+    },
+    "all": {
+        param: XPathResult.ORDERED_NODE_ITERATOR_TYPE,
+        resproc: function ( res ) {
+            var nodes = [];
+            while ( node = res.iterateNext() )
+                nodes.push( node );
+            return nodes;
+        }
+    }
+};
+
 /**
  * メソッドへアラウンドアドバイスを追加する。
  * 処理を置きかえ、引数の変形や、返り値の加工をできるようにする。
