@@ -47,52 +47,22 @@ var Star = {
                 }
             }
         }
-        let code = 'javascript:(' + this._loadOrCheckStar.toSource() + ')(' +
-            [config, this.scriptURL].map(uneval).join(',') + ');';
+
+        // 各 web ページにスターのスクリプトを読み込む
+        // XXX 読み込み処理でエラーが出ていたので読み込み方法を変更して修正したが,
+        // そもそもスクリプトを読み込みが成功してもうまく動いてないような気がする
+        var scriptUriStr = "chrome://hatenabar/content/load-or-check-star.js";
+        // Web ページの window オブジェクトを継承したスコープのためのオブジェクト
+        var scopeObj = Object.create(win, {
+            config:    { value: config },
+            scriptURL: { value: this.scriptURL },
+        });
+        var jsSubScriptLoader = Cc["@mozilla.org/moz/jssubscript-loader;1"].
+                                  getService(Ci.mozIJSSubScriptLoader);
         // 同期で読み込んで何かあるとことなので念のために遅延させる。
-        //win.location.href = encodeURI(code);
-        win.setTimeout(function () win.location.href = encodeURI(code), 11);
-    },
-
-    // This function is executed in the context of the web page.
-    _loadOrCheckStar: function Star__loadOrCheckStar(config, scriptURL) {
-        if (!config && (!window.Hatena || !Hatena.Star)) return;
-        function ensure(object, prop, value) {
-            if (typeof object[prop] === 'undefined')
-                object[prop] = value || {};
-        }
-        ensure(window, 'Hatena');
-        ensure(Hatena, 'Star');
-        if (Hatena.Star.loaded) {
-            onPreload();
-            return;
-        } else {
-            ensure(Hatena.Star, 'onLoadFunctions', []);
-            Hatena.Star.onLoadFunctions.push(onPreload);
-            Hatena.Star.SiteConfig = config;
-            var script = document.createElement('script');
-            script.type = 'text/javascript';
-            script.charset = 'utf-8';
-            script.src = scriptURL;
-            var parent = document.getElementsByTagName('head')[0] ||
-                         document.body;
-            parent.appendChild(script);
-        }
-
-        function onPreload() {
-            // load のタイミングがよくわからないのでとりあえず
-            // リスナ登録も即時呼び出しもやってみる。
-            Hatena.Star.EntryLoader.addEventListener('load', onStarsLoaded);
-            onStarsLoaded();
-        }
-        function onStarsLoaded() {
-            if (!Hatena.Star.EntryLoader.entries ||
-                !Hatena.Star.EntryLoader.entries.length)
-                return;
-            var event = document.createEvent('Event');
-            event.initEvent('hatenabar-stars-loaded', true, false);
-            document.dispatchEvent(event);
-        }
+        win.setTimeout(function () {
+            jsSubScriptLoader.loadSubScript(scriptUriStr, scopeObj, "UTF-8");
+        }, 11);
     },
 
     hasEntries: function Star_hasEntries(doc) {
