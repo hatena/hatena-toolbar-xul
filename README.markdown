@@ -5,5 +5,7 @@
 ## テストについて
 
 chrome/content/tests にテストがあります.
-テストは, はてなツールバーを開発用にインストールしている Firefox で
-chrome://hatenabar/tests/test.html にアクセスすると実行されます.
+テストは, はてなツールバーを開発用にインストールしている Firefox で下記 URL
+にアクセスすると実行されます.
+
+* chrome://hatenabar/content/tests/test.html

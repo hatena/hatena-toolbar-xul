@@ -9,37 +9,6 @@ function setUp() {
     HTTPCache.counter.setFilter(eval(filter));
 }
 
-function testSeriarizer() {
-    let cache = new ExpireCache('unevaltest', null, 'uneval');
-    cache.set('foo', {foo: 1, bar: 2});
-    assert.equals(1, cache.get('foo').foo);
-    assert.equals(2, cache.get('foo').bar);
-
-    cache = new ExpireCache('xmltest', null, 'xml');
-    cache.set('foo', <foo><bar>42</bar><baz>23</baz></foo>);
-    assert.equals('42', cache.get('foo').bar.toString());
-    assert.equals('23', cache.get('foo').baz.toString());
-}
-
-function testCache() {
-    let cache = new ExpireCache();
-    let cache2 = new ExpireCache('foo');
-    cache.set('foo', 1);
-    assert.isTrue(cache.has('foo'));
-    assert.isFalse(cache.has('oooo'));
-    assert.equals(cache.get('foo'), 1);
-    assert.isNull(cache2.get('foo'));
-    assert.isFalse(cache2.get('foo'));
-
-    cache.set('f', 0);
-    assert.isTrue(cache.has('f'));
-
-    cache.set('bar', 1, 1);
-    yield 2000;
-    assert.isNull(cache.get('bar'));
-    assert.isFalse(cache.has('bar'));
-}
-
 function testHTTPCounter() {
     let got = {};
     let result;
