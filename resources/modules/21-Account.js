@@ -194,10 +194,37 @@ EventService.bless(Account);
 
 Account.CookieObserver = {
     observe: function Acnt_CO_observe(subject, topic, data) {
-        let cookie = subject && subject.QueryInterface(Ci.nsICookie);
-        if (cookie && (cookie.host !== LOGIN_COOKIE_HOST ||
-                       cookie.name !== 'rk'))
+        // Depending on the Data value, `subject` is either
+        //   - an `nsICookie2` interface pointer representing the cookie object that changed,
+        //   - an `nsIArray` of `nsICookie2` objects, or
+        //   - `null`.
+        // cf: https://developer.mozilla.org/en/docs/XPCOM_Interface_Reference/nsICookieService
+
+        if (data === "cleared") { // Cookie 全削除
+            Account.setUser(null);
             return;
+        }
+        if (data === "reload") {
+            // XXX What should I do here?
+            return;
+        }
+
+        var cookies = [];
+        if (subject instanceof Ci.nsICookie2) {
+            cookies.push( subject.QueryInterface(Ci.nsICookie2) );
+        } else if (subject instanceof Ci.nsIArray) {
+            var cc = subject.QueryInterface(Ci.nsIArray);
+            for (var i = 0, len = cc.length; i < len; ++i) {
+                cookies.push( cc.queryElementAt(i, Ci.nsICookie2) );
+            }
+        }
+
+        // retrieve cookie which has information of hatena rk
+        var cookie = cookies.filter(function (cookie) {
+            return (cookie.host === LOGIN_COOKIE_HOST && cookie.name === 'rk');
+        })[0];
+        if (!cookie) return;
+
         p('Hatena rk cookie is ' + data);
         switch (data) {
         case 'added':
@@ -205,11 +232,8 @@ Account.CookieObserver = {
             Account.checkLogin(cookie.value);
             break;
         case 'deleted':
-        case 'cleared':
+        case 'batch-deleted':
             Account.setUser(null);
-            break;
-        case 'reload':
-            // XXX What should I do here?
             break;
         }
     },

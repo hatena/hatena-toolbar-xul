@@ -89,7 +89,6 @@ var nowDebug = PrefService.getBoolPref(PREF_PREFIX + 'debug.log');
 var XMLHttpRequest = Components.Constructor("@mozilla.org/xmlextras/xmlhttprequest;1");
 var XMLSerializer = Components.Constructor("@mozilla.org/xmlextras/xmlserializer;1");
 var DOMParser = Components.Constructor("@mozilla.org/xmlextras/domparser;1");
-var XPathEvaluator = Components.Constructor("@mozilla.org/dom/xpath-evaluator;1");
 var XPathResult = Ci.nsIDOMXPathResult;
 
 var NativeTimer = Components.Constructor("@mozilla.org/timer;1", "nsITimer", "init");
@@ -655,7 +654,8 @@ function evaluateXPath( aNode, aExpr, aResultType ) {
     if ( typeof typeOp === "undefined" ) {
         throw new Error( "argument error: third arg '" + aResultType + "' is invalid" );
     }
-    var xpe = new XPathEvaluator();
+    // `xpe` is a XPathEvaluator
+    var xpe = aNode.ownerDocument || aNode;
     var nsResolver = xpe.createNSResolver(aNode.ownerDocument == null ?
             aNode.documentElement : aNode.ownerDocument.documentElement);
     var result = xpe.evaluate(aExpr, aNode, nsResolver, typeOp.param, null);
