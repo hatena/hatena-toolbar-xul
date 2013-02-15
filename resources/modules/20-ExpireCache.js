@@ -12,6 +12,11 @@ const B_API_STATIC_HTTP = 'http://' + B_API_STATIC_HOST + '/';
  */
 const EXPORT = ['ExpireCache', 'HTTPCache'];
 
+/**
+ * @param key 共有のディクショナリのうちでこの ExpireCache オブジェクトがアクセスする
+ *      領域を指定するためのキー; この値が同じであれば別の ExpireCache オブジェクトも
+ *      同じ領域を使う.
+ */
 var ExpireCache = function(key, defaultExpire, serializer, sweeperDelay) {
     this.key = key;
     this.defaultExpire = 60 * 30; // 30分
@@ -97,6 +102,10 @@ ExpireCache.prototype = {
     clearAll: function ExpireCache_clearAll() {
         shared[this.sharedKey] = new DictionaryObject();
     },
+    /**
+     * @param key 値を一意に定めるためのキー; ExpireCache オブジェクトのキーと
+     *         は別であることに注意
+     */
     set: function ExpireCache_set(key, value, expire) {
         if (!expire) expire = this.defaultExpire;
         let e = Date.now() + (expire * 1000);
