@@ -1,13 +1,21 @@
 /**
  * This function is executed in the context of the web page.
- * Web ページの window オブジェクトを継承したオブジェクトをスコープとして
- * 実行されるスクリプト.
- * 下記の変数は, スコープとして生成されたオブジェクトにあらかじめ定義されている.
- *   config
- *   scriptURL
+ * Web ページ側に追加されて実行されるスクリプト.
+ *
+ * see: https://developer.mozilla.org/ja/docs/Code_snippets/Interaction_between_privileged_and_non-privileged_pages
+ * 特権コードと web 上のスクリプトのデータのやりとり
  */
 
 (function namespace_loadOrCheckStar() {
+
+// 特権コードが追加した要素を取得して情報を得る
+var HATENABAR_NS = "http://www.hatena.ne.jp/hatenabar_firefox";
+var infoElem = document.getElementsByTagNameNS(HATENABAR_NS, "hatena-star-info")[0];
+if (!infoElem) {
+    return;
+}
+var config = JSON.parse(infoElem.getAttribute("config"))[0];
+var scriptURL = JSON.parse(infoElem.getAttribute("star-script-uri"))[0];
 
 if (!config && (!window.Hatena || !Hatena.Star)) {
     return;
@@ -33,7 +41,7 @@ if (Hatena.Star.loaded) {
     scriptElem.src = scriptURL;
     scriptElem.setAttribute(
             "data-comment",
-            "この script 要素は Firefox 拡張 「はてなツールバー」 によって挿入されました");
+            "This `script` element is inserted by “Hatena Toolbar for Firefox”.");
 
     var parent = document.getElementsByTagName("head")[0] ||
                  document.body;
