@@ -48,21 +48,42 @@ var Star = {
             }
         }
 
+        // document.body に script を追加するので, 存在しない場合は終了
+        if (!win.document.body) return;
         // 各 web ページにスターのスクリプトを読み込む
-        // XXX 読み込み処理でエラーが出ていたので読み込み方法を変更して修正したが,
-        // そもそもスクリプトを読み込みが成功してもうまく動いてないような気がする
-        var scriptUriStr = "chrome://hatenabar/content/load-or-check-star.js";
-        // Web ページの window オブジェクトを継承したスコープのためのオブジェクト
-        var scopeObj = Object.create(win, {
-            config:    { value: config },
-            scriptURL: { value: this.scriptURL },
-        });
-        var jsSubScriptLoader = Cc["@mozilla.org/moz/jssubscript-loader;1"].
-                                  getService(Ci.mozIJSSubScriptLoader);
+        var starScriptUriStr = this.scriptURL;
         // 同期で読み込んで何かあるとことなので念のために遅延させる。
         win.setTimeout(function () {
-            jsSubScriptLoader.loadSubScript(scriptUriStr, scopeObj, "UTF-8");
+            // 読み込む JS ファイルをテキストで取得して script 要素に突っ込む
+            var xhr = XMLHttpRequest();
+            var scriptUriStr = "chrome://hatenabar/content/load-or-check-star.js";
+            xhr.open("GET", scriptUriStr, true);
+            xhr.responseType = "text";
+            xhr.addEventListener("load", function (evt) {
+                var scriptStr = xhr.responseText;
+                insertScriptToWebContent(scriptStr, config, starScriptUriStr);
+            }, false);
+            xhr.send();
         }, 11);
+        function insertScriptToWebContent(scriptStr, config, starScriptUriStr) {
+            var scriptElem = win.document.createElement("script");
+            scriptElem.textContent = scriptStr;
+            scriptElem.setAttribute(
+                    "data-comment",
+                    "This `script` element is inserted by “Hatena Toolbar for Firefox”.");
+
+            // web ページ上で実行されるスクリプトに渡すための情報を要素で作る
+            var HATENABAR_NS = "http://www.hatena.ne.jp/hatenabar_firefox";
+            var infoElem = win.document.createElementNS(HATENABAR_NS, "hatena-star-info");
+            infoElem.setAttribute("config", JSON.stringify([config]));
+            infoElem.setAttribute("star-script-uri", JSON.stringify([starScriptUriStr]));
+            infoElem.setAttribute(
+                    "data-comment",
+                    "This element is inserted by “Hatena Toolbar for Firefox”.");
+
+            win.document.documentElement.appendChild(infoElem);
+            win.document.body.appendChild(scriptElem);
+        }
     },
 
     hasEntries: function Star_hasEntries(doc) {
