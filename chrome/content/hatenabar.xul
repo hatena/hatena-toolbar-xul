@@ -247,6 +247,20 @@
                           hatena:link="b:"/>
             </menupopup>
         </toolbarbutton>
+        <toolbarbutton id="hatenabar-blog-button"
+                       class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
+                       type="menu-button"
+                       image="chrome://hatenabar/skin/blog-icon.png"
+                       label="&hatenabar.blog.label;"
+                       tooltiptext="&hatenabar.blog.label;"
+                       command="hatenabar-cmd-open-top-or-user-link"
+                       hatena:link="blog:">
+            <menupopup observes="hatenabar-link-popup-base">
+                <menuitem label="&hatenabar.blog.top.label;"
+                          observes="hatenabar-cmd-open-link"
+                          hatena:link="blog:"/>
+            </menupopup>
+        </toolbarbutton>
         <toolbarbutton id="hatenabar-diary-button"
                        class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                        type="menu-button"
@@ -609,7 +623,7 @@
                  iconsize="small"
                  defaulticonsize="small"
                  customizable="true"
-                 defaultset="hatenabar-main-button,hatenabar-search-item,separator,hatenabar-antenna-button,hatenabar-bookmark-button,hatenabar-diary-button,hatenabar-fotolife-button,hatenabar-group-button,hatenabar-haiku-button,hatenabar-question-button,separator,hatenabar-check-antenna-item,hatenabar-check-bookmark-item,hatenabar-check-diary-item,spring"
+                 defaultset="hatenabar-main-button,hatenabar-search-item,separator,hatenabar-antenna-button,hatenabar-bookmark-button,hatenabar-blog-button,hatenabar-diary-button,hatenabar-fotolife-button,hatenabar-group-button,hatenabar-haiku-button,hatenabar-question-button,separator,hatenabar-check-antenna-item,hatenabar-check-bookmark-item,hatenabar-check-diary-item,spring"
                  context="toolbar-context-menu"/>
     </toolbox>
 

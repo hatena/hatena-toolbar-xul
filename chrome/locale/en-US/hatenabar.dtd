@@ -41,6 +41,9 @@
 <!ENTITY hatenabar.bookmark.config.label "Config">
 <!ENTITY hatenabar.bookmark.top.label "Top">
 
+<!ENTITY hatenabar.blog.label "Hatena Blog">
+<!ENTITY hatenabar.blog.top.label "Top">
+
 <!ENTITY hatenabar.diary.label "Hatena Diary">
 <!ENTITY hatenabar.diary.referring.label "Diaries Quoting This Page">
 <!ENTITY hatenabar.diary.quote.label "Quote This Page in Diary">
