@@ -74,6 +74,9 @@
 <!ENTITY hatenabar.haiku.album.label "Album">
 <!ENTITY hatenabar.haiku.top.label "Top">
 
+<!ENTITY hatenabar.space.label "Hatena Space">
+<!ENTITY hatenabar.space.top.label "Top">
+
 <!ENTITY hatenabar.idea.label "Hatena Idea">
 <!ENTITY hatenabar.idea.top.label "Top">
 

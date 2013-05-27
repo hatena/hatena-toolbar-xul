@@ -74,6 +74,9 @@
 <!ENTITY hatenabar.haiku.album.label "アルバム">
 <!ENTITY hatenabar.haiku.top.label "トップ">
 
+<!ENTITY hatenabar.space.label "はてなスペース">
+<!ENTITY hatenabar.space.top.label "トップ">
+
 <!ENTITY hatenabar.idea.label "はてなアイデア">
 <!ENTITY hatenabar.idea.top.label "トップ">
 
