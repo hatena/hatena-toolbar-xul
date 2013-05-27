@@ -41,6 +41,11 @@
 <!ENTITY hatenabar.bookmark.config.label "設定">
 <!ENTITY hatenabar.bookmark.top.label "トップ">
 
+<!ENTITY hatenabar.blog.label "はてなブログ">
+<!ENTITY hatenabar.blog.top.label "トップ">
+<!ENTITY hatenabar.blog.dashboard.label "ダッシュボード">
+<!ENTITY hatenabar.blog.edit.label "記事を書く">
+
 <!ENTITY hatenabar.diary.label "はてなダイアリー">
 <!ENTITY hatenabar.diary.referring.label "このページを含む日記">
 <!ENTITY hatenabar.diary.quote.label "このページを引用する">

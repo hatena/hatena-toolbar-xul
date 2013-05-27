@@ -20,6 +20,12 @@ var UICommand = {
         Command.openUILink(link, event);
     },
 
+    openUserMainBlogOrBlogTop: function UIC_openUserMainBlogOrBlogTop(evt) {
+        let link = (User.user ? "blog:id:" + User.user.name
+                              : "http://hatenablog.com/");
+        Command.openUILink(link, evt);
+    },
+
     addOrViewBookmark: function UIC_addOrViewBookmark(event) {
         if (event.button === 0 || event.button === 1)
             Bookmark.add(content);
