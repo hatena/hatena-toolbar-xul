@@ -609,7 +609,7 @@
                  iconsize="small"
                  defaulticonsize="small"
                  customizable="true"
-                 defaultset="hatenabar-main-button,hatenabar-search-item,separator,hatenabar-antenna-button,hatenabar-bookmark-button,hatenabar-diary-button,hatenabar-fotolife-button,hatenabar-group-button,hatenabar-haiku-button,hatenabar-idea-button,hatenabar-question-button,separator,hatenabar-check-antenna-item,hatenabar-check-bookmark-item,hatenabar-check-diary-item,spring"
+                 defaultset="hatenabar-main-button,hatenabar-search-item,separator,hatenabar-antenna-button,hatenabar-bookmark-button,hatenabar-diary-button,hatenabar-fotolife-button,hatenabar-group-button,hatenabar-haiku-button,hatenabar-question-button,separator,hatenabar-check-antenna-item,hatenabar-check-bookmark-item,hatenabar-check-diary-item,spring"
                  context="toolbar-context-menu"/>
     </toolbox>
 
