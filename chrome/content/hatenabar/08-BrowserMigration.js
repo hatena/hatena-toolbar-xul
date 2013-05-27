@@ -27,6 +27,8 @@ var BrowserMigration = {
     },
 };
 
+// extensions.hatenabar.migration.version アップデート後の最初の起動時に実行される処理
+// 各要素が各バージョン間の移行処理に対応している
 BrowserMigration.processes = [
     function BrowserMigration_0to1() {
         let oldPrefs = new Prefs('hatenabar');
