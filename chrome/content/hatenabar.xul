@@ -379,6 +379,27 @@
                           hatena:link="h:"/>
             </menupopup>
         </toolbarbutton>
+        <toolbarbutton id="hatenabar-space-button"
+                       class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
+                       type="menu-button"
+                       image="chrome://hatenabar/skin/space-icon.png"
+                       label="&hatenabar.space.label;"
+                       tooltiptext="&hatenabar.space.label;"
+                       command="hatenabar-cmd-open-link"
+                       hatena:link="space:">
+            <menupopup observes="hatenabar-link-popup-base">
+                <menuitem label="&hatenabar.space.mypage.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="space:id:?"/>
+                <menuitem label="&hatenabar.space.config.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="space:-:settings"/>
+                <menuseparator/>
+                <menuitem label="&hatenabar.space.top.label;"
+                          observes="hatenabar-cmd-open-link"
+                          hatena:link="space:"/>
+            </menupopup>
+        </toolbarbutton>
         <toolbarbutton id="hatenabar-idea-button"
                        class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                        type="menu-button"
@@ -632,7 +653,7 @@
                  iconsize="small"
                  defaulticonsize="small"
                  customizable="true"
-                 defaultset="hatenabar-main-button,hatenabar-search-item,separator,hatenabar-antenna-button,hatenabar-bookmark-button,hatenabar-blog-button,hatenabar-diary-button,hatenabar-fotolife-button,hatenabar-group-button,hatenabar-haiku-button,hatenabar-question-button,separator,hatenabar-check-antenna-item,hatenabar-check-bookmark-item,hatenabar-check-diary-item,spring"
+                 defaultset="hatenabar-main-button,hatenabar-search-item,separator,hatenabar-antenna-button,hatenabar-bookmark-button,hatenabar-blog-button,hatenabar-diary-button,hatenabar-fotolife-button,hatenabar-group-button,hatenabar-haiku-button,hatenabar-space-button,hatenabar-question-button,separator,hatenabar-check-antenna-item,hatenabar-check-bookmark-item,hatenabar-check-diary-item,spring"
                  context="toolbar-context-menu"/>
     </toolbox>
 
