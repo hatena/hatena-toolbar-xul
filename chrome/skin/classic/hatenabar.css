@@ -3,6 +3,10 @@
 .hatenabar-toolbarbutton {
     list-style-image: url("chrome://hatenabar/skin/icons.png") !important;
 }
+/* はてなブログのアイコンは CSS ではなく直接指定 */
+#hatenabar-blog-button.hatenabar-toolbarbutton {
+    list-style-image: none !important;
+}
 
 toolbar[mode="icons"][iconsize="small"] .toolbarbutton-1.hatenabar-toolbarbutton:not([type="menu-button"]),
 toolbar[mode="icons"][iconsize="small"] .toolbarbutton-1.hatenabar-toolbarbutton[type="menu-button"] > .toolbarbutton-menubutton-button {
