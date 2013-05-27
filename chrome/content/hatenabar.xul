@@ -258,6 +258,9 @@
                        tooltiptext="&hatenabar.blog.label;"
                        command="hatenabar-cmd-open-user-main-blog-or-blog-top">
             <menupopup observes="hatenabar-link-popup-base">
+                <menuitem label="&hatenabar.blog.dashboard.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="blog:"/>
                 <menuitem label="&hatenabar.blog.top.label;"
                           observes="hatenabar-cmd-open-link"
                           hatena:link="http://hatenablog.com/"/>

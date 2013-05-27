@@ -43,6 +43,7 @@
 
 <!ENTITY hatenabar.blog.label "はてなブログ">
 <!ENTITY hatenabar.blog.top.label "トップ">
+<!ENTITY hatenabar.blog.dashboard.label "ダッシュボード">
 
 <!ENTITY hatenabar.diary.label "はてなダイアリー">
 <!ENTITY hatenabar.diary.referring.label "このページを含む日記">
