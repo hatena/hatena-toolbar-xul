@@ -25,6 +25,9 @@
         <command id="hatenabar-cmd-open-top-or-user-link"
                  oncommand="hatenabar.UICommand.openTopOrUserLink(event);"
                  onclick="checkForMiddleClick(this, event);"/>
+        <command id="hatenabar-cmd-open-user-main-blog-or-blog-top"
+                 oncommand="hatenabar.UICommand.openUserMainBlogOrBlogTop(event);"
+                 onclick="checkForMiddleClick(this, event);"/>
         <command id="hatenabar-cmd-open-top-or-selected-antenna"
                  oncommand="hatenabar.Toolbar.openAntenna(event);"
                  onclick="checkForMiddleClick(this, event);"/>
@@ -253,12 +256,11 @@
                        image="chrome://hatenabar/skin/blog-icon.png"
                        label="&hatenabar.blog.label;"
                        tooltiptext="&hatenabar.blog.label;"
-                       command="hatenabar-cmd-open-top-or-user-link"
-                       hatena:link="blog:">
+                       command="hatenabar-cmd-open-user-main-blog-or-blog-top">
             <menupopup observes="hatenabar-link-popup-base">
                 <menuitem label="&hatenabar.blog.top.label;"
                           observes="hatenabar-cmd-open-link"
-                          hatena:link="blog:"/>
+                          hatena:link="http://hatenablog.com/"/>
             </menupopup>
         </toolbarbutton>
         <toolbarbutton id="hatenabar-diary-button"

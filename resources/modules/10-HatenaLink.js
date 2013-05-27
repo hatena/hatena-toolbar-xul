@@ -76,6 +76,10 @@ HatenaLink.schemes = {
         return { url: url };
     },
 
+    blog: function HL_scheme_blog(link, context) {
+        return { url: hatenaURL(link, context) };
+    },
+
     c: function HL_scheme_c(link, context) {
         return { url: hatenaURL(link, context) };
     },
