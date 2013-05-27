@@ -76,6 +76,8 @@
 
 <!ENTITY hatenabar.space.label "Hatena Space">
 <!ENTITY hatenabar.space.top.label "Top">
+<!ENTITY hatenabar.space.mypage.label "My Page">
+<!ENTITY hatenabar.space.config.label "Settings">
 
 <!ENTITY hatenabar.idea.label "Hatena Idea">
 <!ENTITY hatenabar.idea.top.label "Top">

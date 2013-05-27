@@ -103,6 +103,10 @@ HatenaLink.schemes = {
         return { url: hatenaURL(link, context) };
     },
 
+    space: function HL_scheme_space(link, context) {
+        return { url: hatenaURL(link, context) };
+    },
+
     i: function HL_scheme_i(link, context) {
         return { url: hatenaURL(link, context) };
     },
