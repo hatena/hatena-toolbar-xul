@@ -261,6 +261,10 @@
                 <menuitem label="&hatenabar.blog.dashboard.label;"
                           observes="hatenabar-cmd-open-user-link"
                           hatena:link="blog:"/>
+                <menuitem label="&hatenabar.blog.edit.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="blog:my:edit"/>
+                <menuseparator/>
                 <menuitem label="&hatenabar.blog.top.label;"
                           observes="hatenabar-cmd-open-link"
                           hatena:link="http://hatenablog.com/"/>

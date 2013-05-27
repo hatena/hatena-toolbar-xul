@@ -44,6 +44,7 @@
 <!ENTITY hatenabar.blog.label "Hatena Blog">
 <!ENTITY hatenabar.blog.top.label "Top">
 <!ENTITY hatenabar.blog.dashboard.label "Dashboard">
+<!ENTITY hatenabar.blog.edit.label "Write Article">
 
 <!ENTITY hatenabar.diary.label "Hatena Diary">
 <!ENTITY hatenabar.diary.referring.label "Diaries Quoting This Page">
