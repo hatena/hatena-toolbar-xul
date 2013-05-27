@@ -93,15 +93,6 @@
 <!ENTITY hatenabar.star.blogs.label "Blogs">
 <!ENTITY hatenabar.star.top.label "Top">
 
-<!ENTITY hatenabar.ugomemo.label "Flipnote Hatena">
-<!ENTITY hatenabar.ugomemo.favorites.label "Favorites">
-<!ENTITY hatenabar.ugomemo.stars.label "Stars">
-<!ENTITY hatenabar.ugomemo.hotMovies.label "Hot Flipnotes">
-<!ENTITY hatenabar.ugomemo.movies.label "Movies">
-<!ENTITY hatenabar.ugomemo.ranking.label "Ranking">
-<!ENTITY hatenabar.ugomemo.channels.label "Channels">
-<!ENTITY hatenabar.ugomemo.top.label "Top">
-
 <!ENTITY hatenabar.counter.label "Hatena Counter">
 <!ENTITY hatenabar.counter.config.label "Config">
 <!ENTITY hatenabar.counter.top.label "Top">

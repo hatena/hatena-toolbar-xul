@@ -60,7 +60,6 @@ BrowserMigration.processes = [
                 ['message.enable', false, 'hatenabar-message-button'],
                 ['question.enable', true, 'hatenabar-question-button'],
                 ['star.enable', false, 'hatenabar-star-button'],
-                ['ugomemo.enable', true, 'hatenabar-ugomemo-button'],
                 ['counter.enable', true, 'hatenabar-counter-button'],
                 ['graph.enable', true, 'hatenabar-graph-button'],
                 ['', true, 'separator'],

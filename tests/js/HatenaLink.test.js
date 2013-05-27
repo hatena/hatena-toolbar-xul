@@ -136,12 +136,6 @@ function testStarLink() {
     assert.equals('http://s.hatena.ne.jp/', u('s:'));
 }
 
-function testUgomemoLink() {
-    let u = method(HatenaLink, 'parseToURL');
-    assert.equals('http://ugomemo.hatena.ne.jp/', u('ugomemo:'));
-    assert.equals('http://ugomemo.hatena.ne.jp/movies?sort=hot', u('ugomemo:hotmovies'));
-}
-
 function testWWWLink() {
     let u = method(HatenaLink, 'parseToURL');
     assert.equals('http://www.hatena.ne.jp/', u('www:'));

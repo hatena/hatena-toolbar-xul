@@ -97,10 +97,6 @@ textbox[type="autocomplete"]:not([enablehistory="true"]) > .hatenabar-autocomple
     -moz-image-region: rect(64px, 304px, 80px, 288px);
 }
 
-#hatenabar-ugomemo-button {
-    -moz-image-region: rect(128px, 96px, 144px, 80px);
-}
-
 #hatenabar-counter-button {
     -moz-image-region: rect(128px, 48px, 144px, 32px);
 }

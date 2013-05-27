@@ -93,15 +93,6 @@
 <!ENTITY hatenabar.star.blogs.label "ブログ">
 <!ENTITY hatenabar.star.top.label "トップ">
 
-<!ENTITY hatenabar.ugomemo.label "うごメモはてな">
-<!ENTITY hatenabar.ugomemo.favorites.label "お気に入り">
-<!ENTITY hatenabar.ugomemo.stars.label "スター">
-<!ENTITY hatenabar.ugomemo.hotMovies.label "人気作品">
-<!ENTITY hatenabar.ugomemo.movies.label "新着作品">
-<!ENTITY hatenabar.ugomemo.ranking.label "ランキング">
-<!ENTITY hatenabar.ugomemo.channels.label "チャンネル">
-<!ENTITY hatenabar.ugomemo.top.label "トップ">
-
 <!ENTITY hatenabar.counter.label "はてなカウンター">
 <!ENTITY hatenabar.counter.config.label "設定">
 <!ENTITY hatenabar.counter.top.label "トップ">

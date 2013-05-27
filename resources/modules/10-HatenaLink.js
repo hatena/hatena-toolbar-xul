@@ -141,13 +141,6 @@ HatenaLink.schemes = {
         return { url: hatenaURL(link, context) };
     },
 
-    ugomemo: function HL_scheme_ugomemo(link, context) {
-        let url = hatenaURL(link, context);
-        if (link.substring(8) === 'hotmovies')
-            url = url.replace(/hotmovies$/, 'movies?sort=hot');
-        return { url: url };
-    },
-
     www: function HL_scheme_www(link, context) {
         return { url: hatenaURL(link, context) };
     },

@@ -447,42 +447,6 @@
                           hatena:link="s:"/>
             </menupopup>
         </toolbarbutton>
-        <toolbarbutton id="hatenabar-ugomemo-button"
-                       class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
-                       type="menu-button"
-                       label="&hatenabar.ugomemo.label;"
-                       tooltiptext="&hatenabar.ugomemo.label;"
-                       command="hatenabar-cmd-open-top-or-user-link"
-                       hatena:link="ugomemo:id:?:following">
-            <menupopup observes="hatenabar-link-popup-base">
-                <!-- Favorites のリンク先が /favorites でなく、
-                     Stars のリンク先が /favorites なのは意図的
-                     (旧はてなツールバーがそうなっていた)。 -->
-                <menuitem label="&hatenabar.ugomemo.favorites.label;"
-                          observes="hatenabar-cmd-open-user-link"
-                          hatena:link="ugomemo:id:?:following"/>
-                <menuitem label="&hatenabar.ugomemo.stars.label;"
-                          observes="hatenabar-cmd-open-user-link"
-                          hatena:link="ugomemo:id:?:favorites"/>
-                <menuseparator/>
-                <menuitem label="&hatenabar.ugomemo.hotMovies.label;"
-                          observes="hatenabar-cmd-open-link"
-                          hatena:link="ugomemo:hotmovies"/>
-                <menuitem label="&hatenabar.ugomemo.movies.label;"
-                          observes="hatenabar-cmd-open-link"
-                          hatena:link="ugomemo:movies"/>
-                <menuitem label="&hatenabar.ugomemo.ranking.label;"
-                          observes="hatenabar-cmd-open-link"
-                          hatena:link="ugomemo:ranking"/>
-                <menuitem label="&hatenabar.ugomemo.channels.label;"
-                          observes="hatenabar-cmd-open-link"
-                          hatena:link="ugomemo:channels.top"/>
-                <menuseparator/>
-                <menuitem label="&hatenabar.ugomemo.top.label;"
-                          observes="hatenabar-cmd-open-link"
-                          hatena:link="ugomemo:"/>
-            </menupopup>
-        </toolbarbutton>
         <toolbarbutton id="hatenabar-counter-button"
                        class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                        type="menu-button"
@@ -645,7 +609,7 @@
                  iconsize="small"
                  defaulticonsize="small"
                  customizable="true"
-                 defaultset="hatenabar-main-button,hatenabar-search-item,separator,hatenabar-antenna-button,hatenabar-bookmark-button,hatenabar-diary-button,hatenabar-fotolife-button,hatenabar-group-button,hatenabar-haiku-button,hatenabar-idea-button,hatenabar-question-button,hatenabar-ugomemo-button,separator,hatenabar-check-antenna-item,hatenabar-check-bookmark-item,hatenabar-check-diary-item,spring"
+                 defaultset="hatenabar-main-button,hatenabar-search-item,separator,hatenabar-antenna-button,hatenabar-bookmark-button,hatenabar-diary-button,hatenabar-fotolife-button,hatenabar-group-button,hatenabar-haiku-button,hatenabar-idea-button,hatenabar-question-button,separator,hatenabar-check-antenna-item,hatenabar-check-bookmark-item,hatenabar-check-diary-item,spring"
                  context="toolbar-context-menu"/>
     </toolbox>
 
