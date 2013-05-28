@@ -76,6 +76,10 @@ HatenaLink.schemes = {
         return { url: url };
     },
 
+    blog: function HL_scheme_blog(link, context) {
+        return { url: hatenaURL(link, context) };
+    },
+
     c: function HL_scheme_c(link, context) {
         return { url: hatenaURL(link, context) };
     },
@@ -96,6 +100,10 @@ HatenaLink.schemes = {
     },
 
     h: function HL_scheme_h(link, context) {
+        return { url: hatenaURL(link, context) };
+    },
+
+    space: function HL_scheme_space(link, context) {
         return { url: hatenaURL(link, context) };
     },
 
@@ -139,13 +147,6 @@ HatenaLink.schemes = {
 
     s: function HL_scheme_s(link, context) {
         return { url: hatenaURL(link, context) };
-    },
-
-    ugomemo: function HL_scheme_ugomemo(link, context) {
-        let url = hatenaURL(link, context);
-        if (link.substring(8) === 'hotmovies')
-            url = url.replace(/hotmovies$/, 'movies?sort=hot');
-        return { url: url };
     },
 
     www: function HL_scheme_www(link, context) {

@@ -3,6 +3,9 @@ const EXPORT = ['Command'];
 const UI_TAB_IN_BG_PREF = 'browser.tabs.loadBookmarksInBackground';
 const CONTENT_TAB_IN_BG_PREF = 'browser.tabs.loadInBackground';
 
+let utility = {};
+loadSubScript("chrome://browser/content/utilityOverlay.js", utility);
+
 var Command = {
     openUILink: function Cmd_openUILink(link, event) {
         this.openUILinkWith(link, null, event);
@@ -14,7 +17,7 @@ var Command = {
         if (!/^https?:/.test(link))
             link = HatenaLink.parseToURL(link, context);
         let where = this.whereToOpenLink(event, true);
-        openUILinkIn(link, where);
+        utility.openUILinkIn(link, where);
     },
 
     openContentLink: function Cmd_openContentLink(link, event) {
@@ -34,7 +37,7 @@ var Command = {
             Prefs.hatenabar.get("link.useTreeStyleTab") &&
             typeof TreeStyleTabService !== "undefined")
             TreeStyleTabService.readyToOpenChildTab(getTopWin().gBrowser.currentTab, false);
-        openUILinkIn(link, where);
+        utility.openUILinkIn(link, where);
     },
 
     whereToOpenLink: function Cmd_whereToOpenLink(event, isUILink) {
@@ -75,7 +78,7 @@ var Command = {
                    ? 'tabshifted' : 'tab')
                 : Prefs.hatenabar.get('link.openIn', where);
         }
-        openUILinkIn(url, where);
+        utility.openUILinkIn(url, where);
     },
 
     clearSearchHistory: function Cmd_clearSearchHistory() {

@@ -41,6 +41,11 @@
 <!ENTITY hatenabar.bookmark.config.label "設定">
 <!ENTITY hatenabar.bookmark.top.label "トップ">
 
+<!ENTITY hatenabar.blog.label "はてなブログ">
+<!ENTITY hatenabar.blog.top.label "トップ">
+<!ENTITY hatenabar.blog.dashboard.label "ダッシュボード">
+<!ENTITY hatenabar.blog.edit.label "記事を書く">
+
 <!ENTITY hatenabar.diary.label "はてなダイアリー">
 <!ENTITY hatenabar.diary.referring.label "このページを含む日記">
 <!ENTITY hatenabar.diary.quote.label "このページを引用する">
@@ -69,6 +74,11 @@
 <!ENTITY hatenabar.haiku.album.label "アルバム">
 <!ENTITY hatenabar.haiku.top.label "トップ">
 
+<!ENTITY hatenabar.space.label "はてなスペース">
+<!ENTITY hatenabar.space.top.label "トップ">
+<!ENTITY hatenabar.space.mypage.label "マイページ">
+<!ENTITY hatenabar.space.config.label "設定">
+
 <!ENTITY hatenabar.idea.label "はてなアイデア">
 <!ENTITY hatenabar.idea.top.label "トップ">
 
@@ -92,15 +102,6 @@
 <!ENTITY hatenabar.star.stars.label "スター">
 <!ENTITY hatenabar.star.blogs.label "ブログ">
 <!ENTITY hatenabar.star.top.label "トップ">
-
-<!ENTITY hatenabar.ugomemo.label "うごメモはてな">
-<!ENTITY hatenabar.ugomemo.favorites.label "お気に入り">
-<!ENTITY hatenabar.ugomemo.stars.label "スター">
-<!ENTITY hatenabar.ugomemo.hotMovies.label "人気作品">
-<!ENTITY hatenabar.ugomemo.movies.label "新着作品">
-<!ENTITY hatenabar.ugomemo.ranking.label "ランキング">
-<!ENTITY hatenabar.ugomemo.channels.label "チャンネル">
-<!ENTITY hatenabar.ugomemo.top.label "トップ">
 
 <!ENTITY hatenabar.counter.label "はてなカウンター">
 <!ENTITY hatenabar.counter.config.label "設定">

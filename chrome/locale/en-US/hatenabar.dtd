@@ -41,6 +41,11 @@
 <!ENTITY hatenabar.bookmark.config.label "Config">
 <!ENTITY hatenabar.bookmark.top.label "Top">
 
+<!ENTITY hatenabar.blog.label "Hatena Blog">
+<!ENTITY hatenabar.blog.top.label "Top">
+<!ENTITY hatenabar.blog.dashboard.label "Dashboard">
+<!ENTITY hatenabar.blog.edit.label "Write Article">
+
 <!ENTITY hatenabar.diary.label "Hatena Diary">
 <!ENTITY hatenabar.diary.referring.label "Diaries Quoting This Page">
 <!ENTITY hatenabar.diary.quote.label "Quote This Page in Diary">
@@ -69,6 +74,11 @@
 <!ENTITY hatenabar.haiku.album.label "Album">
 <!ENTITY hatenabar.haiku.top.label "Top">
 
+<!ENTITY hatenabar.space.label "Hatena Space">
+<!ENTITY hatenabar.space.top.label "Top">
+<!ENTITY hatenabar.space.mypage.label "My Page">
+<!ENTITY hatenabar.space.config.label "Settings">
+
 <!ENTITY hatenabar.idea.label "Hatena Idea">
 <!ENTITY hatenabar.idea.top.label "Top">
 
@@ -92,15 +102,6 @@
 <!ENTITY hatenabar.star.stars.label "Stars">
 <!ENTITY hatenabar.star.blogs.label "Blogs">
 <!ENTITY hatenabar.star.top.label "Top">
-
-<!ENTITY hatenabar.ugomemo.label "Flipnote Hatena">
-<!ENTITY hatenabar.ugomemo.favorites.label "Favorites">
-<!ENTITY hatenabar.ugomemo.stars.label "Stars">
-<!ENTITY hatenabar.ugomemo.hotMovies.label "Hot Flipnotes">
-<!ENTITY hatenabar.ugomemo.movies.label "Movies">
-<!ENTITY hatenabar.ugomemo.ranking.label "Ranking">
-<!ENTITY hatenabar.ugomemo.channels.label "Channels">
-<!ENTITY hatenabar.ugomemo.top.label "Top">
 
 <!ENTITY hatenabar.counter.label "Hatena Counter">
 <!ENTITY hatenabar.counter.config.label "Config">
