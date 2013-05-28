@@ -25,6 +25,9 @@
         <command id="hatenabar-cmd-open-top-or-user-link"
                  oncommand="hatenabar.UICommand.openTopOrUserLink(event);"
                  onclick="checkForMiddleClick(this, event);"/>
+        <command id="hatenabar-cmd-open-user-main-blog-or-blog-top"
+                 oncommand="hatenabar.UICommand.openUserMainBlogOrBlogTop(event);"
+                 onclick="checkForMiddleClick(this, event);"/>
         <command id="hatenabar-cmd-open-top-or-selected-antenna"
                  oncommand="hatenabar.Toolbar.openAntenna(event);"
                  onclick="checkForMiddleClick(this, event);"/>
@@ -247,6 +250,26 @@
                           hatena:link="b:"/>
             </menupopup>
         </toolbarbutton>
+        <toolbarbutton id="hatenabar-blog-button"
+                       class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
+                       type="menu-button"
+                       image="chrome://hatenabar/skin/blog-icon.png"
+                       label="&hatenabar.blog.label;"
+                       tooltiptext="&hatenabar.blog.label;"
+                       command="hatenabar-cmd-open-user-main-blog-or-blog-top">
+            <menupopup observes="hatenabar-link-popup-base">
+                <menuitem label="&hatenabar.blog.dashboard.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="blog:"/>
+                <menuitem label="&hatenabar.blog.edit.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="blog:my:edit"/>
+                <menuseparator/>
+                <menuitem label="&hatenabar.blog.top.label;"
+                          observes="hatenabar-cmd-open-link"
+                          hatena:link="http://hatenablog.com/"/>
+            </menupopup>
+        </toolbarbutton>
         <toolbarbutton id="hatenabar-diary-button"
                        class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                        type="menu-button"
@@ -356,6 +379,27 @@
                           hatena:link="h:"/>
             </menupopup>
         </toolbarbutton>
+        <toolbarbutton id="hatenabar-space-button"
+                       class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
+                       type="menu-button"
+                       image="chrome://hatenabar/skin/space-icon.png"
+                       label="&hatenabar.space.label;"
+                       tooltiptext="&hatenabar.space.label;"
+                       command="hatenabar-cmd-open-link"
+                       hatena:link="space:">
+            <menupopup observes="hatenabar-link-popup-base">
+                <menuitem label="&hatenabar.space.mypage.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="space:id:?"/>
+                <menuitem label="&hatenabar.space.config.label;"
+                          observes="hatenabar-cmd-open-user-link"
+                          hatena:link="space:-:settings"/>
+                <menuseparator/>
+                <menuitem label="&hatenabar.space.top.label;"
+                          observes="hatenabar-cmd-open-link"
+                          hatena:link="space:"/>
+            </menupopup>
+        </toolbarbutton>
         <toolbarbutton id="hatenabar-idea-button"
                        class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                        type="menu-button"
@@ -445,42 +489,6 @@
                 <menuitem label="&hatenabar.star.top.label;"
                           observes="hatenabar-cmd-open-link"
                           hatena:link="s:"/>
-            </menupopup>
-        </toolbarbutton>
-        <toolbarbutton id="hatenabar-ugomemo-button"
-                       class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
-                       type="menu-button"
-                       label="&hatenabar.ugomemo.label;"
-                       tooltiptext="&hatenabar.ugomemo.label;"
-                       command="hatenabar-cmd-open-top-or-user-link"
-                       hatena:link="ugomemo:id:?:following">
-            <menupopup observes="hatenabar-link-popup-base">
-                <!-- Favorites のリンク先が /favorites でなく、
-                     Stars のリンク先が /favorites なのは意図的
-                     (旧はてなツールバーがそうなっていた)。 -->
-                <menuitem label="&hatenabar.ugomemo.favorites.label;"
-                          observes="hatenabar-cmd-open-user-link"
-                          hatena:link="ugomemo:id:?:following"/>
-                <menuitem label="&hatenabar.ugomemo.stars.label;"
-                          observes="hatenabar-cmd-open-user-link"
-                          hatena:link="ugomemo:id:?:favorites"/>
-                <menuseparator/>
-                <menuitem label="&hatenabar.ugomemo.hotMovies.label;"
-                          observes="hatenabar-cmd-open-link"
-                          hatena:link="ugomemo:hotmovies"/>
-                <menuitem label="&hatenabar.ugomemo.movies.label;"
-                          observes="hatenabar-cmd-open-link"
-                          hatena:link="ugomemo:movies"/>
-                <menuitem label="&hatenabar.ugomemo.ranking.label;"
-                          observes="hatenabar-cmd-open-link"
-                          hatena:link="ugomemo:ranking"/>
-                <menuitem label="&hatenabar.ugomemo.channels.label;"
-                          observes="hatenabar-cmd-open-link"
-                          hatena:link="ugomemo:channels.top"/>
-                <menuseparator/>
-                <menuitem label="&hatenabar.ugomemo.top.label;"
-                          observes="hatenabar-cmd-open-link"
-                          hatena:link="ugomemo:"/>
             </menupopup>
         </toolbarbutton>
         <toolbarbutton id="hatenabar-counter-button"
@@ -645,7 +653,7 @@
                  iconsize="small"
                  defaulticonsize="small"
                  customizable="true"
-                 defaultset="hatenabar-main-button,hatenabar-search-item,separator,hatenabar-antenna-button,hatenabar-bookmark-button,hatenabar-diary-button,hatenabar-fotolife-button,hatenabar-group-button,hatenabar-haiku-button,hatenabar-idea-button,hatenabar-question-button,hatenabar-ugomemo-button,separator,hatenabar-check-antenna-item,hatenabar-check-bookmark-item,hatenabar-check-diary-item,spring"
+                 defaultset="hatenabar-main-button,hatenabar-search-item,separator,hatenabar-antenna-button,hatenabar-bookmark-button,hatenabar-blog-button,hatenabar-diary-button,hatenabar-fotolife-button,hatenabar-group-button,hatenabar-haiku-button,hatenabar-space-button,hatenabar-question-button,separator,hatenabar-check-antenna-item,hatenabar-check-bookmark-item,hatenabar-check-diary-item,spring"
                  context="toolbar-context-menu"/>
     </toolbox>
 

@@ -3,6 +3,11 @@
 .hatenabar-toolbarbutton {
     list-style-image: url("chrome://hatenabar/skin/icons.png") !important;
 }
+/* はてなブログとスペースのアイコンは CSS ではなく直接指定 */
+#hatenabar-blog-button.hatenabar-toolbarbutton,
+#hatenabar-space-button.hatenabar-toolbarbutton {
+    list-style-image: none !important;
+}
 
 toolbar[mode="icons"][iconsize="small"] .toolbarbutton-1.hatenabar-toolbarbutton:not([type="menu-button"]),
 toolbar[mode="icons"][iconsize="small"] .toolbarbutton-1.hatenabar-toolbarbutton[type="menu-button"] > .toolbarbutton-menubutton-button {
@@ -95,10 +100,6 @@ textbox[type="autocomplete"]:not([enablehistory="true"]) > .hatenabar-autocomple
 
 #hatenabar-star-button {
     -moz-image-region: rect(64px, 304px, 80px, 288px);
-}
-
-#hatenabar-ugomemo-button {
-    -moz-image-region: rect(128px, 96px, 144px, 80px);
 }
 
 #hatenabar-counter-button {
