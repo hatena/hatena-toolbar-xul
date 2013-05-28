@@ -89,6 +89,39 @@ BrowserMigration.processes = [
         doOnLoad(method(BrowserMigration, 'applyBookmarkStatusbar'));
     },
     function BrowserMigration_1to2() {},
+    function BrowserMigration_2to3() {
+        // ツールバーにブログとスペースを表示する
+        // 参考: http://vividcode.hatenablog.com/entry/firefox-extension/toolbars
+        let newButtonIds = ["hatenabar-blog-button", "hatenabar-space-button"];
+        window.addEventListener("load", migrateToolbar, false);
+        function migrateToolbar(evt) {
+            if (evt.target !== window.document) return;
+            evt.currentTarget.removeEventListener(evt.type, migrateToolbar, false);
+
+            let toolbar = byId("hatenabar-toolbar");
+            if (!toolbar) return;
+
+            // 現在の実際の配置がデフォルト状態ならば何もしない
+            let defaultsetAttr = toolbar.getAttribute("defaultset");
+            if (defaultsetAttr === toolbar.currentSet) return;
+
+            // 新ボタンを追加
+            let currentsetAttr = toolbar.getAttribute("currentset");
+            let toolbarItemIdList = currentsetAttr.split(",");
+            // "-button" で終わる id の項目の直後に追加 (なければ先頭)
+            let idx = -1;
+            toolbarItemIdList.forEach(function (id, i) {
+                if (id.endsWith("-button")) idx = i;
+            });
+            let args = [idx+1, 0].concat(newButtonIds);
+            Array.prototype.splice.apply(toolbarItemIdList, args);
+
+            var currentsetStr = toolbarItemIdList.join(",");
+            toolbar.currentSet = currentsetStr;
+            toolbar.setAttribute("currentset", currentsetStr);
+            document.persist(toolbar.id, "currentset");
+        }
+    },
 ];
 
 BrowserMigration.run();

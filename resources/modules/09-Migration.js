@@ -4,7 +4,7 @@ loadPrecedingModules.call(this);
 const EXPORTED_SYMBOLS = ['Migration'];
 
 var Migration = {
-    CURRENT_VERSION: 2,
+    CURRENT_VERSION: 3,
 
     isFirstRun: false,
     isFirstRunAfterUpdate: false,
