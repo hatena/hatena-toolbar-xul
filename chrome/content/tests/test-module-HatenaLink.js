@@ -42,6 +42,13 @@ test("はてなブックマークの URL", function () {
             "http://b.hatena.ne.jp/entry/s/example.org/#reldiary");
 });
 
+test("はてなブログの URL", function () {
+    var u = core.method(modules.HatenaLink, "parseToURL");
+    strictEqual(u("blog:"), "http://blog.hatena.ne.jp/");
+    strictEqual(u("blog:my:edit"),                 "http://blog.hatena.ne.jp/my/edit");
+    strictEqual(u("blog:id:sample"),               "http://blog.hatena.ne.jp/sample/");
+});
+
 test("はてなココの URL", function () {
     var u = core.method(modules.HatenaLink, "parseToURL");
     strictEqual(u("c:"), "http://c.hatena.ne.jp/");
@@ -135,6 +142,13 @@ test("人力検索の URL", function () {
 test("はてなスターの URL", function () {
     var u = core.method(modules.HatenaLink, "parseToURL");
     strictEqual(u("s:"), "http://s.hatena.ne.jp/");
+});
+
+test("はてなスペースの URL", function () {
+    var u = core.method(modules.HatenaLink, "parseToURL");
+    strictEqual(u("space:"), "http://space.hatena.ne.jp/");
+    strictEqual(u("space:-:settings"), "http://space.hatena.ne.jp/-/settings");
+    strictEqual(u("space:id:?", { user: "sample" }), "http://space.hatena.ne.jp/sample/");
 });
 
 test("ポータルの URL", function () {
