@@ -1,17 +1,20 @@
 const EXPORT = ['Star'];
 
 var Star = {
+    // HatenaStar.js 読み込みスクリプト
+    STAR_LOAD_SCRIPT_URI_STR: "chrome://hatenabar/content/load-or-check-star.js",
+    // HatenaStar.js の URI
+    STAR_SCRIPT_URI_STR: "chrome://hatenabar/content/external/HatenaStar.js",
+
     SiteConfig: shared.get('Star.SiteConfig'),
     prefs: Prefs.hatenabar.getChildPrefs('star'),
 
     siteConfigURL: HatenaLink.parseToURL('s:siteconfig.json'),
-    // 将来的に国際化すると、設定によってスクリプトの URL が
-    // 変わるかもしれないからゲッタを使う。
-    get scriptURL() HatenaLink.parseToURL('s:js:HatenaStar.js'),
 
     init: function Star_init() {
         gBrowser.addEventListener('DOMContentLoaded', this, false);
         gBrowser.addEventListener('hatenabar-stars-loaded', this, false, true);
+        gBrowser.addEventListener("hatenabarStarLoadRequest", this, false, true);
         if (!this.SiteConfig)
             this.loadSiteConfig();
     },
@@ -50,44 +53,58 @@ var Star = {
 
         // document.body に script を追加するので, 存在しない場合は終了
         if (!win.document.body) return;
-        // 各 web ページにスターのスクリプトを読み込む
-        var starScriptUriStr = this.scriptURL;
+
+        var that = this;
         // 同期で読み込んで何かあるとことなので念のために遅延させる。
         win.setTimeout(function () {
             // 読み込む JS ファイルをテキストで取得して script 要素に突っ込む
-            var xhr = XMLHttpRequest();
-            var scriptUriStr = "chrome://hatenabar/content/load-or-check-star.js";
-            xhr.open("GET", scriptUriStr, true);
-            xhr.responseType = "text";
-            xhr.addEventListener("load", function (evt) {
-                var scriptStr = xhr.responseText;
-                insertScriptToWebContent(scriptStr, config, starScriptUriStr);
-            }, false);
-            xhr.send();
+            that._loadLocalScript(Star.STAR_LOAD_SCRIPT_URI_STR, function (content) {
+                Star._insertStarScriptLoaderConfigToWebContent(win.document, config);
+                Star._insertScriptToWebContent(win.document, content);
+            });
         }, 11);
-        function insertScriptToWebContent(scriptStr, config, starScriptUriStr) {
-            var scriptElem = win.document.createElement("script");
-            scriptElem.textContent = scriptStr;
-            scriptElem.setAttribute(
-                    "data-comment",
-                    "This `script` element is inserted by “Hatena Toolbar for Firefox”.");
+    },
 
-            // web ページ上で実行されるスクリプトに渡すための情報を要素で作る
-            var HATENABAR_NS = "http://www.hatena.ne.jp/hatenabar_firefox";
-            var infoElem = win.document.createElementNS(HATENABAR_NS, "hatena-star-info");
-            infoElem.setAttribute("config", JSON.stringify([config]));
-            infoElem.setAttribute("star-script-uri", JSON.stringify([starScriptUriStr]));
-            infoElem.setAttribute(
-                    "data-comment",
-                    "This element is inserted by “Hatena Toolbar for Firefox”.");
+    _loadLocalScript: function (localScriptUri, callbackFunc) {
+        var xhr = XMLHttpRequest();
+        xhr.open("GET", localScriptUri, true);
+        xhr.responseType = "text";
+        xhr.overrideMimeType("text/plain;charset=UTF-8");
+        xhr.addEventListener("load", function (evt) {
+            callbackFunc(xhr.responseText);
+        }, false);
+        xhr.send();
+    },
 
-            win.document.documentElement.appendChild(infoElem);
-            win.document.body.appendChild(scriptElem);
-        }
+    _insertScriptToWebContent: function (doc, scriptStr) {
+        var scriptElem = doc.createElement("script");
+        scriptElem.textContent = scriptStr;
+        scriptElem.setAttribute(
+                "data-comment",
+                "This `script` element is inserted by “Hatena Toolbar for Firefox”.");
+        doc.body.appendChild(scriptElem);
+    },
+
+    _insertStarScriptLoaderConfigToWebContent: function (doc, config) {
+        // web ページ上で実行されるスクリプトに渡すための情報を要素で作る
+        var HATENABAR_NS = "http://www.hatena.ne.jp/hatenabar_firefox";
+        var infoElem = doc.createElementNS(HATENABAR_NS, "hatena-star-info");
+        infoElem.setAttribute("config", JSON.stringify([config]));
+        infoElem.setAttribute(
+                "data-comment",
+                "This element is inserted by “Hatena Toolbar for Firefox”.");
+        doc.documentElement.appendChild(infoElem);
     },
 
     hasEntries: function Star_hasEntries(doc) {
         return !!(doc && doc._hatenabar_hasStars);
+    },
+
+    // web content として埋め込んだ HatenaStar.js 読み込みスクリプトが発行するイベントを受け取る
+    onStarLoadRequest: function Star_onStarLoadRequest(doc) {
+        this._loadLocalScript(Star.STAR_SCRIPT_URI_STR, function (content) {
+            Star._insertScriptToWebContent(doc, content);
+        });
     },
 
     onStarsLoaded: function Star_onStarsLoaded(doc) {
@@ -102,6 +119,9 @@ var Star = {
             break;
         case 'hatenabar-stars-loaded':
             this.onStarsLoaded(event.target);
+            break;
+        case "hatenabarStarLoadRequest":
+            this.onStarLoadRequest(event.target);
             break;
         }
     },

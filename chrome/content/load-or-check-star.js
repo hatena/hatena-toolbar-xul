@@ -15,7 +15,6 @@ if (!infoElem) {
     return;
 }
 var config = JSON.parse(infoElem.getAttribute("config"))[0];
-var scriptURL = JSON.parse(infoElem.getAttribute("star-script-uri"))[0];
 
 if (!config && (!window.Hatena || !Hatena.Star)) {
     return;
@@ -35,17 +34,9 @@ if (Hatena.Star.loaded) {
     Hatena.Star.onLoadFunctions.push(onPreload);
     Hatena.Star.SiteConfig = config;
 
-    var scriptElem = document.createElement("script");
-    scriptElem.type = "text/javascript";
-    scriptElem.charset = "UTF-8";
-    scriptElem.src = scriptURL;
-    scriptElem.setAttribute(
-            "data-comment",
-            "This `script` element is inserted by “Hatena Toolbar for Firefox”.");
-
-    var parent = document.getElementsByTagName("head")[0] ||
-                 document.body;
-    parent.appendChild(scriptElem);
+    var evt = document.createEvent("Events");
+    evt.initEvent("hatenabarStarLoadRequest", true, false);
+    document.dispatchEvent(evt);
 }
 
 function onPreload() {
