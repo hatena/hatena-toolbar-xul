@@ -95,27 +95,6 @@
              oncommand="hatenabar.SearchField.focus();"/>
     </keyset>
 
-    <popupset id="mainPopupSet">
-        <menupopup id="hatenabar-star-context"
-                   observes="hatenabar-link-popup-base">
-            <menuitem label="&hatenabar.star.siteConfig.wiki.label;"
-                      observes="hatenabar-cmd-open-link"
-                      hatena:link="s:siteconfig"/>
-            <!-- XXX 現時点で HatenaLink.js はキーワード記法に
-                 未対応なので URL を直接指定。 -->
-            <menuitem label="&hatenabar.star.siteConfig.howTo.label;"
-                      observes="hatenabar-cmd-open-link"
-                      hatena:link="http://d.hatena.ne.jp/keyword/%A4%CF%A4%C6%A4%CA%A5%B9%A5%BF%A1%BCSiteConfig%BA%EE%C0%AE%CA%FD%CB%A1"/>
-            <!--
-            <menuitem label="{{Edit SiteConfig for www.example.org…}}"/>
-            <menuitem label="{{Edit SiteConfig for *.example.org…}}"/>
-            -->
-            <menuseparator/>
-            <menuitem label="&hatenabar.star.siteConfig.reload.label;"
-                      oncommand="hatenabar.Star.loadSiteConfig();"/>
-        </menupopup>
-    </popupset>
-
     <popup id="toolbar-context-menu">
         <menuseparator id="hatenabar-toolbar-context-separator"/>
         <menuitem id="hatenabar-toolbar-context-hide-button-menu"
@@ -675,18 +654,6 @@
                 <menuitem id="hatenabar-account-status-login-menu"
                           label="&hatenabar.account.login.label;"
                           observes="hatenabar-cmd-go-login"/>
-            </menupopup>
-        </statusbarpanel>
-        <statusbarpanel id="hatenabar-star-status"
-                        class="statusbarpanel-menu-iconic"
-                        enabledtooltiptext="&hatenabar.starStatus.enabled.tooltip;"
-                        disabledtooltiptext="&hatenabar.starStatus.disabled.tooltip;"
-                        context="hatenabar-star-context">
-            <menupopup observes="hatenabar-link-popup-base">
-                <menuitem label="&hatenabar.starStatus.about.label;"
-                          observes="hatenabar-cmd-open-link"
-                          hatena:link="s:guide"/>
-                <!-- カラースターショップへのリンクもつける? -->
             </menupopup>
         </statusbarpanel>
         <statusbarpanel id="hatenabar-bookmark-status"

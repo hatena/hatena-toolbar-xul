@@ -47,11 +47,6 @@ Migration.processes = [
             prefs.set('account.history', accountHistory.join('|'));
         }
 
-        // Star
-        let starAnywhere = oldPrefs.get('star.anywhere', true);
-        prefs.set('star.showStatus', starAnywhere);
-        prefs.set('star.anywhere', starAnywhere);
-
         // Bookmark
         prefs.set('bookmark.showStatus',
                   oldPrefs.get('bookmarkaddonstatus', true));

@@ -11,13 +11,11 @@
 <!ENTITY general.webPages.label "Web Pages">
 <!ENTITY link.openIn.label "Open page in a new Tab">
 <!ENTITY bookmark.showSearchOnWeb.label "Show &quot;Search using Hatena Bookmark&quot; button in search result pages">
-<!ENTITY star.anywhere.label "Enable Star anywhere">
 
 <!ENTITY general.statusbar.label "Statusbar">
 <!ENTITY account.showStatus.label "Show user history panel">
 <!ENTITY account.rememberHistory.label "Remember user history">
 <!ENTITY account.reloadOnChange.label "Reload page on login/logout">
-<!ENTITY star.showStatus.label "Show Star panel">
 <!ENTITY bookmark.showStatus.label "Show Add-to-Bookmark panel">
 
 <!-- More Convenient -->

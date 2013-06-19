@@ -17,10 +17,6 @@ pref("extensions.hatenabar.bookmark.showSearchOnWeb", true);
 pref("extensions.hatenabar.bookmark.showStatus", true);
 pref("extensions.hatenabar.bookmark.useHatenaBookmarkExtension", true);
 
-// Star
-pref("extensions.hatenabar.star.anywhere", true);
-pref("extensions.hatenabar.star.showStatus", true);
-
 // link.openIn: the possible values are "current", "tab", "tabshifted",
 // "tabfocused", "tabblurred", "window", and "save".
 pref("extensions.hatenabar.link.openIn", "current");
