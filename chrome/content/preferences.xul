@@ -39,14 +39,8 @@ document.addEventListener('DOMContentLoaded', function () {
         <preference id="bookmark.showSearchOnWeb"
                     name="extensions.hatenabar.bookmark.showSearchOnWeb"
                     type="bool"/>
-        <preference id="star.anywhere"
-                    name="extensions.hatenabar.star.anywhere"
-                    type="bool"/>
         <preference id="account.showStatus"
                     name="extensions.hatenabar.account.showStatus"
-                    type="bool"/>
-        <preference id="star.showStatus"
-                    name="extensions.hatenabar.star.showStatus"
                     type="bool"/>
         <preference id="bookmark.showStatus"
                     name="extensions.hatenabar.bookmark.showStatus"
@@ -71,8 +65,6 @@ document.addEventListener('DOMContentLoaded', function () {
                   preference="link.openIn"
                   onsyncfrompreference="return document.getElementById(this.getAttribute('preference')).value !== 'current';"
                   onsynctopreference="return this.checked ? 'tab' : 'current';"/>
-        <checkbox label="&star.anywhere.label;"
-                  preference="star.anywhere"/>
         <checkbox label="&bookmark.showSearchOnWeb.label;"
                   preference="bookmark.showSearchOnWeb"/>
     </groupbox>
@@ -87,8 +79,6 @@ document.addEventListener('DOMContentLoaded', function () {
             <checkbox label="&account.reloadOnChange.label;"
                       preference="account.reloadOnChange"/>
         </vbox>
-        <checkbox label="&star.showStatus.label;"
-                  preference="star.showStatus"/>
         <checkbox label="&bookmark.showStatus.label;"
                   preference="bookmark.showStatus"/>
     </groupbox>

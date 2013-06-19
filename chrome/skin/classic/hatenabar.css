@@ -258,14 +258,6 @@ textbox[type="autocomplete"]:not([enablehistory="true"]) > .hatenabar-autocomple
     height: 16px;
 }
 
-#hatenabar-star-status {
-    list-style-image: url("chrome://hatenabar/skin/icons.png");
-    -moz-image-region: rect(32px, 64px, 48px, 48px);
-}
-#hatenabar-star-status[hatena|star="true"] {
-    -moz-image-region: rect(0px, 64px, 16px, 48px);
-}
-
 #hatenabar-bookmark-status {
     list-style-image: url("chrome://hatenabar/skin/icons.png");
     -moz-image-region: rect(0px, 272px, 16px, 256px);

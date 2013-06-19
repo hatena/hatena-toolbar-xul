@@ -11,13 +11,11 @@
 <!ENTITY general.webPages.label "Web ページ">
 <!ENTITY link.openIn.label "ページを新しいタブで開く">
 <!ENTITY bookmark.showSearchOnWeb.label "検索結果ページに &quot;はてなブックマークで検索&quot; ボタンを表示する">
-<!ENTITY star.anywhere.label "どこでもはてなスターを有効にする">
 
 <!ENTITY general.statusbar.label "ステータスバー">
 <!ENTITY account.showStatus.label "ユーザー履歴パネルを表示する">
 <!ENTITY account.rememberHistory.label "ユーザー履歴を保存する">
 <!ENTITY account.reloadOnChange.label "ログイン / ログアウトしたときにページを再読み込みする">
-<!ENTITY star.showStatus.label "スターパネルを表示する">
 <!ENTITY bookmark.showStatus.label "ブックマーク追加パネルを表示する">
 
 <!-- More Convenient -->
