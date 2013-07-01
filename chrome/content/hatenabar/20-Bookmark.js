@@ -15,21 +15,24 @@ var Bookmark = {
         this.shouldAddSearchButton =
             Prefs.hatenabar.get('bookmark.showSearchOnWeb');
     },
-    
+
+    /**
+     * Show a form to add new bookmark (not browser's bookmark, but bookmark of Hatena Bookmark).
+     */
     add: function B_add(win) {
         if (Prefs.hatenabar.get('bookmark.useHatenaBookmarkExtension') &&
             typeof hBookmark !== 'undefined') {
             hBookmark.AddPanelManager.showPanel(win);
             return;
         }
-        let doc = win.document;
-        let script = doc.createElementNS(XHTML_NS, 'script');
-        script.type = 'text/javascript';
-        script.charset = 'utf-8';
-        script.src = HatenaLink.parseToURL('b:js:Hatena:Bookmark:let.js') +
-                     '?' + new Date().toLocaleFormat('%Y%m%d');
-        let parent = doc.getElementsByTagName('head')[0] || doc.body;
-        parent.appendChild(script);
+
+        var targetUrl = win.document.location.href;
+        var bookmarkletUrl = "http://b.hatena.ne.jp/bookmarklet" +
+                "?url="   + encodeURIComponent(targetUrl) +
+                "&title=" + encodeURIComponent(win.document.title);
+        var winFeatures =
+                "width=520,height=520,menubar=no,location=yes,resizable=yes,scrollbars=yes";
+        window.open(bookmarkletUrl, "_blank", winFeatures);
     },
 
     addSearchButton: function B_addSearchButton(win) {
@@ -49,47 +52,45 @@ var Bookmark = {
         let text =
             Browser.strings.get('bookmark.searchOnWeb.button.tooltip', query);
         let src = HatenaLink.parseToURL('b:images:search-mini.png');
-        let code = 'javascript:(' + this._addSearchButton.toSource() + ')(' +
-            [config, href, text, src].map(uneval).join(',') + ')';
-        // 同期で読み込んで何かあるとことなので念のために遅延させる。
-        //win.location.href = encodeURI(code);
-        win.setTimeout(function () win.location.href = encodeURI(code), 11);
+
+        var that = this;
+        win.setTimeout(function () {
+            that._loadLocalScript(that.ADD_SEARCH_BUTTON_URI, function (scriptStr) {
+                var args = {
+                    config: config,
+                    href: href,
+                    text: text,
+                    src: src,
+                };
+                scriptStr =
+                    "(function (args) {\n" +
+                        scriptStr +
+                    "\n}).call(this," + JSON.stringify(args) + ");";
+                that._insertScriptToWebContent(doc, scriptStr);
+            });
+        }, 11);
     },
 
-    // This function is executed in the context of the web page.
-    // The original file for this function is:
-    // http://www.hatena.ne.jp/js/hatenabar_bookmarksearch.js
-    _addSearchButton: function B__addSearchButton(config, href, text, src) {
-        function ensure(object, prop, value) {
-            if (typeof object[prop] === 'undefined')
-                object[prop] = value || {};
-        }
-        ensure(window, 'Hatena');
-        ensure(Hatena, 'Bookmark');
-        if (Hatena.Bookmark.loaded) return;
-        ensure(Hatena.Bookmark, 'onLoadFunctions', []);
-        ensure(Hatena.Bookmark, 'log', function () {});
-        Hatena.Bookmark.SiteConfig = config;
-        var container = document.evaluate(
-            config.xpath, document, null,
-            XPathResult.FIRST_ORDERED_NODE_TYPE, null
-        ).singleNodeValue;
-        if (!container) return;
-        if (config.parent)
-            container = container.parentNode;
-        if (container instanceof HTMLTableRowElement)
-            container = container.appendChild(document.createElement('td'));
-        var a = document.createElement('a');
-        a.href = href;
-        a.title = text;
-        var img = document.createElement('img');
-        img.src = src;
-        img.alt = text;
-        img.style.border = 'none';
-        img.style.verticalAlign = 'middle';
-        a.appendChild(img);
-        container.appendChild(document.createTextNode(' '));
-        container.appendChild(a);
+    ADD_SEARCH_BUTTON_URI: "chrome://hatenabar/content/contentscripts/addSearchButton.js",
+
+    _loadLocalScript: function (localScriptUri, callbackFunc) {
+        var xhr = XMLHttpRequest();
+        xhr.open("GET", localScriptUri, true);
+        xhr.responseType = "text";
+        xhr.overrideMimeType("text/plain;charset=UTF-8");
+        xhr.addEventListener("load", function (evt) {
+            callbackFunc(xhr.responseText);
+        }, false);
+        xhr.send();
+    },
+
+    _insertScriptToWebContent: function (doc, scriptStr) {
+        var scriptElem = doc.createElement("script");
+        scriptElem.textContent = scriptStr;
+        scriptElem.setAttribute(
+            "data-comment",
+            "This `script` element is inserted by “Hatena Toolbar for Firefox”.");
+        doc.body.appendChild(scriptElem);
     },
 
     handleEvent: function B_handleEvent(event) {
@@ -104,23 +105,23 @@ var Bookmark = {
 Bookmark.SiteConfig = {
     'www.google.co.jp': {
         'path': '^/search',
-        'form': 'gs',
+        'form': 'f',
         'input':'q',
         'parent': true,
-        'xpath': '//table/tbody/tr/td[@class="nobr xsm"] | id("subform_ctrl")/div/a[@class="gl nobr"]',
+        'xpath': '//div[@class="nojsb"]/..',
     },
     'www.google.com': {
         'path': '^/search',
-        'form': 'gs',
+        'form': 'f',
         'input':'q',
         'parent': true,
-        'xpath': '//table/tbody/tr/td[@class="nobr xsm"] | id("subform_ctrl")/div/a[@class="gl nobr"]',
+        'xpath': '//div[@class="nojsb"]/..',
     },
     'search.yahoo.co.jp': {
         'form': 'sbn',
         'input':'p',
-        'parent': false,
-        'xpath': 'id("ygma")/div[@class="searchForm-opt"]',
+        'parent': true,
+        'xpath': '//div[@class="searchForm-opt"]',
     },
 };
 
