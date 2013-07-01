@@ -15,21 +15,24 @@ var Bookmark = {
         this.shouldAddSearchButton =
             Prefs.hatenabar.get('bookmark.showSearchOnWeb');
     },
-    
+
+    /**
+     * Show a form to add new bookmark (not browser's bookmark, but bookmark of Hatena Bookmark).
+     */
     add: function B_add(win) {
         if (Prefs.hatenabar.get('bookmark.useHatenaBookmarkExtension') &&
             typeof hBookmark !== 'undefined') {
             hBookmark.AddPanelManager.showPanel(win);
             return;
         }
-        let doc = win.document;
-        let script = doc.createElementNS(XHTML_NS, 'script');
-        script.type = 'text/javascript';
-        script.charset = 'utf-8';
-        script.src = HatenaLink.parseToURL('b:js:Hatena:Bookmark:let.js') +
-                     '?' + new Date().toLocaleFormat('%Y%m%d');
-        let parent = doc.getElementsByTagName('head')[0] || doc.body;
-        parent.appendChild(script);
+
+        var targetUrl = win.document.location.href;
+        var bookmarkletUrl = "http://b.hatena.ne.jp/bookmarklet" +
+                "?url="   + encodeURIComponent(targetUrl) +
+                "&title=" + encodeURIComponent(win.document.title);
+        var winFeatures =
+                "width=520,height=520,menubar=no,location=yes,resizable=yes,scrollbars=yes";
+        window.open(bookmarkletUrl, "_blank", winFeatures);
     },
 
     addSearchButton: function B_addSearchButton(win) {
