@@ -105,8 +105,6 @@
 
     <toolbarpalette id="BrowserToolbarPalette">
         <toolbarbutton id="hatenabar-main-button"
-
-
                        class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                        type="menu-button"
                        label="&hatenabar.main.label;"
