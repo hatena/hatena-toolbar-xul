@@ -100,16 +100,6 @@ test("はてなハイクの URL", function () {
     //        "http://h.hatena.ne.jp/keyword/%E3%81%AF%E3%81%A6%E3%81%AA");
 });
 
-test("はてなアイデアの URL", function () {
-    var u = core.method(modules.HatenaLink, "parseToURL");
-    strictEqual(u("i:"), "http://i.hatena.ne.jp/");
-    strictEqual(u("i:id:sample"), "http://i.hatena.ne.jp/sample/");
-    //strictEqual(u("i:t:はてな"),
-    //        "http://i.hatena.ne.jp/t/%E3%81%AF%E3%81%A6%E3%81%AA");
-    strictEqual(u("idea:42"), "http://i.hatena.ne.jp/idea/42");
-    strictEqual(u("idea:42:title"), "http://i.hatena.ne.jp/idea/42");
-});
-
 test("はてなキーワードの URL", function () {
     var u = core.method(modules.HatenaLink, "parseToURL");
     //strictEqual(u("keyword:はてな"),

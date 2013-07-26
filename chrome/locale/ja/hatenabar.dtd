@@ -79,9 +79,6 @@
 <!ENTITY hatenabar.space.mypage.label "マイページ">
 <!ENTITY hatenabar.space.config.label "設定">
 
-<!ENTITY hatenabar.idea.label "はてなアイデア">
-<!ENTITY hatenabar.idea.top.label "トップ">
-
 <!ENTITY hatenabar.keyword.label "はてなキーワード">
 <!ENTITY hatenabar.keyword.favorites.label "お気に入り">
 <!ENTITY hatenabar.keyword.modifications.label "編集履歴">

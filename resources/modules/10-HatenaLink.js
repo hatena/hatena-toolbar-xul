@@ -107,16 +107,6 @@ HatenaLink.schemes = {
         return { url: hatenaURL(link, context) };
     },
 
-    i: function HL_scheme_i(link, context) {
-        return { url: hatenaURL(link, context) };
-    },
-
-    idea: function HL_scheme_idea(link, context) {
-        // idea:42:title -> i:idea:42 -> http://i.hatena.ne.jp/idea/42
-        link = 'i:' + link.replace(/:title$/, '');
-        return { url: hatenaURL(link, context) };
-    },
-
     k: function HL_scheme_k(link, context) {
         return { url: hatenaURL(link, context) };
     },
