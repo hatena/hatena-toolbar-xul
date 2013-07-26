@@ -377,19 +377,6 @@
                           hatena:link="space:"/>
             </menupopup>
         </toolbarbutton>
-        <toolbarbutton id="hatenabar-idea-button"
-                       class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
-                       type="menu-button"
-                       label="&hatenabar.idea.label;"
-                       tooltiptext="&hatenabar.idea.label;"
-                       command="hatenabar-cmd-open-top-or-user-link"
-                       hatena:link="i:">
-            <menupopup observes="hatenabar-link-popup-base">
-                <menuitem label="&hatenabar.idea.top.label;"
-                          observes="hatenabar-cmd-open-link"
-                          hatena:link="i:"/>
-            </menupopup>
-        </toolbarbutton>
         <toolbarbutton id="hatenabar-keyword-button"
                        class="toolbarbutton-1 chromeclass-toolbar-additional hatenabar-toolbarbutton"
                        type="menu-button"

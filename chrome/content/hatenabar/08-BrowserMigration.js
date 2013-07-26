@@ -57,7 +57,6 @@ BrowserMigration.processes = [
                 ['fotolife.enable', true, 'hatenabar-fotolife-button'],
                 ['group.enable', true, 'hatenabar-group-button'],
                 ['haiku.enable', true, 'hatenabar-haiku-button'],
-                ['idea.enable', true, 'hatenabar-idea-button'],
                 ['keyword.enable', false, 'hatenabar-keyword-button'],
                 ['message.enable', false, 'hatenabar-message-button'],
                 ['question.enable', true, 'hatenabar-question-button'],

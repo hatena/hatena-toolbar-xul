@@ -82,10 +82,6 @@ textbox[type="autocomplete"]:not([enablehistory="true"]) > .hatenabar-autocomple
     -moz-image-region: rect(128px, 160px, 144px, 144px);
 }
 
-#hatenabar-idea-button {
-    -moz-image-region: rect(64px, 144px, 80px, 128px);
-}
-
 #hatenabar-keyword-button {
     -moz-image-region: rect(128px, 176px, 144px, 160px);
 }
