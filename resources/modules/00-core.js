@@ -227,19 +227,6 @@ function isHatenaURL(url) {
     return /^https?:\/\/(?:[\w\-\u0080-\uffff]+\.)*hatena\.(?:ne\.jp|com)(?::\d+)?(?:\/|$)/.test(url);
 }
 
-var createElementBindDocument = function(doc, ns) {
-    return function(name, attr) {
-        var children = Array.slice(arguments, 2);
-        var e = ns ? doc.createElementNS(ns, name) : doc.createElement(name);
-        if (ns) {
-        }
-        if (attr) for (let key in attr) e.setAttribute(key, attr[key]);
-        children.map(function(el) el.nodeType > 0 ? el : doc.createTextNode(el)).
-            forEach(function(el) e.appendChild(el));
-        return e;
-    }
-};
-
 var UIEncodeText = function(str) {
     return decodeURIComponent(escape(str));
 };

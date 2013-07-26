@@ -29,12 +29,6 @@ var ExpireCache = function(key, defaultExpire, serializer, sweeperDelay) {
 };
 
 ExpireCache.Serializer = {};
-
-ExpireCache.Serializer.uneval = {
-    serialize: function(value) uneval(value),
-    deserialize: function(value) eval(value),
-};
-
 ExpireCache.Serializer.xml = {
     serialize: function (value) {
         if ( value ) {

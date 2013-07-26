@@ -46,13 +46,6 @@ QUnit.asyncTest("XML Document オブジェクトの serialize と deserialize", 
 
 });
 
-QUnit.test("uneval シリアライザを使った ExpireCache", 2, function () {
-    var cache = new modules.ExpireCache("unevaltest", null, "uneval");
-    cache.set("foo", {foo: 1, bar: 2});
-    strictEqual(1, cache.get("foo").foo);
-    strictEqual(2, cache.get("foo").bar);
-});
-
 QUnit.test("xml シリアライザを使った ExpireCache", 1, function () {
     var cache = new modules.ExpireCache("xmltest", null, "xml");
     var domParser = new modules.DOMParser();
