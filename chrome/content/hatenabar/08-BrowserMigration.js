@@ -125,13 +125,15 @@ BrowserMigration.processes = [
 
 BrowserMigration.run();
 
+// 初回起動時などに拡張機能の機能紹介ページを開く
 if (Browser.isFirstWindow &&
     (Migration.isFirstRun ||
      (Migration.isFirstRunAfterUpdate && Migration.prevVersion < 2))) {
     doOnLoad(function () {
         // ロード直後だとタブが開かないことがあるのでちょっと遅らせる。
-        window.setTimeout(method(gBrowser, 'loadOneTab'), 111,
-                          HatenaLink.parseToURL('www:tool:firefox_start'),
-                          null, null, null, false, false);
+        window.setTimeout(function () {
+            var url = HatenaLink.parseToURL('www:tool:firefox_start');
+            gBrowser.loadOneTab(url, null, null, null, false, false);
+        }, 111);
     });
 }

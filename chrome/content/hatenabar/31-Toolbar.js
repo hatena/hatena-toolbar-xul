@@ -264,7 +264,7 @@ doOnLoad(function () {
     let dispatchCustomizeDone = method(Toolbar, 'dispatch', 'CustomizeDone');
     addBefore(window, 'BrowserCustomizeToolbar', dispatchWillCustomize);
     addAfter(window, 'BrowserToolboxCustomizeDone', dispatchCustomizeDone);
-    setTimeout(dispatchCustomizeDone, 0);
+    setTimeout(function () { dispatchCustomizeDone() }, 0);
 
     Toolbar.initContextMenu();
 });
