@@ -13,14 +13,19 @@ const LOGIN_PATH_PATTERN = /^\/login\b/;
 const LOGIN_COOKIE_HOST = '.hatena.ne.jp';
 const LOGIN_CHECK_URL = 'http://b.hatena.ne.jp/my.name';
 
+// Notification topics
+const TOPIC_COOKIE_CHANGED = "cookie-changed";
+const TOPIC_HTTP_ON_EXAMIN_RESPONSE = "http-on-examine-response";
+const TOPIC_NETWOEK_OL_STAT_CHANGED = "network:offline-status-changed";
+
 var Account = {
     LOGIN_URL: LOGIN_URL,
 
     init: function Account_init() {
         let os = ObserverService;
-        os.addObserver(this.CookieObserver, 'cookie-changed', false);
-        os.addObserver(this.ResponseObserver, 'http-on-examine-response', false);
-        os.addObserver(this.OfflineObserver, 'network:offline-status-changed', false);
+        os.addObserver(this.CookieObserver,   TOPIC_COOKIE_CHANGED,          false);
+        os.addObserver(this.ResponseObserver, TOPIC_HTTP_ON_EXAMIN_RESPONSE, false);
+        os.addObserver(this.OfflineObserver,  TOPIC_NETWOEK_OL_STAT_CHANGED, false);
         EventService.createListener('unload', method(this, 'destroy'));
 
         let timer = new Timer(777, 1);
@@ -35,9 +40,9 @@ var Account = {
 
     destroy: function Account_destroy() {
         let os = ObserverService;
-        os.removeObserver(this.CookieObserver, 'cookie-changed');
-        os.removeObserver(this.ResponseObserver, 'htt-on-examine-response');
-        os.removeObserver(this.OfflineObserver, 'network:offline-status-changed');
+        os.removeObserver(this.CookieObserver,   TOPIC_COOKIE_CHANGED);
+        os.removeObserver(this.ResponseObserver, TOPIC_HTTP_ON_EXAMIN_RESPONSE);
+        os.removeObserver(this.OfflineObserver,  TOPIC_NETWOEK_OL_STAT_CHANGED);
         this.setUser(null);
     },
 
